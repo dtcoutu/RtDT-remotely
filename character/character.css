@@ -1,3 +1,11 @@
 .action {
-  text-transform: capitalize;
+  text-transform: uppercase;
+}
+
+.virtue {
+  text-transform: uppercase;
+}
+
+.virtue .inactive {
+  opactity: 0.2;
 }
