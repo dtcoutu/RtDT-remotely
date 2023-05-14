@@ -95,6 +95,7 @@
       <h3>End of Turn</h3>
       <span class="action-description">Drop 1 skull into the Tower</span>
     </div>
+    <!-- Consider generating the virtues from javascript -->
     <div id="virtues">
       <div class="virtue">
         <div class="name">Spiritreaver</div>
@@ -107,7 +108,16 @@
         <div class="description">
           When a skull emerges in your home kingdom, you can place it on any building with 2 or fewer skulls in any kingdom.
         </div>
+        <div class="purchase">
+          <input id="skullweaver" type="button" value="Purchase" onclick="purchaseVirtue(this);">
+        </div>
       </div>
     </div>
+    
+    <script>
+      function purchaseVirtue(button) {
+        console.log(button.id);
+      }
+    </script>
   </body>
 </html>
