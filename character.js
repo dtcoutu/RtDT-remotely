@@ -245,6 +245,7 @@ const spymaster = {
 }
 
 const CHARACTERS = [
+    archwright,
     brutal_warlord,
     haunted_recluse,
     orphaned_scion,
