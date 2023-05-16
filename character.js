@@ -2,38 +2,38 @@ const archwright = {
     id: "archwright",
     name: "Archwright",
     banner: {
-        description: "Gain 5 warriors"
+        description: "Place a battlement on any space or move a battlement up to 2 spaces."
     },
     move: 3,
     virtues: [
         {
             id: "base-virtue-1",
-            name: "baleful",
-            description: "+1 MELEE Advantage",
+            name: "innovative",
+            description: "+1 BEAST Advantage",
             active: true
         },
         {
             id: "base-virtue-2",
-            name: "veteran",
-            description: "+1 Wild Advantage when you Battle",
+            name: "clever",
+            description: "Battlements give you +2 Wild Advantages (instead of +1).",
             active: true
         },
         {
             id: "additional-virtue-1",
-            name: "inspiring",
-            description: "After you Reinforce, also gain 6 warriors.",
+            name: "wily",
+            description: "Battlements give you Advantages when you Quest (in addition to when you Battle).",
             active: false
         },
         {
             id: "additional-virtue-2",
-            name: "callous",
-            description: "After you Battle, if you lost at least 10 warriors, gain a treasure from the market.",
+            name: "tactical",
+            description: "While on a battlement, you can Battle a foe on an adjacent space. (Terrain advantages you the space you are on.)",
             active: false
         },
         {
             id: "additional-virtue-3",
-            name: "relentless",
-            description: "If you double your move, gain +1 Wild Advantage",
+            name: "exalted",
+            description: "While on a battlement, you may Cleanse to remove skulls from all adjacent buildings.",
             active: false
         },
     ]

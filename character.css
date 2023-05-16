@@ -2,7 +2,24 @@
   border-bottom: 1px solid black;
 }
 
-.choose-one {
+.after {
+  writing-mode: vertical-rl;
+  float: right;
+  font-weight: bold;
+  padding-left: 15px;
+  border-left: 1px solid black;
+}
+
+#heroic-action > .choose-one {
+  writing-mode: vertical-rl;
+  transform: rotate(-180deg);
+  float: left;
+  font-weight: bold;
+  padding: 15px 15px 15px 15px;
+  border-left: 1px solid black;
+}
+
+#reinforce > .choose-one {
   writing-mode: vertical-rl;
   transform: rotate(-180deg);
   float: left;
@@ -12,7 +29,22 @@
 }
 
 .column {
-  flex: 50%
+  flex: 50%;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.counter {
+  font-size: large;
+}
+
+#counters > div {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+#counters > div > div {
+  padding-bottom: 5px;
 }
 
 .name {
@@ -58,5 +90,5 @@ dd.action {
 }
 
 h4 {
-  clear: left;
+  clear: both;
 }
