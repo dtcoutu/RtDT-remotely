@@ -1,0 +1,46 @@
+.choose-one {
+  writing-mode: vertical-rl;
+  transform: rotate(-180deg);
+  float: left;
+  font-weight: bold;
+  padding: 30px 15px 30px 15px;
+  margin-right: 15px;
+  border-left: 1px solid black;
+}
+
+.column {
+  flex: 50%
+}
+
+.name {
+  text-transform: uppercase;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.inactive {
+  opacity: 0.2;
+}
+
+.row {
+  display: flex;
+}
+
+dl {
+  display: grid;
+  grid-template-columns: max-content auto;
+}
+
+dt {
+  grid-column-start: 1;
+}
+
+dd {
+  grid-column-start: 2;
+}
+
+h4 {
+  clear: left;
+}

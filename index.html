@@ -1,9 +1,148 @@
 <html>
+  <head>
+    <link rel="stylesheet" href="character.css" />
+    <title>Return to Dark Tower...Remotely</title>
+  </head>
   <body>
-    <h1>Select Character</h1>
-    <ul>
-      <li><a href="character/first.html">First</a></li>
-      <li><a href="character/haunted_recluse.html">Haunted Recluse</a></li>
-    </ul>
+    <div id="header" class="row">
+      <div class="column">
+        <div>
+          <label for="character-selector">Choose a character:</label>
+          <select name="character" id="character-selector" onchange="selectedCharacter(this.value)">
+            <option value="">---</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="guardian-selector">Choose the region you're the guardian of:</label>
+          <select name="guardian" id="guardian-selector" onchange="selectedRegion(this.value)">
+            <option value="">---</option>
+          </select>
+        </div>
+
+        <div>
+          <button type="button" onclick="reset()">Reset</button>
+        </div>
+      </div>
+
+      <div id="counters" class="hidden column">
+        <div>
+          <div>Warriors: <span id="warrior-counter"></span></div>
+          <button onclick="updateCount('warriors', -5)">-5</button>
+          <button onclick="updateCount('warriors', -1)">-1</button>
+          <button onclick="updateCount('warriors', 1)">+1</button>
+          <button onclick="updateCount('warriors', 6)"><strong>+6</strong></button>
+        </div>
+        <div>
+          <div>Spirit: <span id="spirit-counter"></span></div>
+          <button onclick="updateCount('spirit', -5)">-5</button>
+          <button onclick="updateCount('spirit', -1)">-1</button>
+          <button onclick="updateCount('spirit', 1)">+1</button>
+          <button onclick="updateCount('spirit', 5)">+5</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="body" class="row">
+      <div id="actions" class="hidden column">
+        <h2>Actions</h2>
+        <h3>Start of Turn</h3>
+        <div class="action">
+          <span class="name">Banner</span>
+          <span id="banner-description" class="description"></span>
+        </div>
+        <h3>Middle of Turn</h3>
+        <div class="action">
+          <span class="name">Move <span id="movement"></span></span> (Split as Needed)
+          <span class="description">Spend 1 spirit to double your move</span>
+        </div>
+        <h4>Heroic Action</h4>
+        <div class="choose-one">Choose One</div>
+        Gain 2 spirit after
+        <ul>
+          <li>
+            <div class="action">
+              <span class="name">Cleanse</span>
+              <span class="description">Remove all skulls from your space</span>
+            </div>
+          </li>
+          <li>
+            <div class="action">
+              <span class="name">Battle</span>
+              <span class="description">Battle a foe on your space</span>
+            </div>
+          </li>
+          <li>
+            <div class="action">
+              <span class="name">Quest</span>
+              <span class="description">Complete a quest or explore a dungeon</span>
+            </div>
+          </li>
+          <li>
+            <div class="action">
+              <span class="name">Influence</span>
+              <span class="description"></span>
+            </div>
+          </li>
+        </ul>
+        <h4>Reinforce</h4>
+        <div class="choose-one">Choose One</div>
+        <dl>
+          <dt><span class="name">Citadel</span></dt>
+          <dd>
+              <dl>
+                <dt><strong>Free:</strong></dt><dd>Gain 1 potion</dd>
+                <dt><strong>5 spirit:</strong></dt><dd>Gain 1 virtue</dd>
+              </dl>
+          </dd>
+          <dt><span class="name">Sanctuary</span></dt>
+          <dd>
+            <dl>
+              <dt><strong>Free:</strong></dt><dd>Gain 1 spirit</dd>
+              <dt><strong>5 spirit:</strong></dt><dd>Remove all your corruptions</dd>
+            </dl>
+          </dd>
+          <dt><span class="name">Village</span></dt>
+          <dd>
+            <dl>
+              <dt><strong>Free:</strong></dt><dd>Gain 6 warriors</dd>
+              <dt><strong>1 spirit:</strong></dt><dd>Gain 12 warriors</dd>
+            </dl>
+          </dd>
+          <dt><span class="name">Bazaar</span></dt>
+          <dd>
+            <dl>
+              <dt><strong>Free:</strong></dt><dd>Gain 1 gear</dd>
+              <dt><strong>2 spirit:</strong></dt><dd>Gain 1 treasure</dd>
+            </dl>
+          </dd>
+        </dl>
+        <h3>End of Turn</h3>
+        <span class="action-description">Drop 1 skull into the Tower</span>
+      </div>
+
+      <div id="virtues" class="hidden column">
+        <h2>Virtues</h2>
+        <div id="base-virtue-1"></div>
+        <div id="base-virtue-2"></div>
+        <div id="champion-virtue"></div>
+        <div id="additional-virtue-1"></div>
+        <div id="additional-virtue-2"></div>
+        <div id="additional-virtue-3"></div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="character.js"></script>
+    <script type="text/javascript" src="champion.js"></script>
+    <script type="text/javascript">
+      function onLoad() {
+        characterSelector();
+        guardianSelector();
+        pageUpdate();
+      }
+
+      window.onload = onLoad();
+    </script>
   </body>
 </html>
