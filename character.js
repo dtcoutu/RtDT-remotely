@@ -10,13 +10,13 @@ const archwright = {
             id: "base-virtue-1",
             name: "innovative",
             description: "+1 BEAST Advantage",
-            active: true
+            permanent: true
         },
         {
             id: "base-virtue-2",
             name: "clever",
             description: "Battlements give you +2 Wild Advantages (instead of +1).",
-            active: true
+            permanent: true
         },
         {
             id: "additional-virtue-1",
@@ -51,13 +51,13 @@ const brutal_warlord = {
             id: "base-virtue-1",
             name: "baleful",
             description: "+1 MELEE Advantage",
-            active: true
+            permanent: true
         },
         {
             id: "base-virtue-2",
             name: "veteran",
             description: "+1 Wild Advantage when you Battle",
-            active: true
+            permanent: true
         },
         {
             id: "additional-virtue-1",
@@ -92,13 +92,13 @@ const haunted_recluse = {
             id: "base-virtue-1",
             name: "spiritreaver",
             description: "+1 UNDEAD Advantage",
-            active: true
+            permanent: true
         },
         {
             id: "base-virtue-2",
             name: "skullweaver",
             description: "When a skull emerges in your home kingdom, you can place it on any building with 2 or fewer skulls in any kingdom.",
-            active: true
+            permanent: true
         },
         {
             id: "additional-virtue-1",
@@ -133,13 +133,13 @@ const orphaned_scion = {
             id: "base-virtue-1",
             name: "arcane",
             description: "+1 MAGIC Advantage",
-            active: true
+            permanent: true
         },
         {
             id: "base-virtue-2",
             name: "generous",
             description: "After you Cleanse, remove 1 skull from any building.",
-            active: true
+            permanent: true
         },
         {
             id: "additional-virtue-1",
@@ -174,13 +174,13 @@ const relic_hunter = {
             id: "base-virtue-1",
             name: "precise",
             description: "+1 HUMANOID Advantage",
-            active: true
+            permanent: true
         },
         {
             id: "base-virtue-2",
             name: "prepared",
             description: "When you reinforce at a bazaar, spend 1 less spirit to gain a treasure.",
-            active: true
+            permanent: true
         },
         {
             id: "additional-virtue-1",
@@ -215,13 +215,13 @@ const spymaster = {
             id: "base-virtue-1",
             name: "alert",
             description: "+1 STEALTH Advantage",
-            active: true
+            permanent: true
         },
         {
             id: "base-virtue-2",
             name: "swift",
             description: "Your base move is 4.",
-            active: true
+            permanent: true
         },
         {
             id: "additional-virtue-1",
@@ -268,6 +268,16 @@ function buyVirtue({ srcElement }) {
     const character = JSON.parse(localStorage.getItem("character"));
 
     character.virtues.find(virtue => virtue.id === srcElement.id.slice(4)).active = true;
+
+    localStorage.setItem("character", JSON.stringify(character));
+
+    window.location.reload();
+}
+
+function unbuyVirtue({ srcElement }) {
+    const character = JSON.parse(localStorage.getItem("character"));
+
+    character.virtues.find(virtue => virtue.id === srcElement.id.slice(6)).active = false;
 
     localStorage.setItem("character", JSON.stringify(character));
 

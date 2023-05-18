@@ -80,14 +80,26 @@ function showCharacterDetails(character) {
         descriptionDiv.innerHTML = virtue.description
         virtueElement.append(descriptionDiv);
 
-        if (virtue.active) {
+        if (virtue.permanent || virtue.active) {
             virtueElement.classList.remove("inactive");
 
-            const buyButton = document.getElementById("buy-" + virtue.id);
-            if (buyButton !== null) {
-                buyButton.remove();
+            if (!virtue.permanent) {
+                const buyButton = document.getElementById("buy-" + virtue.id);
+                if (buyButton !== null) {
+                    buyButton.remove();
+                }
+
+                let unbuyButton = document.getElementById("unbuy-" + virtue.id);
+                if (unbuyButton === null) {
+                    unbuyButton = document.createElement("button");
+                    unbuyButton.id = "unbuy-" + virtue.id;
+                    unbuyButton.value = virtue.id;
+                    unbuyButton.onclick = unbuyVirtue;
+                    unbuyButton.appendChild(document.createTextNode("Un-Buy"));
+                    virtueElement.appendChild(unbuyButton);
+                }
             }
-        } else {
+        } else if (!virtue.permanent) {
             virtueElement.classList.add("inactive");
 
             let buyButton = document.createElement("button");
