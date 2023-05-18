@@ -2,13 +2,33 @@
   border-bottom: 1px solid black;
 }
 
+#actions {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+#reinforce {
+  display: grid;
+}
+
+#reinforce > h4 {
+  grid-column: 1 / span 2;
+  grid-row: 1;
+}
+
 #reinforce > .choose-one {
+  grid-column: 1;
+  grid-row: 2 / span 5;
   writing-mode: vertical-rl;
   transform: rotate(-180deg);
-  float: left;
   font-weight: bold;
   padding: 60px 15px 60px 15px;
   border-left: 1px solid black;
+}
+
+#reinforce > dl {
+  grid-column: 2;
+  grid-row: 2;
 }
 
 .counter {
@@ -34,8 +54,6 @@
 }
 
 #heroic-action {
-  grid-column: 1;
-  grid-row: 2;
   display: grid;
 }
 
@@ -77,6 +95,8 @@
   padding-left: 15px;
   border-left: 1px solid black;
 }
+
+
 
 .hidden {
   visibility: hidden;
