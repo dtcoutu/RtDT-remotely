@@ -2,40 +2,22 @@
   border-bottom: 1px solid black;
 }
 
-.after {
-  writing-mode: vertical-rl;
-  float: right;
-  font-weight: bold;
-  padding-left: 15px;
-  border-left: 1px solid black;
-}
-
-#heroic-action > .choose-one {
-  writing-mode: vertical-rl;
-  transform: rotate(-180deg);
-  float: left;
-  font-weight: bold;
-  padding: 15px 15px 15px 15px;
-  border-left: 1px solid black;
-}
-
 #reinforce > .choose-one {
   writing-mode: vertical-rl;
   transform: rotate(-180deg);
   float: left;
   font-weight: bold;
-  padding: 30px 15px 30px 15px;
+  padding: 60px 15px 60px 15px;
   border-left: 1px solid black;
-}
-
-.column {
-  flex: 50%;
-  padding-right: 10px;
-  padding-left: 10px;
 }
 
 .counter {
   font-size: large;
+}
+
+#counters {
+  grid-column: 2;
+  grid-row: 1;
 }
 
 #counters > div {
@@ -51,20 +33,88 @@
   text-transform: uppercase;
 }
 
+#heroic-action {
+  grid-column: 1;
+  grid-row: 2;
+  display: grid;
+}
+
+#heroic-action > h4 {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+}
+
+#heroic-action > .choose-one {
+  grid-column-start: 1;
+  grid-row-start: 2;
+  grid-row-end: 5;
+  writing-mode: vertical-rl;
+  transform: rotate(-180deg);
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  font-weight: bold;
+  border-left: 1px solid black;
+  padding-left: 15px;
+}
+
+#heroic-action > dl {
+  grid-column-start: 2;
+  grid-row-start: 2;
+  grid-row-end: 5;
+}
+
+.after {
+  grid-column-start: 3;
+  grid-row-start: 2;
+  grid-row-end: 5;
+  writing-mode: vertical-rl;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  font-weight: bold;
+  padding-left: 15px;
+  border-left: 1px solid black;
+}
+
 .hidden {
   visibility: hidden;
 }
 
-.inactive {
+.inactive > div {
   opacity: 0.2;
 }
 
-.row {
-  display: flex;
+#setup {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+#virtues {
+  grid-column: 2;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: max-content auto;
+  gap: 24px;
+}
+
+#virtues > .header {
+  grid-column: 1 / span 2;
+}
+
+.virtue {
+  text-align: center;
+}
+
+.virtue .name {
+  padding-bottom: 10px;
 }
 
 body {
-  width: 50%;
+  display: grid;
+  grid-template-columns: max-content auto;
+  gap: 25px;
 }
 
 dl {
@@ -89,6 +139,6 @@ dd.action {
   padding-left: 40px;
 }
 
-h4 {
+h3, h4 {
   clear: both;
 }

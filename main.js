@@ -66,7 +66,7 @@ function showCharacterDetails(character) {
 
     document.getElementById("movement").innerHTML = character.move;
 
-        // populate virtues
+    // populate virtues
     character.virtues.map((virtue) => {
         const virtueElement = document.getElementById(virtue.id);
 
