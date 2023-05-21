@@ -4,6 +4,32 @@ const COUNTERS_STORAGE = "counters";
 const ALLIANCES_STORAGE = "alliances";
 const STARTED_STORAGE = "started";
 
+const NORTH = {
+    id: "north",
+    name: "Champion of the North",
+    description: "+2 WILD Advantages in mountains",
+}
+
+const SOUTH = {
+    id: "south",
+    name: "Champion of the South",
+    description: "+2 WILD Advantages in desert",
+}
+
+const EAST = {
+    id: "east",
+    name: "Champion of the East",
+    description: "+2 WILD Advantages in hills",
+}
+
+const WEST = {
+    id: "west",
+    name: "Champion of the West",
+    description: "+2 WILD Advantages in forest",
+}
+
+REGIONS = [ NORTH, SOUTH, EAST, WEST]
+
 function resetGame() {
     localStorage.setItem(CHARACTER_STORAGE, null);
     localStorage.setItem(REGION_STORAGE, null);
@@ -13,10 +39,9 @@ function resetGame() {
 
     hideSections();
 
-    // Not sure why this drop down is the only one that doesn't reset...
     document.getElementById("alliances-expansion").value = "";
 
-    window.location.reload();
+    pageUpdate();
 }
 
 function startGame() {
@@ -81,7 +106,7 @@ function alliancesInclusion(included) {
 
     localStorage.setItem(ALLIANCES_STORAGE, JSON.stringify(alliances));
 
-    window.location.reload();
+    pageUpdate();
 }
 
 function allianceRegionSet(selectorId, value) {
@@ -92,7 +117,26 @@ function allianceRegionSet(selectorId, value) {
 
     localStorage.setItem(ALLIANCES_STORAGE, JSON.stringify(alliances));
 
-    window.location.reload();
+    pageUpdate();
+}
+
+function guardianSelector() {
+    const selector = document.getElementById('guardian-selector');
+
+    REGIONS.map( (region, i) => {
+        let opt = document.createElement("option");
+        opt.value = region.id;
+        opt.innerHTML = region.name;
+        selector.append(opt);
+    });
+}
+
+function selectedRegion(value) {
+    const region = REGIONS.find(element => element.id === value);
+
+    localStorage.setItem("region", JSON.stringify(region))
+
+    pageUpdate();
 }
 
 function pageUpdate() {
@@ -102,20 +146,16 @@ function pageUpdate() {
     const alliances = JSON.parse(localStorage.getItem(ALLIANCES_STORAGE));
     const started = localStorage.getItem(STARTED_STORAGE) === 'true';
 
-    if (character !== null) {
-        const characterSelector = document.getElementById("character-selector");
-        characterSelector.value = character.id;
-    }
+    const characterSelector = document.getElementById("character-selector");
+    characterSelector.value = character ? character.id : '';
 
-    if (region !== null) {
-        const regionSelector = document.getElementById("guardian-selector");
-        regionSelector.value = region.id;
-    }
+    const regionSelector = document.getElementById("guardian-selector");
+    regionSelector.value = region ? region.id : '';
+
+    const alliancesExpansionSelector = document.getElementById("alliances-expansion");
+    alliancesExpansionSelector.value = alliances ? alliances.included : '';
 
     if (alliances !== null) {
-        const alliancesExpansionSelector = document.getElementById("alliances-expansion");
-        alliancesExpansionSelector.value = alliances.included
-
         const alliances_guild_setup = document.getElementById('alliances-guild-setup');
         if (alliances.included) {
             alliances_guild_setup.classList.remove('hidden');
