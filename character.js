@@ -1,9 +1,7 @@
 const archwright = {
     id: "archwright",
     name: "Archwright",
-    banner: {
-        description: "Place a battlement on any space or move a battlement up to 2 spaces."
-    },
+    banner: "Place a battlement on any space or move a battlement up to 2 spaces.",
     move: 3,
     virtues: [
         {
@@ -42,9 +40,7 @@ const archwright = {
 const brutal_warlord = {
     id: "brutal-warlord",
     name: "Brutal Warlord",
-    banner: {
-        description: "Gain 5 warriors"
-    },
+    banner: "Gain 5 warriors",
     move: 3,
     virtues: [
         {
@@ -83,9 +79,7 @@ const brutal_warlord = {
 const haunted_recluse = {
     id: "haunted-recluse",
     name: "Haunted Recluse",
-    banner: {
-        description: "Move 1 skull from any building to any other building with 2 or fewer skulls"
-    },
+    banner: "Move 1 skull from any building to any other building with 2 or fewer skulls",
     move: 3,
     virtues: [
         {
@@ -124,9 +118,7 @@ const haunted_recluse = {
 const orphaned_scion = {
     id: "orphaned-scion",
     name: "Orphaned Scion",
-    banner: {
-        description: "Gain 1 spirit"
-    },
+    banner: "Gain 1 spirit",
     move: 3,
     virtues: [
         {
@@ -165,9 +157,7 @@ const orphaned_scion = {
 const relic_hunter = {
     id: "relic-hunger",
     name: "Relic Hunter",
-    banner: {
-        description: "Gain 1 potion"
-    },
+    banner: "Gain 1 potion",
     move: 3,
     virtues: [
         {
@@ -206,9 +196,7 @@ const relic_hunter = {
 const spymaster = {
     id: "spymaster",
     name: "Spymaster",
-    banner: {
-        description: "Place your hero on any space in your current kingdom"
-    },
+    banner: "Place your hero on any space in your current kingdom",
     move: 4,
     virtues: [
         {
@@ -264,20 +252,10 @@ function characterSelector() {
     });
 }
 
-function buyVirtue({ srcElement }) {
+function toggleVirtue(value) {
     const character = JSON.parse(localStorage.getItem("character"));
 
-    character.virtues.find(virtue => virtue.id === srcElement.id.slice(4)).active = true;
-
-    localStorage.setItem("character", JSON.stringify(character));
-
-    window.location.reload();
-}
-
-function unbuyVirtue({ srcElement }) {
-    const character = JSON.parse(localStorage.getItem("character"));
-
-    character.virtues.find(virtue => virtue.id === srcElement.id.slice(6)).active = false;
+    character.virtues.find(virtue => virtue.id === value).active = !character.virtues.find(virtue => virtue.id === value).active;
 
     localStorage.setItem("character", JSON.stringify(character));
 

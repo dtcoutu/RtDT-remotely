@@ -7,6 +7,14 @@
   grid-row: 2;
 }
 
+#alliances-guild-setup {
+  padding-left: 24px;
+}
+
+#alliances-guild-setup.hidden {
+  float: right;
+}
+
 #reinforce {
   display: grid;
 }
@@ -135,7 +143,7 @@
 
 body {
   display: grid;
-  grid-template-columns: max-content auto;
+  grid-template-columns: 50% 50%;
   gap: 25px;
 }
 
