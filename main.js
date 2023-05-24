@@ -273,6 +273,13 @@ const CHARACTERS = [
     spymaster,
 ];
 
+const GUILDS = [
+    'arcane_scouts',
+    'druids_circle',
+    'paladins_order',
+    'thieves_guild'
+]
+
 function resetGame() {
     localStorage.setItem(CHARACTER_STORAGE, null);
     localStorage.setItem(REGION_STORAGE, null);
@@ -288,16 +295,16 @@ function resetGame() {
 }
 
 function startGame() {
-    const character = JSON.parse(localStorage.getItem(CHARACTER_STORAGE));
-    const region = JSON.parse(localStorage.getItem(REGION_STORAGE));
-    const alliances = JSON.parse(localStorage.getItem(ALLIANCES_STORAGE));
+    const character = getStoredData(CHARACTER_STORAGE);
+    const region = getStoredData(REGION_STORAGE);
+    const alliances = getStoredData(ALLIANCES_STORAGE);
 
     if ((character === null) || (region === null) || (alliances === null)) {
         alert('You must select a character, a region, indicate if alliances expansion is in play.');
         return;
     }
 
-    if (alliances.included && !guildRegionsValid(alliances)) {
+    if (alliances.included && !guildRegionsValid()) {
         alert('All guilds must have a region set and they must be unique');
         return;
     }
@@ -305,18 +312,12 @@ function startGame() {
     localStorage.setItem(STARTED_STORAGE, 'true');
 
     initializeCounters();
-    revealSections();
 
     pageUpdate();
 }
 
-function guildRegionsValid(alliances) {
-    const guildRegions = [
-        document.getElementById('arcane-scouts-location').value,
-        document.getElementById('druids-circle-location').value,
-        document.getElementById('paladins-order-location').value,
-        document.getElementById('thieves-guild-location').value
-    ]
+function guildRegionsValid() {
+    const guildRegions = GUILDS.map(guild => document.getElementById(guild + '-location').value);
 
     const uniqueGuildRegions = guildRegions.filter((region, index, array) => array.indexOf(region) === index)
 
@@ -329,7 +330,7 @@ function initializeCounters() {
         spirit: 1,
     }
 
-    localStorage.setItem(COUNTERS_STORAGE, JSON.stringify(counters));
+    updateStoredData(COUNTERS_STORAGE, counters);
 }
 
 function alliancesInclusion(included) {
@@ -341,26 +342,34 @@ function alliancesInclusion(included) {
 
     const alliances = {
         included: alliancesIncluded,
-        arcane_scouts: '',
-        druids_circle: '',
-        paladins_order: '',
-        thieves_guild: ''
+        arcane_scouts: {
+            region: '',
+            level: 1
+        },
+        druids_circle: {
+            region: '',
+            level: 1
+        },
+        paladins_order: {
+            region: '',
+            level: 1
+        },
+        thieves_guild: {
+            region: '',
+            level: 1
+        }
     }
 
-    localStorage.setItem(ALLIANCES_STORAGE, JSON.stringify(alliances));
-
-    pageUpdate();
+    updateStoredData(ALLIANCES_STORAGE, alliances);
 }
 
 function allianceRegionSet(selectorId, value) {
-    const alliances = JSON.parse(localStorage.getItem(ALLIANCES_STORAGE));
+    const alliances = getStoredData(ALLIANCES_STORAGE);
 
-    const guildName = selectorId.split('-').slice(0,2).join('_');
-    alliances[guildName] = value;
+    const guildName = selectorId.split('-')[0];
+    alliances[guildName].region = value;
 
-    localStorage.setItem(ALLIANCES_STORAGE, JSON.stringify(alliances));
-
-    pageUpdate();
+    updateStoredData(ALLIANCES_STORAGE, alliances);
 }
 
 function characterSelector() {
@@ -377,7 +386,7 @@ function characterSelector() {
 function guardianSelector() {
     const selector = document.getElementById('guardian-selector');
 
-    REGIONS.map( (region, i) => {
+    REGIONS.map( region => {
         let opt = document.createElement("option");
         opt.value = region.id;
         opt.innerHTML = region.name;
@@ -388,23 +397,19 @@ function guardianSelector() {
 function selectedRegion(value) {
     const region = REGIONS.find(element => element.id === value);
 
-    localStorage.setItem("region", JSON.stringify(region))
-
-    pageUpdate();
+    updateStoredData(REGION_STORAGE, region);
 }
 
 function selectedCharacter(value) {
     const character = CHARACTERS.find(element => element.id === value);
-    localStorage.setItem("character", JSON.stringify(character));
-
-    pageUpdate();
+    updateStoredData(CHARACTER_STORAGE, character);
 }
 
 function pageUpdate() {
-    const character = JSON.parse(localStorage.getItem(CHARACTER_STORAGE));
-    const region = JSON.parse(localStorage.getItem(REGION_STORAGE));
-    const counters = JSON.parse(localStorage.getItem(COUNTERS_STORAGE));
-    const alliances = JSON.parse(localStorage.getItem(ALLIANCES_STORAGE));
+    const character = getStoredData(CHARACTER_STORAGE);
+    const region = getStoredData(REGION_STORAGE);
+    const counters = getStoredData(COUNTERS_STORAGE);
+    const alliances = getStoredData(ALLIANCES_STORAGE);
     const started = localStorage.getItem(STARTED_STORAGE) === 'true';
 
     const characterSelector = document.getElementById("character-selector");
@@ -424,34 +429,36 @@ function pageUpdate() {
             alliances_guild_setup.classList.add('hidden');
         }
 
-        const arcaneScoutsSelector = document.getElementById("arcane-scouts-location");
-        arcaneScoutsSelector.value = alliances.arcane_scouts;
-        const druidsCircleSelector = document.getElementById("druids-circle-location");
-        druidsCircleSelector.value = alliances.druids_circle;
-        const paladinsOrderSelector = document.getElementById("paladins-order-location")
-        paladinsOrderSelector.value = alliances.paladins_order;
-        const thievesGuildSelector = document.getElementById("thieves-guild-location");
-        thievesGuildSelector.value = alliances.thieves_guild;
+        GUILDS.map(guild =>
+            document.getElementById(guild + '-location').value = alliances[guild].region
+        );
     }
 
     if (started) {
-        revealSections();
+        revealSections(alliances);
         setCounters(counters);
         showCharacterDetails(character);
         showRegionDetails(region);
+        showAlliancesGuilds(alliances);
     }
 }
 
-function revealSections() {
+function revealSections(alliances) {
     document.getElementById("counters").classList.remove("hidden");
     document.getElementById("actions").classList.remove("hidden");
     document.getElementById("virtues").classList.remove("hidden");
+
+    if (alliances.included) {
+        document.getElementById("guilds").classList.remove("hidden");
+    }
 }
 
 function hideSections() {
+    document.getElementById('alliances-guild-setup').classList.add("hidden")
     document.getElementById("counters").classList.add("hidden");
     document.getElementById("actions").classList.add("hidden");
     document.getElementById("virtues").classList.add("hidden");
+    document.getElementById("guilds").classList.add("hidden");
 }
 
 function setCounters(counters) {
@@ -491,22 +498,55 @@ function showRegionDetails(region) {
     document.getElementById("champion-virtue-description").innerHTML = region.description;
 }
 
+function showAlliancesGuilds(alliances) {
+    // Update region text
+    GUILDS.map(guild => {
+        document.getElementById(guild + '-region').innerHTML = alliances[guild].region;
+
+        for (let i = 1; i <= 4; i++) {
+            document.getElementById(guild + '-rank-' + i).classList.remove("selected");
+        }
+
+        document.getElementById(guild + '-rank-' + alliances[guild].level).classList.add("selected");
+    });
+
+    // Select guild level
+
+    // Order guilds by region in relation to players region
+}
+
+function selectGuildLevel(guildLevelId) {
+    const [guild, level] = guildLevelId.split("-rank-");
+
+    const alliances = getStoredData(ALLIANCES_STORAGE);
+
+    alliances[guild].level = level;
+
+    updateStoredData(ALLIANCES_STORAGE, alliances);
+}
+
 function updateCount(counter, amount) {
-    let counters = JSON.parse(localStorage.getItem(COUNTERS_STORAGE));
+    let counters = getStoredData(COUNTERS_STORAGE);
 
     counters[counter] += amount;
 
-    localStorage.setItem(COUNTERS_STORAGE, JSON.stringify(counters));
-
-    pageUpdate();
+    updateStoredData(COUNTERS_STORAGE, counters);
 }
 
 function toggleVirtue(value) {
-    const character = JSON.parse(localStorage.getItem("character"));
+    const character = getStoredData(CHARACTER_STORAGE);
 
     character.virtues.find(virtue => virtue.id === value).active = !character.virtues.find(virtue => virtue.id === value).active;
 
-    localStorage.setItem("character", JSON.stringify(character));
+    updateStoredData(CHARACTER_STORAGE, character);
+}
+
+function getStoredData(key) {
+    return JSON.parse(localStorage.getItem(key));
+}
+
+function updateStoredData(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
 
     pageUpdate();
 }

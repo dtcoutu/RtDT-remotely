@@ -33,10 +33,10 @@
           </select>
         </label>
         <div id="alliances-guild-setup" class="hidden">
-          <div id="arcane-scouts-setup">
+          <div id="arcane_scouts-setup">
             <label>
               Arcane Scouts location:
-              <select id="arcane-scouts-location" onchange="allianceRegionSet(this.id, this.value)">
+              <select id="arcane_scouts-location" onchange="allianceRegionSet(this.id, this.value)">
                 <option value="">---</option>
                 <option value="North">North</option>
                 <option value="South">South</option>
@@ -45,10 +45,10 @@
               </select>
             </label>
           </div>
-          <div id="druids-circle-setup">
+          <div id="druids_circle-setup">
             <label>
               Druids Circle location:
-              <select id="druids-circle-location" onchange="allianceRegionSet(this.id, this.value)">
+              <select id="druids_circle-location" onchange="allianceRegionSet(this.id, this.value)">
                 <option value="">---</option>
                 <option value="North">North</option>
                 <option value="South">South</option>
@@ -57,10 +57,10 @@
               </select>
             </label>
           </div>
-          <div id="paladins-order-setup">
+          <div id="paladins_order-setup">
             <label>
               Paladins Order location:
-              <select id="paladins-order-location" onchange="allianceRegionSet(this.id, this.value)">
+              <select id="paladins_order-location" onchange="allianceRegionSet(this.id, this.value)">
                 <option value="">---</option>
                 <option value="North">North</option>
                 <option value="South">South</option>
@@ -69,10 +69,10 @@
               </select>
             </label>
           </div>
-          <div id="thieves-guild-setup">
+          <div id="thieves_guild-setup">
             <label>
               Thieves Guild location:
-              <select id="thieves-guild-location" onchange="allianceRegionSet(this.id, this.value)">
+              <select id="thieves_guild-location" onchange="allianceRegionSet(this.id, this.value)">
                 <option value="">---</option>
                 <option value="North">North</option>
                 <option value="South">South</option>
@@ -212,36 +212,32 @@
 
     <div id="guilds" class="hidden">
       <div class="side-a">
-        <div>Arcane Scouts</div>
-        <div>Citadel</div>
-        <div class="rank-1">If you start your move in this kingdom, your base move is -1.</div>
-        <div class="rank-2">You cannot spend <img src="icons/spirit.png" alt="spirit" width="20" height="22" /> to double your base move.</div>
-        <div class="rank-3">If you start your move in this kingdom, your base move is +1.</div>
-        <div class="rank-4">At the start of your turn you may place your hero on any space.</div>
+        <div class="guild-name">Arcane Scouts: Citadel <span id="arcane_scouts-region"></span></div>
+        <div id="arcane_scouts-rank-1" onclick="selectGuildLevel('arcane_scouts-rank-1')">If you start your move in this kingdom, your base move is -1.</div>
+        <div id="arcane_scouts-rank-2" onclick="selectGuildLevel('arcane_scouts-rank-2')">You cannot spend <img src="icons/spirit.png" alt="spirit" width="20" height="22" /> to double your base move.</div>
+        <div id="arcane_scouts-rank-3" onclick="selectGuildLevel('arcane_scouts-rank-3')">If you start your move in this kingdom, your base move is +1.</div>
+        <div id="arcane_scouts-rank-4" onclick="selectGuildLevel('arcane_scouts-rank-4')">At the start of your turn you may place your hero on any space.</div>
       </div>
       <div class="side-a">
-        <div>Druids Circle</div>
-        <div>Village</div>
-        <div class="rank-1">You cannot take a Banner action.</div>
-        <div class="rank-2">You must spend 1 <img src="icons/spirit.png" alt="spirit" width="20" height="22" /> to take your Banner action.</div>
-        <div class="rank-3">When you take your Banner action, you may spend 1 <img src="icons/spirit.png" alt="spirit" width="20" height="22" /> to take it twice.</div>
-        <div class="rank-4">When you take your Banner Action, all other heroes in this kingdom may take your Banner action.</div>
+        <div class="guild-name">Druids Circle: Village <span id="druids_circle-region"></span></div>
+        <div id="druids_circle-rank-1" onclick="selectGuildLevel('druids_circle-rank-1')">You cannot take a Banner action.</div>
+        <div id="druids_circle-rank-2" onclick="selectGuildLevel('druids_circle-rank-2')">You must spend 1 <img src="icons/spirit.png" alt="spirit" width="20" height="22" /> to take your Banner action.</div>
+        <div id="druids_circle-rank-3" onclick="selectGuildLevel('druids_circle-rank-3')">When you take your Banner action, you may spend 1 <img src="icons/spirit.png" alt="spirit" width="20" height="22" /> to take it twice.</div>
+        <div id="druids_circle-rank-4" onclick="selectGuildLevel('druids_circle-rank-4')">When you take your Banner Action, all other heroes in this kingdom may take your Banner action.</div>
       </div>
       <div class="side-a">
-        <div>Paladins Order</div>
-        <div>Sanctuary</div>
-        <div class="rank-1">You cannot Cleanse.</div>
-        <div class="rank-2">You must spend 1 <img src="icons/spirit.png" alt="spirit" width="20" height="22" /> to Cleanse.</div>
-        <div class="rank-3">After you Cleanse, gain +1 <img src="icons/spirit.png" alt="spirit" width="20" height="22" />.</div>
-        <div class="rank-4">After you Cleanse, gain +2 <img src="icons/spirit.png" alt="spirit" width="20" height="22" />.</div>
+        <div class="guild-name">Paladins Order: Sanctuary <span id="paladins_order-region"></span></div>
+        <div id="paladins_order-rank-1" onclick="selectGuildLevel('paladins_order-rank-1')">You cannot Cleanse.</div>
+        <div id="paladins_order-rank-2" onclick="selectGuildLevel('paladins_order-rank-2')">You must spend 1 <img src="icons/spirit.png" alt="spirit" width="20" height="22" /> to Cleanse.</div>
+        <div id="paladins_order-rank-3" onclick="selectGuildLevel('paladins_order-rank-3')">After you Cleanse, gain +1 <img src="icons/spirit.png" alt="spirit" width="20" height="22" />.</div>
+        <div id="paladins_order-rank-4" onclick="selectGuildLevel('paladins_order-rank-4')">After you Cleanse, gain +2 <img src="icons/spirit.png" alt="spirit" width="20" height="22" />.</div>
       </div>
       <div class="side-a">
-        <div>Thieves Guild</div>
-        <div>Bazaar</div>
-        <div class="rank-1">Treasures cost +2 <img src="icons/spirit.png" alt="spirit" width="20" height="22" />.</div>
-        <div class="rank-2">Treasures cost +1 <img src="icons/spirit.png" alt="spirit" width="20" height="22" />.</div>
-        <div class="rank-3">Treasures cost 1 less <img src="icons/spirit.png" alt="spirit" width="20" height="22" />.</div>
-        <div class="rank-4">When you Reinforce to gain a treasure, also gain the top card of the treasure deck.</div>
+        <div class="guild-name">Thieves Guild: Bazaar <span id="thieves_guild-region"></span></div>
+        <div id="thieves_guild-rank-1" onclick="selectGuildLevel('thieves_guild-rank-1')">Treasures cost +2 <img src="icons/spirit.png" alt="spirit" width="20" height="22" />.</div>
+        <div id="thieves_guild-rank-2" onclick="selectGuildLevel('thieves_guild-rank-2')">Treasures cost +1 <img src="icons/spirit.png" alt="spirit" width="20" height="22" />.</div>
+        <div id="thieves_guild-rank-3" onclick="selectGuildLevel('thieves_guild-rank-3')">Treasures cost 1 less <img src="icons/spirit.png" alt="spirit" width="20" height="22" />.</div>
+        <div id="thieves_guild-rank-4" onclick="selectGuildLevel('thieves_guild-rank-4')">When you Reinforce to gain a treasure, also gain the top card of the treasure deck.</div>
       </div>
     </div>
 
