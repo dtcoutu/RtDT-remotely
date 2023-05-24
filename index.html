@@ -92,14 +92,14 @@
 
     <div id="counters" class="hidden">
       <div>
-        <div><img src="icons/warrior.png" alt="warrior" width="22" height="22" />: <span id="warrior-counter" class="counter"></span></div>
+        <div><img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />: <span id="warrior-counter" class="counter"></span></div>
         <button onclick="updateCount('warriors', -5)">-5</button>
         <button onclick="updateCount('warriors', -1)">-1</button>
         <button onclick="updateCount('warriors', 1)">+1</button>
         <button onclick="updateCount('warriors', 6)"><strong>+6</strong></button>
       </div>
       <div>
-        <div><img src="icons/spirit.png" alt="spirit" width="20" height="22" />: <span id="spirit-counter" class="counter"></span></div>
+        <div><img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />: <span id="spirit-counter" class="counter"></span></div>
         <button onclick="updateCount('spirit', -5)">-5</button>
         <button onclick="updateCount('spirit', -1)">-1</button>
         <button onclick="updateCount('spirit', 1)">+1</button>
@@ -117,7 +117,7 @@
       <h3>Middle of Turn</h3>
       <div class="action">
         <span class="name">Move <span id="movement"></span></span> (Split as Needed)
-        <span class="description">Spend 1 <img src="icons/spirit.png" alt="spirit" width="20" height="22" /> to double your move</span>
+        <span class="description">Spend 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to double your move</span>
       </div>
       <div id="heroic-action">
         <h4>Heroic Action</h4>
@@ -130,9 +130,9 @@
           <dt class="action"><span class="name">Quest</span></dt>
           <dd class="action"><span class="description">Complete a quest or explore a dungeon</span></dd>
           <dt class="action"><span class="name">Influence</span></dt>
-          <dd class="action"><span class="description">When at a Guild Hall gain 2 <img src="icons/influence.png" alt="influence" width="24" height="24"></span></dd>
+          <dd class="action"><span class="description">When at a Guild Hall gain 2 <img src="icons/influence.png" title="influence" alt="influence" width="24" height="24"></span></dd>
         </dl>
-        <div class="after">Gain 2 <img src="icons/spirit.png" alt="spirit" width="20" height="22" /> after</div>
+        <div class="after">Gain 2 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> after</div>
       </div>
       <div id="reinforce">
         <h4>Reinforce</h4>
@@ -142,34 +142,34 @@
           <dd class="action">
             <dl>
               <dt><strong>Free:</strong></dt><dd>Gain 1 potion</dd>
-              <dt><strong>5 <img src="icons/spirit.png" alt="spirit" width="20" height="22" />:</strong></dt><dd>Gain 1 virtue</dd>
+              <dt><strong>5 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Gain 1 virtue</dd>
             </dl>
           </dd>
           <dt class="action"><span class="name">Sanctuary</span></dt>
           <dd class="action">
             <dl>
               <dt><strong>Free:</strong></dt><dd>Gain 1 spirit</dd>
-              <dt><strong>5 <img src="icons/spirit.png" alt="spirit" width="20" height="22" />:</strong></dt><dd>Remove all your corruptions</dd>
+              <dt><strong>5 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Remove all your corruptions</dd>
             </dl>
           </dd>
           <dt class="action"><span class="name">Village</span></dt>
           <dd class="action">
             <dl>
-              <dt><strong>Free:</strong></dt><dd>Gain 6 <img src="icons/warrior.png" alt="warrior" width="22" height="22" /></dd>
-              <dt><strong>1 <img src="icons/spirit.png" alt="spirit" width="20" height="22" />:</strong></dt><dd>Gain 12 <img src="icons/warrior.png" alt="warrior" width="22" height="22" /></dd>
+              <dt><strong>Free:</strong></dt><dd>Gain 6 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /></dd>
+              <dt><strong>1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Gain 12 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /></dd>
             </dl>
           </dd>
           <dt class="action"><span class="name">Bazaar</span></dt>
           <dd class="action">
             <dl>
               <dt><strong>Free:</strong></dt><dd>Gain 1 gear</dd>
-              <dt><strong>2 <img src="icons/spirit.png" alt="spirit" width="20" height="22" />:</strong></dt><dd>Gain 1 treasure</dd>
+              <dt><strong>2 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Gain 1 treasure</dd>
             </dl>
           </dd>
           <dt class="action"><span class="name">Guild Hall</span></dt>
           <dd class="action">
             <dl>
-              <dt><strong>5 <img src="icons/influence.png" alt="influence" width="24" height="24">:</strong></dt>
+              <dt><strong>5 <img src="icons/influence.png" title="influence" alt="influence" width="24" height="24">:</strong></dt>
               <dd>Gain 1 level in corresponding Guild</dd>
             </dl>
           </dd>
@@ -214,29 +214,29 @@
       <div class="side-a">
         <div class="guild-name">Arcane Scouts: Citadel <span id="arcane_scouts-region"></span></div>
         <div id="arcane_scouts-rank-1" onclick="selectGuildLevel('arcane_scouts-rank-1')">If you start your move in this kingdom, your base move is -1.</div>
-        <div id="arcane_scouts-rank-2" onclick="selectGuildLevel('arcane_scouts-rank-2')">You cannot spend <img src="icons/spirit.png" alt="spirit" width="20" height="22" /> to double your base move.</div>
+        <div id="arcane_scouts-rank-2" onclick="selectGuildLevel('arcane_scouts-rank-2')">You cannot spend <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to double your base move.</div>
         <div id="arcane_scouts-rank-3" onclick="selectGuildLevel('arcane_scouts-rank-3')">If you start your move in this kingdom, your base move is +1.</div>
         <div id="arcane_scouts-rank-4" onclick="selectGuildLevel('arcane_scouts-rank-4')">At the start of your turn you may place your hero on any space.</div>
       </div>
       <div class="side-a">
         <div class="guild-name">Druids Circle: Village <span id="druids_circle-region"></span></div>
         <div id="druids_circle-rank-1" onclick="selectGuildLevel('druids_circle-rank-1')">You cannot take a Banner action.</div>
-        <div id="druids_circle-rank-2" onclick="selectGuildLevel('druids_circle-rank-2')">You must spend 1 <img src="icons/spirit.png" alt="spirit" width="20" height="22" /> to take your Banner action.</div>
-        <div id="druids_circle-rank-3" onclick="selectGuildLevel('druids_circle-rank-3')">When you take your Banner action, you may spend 1 <img src="icons/spirit.png" alt="spirit" width="20" height="22" /> to take it twice.</div>
+        <div id="druids_circle-rank-2" onclick="selectGuildLevel('druids_circle-rank-2')">You must spend 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to take your Banner action.</div>
+        <div id="druids_circle-rank-3" onclick="selectGuildLevel('druids_circle-rank-3')">When you take your Banner action, you may spend 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to take it twice.</div>
         <div id="druids_circle-rank-4" onclick="selectGuildLevel('druids_circle-rank-4')">When you take your Banner Action, all other heroes in this kingdom may take your Banner action.</div>
       </div>
       <div class="side-a">
         <div class="guild-name">Paladins Order: Sanctuary <span id="paladins_order-region"></span></div>
         <div id="paladins_order-rank-1" onclick="selectGuildLevel('paladins_order-rank-1')">You cannot Cleanse.</div>
-        <div id="paladins_order-rank-2" onclick="selectGuildLevel('paladins_order-rank-2')">You must spend 1 <img src="icons/spirit.png" alt="spirit" width="20" height="22" /> to Cleanse.</div>
-        <div id="paladins_order-rank-3" onclick="selectGuildLevel('paladins_order-rank-3')">After you Cleanse, gain +1 <img src="icons/spirit.png" alt="spirit" width="20" height="22" />.</div>
-        <div id="paladins_order-rank-4" onclick="selectGuildLevel('paladins_order-rank-4')">After you Cleanse, gain +2 <img src="icons/spirit.png" alt="spirit" width="20" height="22" />.</div>
+        <div id="paladins_order-rank-2" onclick="selectGuildLevel('paladins_order-rank-2')">You must spend 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to Cleanse.</div>
+        <div id="paladins_order-rank-3" onclick="selectGuildLevel('paladins_order-rank-3')">After you Cleanse, gain +1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.</div>
+        <div id="paladins_order-rank-4" onclick="selectGuildLevel('paladins_order-rank-4')">After you Cleanse, gain +2 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.</div>
       </div>
       <div class="side-a">
         <div class="guild-name">Thieves Guild: Bazaar <span id="thieves_guild-region"></span></div>
-        <div id="thieves_guild-rank-1" onclick="selectGuildLevel('thieves_guild-rank-1')">Treasures cost +2 <img src="icons/spirit.png" alt="spirit" width="20" height="22" />.</div>
-        <div id="thieves_guild-rank-2" onclick="selectGuildLevel('thieves_guild-rank-2')">Treasures cost +1 <img src="icons/spirit.png" alt="spirit" width="20" height="22" />.</div>
-        <div id="thieves_guild-rank-3" onclick="selectGuildLevel('thieves_guild-rank-3')">Treasures cost 1 less <img src="icons/spirit.png" alt="spirit" width="20" height="22" />.</div>
+        <div id="thieves_guild-rank-1" onclick="selectGuildLevel('thieves_guild-rank-1')">Treasures cost +2 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.</div>
+        <div id="thieves_guild-rank-2" onclick="selectGuildLevel('thieves_guild-rank-2')">Treasures cost +1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.</div>
+        <div id="thieves_guild-rank-3" onclick="selectGuildLevel('thieves_guild-rank-3')">Treasures cost 1 less <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.</div>
         <div id="thieves_guild-rank-4" onclick="selectGuildLevel('thieves_guild-rank-4')">When you Reinforce to gain a treasure, also gain the top card of the treasure deck.</div>
       </div>
     </div>

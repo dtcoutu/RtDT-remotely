@@ -17,6 +17,7 @@
 
 #reinforce {
   display: grid;
+  grid-template-columns: 10% auto;
 }
 
 #reinforce > h4 {
@@ -66,6 +67,7 @@
 
 #heroic-action {
   display: grid;
+  grid-template-columns: 10% auto 10%;
 }
 
 #heroic-action > h4 {
