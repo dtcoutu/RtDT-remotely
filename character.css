@@ -4,7 +4,7 @@
 
 #actions {
   grid-column: 1;
-  grid-row: 2;
+  grid-row: 2 / span 2;
 }
 
 #alliances-guild-setup {
@@ -140,13 +140,24 @@
 
 .virtue {
   text-align: center;
+  border: 1px solid black;
 }
 
 .virtue .name {
   padding-bottom: 10px;
 }
 
+.virtue button {
+  float: left;
+  margin-left: 3px;
+  margin-top: 3px;
+  z-index: 1;
+  position: relative;
+}
+
 #guilds {
+  grid-column: 2;
+  grid-row: 3;
   display: grid;
   gap: 12px;
 }
