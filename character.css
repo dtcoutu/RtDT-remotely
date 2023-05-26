@@ -59,6 +59,7 @@
 
 .name {
   text-transform: uppercase;
+  font-weight: bold;
 }
 
 #heroic-action {
