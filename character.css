@@ -8,10 +8,6 @@
 }
 
 #alliances-guild-setup {
-  padding-left: 24px;
-}
-
-#alliances-guild-setup.hidden {
   float: right;
 }
 
@@ -159,7 +155,29 @@
   grid-column: 2;
   grid-row: 3;
   display: grid;
-  gap: 12px;
+  grid-template-columns: 24% 24% 24% 24%;
+  gap: 24px;
+  font-size: small;
+}
+
+.region-1 {
+  grid-column: 2 / span 2;
+  grid-row: 3;
+}
+
+.region-2 {
+  grid-column: 1 / span 2;
+  grid-row: 2;
+}
+
+.region-3 {
+  grid-column: 2 / span 2;
+  grid-row: 1;
+}
+
+.region-4 {
+  grid-column: 3 / span 2;
+  grid-row: 2;
 }
 
 #guilds > div {
@@ -187,8 +205,9 @@
 }
 
 body {
+  width: 75%;
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 33% 65%;
   gap: 25px;
 }
 

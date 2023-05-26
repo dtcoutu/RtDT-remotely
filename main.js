@@ -5,25 +5,25 @@ const ALLIANCES_STORAGE = "alliances";
 const STARTED_STORAGE = "started";
 
 const NORTH = {
-    id: "north",
+    id: "North",
     name: "Champion of the North",
     description: "+2 WILD Advantages in mountains",
 }
 
 const SOUTH = {
-    id: "south",
+    id: "South",
     name: "Champion of the South",
     description: "+2 WILD Advantages in desert",
 }
 
 const EAST = {
-    id: "east",
+    id: "East",
     name: "Champion of the East",
     description: "+2 WILD Advantages in hills",
 }
 
 const WEST = {
-    id: "west",
+    id: "West",
     name: "Champion of the West",
     description: "+2 WILD Advantages in forest",
 }
@@ -342,21 +342,27 @@ function alliancesInclusion(included) {
 
     const alliances = {
         included: alliancesIncluded,
-        arcane_scouts: {
-            region: '',
-            level: 1
-        },
-        druids_circle: {
-            region: '',
-            level: 1
-        },
-        paladins_order: {
-            region: '',
-            level: 1
-        },
-        thieves_guild: {
-            region: '',
-            level: 1
+        guilds: {
+            arcane_scouts: {
+                region: '',
+                side: 'a',
+                level: 1
+            },
+            druids_circle: {
+                region: '',
+                side: 'a',
+                level: 1
+            },
+            paladins_order: {
+                region: '',
+                side: 'a',
+                level: 1
+            },
+            thieves_guild: {
+                region: '',
+                side: 'a',
+                level: 1
+            }
         }
     }
 
@@ -367,7 +373,7 @@ function allianceRegionSet(selectorId, value) {
     const alliances = getStoredData(ALLIANCES_STORAGE);
 
     const guildName = selectorId.split('-')[0];
-    alliances[guildName].region = value;
+    alliances.guilds[guildName].region = value;
 
     updateStoredData(ALLIANCES_STORAGE, alliances);
 }
@@ -430,7 +436,7 @@ function pageUpdate() {
         }
 
         GUILDS.map(guild =>
-            document.getElementById(guild + '-location').value = alliances[guild].region
+            document.getElementById(guild + '-location').value = alliances.guilds[guild].region
         );
     }
 
@@ -439,7 +445,7 @@ function pageUpdate() {
         setCounters(counters);
         showCharacterDetails(character);
         showRegionDetails(region);
-        showAlliancesGuilds(alliances);
+        showAlliancesGuilds(alliances, region);
     }
 }
 
@@ -498,21 +504,30 @@ function showRegionDetails(region) {
     document.getElementById("champion-virtue-description").innerHTML = region.description;
 }
 
-function showAlliancesGuilds(alliances) {
-    // Update region text
+function showAlliancesGuilds(alliances, region) {
     GUILDS.map(guild => {
-        document.getElementById(guild + '-region').innerHTML = alliances[guild].region;
+        document.getElementById(guild + '-region').innerHTML = alliances.guilds[guild].region;
 
         for (let i = 1; i <= 4; i++) {
             document.getElementById(guild + '-rank-' + i).classList.remove("selected");
         }
 
-        document.getElementById(guild + '-rank-' + alliances[guild].level).classList.add("selected");
+        document.getElementById(guild + '-rank-' + alliances.guilds[guild].level).classList.add("selected");
     });
 
-    // Select guild level
-
     // Order guilds by region in relation to players region
+    const regions = ['North', 'East', 'South', 'West'];
+
+    const index = regions.indexOf(region.id);
+
+    const sorted_regions = regions.splice(index);
+    sorted_regions.push(...regions);
+
+    sorted_regions.forEach((area, index) => {
+        const guild = Object.keys(alliances.guilds).find(guild => alliances.guilds[guild].region === area);
+        document.getElementById(guild + '-' + alliances.guilds[guild].side).classList.add('region-' + (index+1));
+    });
+    // update the guild container with a new class based on the sort order
 }
 
 function selectGuildLevel(guildLevelId) {
@@ -520,7 +535,7 @@ function selectGuildLevel(guildLevelId) {
 
     const alliances = getStoredData(ALLIANCES_STORAGE);
 
-    alliances[guild].level = level;
+    alliances.guilds[guild].level = level;
 
     updateStoredData(ALLIANCES_STORAGE, alliances);
 }
