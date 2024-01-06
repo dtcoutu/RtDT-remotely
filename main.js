@@ -384,7 +384,7 @@ const spymaster = {
 const undaunted_ageis = {
     id: "undaunted_ageis",
     name: "Undaunted Ageis",
-    banner: "For each corruption you have, gain 3 Warrior. You may spend 10 Warrior to remove one of your corruptions.",
+    banner: 'For each corruption you have, gain 3 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />. You may spend 10 Warrior to remove one of your corruptions.',
     move: 3,
     virtues: [
         {
