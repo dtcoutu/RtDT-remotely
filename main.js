@@ -57,7 +57,7 @@ const archwright = {
         {
             id: "additional-virtue-2",
             name: "tactical",
-            description: "While on a battlement, you can Battle a foe on an adjacent space. (Terrain advantages you the space you are on.)",
+            description: "While on a battlement, you can Battle a foe on an adjacent space. (Terrain advantages use the space you are on.)",
             active: false
         },
         {
@@ -72,7 +72,7 @@ const archwright = {
 const brutal_warlord = {
     id: "brutal-warlord",
     name: "Brutal Warlord",
-    banner: "Gain 5 warriors",
+    banner: 'Gain 5 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />',
     move: 3,
     virtues: [
         {
@@ -90,19 +90,58 @@ const brutal_warlord = {
         {
             id: "additional-virtue-1",
             name: "inspiring",
-            description: "After you Reinforce, also gain 6 warriors.",
+            description: 'After you Reinforce, also gain 6 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />.',
             active: false
         },
         {
             id: "additional-virtue-2",
             name: "callous",
-            description: "After you Battle, if you lost at least 10 warriors, gain a treasure from the market.",
+            description: 'After you Battle, if you lost at least 10 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />, gain a treasure from the market.',
             active: false
         },
         {
             id: "additional-virtue-3",
             name: "relentless",
             description: "If you double your move, gain +1 Wild Advantage",
+            active: false
+        },
+    ]
+}
+
+const devious_swindler = {
+    id: "devious-swindler",
+    name: "Devious Swindler",
+    banner: "Roll the haggle die and gain the result",
+    move: 3,
+    virtues: [
+        {
+            id: "base-virtue-1",
+            name: "inventive",
+            description: "When you Battle, gain all advantages in the treasure market.",
+            permanent: true
+        },
+        {
+            id: "base-virtue-2",
+            name: "joyful",
+            description: "When you roll the haggle die, ignore Bazaar Closed.",
+            permanent: true
+        },
+        {
+            id: "additional-virtue-1",
+            name: "calculating",
+            description: 'You may ignore <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /> and <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> losses on <b>critical hit</b> battle cards.',
+            active: false
+        },
+        {
+            id: "additional-virtue-2",
+            name: "fortuitous",
+            description: "After you roll the haggle die, you may reroll once and take either result.",
+            active: false
+        },
+        {
+            id: "additional-virtue-3",
+            name: "opportunistic",
+            description: "When any player gains a treasure from the treasure market, you gain a blessing.",
             active: false
         },
     ]
@@ -129,7 +168,7 @@ const haunted_recluse = {
         {
             id: "additional-virtue-1",
             name: "sinbearer",
-            description: "At the end of the month, you can spend 12 warriors to remove all skulls from your current kingdom.",
+            description: 'At the end of the month, you can spend 12 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /> to remove all skulls from your current kingdom.',
             active: false
         },
         {
@@ -141,7 +180,7 @@ const haunted_recluse = {
         {
             id: "additional-virtue-3",
             name: "soulreaper",
-            description: "Prevent up to 2 warrior losses per battle card for each skull on or adjacent to your space.",
+            description: 'Prevent up to 2 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /> losses per battle card for each skull on or adjacent to your space.',
             active: false
         },
     ]
@@ -150,7 +189,7 @@ const haunted_recluse = {
 const orphaned_scion = {
     id: "orphaned-scion",
     name: "Orphaned Scion",
-    banner: "Gain 1 spirit",
+    banner: 'Gain 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />',
     move: 3,
     virtues: [
         {
@@ -174,13 +213,91 @@ const orphaned_scion = {
         {
             id: "additional-virtue-2",
             name: "blessed",
-            description: "Spend 1 spirit to prevent up to 6 warrior losses from a battle card or dungeon room.",
+            description: 'Spend 1 spirit to prevent up to 6 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /> losses from a battle card or dungeon room.',
             active: false
         },
         {
             id: "additional-virtue-3",
             name: "anointed",
             description: "+1 Wild Advantage for each building with no skulls on or adjacent to your space.",
+            active: false
+        },
+    ]
+}
+
+const relentless_warden = {
+    id: "relentless-warden",
+    name: "Relentless Warden",
+    banner: "If your quarry token is not on a foe, place it on a foe. Otherwise, move your quarry up to 2 spaces.",
+    move: 3,
+    virtues: [
+        {
+            id: "base-virtue-1",
+            name: "perceptive",
+            description: "+1 Wild Advantage vs. your quarry",
+            permanent: true
+        },
+        {
+            id: "base-virtue-2",
+            name: "guarded",
+            description: 'Prevent up to 3 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /> losses per battle card when you Battle your quarry.',
+            permanent: true
+        },
+        {
+            id: "additional-virtue-1",
+            name: "inspiring",
+            description: "When you defeat your quarry, remove all skulls on or adjacent to your space.",
+            active: false
+        },
+        {
+            id: "additional-virtue-2",
+            name: "instinctive",
+            description: "You may remove your quarry token to ignore your quarry during its strike event.",
+            active: false
+        },
+        {
+            id: "additional-virtue-3",
+            name: "keen-eyed",
+            description: "+2 Wild Advantages vs. your quarry",
+            active: false
+        },
+    ]
+}
+
+const reverent_astromancer = {
+    id: "reverent-astromancer",
+    name: "Reverent Astromancer",
+    banner: "Remove a skull on or adjacent to your space",
+    move: 3,
+    virtues: [
+        {
+            id: "base-virtue-1",
+            name: "well versed",
+            description: "If you remove a skull with your Banner action, gain a blessing.",
+            permanent: true
+        },
+        {
+            id: "base-virtue-2",
+            name: "pious",
+            description: "At the start of each month, prepare spells equal to the month number.",
+            permanent: true
+        },
+        {
+            id: "additional-virtue-1",
+            name: "bounteous",
+            description: "Once per turn, when you cast a spell, gain the top card of the treasure deck.",
+            active: false
+        },
+        {
+            id: "additional-virtue-2",
+            name: "exalted",
+            description: "You can prepare invocations.",
+            active: false
+        },
+        {
+            id: "additional-virtue-3",
+            name: "zealous",
+            description: "Whenever you cast a spell gain a blessing.",
             active: false
         },
     ]
@@ -201,7 +318,7 @@ const relic_hunter = {
         {
             id: "base-virtue-2",
             name: "prepared",
-            description: "When you reinforce at a bazaar, spend 1 less spirit to gain a treasure.",
+            description: 'When you reinforce at a bazaar, spend 1 less <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to gain a treasure.',
             permanent: true
         },
         {
@@ -252,13 +369,52 @@ const spymaster = {
         {
             id: "additional-virtue-2",
             name: "resourceful",
-            description: "At the end of each month, gain 15 warriors.",
+            description: 'At the end of each month, gain 15 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />.',
             active: false
         },
         {
             id: "additional-virtue-3",
             name: "unseen",
-            description: "When you complete a monthly quest, you may remove a foe instead of gaining spirit.",
+            description: 'When you complete a monthly quest, you may remove a foe instead of gaining <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.',
+            active: false
+        },
+    ]
+}
+
+const undaunted_ageis = {
+    id: "undaunted_ageis",
+    name: "Undaunted Ageis",
+    banner: "For each corruption you have, gain 3 Warrior. You may spend 10 Warrior to remove one of your corruptions.",
+    move: 3,
+    virtues: [
+        {
+            id: "base-virtue-1",
+            name: "ascetic",
+            description: 'Gain 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> for each battle card you spend no Advantages on.',
+            permanent: true
+        },
+        {
+            id: "base-virtue-2",
+            name: "iron-willed",
+            description: "You can have an additional corruption. Start the game witha 1 random corruption.",
+            permanent: true
+        },
+        {
+            id: "additional-virtue-1",
+            name: "emboldened",
+            description: "+1 Wild Advantage for each corruption you have",
+            active: false
+        },
+        {
+            id: "additional-virtue-2",
+            name: "resolute",
+            description: 'When you Reinforce, spend 1 less <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> for each corruption you have.',
+            active: false
+        },
+        {
+            id: "additional-virtue-3",
+            name: "steeled",
+            description: 'Once per turn, if another hero would gain a corruption, you may gain it instead and gain 2 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.',
             active: false
         },
     ]
@@ -267,10 +423,14 @@ const spymaster = {
 const CHARACTERS = [
     archwright,
     brutal_warlord,
+    devious_swindler,
     haunted_recluse,
     orphaned_scion,
     relic_hunter,
+    relentless_warden,
+    reverent_astromancer,
     spymaster,
+    undaunted_ageis,
 ];
 
 const GUILDS = [
@@ -478,6 +638,7 @@ function showCharacterDetails(character) {
 
     // populate virtues
     character.virtues.map((virtue) => {
+        console.log(virtue);
         const virtueElement = document.getElementById(virtue.id);
 
         document.getElementById(virtue.id + "-name").innerHTML = virtue.name
