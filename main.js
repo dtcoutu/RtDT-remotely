@@ -610,9 +610,13 @@ function pageUpdate() {
 }
 
 function revealSections(alliances) {
-    document.getElementById("counters").classList.remove("hidden");
-    document.getElementById("actions").classList.remove("hidden");
-    document.getElementById("virtues").classList.remove("hidden");
+    [
+        "counters",
+        "actions",
+        "virtues"
+    ].forEach((id) => {
+        document.getElementById(id).classList.remove("hidden");
+    });
 
     if (alliances.included) {
         document.getElementById("guilds").classList.remove("hidden");
@@ -620,11 +624,15 @@ function revealSections(alliances) {
 }
 
 function hideSections() {
-    document.getElementById('alliances-guild-setup').classList.add("hidden")
-    document.getElementById("counters").classList.add("hidden");
-    document.getElementById("actions").classList.add("hidden");
-    document.getElementById("virtues").classList.add("hidden");
-    document.getElementById("guilds").classList.add("hidden");
+    [
+        "alliances-guild-setup",
+        "counters",
+        "actions",
+        "virtues",
+        "guilds"
+    ].forEach((id) => {
+        document.getElementById(id).classList.add("hidden");
+    });
 }
 
 function setCounters(counters) {
