@@ -1,4 +1,6 @@
 const CHARACTER_STORAGE = "character";
+const COMPANION_STORAGE = "companion";
+const GEAR_STORAGE = "gear";
 const REGION_STORAGE = "region";
 const COUNTERS_STORAGE = "counters";
 const ALLIANCES_STORAGE = "alliances";
@@ -442,6 +444,8 @@ const GUILDS = [
 
 function resetGame() {
     localStorage.setItem(CHARACTER_STORAGE, null);
+    localStorage.setItem(COMPANION_STORAGE, null);
+    localStorage.setItem(GEAR_STORAGE, null);
     localStorage.setItem(REGION_STORAGE, null);
     localStorage.setItem(COUNTERS_STORAGE, null);
     localStorage.setItem(ALLIANCES_STORAGE, null);
