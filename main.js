@@ -1,6 +1,7 @@
 const CHARACTER_STORAGE = "character";
-const COMPANION_STORAGE = "companion";
+const COMPANIONS_STORAGE = "companions";
 const GEAR_STORAGE = "gear";
+const POTIONS_STORAGE = "potions";
 const REGION_STORAGE = "region";
 const COUNTERS_STORAGE = "counters";
 const ALLIANCES_STORAGE = "alliances";
@@ -442,10 +443,44 @@ const GUILDS = [
     'thieves_guild'
 ]
 
+const GEAR = [
+    {
+        id: 'blessed_sceptres',
+        name: 'Blessed Sceptres',
+        description: 'Something something...'
+    },
+    {
+        id: 'brass_talismans',
+        name: 'Brass Taslimans',
+        description: '+1 MAGIC Advantage'
+    },
+    {
+        id: 'dusky_cloaks',
+        name: 'Dusky Cloaks',
+        description: '+1 STEALTH Advantage'
+    },
+    {
+        id: 'leather_armor',
+        name: 'Leather Armor',
+        description: 'Lose less warriors in battle'
+    },
+    {
+        id: 'longswords',
+        name: 'Longswords',
+        description: '+1 MELEE Advantage'
+    },
+    {
+        id: 'trusted_maps',
+        name: 'Trusted Maps',
+        description: 'Your base move is +1.'
+    },
+]
+
 function resetGame() {
     localStorage.setItem(CHARACTER_STORAGE, null);
-    localStorage.setItem(COMPANION_STORAGE, null);
-    localStorage.setItem(GEAR_STORAGE, null);
+    localStorage.setItem(COMPANIONS_STORAGE, JSON.stringify([]));
+    localStorage.setItem(GEAR_STORAGE, JSON.stringify([]));
+    localStorage.setItem(POTIONS_STORAGE, JSON.stringify([]));
     localStorage.setItem(REGION_STORAGE, null);
     localStorage.setItem(COUNTERS_STORAGE, null);
     localStorage.setItem(ALLIANCES_STORAGE, null);
@@ -542,6 +577,57 @@ function allianceRegionSet(selectorId, value) {
     updateStoredData(ALLIANCES_STORAGE, alliances);
 }
 
+function selectGear() {
+    // TODO: Handle the case when player has all gear
+    const button = document.getElementById('select-gear');
+    button.classList.add("hidden");
+
+    const selector = document.getElementById('gear-selector');
+    selector.innerHTML = "";
+
+    const currentGear = getStoredData(GEAR_STORAGE);
+
+    GEAR.filter((gear) => currentGear.find((g) => g.id === gear.id) === undefined).map((gear) => {
+        let opt = document.createElement("option");
+        opt.value = gear.id;
+        opt.innerHTML = gear.name;
+        selector.append(opt);
+    });
+
+    selector.classList.remove("hidden");
+    const addButton = document.getElementById('add-gear');
+    addButton.classList.remove("hidden");
+}
+
+function addGear() {
+    const addButton = document.getElementById('add-gear');
+    addButton.classList.add("hidden");
+
+    const selector = document.getElementById('gear-selector');
+    let gearList = getStoredData(GEAR_STORAGE);
+    const gear = GEAR.find(element => element.id === selector.value);
+
+    gearList.push(gear);
+    updateStoredData(GEAR_STORAGE, gearList);
+    selector.classList.add("hidden");
+
+    const button = document.getElementById('select-gear');
+    button.classList.remove("hidden");
+}
+
+function removeGear(button) {
+    const gearId = button.target.value
+    let gearList = getStoredData(GEAR_STORAGE);
+
+    const index = gearList.findIndex((gear) => gear.id === gearId);
+
+    if (index === -1) return;
+    
+    gearList.splice(index, 1);
+
+    updateStoredData(GEAR_STORAGE, gearList);
+}
+
 function characterSelector() {
     const selector = document.getElementById('character-selector');
 
@@ -609,7 +695,10 @@ function pageUpdate() {
         setCounters(counters);
         showCharacterDetails(character);
         showRegionDetails(region);
-        showAlliancesGuilds(alliances, region);
+        showCards();
+        if (alliances.included) {
+            showAlliancesGuilds(alliances, region);
+        }
     }
 }
 
@@ -617,7 +706,8 @@ function revealSections(alliances) {
     [
         "counters",
         "actions",
-        "virtues"
+        "virtues",
+        "cards"
     ].forEach((id) => {
         document.getElementById(id).classList.remove("hidden");
     });
@@ -633,6 +723,7 @@ function hideSections() {
         "counters",
         "actions",
         "virtues",
+        "cards",
         "guilds"
     ].forEach((id) => {
         document.getElementById(id).classList.add("hidden");
@@ -675,6 +766,29 @@ function showCharacterDetails(character) {
 function showRegionDetails(region) {
     document.getElementById("champion-virtue-name").innerHTML = region.name;
     document.getElementById("champion-virtue-description").innerHTML = region.description;
+}
+
+function showCards() {
+    const gearCards = getStoredData(GEAR_STORAGE);
+
+    const gearList = document.getElementById("gear-list");
+    gearList.innerHTML = "";
+
+    gearCards.map((gear) => {
+        const itemTitle = document.createElement("dt");
+        itemTitle.innerHTML = gear.name;
+
+        const button = document.createElement("button");
+        button.addEventListener("click", removeGear, false);
+        button.value = gear.id;
+        button.innerHTML = "X";
+        itemTitle.appendChild(button);
+
+        gearList.appendChild(itemTitle);
+        const itemDescription = document.createElement("dd");
+        itemDescription.innerHTML = gear.description;
+        gearList.appendChild(itemDescription);
+    });
 }
 
 function showAlliancesGuilds(alliances, region) {

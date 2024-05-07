@@ -205,6 +205,27 @@
   text-align: center;
 }
 
+#cards {
+  grid-column: 1 / span 2;
+  grid-row: 4;
+  display: grid;
+}
+
+#gear-cards {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+#companion-cards {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+#potion-cards {
+  grid-column: 3;
+  grid-row: 1
+}
+
 body {
   width: 75%;
   display: grid;

@@ -244,6 +244,25 @@
       </div>
     </div>
 
+    <div id="cards" class="hidden">
+      <div id="gear-cards">
+        <h2>Gear</h2>
+        <button id="select-gear" value="select-gear" onclick="selectGear()">Select Gear</button>
+        <select id="gear-selector" class="hidden"></select>
+        <button id="add-gear" value="add-gear" class="hidden" onclick="addGear()">Add</button>
+        <dl id="gear-list">
+        </dl>
+      </div>
+      <div id="companion-cards">
+        <h2>Companions</h2>
+        <button id="add-companion" value="add-companion" onclick="selectCompanionToAdd()">Add Companion</button>
+      </div>
+      <div id="potion-cards">
+        <h2>Potions</h2>
+        <button id="add-potion" value="add-potion" onclick="selectPotionToAdd()">Add Potion</button>
+      </div>
+    </div>
+
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript">
       function onLoad() {
