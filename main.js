@@ -776,13 +776,16 @@ function showCards() {
 
     gearCards.map((gear) => {
         const itemTitle = document.createElement("dt");
-        itemTitle.innerHTML = gear.name;
 
         const button = document.createElement("button");
         button.addEventListener("click", removeGear, false);
         button.value = gear.id;
         button.innerHTML = "X";
         itemTitle.appendChild(button);
+
+        const itemName = document.createElement("span");
+        itemName.innerHTML = gear.name;
+        itemTitle.appendChild(itemName);
 
         gearList.appendChild(itemTitle);
         const itemDescription = document.createElement("dd");

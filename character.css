@@ -216,6 +216,14 @@
   grid-row: 1;
 }
 
+#gear-list > dt {
+  font-weight: bold;
+}
+
+#gear-list > dt > button {
+  margin-right: 5px;
+}
+
 #companion-cards {
   grid-column: 2;
   grid-row: 1;
