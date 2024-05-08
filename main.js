@@ -578,9 +578,7 @@ function allianceRegionSet(selectorId, value) {
 }
 
 function selectGear() {
-    // TODO: Handle the case when player has all gear
-    const button = document.getElementById('select-gear');
-    button.classList.add("hidden");
+    hideElement("select-gear");
 
     const selector = document.getElementById('gear-selector');
     selector.innerHTML = "";
@@ -595,13 +593,12 @@ function selectGear() {
     });
 
     selector.classList.remove("hidden");
-    const addButton = document.getElementById('add-gear');
-    addButton.classList.remove("hidden");
+
+    showElement("add-gear");
 }
 
 function addGear() {
-    const addButton = document.getElementById('add-gear');
-    addButton.classList.add("hidden");
+    hideElement("add-gear");
 
     const selector = document.getElementById('gear-selector');
     let gearList = getStoredData(GEAR_STORAGE);
@@ -611,8 +608,11 @@ function addGear() {
     updateStoredData(GEAR_STORAGE, gearList);
     selector.classList.add("hidden");
 
-    const button = document.getElementById('select-gear');
-    button.classList.remove("hidden");
+    if (gearList.length === GEAR.length) {
+        disableElement("select-gear");
+    }
+
+    showElement("select-gear");
 }
 
 function removeGear(button) {
@@ -626,6 +626,8 @@ function removeGear(button) {
     gearList.splice(index, 1);
 
     updateStoredData(GEAR_STORAGE, gearList);
+
+    enableElement("select-gear");
 }
 
 function characterSelector() {
@@ -854,4 +856,24 @@ function updateStoredData(key, data) {
     localStorage.setItem(key, JSON.stringify(data));
 
     pageUpdate();
+}
+
+function enableElement(elementId) {
+    const element = document.getElementById(elementId);
+    element.removeAttribute("disabled");
+}
+
+function disableElement(elementId) {
+    const element = document.getElementById(elementId);
+    element.setAttribute("disabled", "disabled");
+}
+
+function hideElement(elementId) {
+    const element = document.getElementById(elementId);
+    element.classList.add("hidden");
+}
+
+function showElement(elementId) {
+    const element = document.getElementById(elementId);
+    element.classList.remove("hidden");
 }
