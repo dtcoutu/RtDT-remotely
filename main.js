@@ -447,7 +447,7 @@ const GEAR = [
     {
         id: 'blessed_sceptres',
         name: 'Blessed Sceptres',
-        description: 'Something something...'
+        description: 'After your Reinforce remove 1 skull from the building on your space.'
     },
     {
         id: 'brass_talismans',
@@ -462,7 +462,7 @@ const GEAR = [
     {
         id: 'leather_armor',
         name: 'Leather Armor',
-        description: 'Lose less warriors in battle'
+        description: 'Prevent up to 2 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" /> losses per battle card'
     },
     {
         id: 'longswords',
