@@ -478,14 +478,14 @@ const GEAR = [
 
 const POTIONS = [
     {
-        id: 'fortunes-favor',
-        name: 'Potion of Fortune\'s Favor',
-        description: 'Spend to gain +1 Wild Advantage'
-    },
-    {
         id: 'dragons-teeth',
         name: 'Potion of Dragon\'s Teeth',
         description: 'Spend to gain 6 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" />.'
+    },
+    {
+        id: 'fortunes-favor',
+        name: 'Potion of Fortune\'s Favor',
+        description: 'Spend to gain +1 Wild Advantage'
     },
     {
         id: 'golden-sun',
@@ -498,15 +498,15 @@ const POTIONS = [
         description: 'Spend to move any hero up to 3 spaces.'
     },
     {
-        id: 'sirens-song',
-        name: 'Potion of the Siren\'s Song',
-        description: 'Spend to move any for up to 2 spaces.'
-    },
-    {
         id: 'purifying-breath',
         name: 'Potion of Purifying Breath',
         description: 'Spend to remove up to 2 skulls from any building.'
     },
+    {
+        id: 'sirens-song',
+        name: 'Potion of the Siren\'s Song',
+        description: 'Spend to move any for up to 2 spaces.'
+    }
 ]
 
 function resetGame() {
@@ -611,56 +611,84 @@ function allianceRegionSet(selectorId, value) {
 }
 
 function selectGear() {
-    hideElement("select-gear");
+    selectCard("gear", GEAR, GEAR_STORAGE);
+}
 
-    const selector = document.getElementById('gear-selector');
+function selectPotion() {
+    selectCard("potion", POTIONS, POTIONS_STORAGE);
+}
+
+function selectCard(elementIdPartial, dataSet, dataStorage) {
+    hideElement("select-" + elementIdPartial);
+
+    const selector = document.getElementById(elementIdPartial + "-selector");
     selector.innerHTML = "";
 
-    const currentGear = getStoredData(GEAR_STORAGE);
+    const currentData = getStoredData(dataStorage);
 
-    GEAR.filter((gear) => currentGear.find((g) => g.id === gear.id) === undefined).map((gear) => {
+    dataSet.filter((item) => currentData.find((i) => i.id === item.id) === undefined).map((item) => {
         let opt = document.createElement("option");
-        opt.value = gear.id;
-        opt.innerHTML = gear.name;
+        opt.value = item.id;
+        opt.innerHTML = item.name;
         selector.append(opt);
     });
 
     selector.classList.remove("hidden");
 
-    showElement("add-gear");
+    showElement("add-" + elementIdPartial);
 }
 
 function addGear() {
-    hideElement("add-gear");
-
-    const selector = document.getElementById('gear-selector');
-    let gearList = getStoredData(GEAR_STORAGE);
-    const gear = GEAR.find(element => element.id === selector.value);
-
-    gearList.push(gear);
-    updateStoredData(GEAR_STORAGE, gearList);
-    selector.classList.add("hidden");
-
-    if (gearList.length === GEAR.length) {
-        disableElement("select-gear");
-    }
-
-    showElement("select-gear");
+    addCard("gear", GEAR, GEAR_STORAGE);
 }
 
-function removeGear(button) {
-    const gearId = button.target.value
-    let gearList = getStoredData(GEAR_STORAGE);
+function addPotion() {
+    addCard("potion", POTIONS, POTIONS_STORAGE);
+}
 
-    const index = gearList.findIndex((gear) => gear.id === gearId);
+function addCard(elementIdPartial, dataSet, dataStorage) {
+    hideElement("add-" + elementIdPartial);
+
+    const selector = document.getElementById(elementIdPartial + "-selector");
+    let itemList = getStoredData(dataStorage);
+    const item = dataSet.find(element => element.id === selector.value);
+
+    itemList.push(item);
+    updateStoredData(dataStorage, itemList);
+    selector.classList.add("hidden");
+
+    if (itemList.length === dataSet.length) {
+        disableElement("select-" + elementIdPartial);
+    }
+
+    showElement("select-" + elementIdPartial);
+}
+
+function removeCard(buttonEvent) {
+    const cardId = buttonEvent.target.value;
+    const cardType = buttonEvent.target.name;
+
+    let dataStorage = "";
+    switch (cardType) {
+        case "gear":
+            dataStorage = GEAR_STORAGE;
+            break;
+        case "potion":
+            dataStorage = POTIONS_STORAGE;
+            break;
+    }
+
+    let cardList = getStoredData(dataStorage);
+
+    const index = cardList.findIndex((card) => card.id === cardId);
 
     if (index === -1) return;
     
-    gearList.splice(index, 1);
+    cardList.splice(index, 1);
 
-    updateStoredData(GEAR_STORAGE, gearList);
+    updateStoredData(dataStorage, cardList);
 
-    enableElement("select-gear");
+    enableElement("select-" + cardType);
 }
 
 function characterSelector() {
@@ -804,28 +832,34 @@ function showRegionDetails(region) {
 }
 
 function showCards() {
-    const gearCards = getStoredData(GEAR_STORAGE);
+    showCardsHelper("gear", GEAR_STORAGE);
+    showCardsHelper("potion", POTIONS_STORAGE);
+}
 
-    const gearList = document.getElementById("gear-list");
-    gearList.innerHTML = "";
+function showCardsHelper(elementIdPartial, dataStorage) {
+    const storedData = getStoredData(dataStorage);
 
-    gearCards.map((gear) => {
+    const displayList = document.getElementById(elementIdPartial + "-list");
+    displayList.innerHTML = "";
+
+    storedData.map((item) => {
         const itemTitle = document.createElement("dt");
 
         const button = document.createElement("button");
-        button.addEventListener("click", removeGear, false);
-        button.value = gear.id;
+        button.addEventListener("click", removeCard, false);
+        button.value = item.id;
+        button.name = elementIdPartial;
         button.innerHTML = "X";
         itemTitle.appendChild(button);
 
         const itemName = document.createElement("span");
-        itemName.innerHTML = gear.name;
+        itemName.innerHTML = item.name;
         itemTitle.appendChild(itemName);
 
-        gearList.appendChild(itemTitle);
+        displayList.appendChild(itemTitle);
         const itemDescription = document.createElement("dd");
-        itemDescription.innerHTML = gear.description;
-        gearList.appendChild(itemDescription);
+        itemDescription.innerHTML = item.description;
+        displayList.appendChild(itemDescription);
     });
 }
 

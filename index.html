@@ -259,7 +259,11 @@
       </div>
       <div id="potion-cards">
         <h2>Potions</h2>
-        <button id="add-potion" value="add-potion" onclick="selectPotionToAdd()">Add Potion</button>
+        <button id="select-potion" value="select-potion" onclick="selectPotion()">Select Potion</button>
+        <select id="potion-selector" class="hidden"></select>
+        <button id="add-potion" value="add-potion" class="hidden" onclick="addPotion()">Add</button>
+        <dl id="potion-list">
+        </dl>
       </div>
     </div>
 
