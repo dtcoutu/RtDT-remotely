@@ -615,10 +615,10 @@ function selectGear() {
 }
 
 function selectPotion() {
-    selectCard("potion", POTIONS, POTIONS_STORAGE);
+    selectCard("potion", POTIONS, POTIONS_STORAGE, true);
 }
 
-function selectCard(elementIdPartial, dataSet, dataStorage) {
+function selectCard(elementIdPartial, dataSet, dataStorage, allowMultiple = false) {
     hideElement("select-" + elementIdPartial);
 
     const selector = document.getElementById(elementIdPartial + "-selector");
@@ -626,7 +626,9 @@ function selectCard(elementIdPartial, dataSet, dataStorage) {
 
     const currentData = getStoredData(dataStorage);
 
-    dataSet.filter((item) => currentData.find((i) => i.id === item.id) === undefined).map((item) => {
+    const filterFunction = allowMultiple ? (item) => item : (item) => currentData.find((i) => i.id === item.id) === undefined
+
+    dataSet.filter(filterFunction).map((item) => {
         let opt = document.createElement("option");
         opt.value = item.id;
         opt.innerHTML = item.name;
@@ -643,21 +645,33 @@ function addGear() {
 }
 
 function addPotion() {
-    addCard("potion", POTIONS, POTIONS_STORAGE);
+    addCard("potion", POTIONS, POTIONS_STORAGE, true);
 }
 
-function addCard(elementIdPartial, dataSet, dataStorage) {
+function addCard(elementIdPartial, dataSet, dataStorage, allowMultiple = false) {
     hideElement("add-" + elementIdPartial);
 
     const selector = document.getElementById(elementIdPartial + "-selector");
     let itemList = getStoredData(dataStorage);
-    const item = dataSet.find(element => element.id === selector.value);
+    const item = structuredClone(dataSet.find(element => element.id === selector.value));
 
-    itemList.push(item);
+    if (allowMultiple) {
+        let matchedItem = itemList.find(i => i.id === item.id)
+
+        if (matchedItem === undefined) {
+            item.count = 1;
+            itemList.push(item);
+        } else {
+            matchedItem.count++
+        }
+    } else {
+        itemList.push(item);
+    }
+
     updateStoredData(dataStorage, itemList);
     selector.classList.add("hidden");
 
-    if (itemList.length === dataSet.length) {
+    if (itemList.length === dataSet.length && !allowMultiple) {
         disableElement("select-" + elementIdPartial);
     }
 
@@ -683,8 +697,12 @@ function removeCard(buttonEvent) {
     const index = cardList.findIndex((card) => card.id === cardId);
 
     if (index === -1) return;
-    
-    cardList.splice(index, 1);
+
+    if (cardList[index].count > 1) {
+        cardList[index].count--;
+    } else {
+        cardList.splice(index, 1);
+    }
 
     updateStoredData(dataStorage, cardList);
 
@@ -855,6 +873,13 @@ function showCardsHelper(elementIdPartial, dataStorage) {
         const itemName = document.createElement("span");
         itemName.innerHTML = item.name;
         itemTitle.appendChild(itemName);
+
+        if (item.count) {
+            const count = document.createElement("span");
+            count.classList.add("count");
+            count.innerHTML = "x" + item.count;
+            itemTitle.appendChild(count);
+        }
 
         displayList.appendChild(itemTitle);
         const itemDescription = document.createElement("dd");

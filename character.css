@@ -234,6 +234,10 @@
   grid-row: 1
 }
 
+.count {
+  margin-left: 2px;
+}
+
 body {
   width: 75%;
   display: grid;
