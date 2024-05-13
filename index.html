@@ -255,7 +255,11 @@
       </div>
       <div id="companion-cards">
         <h2>Companions</h2>
-        <button id="add-companion" value="add-companion" onclick="selectCompanionToAdd()">Add Companion</button>
+        <button id="select-companion" value="select-companion" onclick="selectCompanion()">Select Companion</button>
+        <select id="companion-selector" class="hidden"></select>
+        <button id="add-companion" value="add-companion" class="hidden" onclick="addCompanion()">Add</button>
+        <dl id="companion-list">
+        </dl>
       </div>
       <div id="potion-cards">
         <h2>Potions</h2>
