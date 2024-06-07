@@ -229,9 +229,25 @@
   grid-row: 1;
 }
 
+#companion-list > dt {
+  font-weight: bold;
+}
+
+#companion-list > dt > button {
+  margin-right: 5px;
+}
+
 #potion-cards {
   grid-column: 3;
   grid-row: 1
+}
+
+#potion-list > dt {
+  font-weight: bold;
+}
+
+#potion-list > dt > button {
+  margin-right: 5px;
 }
 
 .count {
