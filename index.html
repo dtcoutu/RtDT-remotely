@@ -1,3 +1,4 @@
+<!doctype html>
 <html>
   <head>
     <link rel="stylesheet" href="character.css" />
@@ -271,8 +272,10 @@
       </div>
     </div>
 
-    <script type="text/javascript" src="main.js"></script>
-    <script type="text/javascript">
+    <script type="module" src="main.js"></script>
+    <script type="module">
+      import { characterSelector, guardianSelector } from './main.js';
+
       function onLoad() {
         characterSelector();
         guardianSelector();
