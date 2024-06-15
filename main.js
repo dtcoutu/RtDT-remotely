@@ -461,7 +461,7 @@ function showAlliancesGuilds(alliances, region) {
     // update the guild container with a new class based on the sort order
 }
 
-function selectGuildLevel(guildLevelId) {
+window.selectGuildLevel=(guildLevelId) => {
     const [guild, level] = guildLevelId.split("-rank-");
 
     const alliances = getStoredData(ALLIANCES_STORAGE);
@@ -471,7 +471,7 @@ function selectGuildLevel(guildLevelId) {
     updateStoredData(ALLIANCES_STORAGE, alliances);
 }
 
-function updateCount(counter, amount) {
+window.updateCount=(counter, amount) => {
     let counters = getStoredData(COUNTERS_STORAGE);
 
     counters[counter] += amount;
