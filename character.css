@@ -237,6 +237,16 @@
   margin-right: 5px;
 }
 
+.companion-title {
+  font-style: italic;
+  font-weight: normal;
+}
+
+.companion-usage {
+  font-style: italic;
+  font-size: smaller;
+}
+
 #potion-cards {
   grid-column: 3;
   grid-row: 1

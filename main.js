@@ -192,7 +192,7 @@ window.addPotion=() => {
     addCard("potion", POTIONS, POTIONS_STORAGE, true);
 }
 
-export function addCard(elementIdPartial, dataSet, dataStorage, allowMultiple = false) {
+function addCard(elementIdPartial, dataSet, dataStorage, allowMultiple = false) {
     hideElement("add-" + elementIdPartial);
 
     const selector = document.getElementById(elementIdPartial + "-selector");
@@ -401,37 +401,82 @@ window.showCards=() => {
     showCardsHelper("potion", POTIONS_STORAGE);
 }
 
-window.showCardsHelper=(elementIdPartial, dataStorage) => {
+function showCardsHelper(elementIdPartial, dataStorage) {
     const storedData = getStoredData(dataStorage);
 
     const displayList = document.getElementById(elementIdPartial + "-list");
     displayList.innerHTML = "";
 
-    storedData.map((item) => {
-        const itemTitle = document.createElement("dt");
+    storedData.map((card) => {
+        const cardHeader = document.createElement("dt");
 
         const button = document.createElement("button");
         button.addEventListener("click", removeCard, false);
-        button.value = item.id;
+        button.value = card.id;
         button.name = elementIdPartial;
         button.innerHTML = "X";
-        itemTitle.appendChild(button);
+        cardHeader.appendChild(button);
 
-        const itemName = document.createElement("span");
-        itemName.innerHTML = item.name;
-        itemTitle.appendChild(itemName);
+        const cardName = document.createElement("span");
+        cardName.innerHTML = card.name;
+        cardHeader.appendChild(cardName);
 
-        if (item.count) {
+        if (card.count) {
             const count = document.createElement("span");
             count.classList.add("count");
-            count.innerHTML = "x" + item.count;
-            itemTitle.appendChild(count);
+            count.innerHTML = "x" + card.count;
+            cardHeader.appendChild(count);
         }
 
-        displayList.appendChild(itemTitle);
-        const itemDescription = document.createElement("dd");
-        itemDescription.innerHTML = item.description;
-        displayList.appendChild(itemDescription);
+        displayList.appendChild(cardHeader);
+        const cardBody = document.createElement("dd");
+
+
+        if (elementIdPartial === "companion") {
+            const cardTitle = document.createElement("span");
+            cardTitle.innerHTML = card.title;
+            cardTitle.classList.add("companion-title");
+            cardHeader.appendChild(cardTitle);
+
+            // benefit - optional with text and usage (optional)
+            if (card.benefit) {
+                const benefit = document.createElement("div");
+                benefit.innerHTML = card.benefit.text;
+
+                if (card.benefit.usage) {
+                    const benefitUsage = document.createElement("span");
+                    benefitUsage.classList.add("companion-usage");
+                    benefitUsage.innerHTML = card.benefit.usage;
+                    benefit.appendChild(benefitUsage);
+                }
+
+                cardBody.appendChild(benefit);
+            }
+
+            // advantage(s) - each with text and usage (optional)
+            card.advantage.forEach((advantage) => {
+                const advantageElement = document.createElement("div");
+                advantageElement.innerHTML = advantage.text;
+
+                if (advantage.usage) {
+                    const advantageUsage = document.createElement("span");
+                    advantageUsage.classList.add("companion-usage");
+                    advantageUsage.innerHTML = advantage.usage;
+                    advantageElement.appendChild(advantageUsage);
+                }
+
+                cardBody.appendChild(advantageElement);
+            });
+
+            // event
+            const eventElement = document.createElement("div");
+            eventElement.innerHTML = card.name + " " + card.event;
+            cardBody.appendChild(eventElement);
+        } else {
+            cardBody.innerHTML = card.description;
+        }
+
+        displayList.appendChild(cardBody);
     });
 }
 
