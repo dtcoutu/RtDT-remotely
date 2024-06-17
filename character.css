@@ -228,6 +228,10 @@
   border-bottom: 1px solid black;
 }
 
+.card-list > dd > div:nth-child(even) {
+  background-color: lightgray;
+}
+
 .card-list, button {
   margin-right: 5px;
 }
