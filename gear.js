@@ -6,7 +6,7 @@ export const GEAR = [
   },
   {
       id: 'brass_talismans',
-      name: 'Brass Taslimans',
+      name: 'Brass Talismans',
       description: '+1 MAGIC Advantage'
   },
   {
