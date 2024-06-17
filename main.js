@@ -405,6 +405,7 @@ function showCardsHelper(elementIdPartial, dataStorage) {
     const storedData = getStoredData(dataStorage);
 
     const displayList = document.getElementById(elementIdPartial + "-list");
+    displayList.classList.add("card-list");
     displayList.innerHTML = "";
 
     storedData.map((card) => {

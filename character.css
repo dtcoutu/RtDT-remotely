@@ -209,6 +209,27 @@
   grid-column: 1 / span 2;
   grid-row: 4;
   display: grid;
+  grid-template-columns: 30% 40% 30%;
+  column-gap: 8px;
+}
+
+.card-list > dt {
+  font-weight: bold;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid black;
+}
+
+.card-list > dd {
+  margin-left: 0;
+  padding-left: 24px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid black;
+}
+
+.card-list, button {
+  margin-right: 5px;
 }
 
 #gear-cards {
@@ -216,30 +237,15 @@
   grid-row: 1;
 }
 
-#gear-list > dt {
-  font-weight: bold;
-}
-
-#gear-list > dt > button {
-  margin-right: 5px;
-}
-
 #companion-cards {
   grid-column: 2;
   grid-row: 1;
 }
 
-#companion-list > dt {
-  font-weight: bold;
-}
-
-#companion-list > dt > button {
-  margin-right: 5px;
-}
-
 .companion-title {
   font-style: italic;
   font-weight: normal;
+  padding-left: 2px;
 }
 
 .companion-usage {
@@ -250,14 +256,6 @@
 #potion-cards {
   grid-column: 3;
   grid-row: 1
-}
-
-#potion-list > dt {
-  font-weight: bold;
-}
-
-#potion-list > dt > button {
-  margin-right: 5px;
 }
 
 .count {
