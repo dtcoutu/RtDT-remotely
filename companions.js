@@ -98,7 +98,7 @@ export const COMPANIONS = [
               text: '+2 STEALTH Advantages',
           }
       ],
-      event: 'moves heros around the board.'
+      event: 'moves heroes around the board.'
   },
   {
       id: 'vasa',
