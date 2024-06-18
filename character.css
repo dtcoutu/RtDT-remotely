@@ -179,19 +179,22 @@
 }
 
 #virtues {
-  display: grid;
-  grid-template-columns: 5% 15% 15% 15% 15% 15% 15%;
-  gap: 24px;
-
   margin: 24px 0px;
 }
 
 #virtues > .header {
-  grid-column: 1;
+  writing-mode: vertical-rl;
+  transform: rotate(-180deg);
+  display: inline-block;
+  justify-content: center;
 }
 
 .virtue {
+  display: inline-block;
+  width: 15%;
+  height: 125px;
   text-align: center;
+  vertical-align: top;
   border: 1px solid black;
 }
 
@@ -346,4 +349,8 @@ dd.action {
 
 h3, h4 {
   clear: both;
+}
+
+summary {
+  padding-bottom: 8px;
 }
