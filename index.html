@@ -5,183 +5,196 @@
     <title>Return to Dark Tower...Remotely</title>
   </head>
   <body>
-    <div id="setup">
-      <div id="alliances-guild-setup" class="hidden">
-        <div id="arcane_scouts-setup">
+    <div id="header">
+      <div id="setup">
+        <div id="alliances-guild-setup" class="hidden">
+          Guild locations:
+          <div id="arcane_scouts-setup">
+            <label>
+              Arcane Scouts:
+              <select id="arcane_scouts-location" onchange="allianceRegionSet(this.id, this.value)">
+                <option value="">---</option>
+                <option value="North">North</option>
+                <option value="South">South</option>
+                <option value="East">East</option>
+                <option value="West">West</option>
+              </select>
+            </label>
+          </div>
+          <div id="druids_circle-setup">
+            <label>
+              Druids Circle:
+              <select id="druids_circle-location" onchange="allianceRegionSet(this.id, this.value)">
+                <option value="">---</option>
+                <option value="North">North</option>
+                <option value="South">South</option>
+                <option value="East">East</option>
+                <option value="West">West</option>
+              </select>
+            </label>
+          </div>
+          <div id="paladins_order-setup">
+            <label>
+              Paladins Order:
+              <select id="paladins_order-location" onchange="allianceRegionSet(this.id, this.value)">
+                <option value="">---</option>
+                <option value="North">North</option>
+                <option value="South">South</option>
+                <option value="East">East</option>
+                <option value="West">West</option>
+              </select>
+            </label>
+          </div>
+          <div id="thieves_guild-setup">
+            <label>
+              Thieves Guild:
+              <select id="thieves_guild-location" onchange="allianceRegionSet(this.id, this.value)">
+                <option value="">---</option>
+                <option value="North">North</option>
+                <option value="South">South</option>
+                <option value="East">East</option>
+                <option value="West">West</option>
+              </select>
+            </label>
+          </div>
+        </div>
+  
+        <div id="character-setup">
           <label>
-            Arcane Scouts location:
-            <select id="arcane_scouts-location" onchange="allianceRegionSet(this.id, this.value)">
+            Choose a character:
+            <select name="character" id="character-selector" onchange="selectedCharacter(this.value)">
               <option value="">---</option>
-              <option value="North">North</option>
-              <option value="South">South</option>
-              <option value="East">East</option>
-              <option value="West">West</option>
             </select>
           </label>
         </div>
-        <div id="druids_circle-setup">
+  
+        <div id="region-setup">
           <label>
-            Druids Circle location:
-            <select id="druids_circle-location" onchange="allianceRegionSet(this.id, this.value)">
+            Choose your region:
+            <select name="guardian" id="guardian-selector" onchange="selectedRegion(this.value)">
               <option value="">---</option>
-              <option value="North">North</option>
-              <option value="South">South</option>
-              <option value="East">East</option>
-              <option value="West">West</option>
             </select>
           </label>
         </div>
-        <div id="paladins_order-setup">
+  
+        <div id="alliances-options">
           <label>
-            Paladins Order location:
-            <select id="paladins_order-location" onchange="allianceRegionSet(this.id, this.value)">
+            Is alliances expansion in play?
+            <select id="alliances-expansion" onchange="alliancesInclusion(this.value)">
               <option value="">---</option>
-              <option value="North">North</option>
-              <option value="South">South</option>
-              <option value="East">East</option>
-              <option value="West">West</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
             </select>
           </label>
         </div>
-        <div id="thieves_guild-setup">
-          <label>
-            Thieves Guild location:
-            <select id="thieves_guild-location" onchange="allianceRegionSet(this.id, this.value)">
-              <option value="">---</option>
-              <option value="North">North</option>
-              <option value="South">South</option>
-              <option value="East">East</option>
-              <option value="West">West</option>
-            </select>
-          </label>
+  
+        <div>
+          <button onclick="startGame()">Start</button>
+          <button onclick="resetGame()">Reset</button>
         </div>
       </div>
-
-      <div id="character-setup">
-        <label>
-          Choose a character:
-          <select name="character" id="character-selector" onchange="selectedCharacter(this.value)">
-            <option value="">---</option>
-          </select>
-        </label>
+  
+      <div id="counters" class="hidden">
+        <div id="warriors">
+          <div><img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />: <span id="warrior-counter" class="counter"></span></div>
+          <button onclick="updateCount('warriors', -5)">-5</button>
+          <button onclick="updateCount('warriors', -1)">-1</button>
+          <button onclick="updateCount('warriors', 1)">+1</button>
+          <button onclick="updateCount('warriors', 6)"><strong>+6</strong></button>
+        </div>
+        <div id="spirit">
+          <div><img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />: <span id="spirit-counter" class="counter"></span></div>
+          <button onclick="updateCount('spirit', -5)">-5</button>
+          <button onclick="updateCount('spirit', -1)">-1</button>
+          <button onclick="updateCount('spirit', 1)">+1</button>
+          <button onclick="updateCount('spirit', 5)">+5</button>
+        </div>
       </div>
-
-      <div id="region-setup">
-        <label>
-          Choose your region:
-          <select name="guardian" id="guardian-selector" onchange="selectedRegion(this.value)">
-            <option value="">---</option>
-          </select>
-        </label>
-      </div>
-
-      <div id="alliances-options">
-        <label>
-          Is alliances expansion in play?
-          <select id="alliances-expansion" onchange="alliancesInclusion(this.value)">
-            <option value="">---</option>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
-        </label>
-      </div>
-
-      <div>
-        <button onclick="startGame()">Start</button>
-        <button onclick="resetGame()">Reset</button>
-      </div>
+  
+      <details id="actions" class="hidden" open>
+        <summary>Actions</summary>
+        <div id="actions-display">
+          <div id="start-of-turn">
+            <h3>Start of Turn</h3>
+            <div>
+              <img src="icons/banner.png" title="banner" alt="banner" width="25" height="40" />
+              <span class="name">Banner</span>
+            </div>
+            <div id="banner-description"></div>
+          </div>
+          <div id="middle-of-turn">
+            <h3>Middle of Turn</h3>
+            <div id="move">
+              <div>
+                <img src="icons/move.png" title="banner" alt="banner" width="40" height="40" />
+                <span class="name">Move <span id="movement"></span></span> (Split as Needed)
+              </div>
+              <div>Spend 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to double your move</div>
+            </div>
+            <div id="heroic-action">
+              <h4>Heroic Action</h4>
+              <div class="choose-one">Choose One</div>
+              <dl>
+                <dt class="action"><img src="icons/cleanse.png" title="cleanse" alt="cleanse" width="40" height="40" /><span>Cleanse</span></dt>
+                <dd class="action"><span>Remove all skulls from your space</span></dd>
+                <dt class="action"><img src="icons/battle.png" title="cleanse" alt="cleanse" width="40" height="40" /><span>Battle</span></dt>
+                <dd class="action"><span>Battle a foe on your space</span></dd>
+                <dt class="action"><img src="icons/quest.png" title="cleanse" alt="cleanse" width="40" height="40" /><span>Quest</span></dt>
+                <dd class="action"><span>Complete a quest or explore a dungeon</span></dd>
+                <dt class="action"><span>Influence</span></dt>
+                <dd class="action"><span>When at a Guild Hall gain 2 <img src="icons/influence.png" title="influence" alt="influence" width="24" height="24"></span></dd>
+              </dl>
+              <div class="after">Gain 2 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> after</div>
+            </div>
+            <div id="reinforce">
+              <h4>Reinforce</h4>
+              <div class="choose-one">Choose One</div>
+              <dl>
+                <dt class="action"><span>Citadel</span></dt>
+                <dd class="action">
+                  <dl>
+                    <dt><strong>Free:</strong></dt><dd>Gain 1 potion</dd>
+                    <dt><strong>5 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Gain 1 virtue</dd>
+                  </dl>
+                </dd>
+                <dt class="action"><span>Sanctuary</span></dt>
+                <dd class="action">
+                  <dl>
+                    <dt><strong>Free:</strong></dt><dd>Gain 1 spirit</dd>
+                    <dt><strong>5 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Remove all your corruptions</dd>
+                  </dl>
+                </dd>
+                <dt class="action"><span>Village</span></dt>
+                <dd class="action">
+                  <dl>
+                    <dt><strong>Free:</strong></dt><dd>Gain 6 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /></dd>
+                    <dt><strong>1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Gain 12 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /></dd>
+                  </dl>
+                </dd>
+                <dt class="action"><span>Bazaar</span></dt>
+                <dd class="action">
+                  <dl>
+                    <dt><strong>Free:</strong></dt><dd>Gain 1 gear</dd>
+                    <dt><strong>2 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Gain 1 treasure</dd>
+                  </dl>
+                </dd>
+                <dt class="action"><span>Guild Hall</span></dt>
+                <dd class="action">
+                  <dl>
+                    <dt><strong>5 <img src="icons/influence.png" title="influence" alt="influence" width="24" height="24">:</strong></dt>
+                    <dd>Gain 1 level in corresponding Guild</dd>
+                  </dl>
+                </dd>
+              </dl>
+            </div>
+          </div>
+          <div id="end-of-turn">
+            <h3>End of Turn</h3>
+            <span class="action-description">Drop 1 skull into the Tower</span>
+          </div>
+        </div>
+      </details>
     </div>
-
-    <div id="counters" class="hidden">
-      <div id="warriors">
-        <div><img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />: <span id="warrior-counter" class="counter"></span></div>
-        <button onclick="updateCount('warriors', -5)">-5</button>
-        <button onclick="updateCount('warriors', -1)">-1</button>
-        <button onclick="updateCount('warriors', 1)">+1</button>
-        <button onclick="updateCount('warriors', 6)"><strong>+6</strong></button>
-      </div>
-      <div id="spirit">
-        <div><img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />: <span id="spirit-counter" class="counter"></span></div>
-        <button onclick="updateCount('spirit', -5)">-5</button>
-        <button onclick="updateCount('spirit', -1)">-1</button>
-        <button onclick="updateCount('spirit', 1)">+1</button>
-        <button onclick="updateCount('spirit', 5)">+5</button>
-      </div>
-    </div>
-
-    <details id="actions" class="hidden" open>
-      <summary><h2>Actions</h2></summary>
-      <h3>Start of Turn</h3>
-      <div class="action">
-        <img src="icons/banner.png" title="banner" alt="banner" width="25" height="40" />
-        <span class="name">Banner</span>
-        <span id="banner-description" class="description"></span>
-      </div>
-      <h3>Middle of Turn</h3>
-      <div class="action">
-        <img src="icons/move.png" title="banner" alt="banner" width="40" height="40" />
-        <span class="name">Move <span id="movement"></span></span> (Split as Needed)
-        <span class="description">Spend 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to double your move</span>
-      </div>
-      <div id="heroic-action">
-        <h4>Heroic Action</h4>
-        <div class="choose-one">Choose One</div>
-        <dl>
-          <dt class="action"><img src="icons/cleanse.png" title="cleanse" alt="cleanse" width="40" height="40" /><span class="name">Cleanse</span></dt>
-          <dd class="action"><span class="description">Remove all skulls from your space</span></dd>
-          <dt class="action"><img src="icons/battle.png" title="cleanse" alt="cleanse" width="40" height="40" /><span class="name">Battle</span></dt>
-          <dd class="action"><span class="description">Battle a foe on your space</span></dd>
-          <dt class="action"><img src="icons/quest.png" title="cleanse" alt="cleanse" width="40" height="40" /><span class="name">Quest</span></dt>
-          <dd class="action"><span class="description">Complete a quest or explore a dungeon</span></dd>
-          <dt class="action"><span class="name">Influence</span></dt>
-          <dd class="action"><span class="description">When at a Guild Hall gain 2 <img src="icons/influence.png" title="influence" alt="influence" width="24" height="24"></span></dd>
-        </dl>
-        <div class="after">Gain 2 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> after</div>
-      </div>
-      <div id="reinforce">
-        <h4>Reinforce</h4>
-        <div class="choose-one">Choose One</div>
-        <dl>
-          <dt class="action"><span class="name">Citadel</span></dt>
-          <dd class="action">
-            <dl>
-              <dt><strong>Free:</strong></dt><dd>Gain 1 potion</dd>
-              <dt><strong>5 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Gain 1 virtue</dd>
-            </dl>
-          </dd>
-          <dt class="action"><span class="name">Sanctuary</span></dt>
-          <dd class="action">
-            <dl>
-              <dt><strong>Free:</strong></dt><dd>Gain 1 spirit</dd>
-              <dt><strong>5 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Remove all your corruptions</dd>
-            </dl>
-          </dd>
-          <dt class="action"><span class="name">Village</span></dt>
-          <dd class="action">
-            <dl>
-              <dt><strong>Free:</strong></dt><dd>Gain 6 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /></dd>
-              <dt><strong>1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Gain 12 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /></dd>
-            </dl>
-          </dd>
-          <dt class="action"><span class="name">Bazaar</span></dt>
-          <dd class="action">
-            <dl>
-              <dt><strong>Free:</strong></dt><dd>Gain 1 gear</dd>
-              <dt><strong>2 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Gain 1 treasure</dd>
-            </dl>
-          </dd>
-          <dt class="action"><span class="name">Guild Hall</span></dt>
-          <dd class="action">
-            <dl>
-              <dt><strong>5 <img src="icons/influence.png" title="influence" alt="influence" width="24" height="24">:</strong></dt>
-              <dd>Gain 1 level in corresponding Guild</dd>
-            </dl>
-          </dd>
-        </dl>
-      </div>
-      <h3>End of Turn</h3>
-      <span class="action-description">Drop 1 skull into the Tower</span>
-    </details>
 
     <div id="virtues" class="hidden">
       <h2 class="header">Virtues</h2>
