@@ -147,7 +147,7 @@ export const ALLIANCE_COMPANIONS = [
       id: 'berat',
       name: 'Berat',
       title: 'The Wizard',
-      guild: "The Arcane Scouts",
+      guild: "arcane_scouts",
       benefit: {
           text: 'When you would gain a gear, you can spend 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" /> to gain the top card of the treasure deck instead.',
       },
@@ -162,7 +162,7 @@ export const ALLIANCE_COMPANIONS = [
       id: 'heraswa',
       name: 'Haraswa',
       title: 'The Pegasus',
-      guild: "The Arcane Scouts",
+      guild: "arcane_scouts",
       benefit: {
           text: 'Your base move is +2.',
       },
@@ -177,7 +177,7 @@ export const ALLIANCE_COMPANIONS = [
       id: 'oola',
       name: 'Oola',
       title: 'The Nomad',
-      guild: "The Arcane Scouts",
+      guild: "arcane_scouts",
       benefit: {
           text: 'If you Influence outside your home kingdom, gain an additional 3 |influence|.',
       },
@@ -192,7 +192,7 @@ export const ALLIANCE_COMPANIONS = [
       id: 'burgoyn',
       name: 'Burgoyn',
       title: 'The Herbalist',
-      guild: "Druids Circle",
+      guild: "druids_circle",
       benefit: {
           text: 'When you spend (not lose) a potion, gain 1 |influence|',
       },
@@ -207,7 +207,7 @@ export const ALLIANCE_COMPANIONS = [
       id: 'ruska',
       name: 'Ruska',
       title: 'The Barbarian',
-      guild: "Druids Circle",
+      guild: "druids_circle",
       benefit: {
           text: 'You can Reinforce on a space without a building. If you do, gain 6 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" /> or 1 potion.',
       },
@@ -222,7 +222,7 @@ export const ALLIANCE_COMPANIONS = [
       id: 'xyr',
       name: 'Xyr',
       title: 'The Oracle',
-      guild: "Druids Circle",
+      guild: "druids_circle",
       benefit: {
           text: 'Keep the top card of the treasure deck and potion deck face up. At the start of your turn, you may move the top card of either deck to the bottom.',
       },
@@ -237,7 +237,7 @@ export const ALLIANCE_COMPANIONS = [
       id: 'amani',
       name: 'Amani',
       title: 'The Vizier',
-      guild: "Paladins Order",
+      guild: "paladins_order",
       benefit: {
           text: 'At the end of the month, gain 4 |influence|.',
       },
@@ -252,7 +252,7 @@ export const ALLIANCE_COMPANIONS = [
       id: 'omar',
       name: 'Omar',
       title: 'The Healer',
-      guild: "Paladins Order",
+      guild: "paladins_order",
       benefit: {
           text: 'In each battle, place the first 5 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" /> that you lose on this card. At the end of the month, gain all <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" /> on this card.',
       },
@@ -267,7 +267,7 @@ export const ALLIANCE_COMPANIONS = [
       id: 'sanzhar',
       name: 'Sanzhar',
       title: 'The Zealot',
-      guild: "Paladins Order",
+      guild: "paladins_order",
       benefit: {
           text: 'Virtues cost you 2 less <img src="icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />.',
       },
@@ -282,7 +282,7 @@ export const ALLIANCE_COMPANIONS = [
       id: 'ema',
       name: 'Ema',
       title: 'The Grand Merchant',
-      guild: "Thieves Guild",
+      guild: "thieves_guild",
       benefit: {
           text: 'You can Reinforce at any building as if it were a bazaar.',
       },
@@ -297,7 +297,7 @@ export const ALLIANCE_COMPANIONS = [
       id: 'maxim',
       name: 'Maxim',
       title: 'The Beast',
-      guild: "Thieves Guild",
+      guild: "thieves_guild",
       benefit: {
           text: 'You can carry up to 4 extra treasures. When you gain a treasure, also gain 2 |influence|.',
       },
@@ -312,7 +312,7 @@ export const ALLIANCE_COMPANIONS = [
       id: 'lukas',
       name: 'Lukas',
       title: 'The Plunderer',
-      guild: "Thieves Guild",
+      guild: "thieves_guild",
       benefit: {
           text: 'When you defeat a level 4 foe, gain the top card of the treasure deck.',
       },

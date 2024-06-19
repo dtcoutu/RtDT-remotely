@@ -9,7 +9,7 @@ const GEAR_STORAGE = "gear";
 const POTIONS_STORAGE = "potions";
 const REGION_STORAGE = "region";
 const COUNTERS_STORAGE = "counters";
-const ALLIANCES_STORAGE = "alliances";
+const ALLIANCES_STORAGE = "alliances"; // Don't think this is needed...
 const STARTED_STORAGE = "started";
 
 const NORTH = {
@@ -500,11 +500,11 @@ function showAlliancesGuilds(alliances, region) {
     const sorted_regions = regions.splice(index);
     sorted_regions.push(...regions);
 
+    // update the guild container with a new class based on the sort order
     sorted_regions.forEach((area, index) => {
         const guild = Object.keys(alliances.guilds).find(guild => alliances.guilds[guild].region === area);
         document.getElementById(guild + '-' + alliances.guilds[guild].side).classList.add('region-' + (index+1));
     });
-    // update the guild container with a new class based on the sort order
 }
 
 window.selectGuildLevel=(guildLevelId) => {
@@ -512,9 +512,46 @@ window.selectGuildLevel=(guildLevelId) => {
 
     const alliances = getStoredData(ALLIANCES_STORAGE);
 
+    const guildLevelIncreased = alliances.guilds[guild].level < level;
+
     alliances.guilds[guild].level = level;
 
     updateStoredData(ALLIANCES_STORAGE, alliances);
+
+    if (guildLevelIncreased) {
+        var modal = document.getElementById("alliance-companion-modal");
+
+        document.getElementById("alliance-companion-guild").innerHTML = guild.replace("_", " ");
+
+        const selector = document.getElementById("alliance-companion-selector");
+        selector.innerHTML = "";
+    
+        ALLIANCE_COMPANIONS.filter((companion) => companion.guild == guild).map((item) => {
+            let opt = document.createElement("option");
+            opt.value = item.id;
+            opt.innerHTML = item.name;
+            selector.append(opt);
+        });
+
+        modal.style.display = "block";
+    }
+}
+
+window.addAllianceCompanion=() => {
+    const selector = document.getElementById("alliance-companion-selector");
+    let itemList = getStoredData(COMPANIONS_STORAGE);
+    const item = structuredClone(ALLIANCE_COMPANIONS.find(element => element.id === selector.value));
+
+    itemList.push(item);
+
+    updateStoredData(COMPANIONS_STORAGE, itemList);
+
+    closeModal("alliance-companion-modal")
+}
+
+window.closeModal=(modalId) => {
+    const modal = document.getElementById(modalId);
+    modal.style.display = "none";
 }
 
 window.updateCount=(counter, amount) => {

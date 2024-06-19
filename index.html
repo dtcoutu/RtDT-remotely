@@ -285,6 +285,19 @@
       </div>
     </div>
 
+    <div id="alliance-companion-modal" class="modal">
+      <strong>The rank of the <span id="alliance-companion-guild"></span> guild has increased.</strong>
+      <br>Did you get a companion for that?
+      <br><i>Don't forget to update the app with the new companion as well.</i>
+
+      <div>
+        <select id="alliance-companion-selector"></select>
+        <button id="alliance-companion-add" value="add-alliance-companion" onclick="addAllianceCompanion()">Add</button>
+      </div>
+
+      <button id="alliance-companion-modal-close" onclick="closeModal('alliance-companion-modal')">Close</button>
+    </div>
+
     <script type="module" src="main.js"></script>
     <script type="module">
       import { characterSelector, guardianSelector } from './main.js';
