@@ -5,60 +5,9 @@
     <title>Return to Dark Tower...Remotely</title>
   </head>
   <body>
-    <div id="header">
-      <div id="setup">
-        <div id="alliances-guild-setup" class="hidden">
-          Guild locations:
-          <div id="arcane_scouts-setup">
-            <label>
-              Arcane Scouts:
-              <select id="arcane_scouts-location" onchange="allianceRegionSet(this.id, this.value)">
-                <option value="">---</option>
-                <option value="North">North</option>
-                <option value="South">South</option>
-                <option value="East">East</option>
-                <option value="West">West</option>
-              </select>
-            </label>
-          </div>
-          <div id="druids_circle-setup">
-            <label>
-              Druids Circle:
-              <select id="druids_circle-location" onchange="allianceRegionSet(this.id, this.value)">
-                <option value="">---</option>
-                <option value="North">North</option>
-                <option value="South">South</option>
-                <option value="East">East</option>
-                <option value="West">West</option>
-              </select>
-            </label>
-          </div>
-          <div id="paladins_order-setup">
-            <label>
-              Paladins Order:
-              <select id="paladins_order-location" onchange="allianceRegionSet(this.id, this.value)">
-                <option value="">---</option>
-                <option value="North">North</option>
-                <option value="South">South</option>
-                <option value="East">East</option>
-                <option value="West">West</option>
-              </select>
-            </label>
-          </div>
-          <div id="thieves_guild-setup">
-            <label>
-              Thieves Guild:
-              <select id="thieves_guild-location" onchange="allianceRegionSet(this.id, this.value)">
-                <option value="">---</option>
-                <option value="North">North</option>
-                <option value="South">South</option>
-                <option value="East">East</option>
-                <option value="West">West</option>
-              </select>
-            </label>
-          </div>
-        </div>
-  
+    <details id="setup" open>
+      <summary>Setup</summary>
+      <div id="base-setup">
         <div id="character-setup">
           <label>
             Choose a character:
@@ -67,7 +16,7 @@
             </select>
           </label>
         </div>
-  
+
         <div id="region-setup">
           <label>
             Choose your region:
@@ -76,7 +25,7 @@
             </select>
           </label>
         </div>
-  
+
         <div id="alliances-options">
           <label>
             Is alliances expansion in play?
@@ -87,13 +36,67 @@
             </select>
           </label>
         </div>
-  
-        <div>
-          <button onclick="startGame()">Start</button>
-          <button onclick="resetGame()">Reset</button>
+      </div>
+
+      <div id="alliances-guild-setup" class="hidden">
+        Guild locations:
+        <div id="arcane_scouts-setup">
+          <label>
+            Arcane Scouts:
+            <select id="arcane_scouts-location" onchange="allianceRegionSet(this.id, this.value)">
+              <option value="">---</option>
+              <option value="North">North</option>
+              <option value="South">South</option>
+              <option value="East">East</option>
+              <option value="West">West</option>
+            </select>
+          </label>
+        </div>
+        <div id="druids_circle-setup">
+          <label>
+            Druids Circle:
+            <select id="druids_circle-location" onchange="allianceRegionSet(this.id, this.value)">
+              <option value="">---</option>
+              <option value="North">North</option>
+              <option value="South">South</option>
+              <option value="East">East</option>
+              <option value="West">West</option>
+            </select>
+          </label>
+        </div>
+        <div id="paladins_order-setup">
+          <label>
+            Paladins Order:
+            <select id="paladins_order-location" onchange="allianceRegionSet(this.id, this.value)">
+              <option value="">---</option>
+              <option value="North">North</option>
+              <option value="South">South</option>
+              <option value="East">East</option>
+              <option value="West">West</option>
+            </select>
+          </label>
+        </div>
+        <div id="thieves_guild-setup">
+          <label>
+            Thieves Guild:
+            <select id="thieves_guild-location" onchange="allianceRegionSet(this.id, this.value)">
+              <option value="">---</option>
+              <option value="North">North</option>
+              <option value="South">South</option>
+              <option value="East">East</option>
+              <option value="West">West</option>
+            </select>
+          </label>
         </div>
       </div>
-  
+    </details>
+
+    <div>
+      <button onclick="startGame()">Start</button>
+      <button onclick="resetGame()">Reset</button>
+    </div>
+
+    <div id="header">
       <div id="counters" class="hidden">
         <div id="warriors">
           <div><img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />: <span id="warrior-counter" class="counter"></span></div>
@@ -110,7 +113,14 @@
           <button onclick="updateCount('spirit', 5)">+5</button>
         </div>
       </div>
-  
+
+      <div id="enemies" class="hidden">
+        <div id="enemy-level-2"></div>
+        <div id="enemy-level-3"></div>
+        <div id="enemy-level-4"></div>
+        <div id="enemy-level-5"></div>
+      </div>
+    
       <details id="actions" class="hidden" open>
         <summary>Actions</summary>
         <div id="actions-display">

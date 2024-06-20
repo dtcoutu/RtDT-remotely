@@ -2,17 +2,8 @@
   border-bottom: 1px solid black;
 }
 
-#alliances-guild-setup {
-  float: right;
-}
-
 .counter {
   font-size: large;
-}
-
-#counters {
-  grid-column: 2;
-  grid-row: 1;
 }
 
 #counters > div {
@@ -70,17 +61,26 @@
 }
 
 #header {
-  grid-column: 1 / span 3;
   display: grid;
-  grid-template-columns: 35% 15% 45%;
+  grid-template-columns: 25% 15% 45%;
   gap: 15px;
+  clear: both;
 }
 
 #setup {
-  grid-column: 1;
-  grid-row: 1;
+  display: inline-block;
   padding: 4px;
+  margin: 8px;
   border: 1px solid black;
+}
+
+#base-setup {
+  float: left;
+}
+
+#alliances-guild-setup {
+  float: right;
+  margin-left: 16px;
 }
 
 #actions {
