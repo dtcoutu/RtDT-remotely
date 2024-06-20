@@ -49,26 +49,6 @@ export const ENEMIES = [
     strike_event: 'Spine fiends make you lose warriors.'
   },
   {
-    id: 'widowmade_spider',
-    level: 3,
-    name: 'Widowmade Spider',
-    traits: [
-      'stealth',
-      'beast'
-    ],
-    strike_event: 'Widowmade spiders chase one hero and drain their spirit.'
-  },
-  {
-    id: 'lemure',
-    level: 3,
-    name: 'Lemure',
-    traits: [
-      'magic',
-      'undead'
-    ],
-    strike_event: 'Lemures add skulls to citadels and sanctuaries.'
-  },
-  {
     id: 'clan_of_neuri',
     level: 3,
     name: 'Clan of Neuri',
@@ -89,24 +69,24 @@ export const ENEMIES = [
     strike_event: 'Frost trolls add skulls to nearby buildings.'
   },
   {
-    id: 'mormo',
-    level: 4,
-    name: 'Mormo',
+    id: 'lemure',
+    level: 3,
+    name: 'Lemure',
     traits: [
-      'stealth',
+      'magic',
       'undead'
     ],
-    strike_event: 'Mormos give you corruptions.'
+    strike_event: 'Lemures add skulls to citadels and sanctuaries.'
   },
   {
-    id: 'titan',
-    level: 4,
-    name: 'Titan',
+    id: 'widowmade_spider',
+    level: 3,
+    name: 'Widowmade Spider',
     traits: [
-      'melee',
-      'humanoid'
+      'stealth',
+      'beast'
     ],
-    strike_event: 'The titan destroy buildings.'
+    strike_event: 'Widowmade spiders chase one hero and drain their spirit.'
   },
   {
     id: 'dragon',
@@ -119,6 +99,16 @@ export const ENEMIES = [
     strike_event: 'Dragons make you lose treasures.'
   },
   {
+    id: 'mormo',
+    level: 4,
+    name: 'Mormo',
+    traits: [
+      'stealth',
+      'undead'
+    ],
+    strike_event: 'Mormos give you corruptions.'
+  },
+  {
     id: 'striga',
     level: 4,
     name: 'Striga',
@@ -127,6 +117,16 @@ export const ENEMIES = [
       'undead'
     ],
     strike_event: 'Strigas make you lose virtues.'
+  },
+  {
+    id: 'titan',
+    level: 4,
+    name: 'Titan',
+    traits: [
+      'melee',
+      'humanoid'
+    ],
+    strike_event: 'The titan destroy buildings.'
   },
   {
     id: 'ashstrider',
