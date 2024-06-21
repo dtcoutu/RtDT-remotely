@@ -10,7 +10,7 @@ export const TRAITS = {
 export const ENEMIES = [
   {
     id: 'brigands',
-    level: 2,
+    level: "2",
     name: 'Brigands',
     traits: [
       'stealth',
@@ -20,7 +20,7 @@ export const ENEMIES = [
   },
   {
     id: 'oreks',
-    level: 2,
+    level: "2",
     name: 'Oreks',
     traits: [
       'melee',
@@ -30,7 +30,7 @@ export const ENEMIES = [
   },
   {
     id: 'shadow_wolves',
-    level: 2,
+    level: "2",
     name: 'Shadow Wolves',
     traits: [
       'stealth',
@@ -40,7 +40,7 @@ export const ENEMIES = [
   },
   {
     id: 'spine_fiend',
-    level: 2,
+    level: "2",
     name: 'Spine Fiend',
     traits: [
       'magic',
@@ -50,7 +50,7 @@ export const ENEMIES = [
   },
   {
     id: 'clan_of_neuri',
-    level: 3,
+    level: "3",
     name: 'Clan of Neuri',
     traits: [
       'magic',
@@ -60,7 +60,7 @@ export const ENEMIES = [
   },
   {
     id: 'frost_troll',
-    level: 3,
+    level: "3",
     name: 'Frost Troll',
     traits: [
       'melee',
@@ -70,7 +70,7 @@ export const ENEMIES = [
   },
   {
     id: 'lemure',
-    level: 3,
+    level: "3",
     name: 'Lemure',
     traits: [
       'magic',
@@ -80,7 +80,7 @@ export const ENEMIES = [
   },
   {
     id: 'widowmade_spider',
-    level: 3,
+    level: "3",
     name: 'Widowmade Spider',
     traits: [
       'stealth',
@@ -90,7 +90,7 @@ export const ENEMIES = [
   },
   {
     id: 'dragon',
-    level: 4,
+    level: "4",
     name: 'Dragon',
     traits: [
       'melee',
@@ -100,7 +100,7 @@ export const ENEMIES = [
   },
   {
     id: 'mormo',
-    level: 4,
+    level: "4",
     name: 'Mormo',
     traits: [
       'stealth',
@@ -110,7 +110,7 @@ export const ENEMIES = [
   },
   {
     id: 'striga',
-    level: 4,
+    level: "4",
     name: 'Striga',
     traits: [
       'magic',
@@ -120,7 +120,7 @@ export const ENEMIES = [
   },
   {
     id: 'titan',
-    level: 4,
+    level: "4",
     name: 'Titan',
     traits: [
       'melee',
@@ -130,7 +130,7 @@ export const ENEMIES = [
   },
   {
     id: 'ashstrider',
-    level: 5,
+    level: "5",
     name: 'Ashstrider',
     traits: [
       'magic',
@@ -144,7 +144,7 @@ export const ENEMIES = [
   },
   {
     id: 'bane_of_omens',
-    level: 5,
+    level: "5",
     name: 'Bane of Omens',
     traits: [
       'stealth',
@@ -158,7 +158,7 @@ export const ENEMIES = [
   },
   {
     id: 'empress_of_shades',
-    level: 5,
+    level: "5",
     name: 'Empress of Shades',
     traits: [
       'stealth',
@@ -172,7 +172,7 @@ export const ENEMIES = [
   },
   {
     id: 'gaze_eternal',
-    level: 5,
+    level: "5",
     name: 'Gaze Eternal',
     traits: [
       'magic',
@@ -186,7 +186,7 @@ export const ENEMIES = [
   },
   {
     id: 'gravemaw',
-    level: 5,
+    level: "5",
     name: 'Gravemaw',
     traits: [
       'melee',
@@ -200,7 +200,7 @@ export const ENEMIES = [
   },
   {
     id: 'isa_the_exile',
-    level: 5,
+    level: "5",
     name: 'Isa the Exile',
     traits: [
       'humanoid'
@@ -213,7 +213,7 @@ export const ENEMIES = [
   },
   {
     id: 'lingering_rot',
-    level: 5,
+    level: "5",
     name: 'Lingering Rot',
     traits: [
       'melee',
@@ -227,7 +227,7 @@ export const ENEMIES = [
   },
   {
     id: 'utuk_ku_the_ice_herald',
-    level: 5,
+    level: "5",
     name: 'Utuk-Ku the Ice Herald',
     traits: [
       'magic',
