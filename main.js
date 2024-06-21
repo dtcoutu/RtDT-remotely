@@ -1,6 +1,6 @@
 import { CHARACTERS } from "./characters.js";
 import { COMPANIONS, ALLIANCE_COMPANIONS } from "./companions.js";
-import { ENEMIES } from "./enemies.js";
+import { ENEMIES, TRAITS } from "./enemies.js";
 import { GEAR } from "./gear.js";
 import { POTIONS } from "./potions.js";
 
@@ -359,6 +359,7 @@ window.pageUpdate=() => {
 function revealSections(alliances) {
     [
         "counters",
+        "enemies",
         "actions",
         "virtues",
         "cards"
@@ -417,7 +418,54 @@ function showCharacterDetails(character) {
 }
 
 function showEnemyDetails(enemies) {
-    
+    for (let l=2; l<=5; l++) {
+        const divContainer = document.getElementById("enemy-level-" + l);
+        const enemy = enemies[l.toString()];
+
+        // Add name, traits, and strike event
+        const levelSpan = document.createElement("span");
+        levelSpan.classList.add("enemy-level")
+        levelSpan.innerHTML = enemy.level;
+        divContainer.appendChild(levelSpan);
+        const nameSpan = document.createElement("span");
+        nameSpan.classList.add("enemy-name");
+        nameSpan.innerHTML = enemy.name;
+        divContainer.appendChild(nameSpan);
+
+        const traitDiv = document.createElement("div");  
+        traitDiv.id = "enemy-traits";      
+        enemy.traits.forEach((trait) => {
+            const traitSpan = document.createElement("span");
+            traitSpan.classList.add("enemy-trait");
+            traitSpan.innerHTML = trait;
+            traitDiv.appendChild(traitSpan);
+        });
+        divContainer.appendChild(traitDiv);
+
+        const battleDiv = document.createElement("div");
+        battleDiv.id = "enemy-battle-effects";
+        if (enemy.when_battling) {
+            enemy.when_battling.forEach((battleText) => {
+                const battleSpan = document.createElement("span");
+                battleSpan.classList.add("battle-effect");
+                battleSpan.innerHTML = battleText;
+                battleDiv.appendChild(battleSpan);
+            });
+        } else {
+            enemy.traits.forEach((trait) => {
+                const battleSpan = document.createElement("span");
+                battleSpan.classList.add("battle-effect");
+                battleSpan.innerHTML = trait.toUpperCase() + " " + TRAITS[trait];
+                battleDiv.appendChild(battleSpan);
+            });
+        }
+        divContainer.appendChild(battleDiv);
+
+        const eventSpan = document.createElement("span");
+        eventSpan.classList.add("enemy-event");
+        eventSpan.innerHTML = enemy.strike_event;
+        divContainer.appendChild(eventSpan);
+    }
 }
 
 function showRegionDetails(region) {

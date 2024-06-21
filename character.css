@@ -15,6 +15,54 @@
   padding-bottom: 5px;
 }
 
+#enemies {
+  display: flex;
+}
+
+#enemies > div {
+  display: inline-block;
+  width: 22%;
+  margin: 0px auto;
+  border: 1px solid black;
+}
+
+.enemy-level {
+  display: block;
+  font-size: x-large;
+  text-align: center;
+}
+
+.enemy-name {
+  display: block;
+  font-size: larger;
+  text-align: center;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+#enemy-traits {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+
+.enemy-trait {
+  text-transform: uppercase;
+  margin: 0 8px;
+}
+
+#enemy-battle-effects {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 4px;
+  border: 1px solid black;
+}
+
+.enemy-event {
+  display: block;
+  margin: 8px 8px 0 8px;
+}
+
 .name {
   text-transform: uppercase;
   font-weight: bold;
@@ -62,7 +110,7 @@
 
 #header {
   display: grid;
-  grid-template-columns: 25% 15% 45%;
+  grid-template-columns: 15% auto;
   gap: 15px;
   clear: both;
 }
