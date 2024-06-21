@@ -78,6 +78,11 @@
   float: left;
 }
 
+#enemy-selectors {
+  float: left;
+  margin-left: 16px;
+}
+
 #alliances-guild-setup {
   float: right;
   margin-left: 16px;

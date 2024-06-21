@@ -1,15 +1,17 @@
 import { CHARACTERS } from "./characters.js";
 import { COMPANIONS, ALLIANCE_COMPANIONS } from "./companions.js";
+import { ENEMIES } from "./enemies.js";
 import { GEAR } from "./gear.js";
 import { POTIONS } from "./potions.js";
 
 const CHARACTER_STORAGE = "character";
 const COMPANIONS_STORAGE = "companions";
+const ENEMIES_STORAGE = "enemies";
 const GEAR_STORAGE = "gear";
 const POTIONS_STORAGE = "potions";
 const REGION_STORAGE = "region";
 const COUNTERS_STORAGE = "counters";
-const ALLIANCES_STORAGE = "alliances"; // Don't think this is needed...
+const ALLIANCES_STORAGE = "alliances";
 const STARTED_STORAGE = "started";
 
 const NORTH = {
@@ -48,6 +50,7 @@ const GUILDS = [
 window.resetGame=() => {
     localStorage.setItem(CHARACTER_STORAGE, null);
     localStorage.setItem(COMPANIONS_STORAGE, JSON.stringify([]));
+    localStorage.setItem(ENEMIES_STORAGE, null);
     localStorage.setItem(GEAR_STORAGE, JSON.stringify([]));
     localStorage.setItem(POTIONS_STORAGE, JSON.stringify([]));
     localStorage.setItem(REGION_STORAGE, null);
@@ -289,8 +292,25 @@ window.selectedCharacter=(value) => {
     updateStoredData(CHARACTER_STORAGE, character);
 }
 
+window.selectedEnemy=(id, value) => {
+    const level = id.slice(-1);
+
+    let enemies = getStoredData(ENEMIES_STORAGE);
+
+    if (enemies === null) {
+        enemies = {};
+    }
+
+    const foundEnemy = ENEMIES.find(element => element.id === value );
+
+    enemies[level] = foundEnemy;
+
+    updateStoredData(ENEMIES_STORAGE, enemies);
+}
+
 window.pageUpdate=() => {
     const character = getStoredData(CHARACTER_STORAGE);
+    const enemies = getStoredData(ENEMIES_STORAGE);
     const region = getStoredData(REGION_STORAGE);
     const counters = getStoredData(COUNTERS_STORAGE);
     const alliances = getStoredData(ALLIANCES_STORAGE);
@@ -298,6 +318,11 @@ window.pageUpdate=() => {
 
     const characterSelector = document.getElementById("character-selector");
     characterSelector.value = character ? character.id : '';
+
+    document.getElementById("enemy-selector-level-2").value = enemies ? enemies["2"]?.id : '';
+    document.getElementById("enemy-selector-level-3").value = enemies ? enemies["3"]?.id : '';
+    document.getElementById("enemy-selector-level-4").value = enemies ? enemies["4"]?.id : '';
+    document.getElementById("enemy-selector-level-5").value = enemies ? enemies["5"]?.id : '';
 
     const regionSelector = document.getElementById("guardian-selector");
     regionSelector.value = region ? region.id : '';
@@ -322,6 +347,7 @@ window.pageUpdate=() => {
         revealSections(alliances);
         setCounters(counters);
         showCharacterDetails(character);
+        showEnemyDetails(enemies);
         showRegionDetails(region);
         showCards();
         if (alliances.included) {
@@ -388,6 +414,10 @@ function showCharacterDetails(character) {
             buyButton.innerHTML = "Buy"
         }
     });
+}
+
+function showEnemyDetails(enemies) {
+    
 }
 
 function showRegionDetails(region) {
