@@ -426,11 +426,9 @@ function showEnemyDetails(enemies) {
         const levelSpan = document.createElement("span");
         levelSpan.classList.add("enemy-level")
         levelSpan.innerHTML = enemy.level;
-        divContainer.appendChild(levelSpan);
         const nameSpan = document.createElement("span");
         nameSpan.classList.add("enemy-name");
         nameSpan.innerHTML = enemy.name;
-        divContainer.appendChild(nameSpan);
 
         const traitDiv = document.createElement("div");  
         traitDiv.id = "enemy-traits";      
@@ -440,7 +438,6 @@ function showEnemyDetails(enemies) {
             traitSpan.innerHTML = trait;
             traitDiv.appendChild(traitSpan);
         });
-        divContainer.appendChild(traitDiv);
 
         const battleDiv = document.createElement("div");
         battleDiv.id = "enemy-battle-effects";
@@ -459,12 +456,12 @@ function showEnemyDetails(enemies) {
                 battleDiv.appendChild(battleSpan);
             });
         }
-        divContainer.appendChild(battleDiv);
 
         const eventSpan = document.createElement("span");
         eventSpan.classList.add("enemy-event");
         eventSpan.innerHTML = enemy.strike_event;
-        divContainer.appendChild(eventSpan);
+
+        divContainer.replaceChildren(levelSpan, nameSpan, traitDiv, battleDiv, eventSpan);
     }
 }
 
