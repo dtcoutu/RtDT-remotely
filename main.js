@@ -377,6 +377,7 @@ function hideSections() {
         "alliances-guild-setup",
         "counters",
         "actions",
+        "enemies",
         "virtues",
         "cards",
         "guilds"
