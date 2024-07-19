@@ -263,6 +263,7 @@
   display: grid;
   grid-template-columns: 24% 24% 24% 24%;
   gap: 24px;
+  font-size: small;
 }
 
 .region-1 {
