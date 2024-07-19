@@ -393,10 +393,6 @@
   margin: 8px 0px;
 }
 
-body {
-  width: 75%;
-}
-
 dl {
   display: grid;
   grid-template-columns: max-content auto;
