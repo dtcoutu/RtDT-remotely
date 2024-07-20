@@ -53,9 +53,16 @@
 
 #enemy-battle-effects {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
   margin: 0 4px;
   border: 1px solid black;
+}
+
+#enemy-battle-effects>* {
+  flex: 1 1 15px;
+  padding: 4px;
 }
 
 .enemy-event {
@@ -238,13 +245,22 @@
   margin: 24px 0px;
 }
 
+#virtues-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#virtues-container>* {
+  flex: 1 1 240px;
+}
+
 .virtue {
-  display: inline-block;
   width: 16%;
   height: 125px;
   text-align: center;
-  vertical-align: top;
   border: 1px solid black;
+  margin: 4px;
 }
 
 .virtue .name {
