@@ -327,7 +327,9 @@
 }
 
 #cards {
-  display: grid;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   grid-template-columns: 30% 40% 30%;
   column-gap: 8px;
 }
@@ -356,13 +358,13 @@
 }
 
 #gear-cards {
-  grid-column: 1;
-  grid-row: 1;
+  min-width: 350px;
+  max-width: 500px;
 }
 
 #companion-cards {
-  grid-column: 2;
-  grid-row: 1;
+  min-width: 350px;
+  max-width: 600px;
 }
 
 .companion-title {
@@ -374,11 +376,12 @@
 .companion-usage {
   font-style: italic;
   font-size: smaller;
+  padding-left: 2px;
 }
 
 #potion-cards {
-  grid-column: 3;
-  grid-row: 1
+  min-width: 350px;
+  max-width: 500px;
 }
 
 .count {

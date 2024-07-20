@@ -518,7 +518,9 @@ function showCardsHelper(elementIdPartial, dataStorage) {
             // benefit - optional with text and usage (optional)
             if (card.benefit) {
                 const benefit = document.createElement("div");
-                benefit.innerHTML = card.benefit.text;
+                const benefitText = document.createElement("span");
+                benefitText.innerHTML = card.benefit.text;
+                benefit.appendChild(benefitText);
 
                 if (card.benefit.usage) {
                     const benefitUsage = document.createElement("span");
