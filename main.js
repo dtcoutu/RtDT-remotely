@@ -581,7 +581,9 @@ function showAlliancesGuilds(alliances, region) {
     // update the guild container with a new class based on the sort order
     sorted_regions.forEach((area, index) => {
         const guild = Object.keys(alliances.guilds).find(guild => alliances.guilds[guild].region === area);
-        document.getElementById(guild + '-' + alliances.guilds[guild].side).classList.add('region-' + (index+1));
+        const guildElement = document.getElementById(guild + '-' + alliances.guilds[guild].side);
+        guildElement.removeAttribute('class');
+        guildElement.classList.add('region-' + (index+1));
     });
 }
 

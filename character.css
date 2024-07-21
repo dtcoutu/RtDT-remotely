@@ -275,7 +275,6 @@
   display: grid;
   grid-template-columns: 24% 24% 24% 24%;
   gap: 24px;
-  font-size: small;
 }
 
 .region-1 {
@@ -299,10 +298,10 @@
 }
 
 #guilds > div {
-  display: grid;
-  grid-template-columns: 24% 24% 24% 24%;
-  grid-auto-rows: 3em;
-  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
   gap: 12px;
 }
 
@@ -318,8 +317,12 @@
   border-top: 1px solid black;
   border-bottom: 1px solid black;
   font-weight: bold;
-  grid-column: 1 / span 4;
+  flex: 0 0 100%;
   text-align: center;
+}
+
+.guild-rank {
+  flex: 1;
 }
 
 #cards {
