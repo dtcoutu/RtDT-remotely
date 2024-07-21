@@ -326,7 +326,6 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  grid-template-columns: 30% 40% 30%;
   column-gap: 8px;
 }
 
@@ -354,13 +353,13 @@
 }
 
 #gear-cards {
-  min-width: 350px;
-  max-width: 500px;
+  flex: 1;
+  min-width: 325px;
 }
 
 #companion-cards {
-  min-width: 350px;
-  max-width: 600px;
+  flex: 2;
+  min-width: 500px;
 }
 
 .companion-title {
@@ -376,8 +375,8 @@
 }
 
 #potion-cards {
-  min-width: 350px;
-  max-width: 500px;
+  flex: 1;
+  min-width: 380px;
 }
 
 .count {
