@@ -149,8 +149,7 @@
 }
 
 #actions-display {
-  display: grid;
-  grid-template-columns: 15% auto 15%;
+  display: flex;
   column-gap: 8px;
 }
 
@@ -160,8 +159,7 @@
 }
 
 #start-of-turn {
-  grid-column: 1;
-  grid-row: 2;
+  flex: 1;
 
   & h3 {
     text-align: center;
@@ -169,8 +167,7 @@
 }
 
 #middle-of-turn {
-  grid-column: 2;
-  grid-row: 2;
+  flex: 6;
   display: grid;
   grid-template-columns: 24% 38% 38%;
   padding: 4px;
@@ -233,8 +230,7 @@
 }
 
 #end-of-turn {
-  grid-column: 3;
-  grid-row: 2;
+  flex: 1;
 
   & h3 {
     text-align: center;
@@ -432,7 +428,7 @@ dd {
 
 dd.action {
   margin-left: 0;
-  padding-left: 40px;
+  padding-left: 20px;
 }
 
 h3, h4 {
