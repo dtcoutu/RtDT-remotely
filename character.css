@@ -17,11 +17,12 @@
 
 #enemies {
   display: flex;
+  gap: 16px;
 }
 
 #enemies > div {
-  display: inline-block;
-  width: 22%;
+  flex: 1;
+  min-width: 220px;
   margin: 0px auto;
   border: 1px solid black;
 }
@@ -118,29 +119,22 @@
 #header {
   display: grid;
   grid-template-columns: 15% auto;
-  gap: 15px;
-  clear: both;
+  gap: 16px;
 }
 
 #setup {
-  display: inline-block;
   padding: 4px;
   margin: 8px;
   border: 1px solid black;
 }
 
-#base-setup {
-  float: left;
+#setup-container {
+  display: flex;
+  gap: 16px;
 }
 
-#enemy-selectors {
-  float: left;
-  margin-left: 16px;
-}
-
-#alliances-guild-setup {
-  float: right;
-  margin-left: 16px;
+#setup-container>* {
+  flex: 1;
 }
 
 #actions {
