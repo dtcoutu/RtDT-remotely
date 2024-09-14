@@ -27,6 +27,6 @@ export const POTIONS = [
   {
       id: 'sirens-song',
       name: 'Potion of the Siren\'s Song',
-      description: 'Spend to move any for up to 2 spaces.'
+      description: 'Spend to move any foe up to 2 spaces.'
   }
 ];
