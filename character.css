@@ -140,6 +140,7 @@
 #actions {
   grid-column: 1 / span 3;
   grid-row: 1;
+  padding: 8px;
 }
 
 #actions-display {
@@ -291,7 +292,7 @@
   grid-row: 2;
 }
 
-#guilds > div {
+#guilds > section {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -299,11 +300,11 @@
   gap: 12px;
 }
 
-#guilds > div > div {
+#guilds > section > div {
   background-color: white;
 }
 
-#guilds > div > div.selected {
+#guilds > section > div.selected {
   background-color: tan;
 }
 

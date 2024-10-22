@@ -5,157 +5,243 @@
     <title>Return to Dark Tower...Remotely</title>
   </head>
   <body>
-    <details id="setup" open>
-      <summary>Setup</summary>
-      <div id="setup-container">
-        <div id="base-setup">
-          <div id="character-setup">
-            <label>
-              Choose a character:
-              <select name="character" id="character-selector" onchange="selectedCharacter(this.value)">
-                <option value="">---</option>
-              </select>
-            </label>
-          </div>
+    <header>
+      <details id="setup" open>
+        <summary>Setup</summary>
+        <section id="setup-container">
+          <section id="base-setup">
+            <section id="character-setup">
+              <label>
+                Choose a character:
+                <select name="character" id="character-selector" onchange="selectedCharacter(this.value)">
+                  <option value="">---</option>
+                </select>
+              </label>
+            </section>
+  
+            <section id="region-setup">
+              <label>
+                Choose your region:
+                <select name="guardian" id="guardian-selector" onchange="selectedRegion(this.value)">
+                  <option value="">---</option>
+                </select>
+              </label>
+            </section>
+  
+            <section id="alliances-options">
+              <label>
+                Is alliances expansion in play?
+                <select id="alliances-expansion" onchange="alliancesInclusion(this.value)">
+                  <option value="">---</option>
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </label>
+            </section>
+          </section>
+  
+          <section id="enemy-selectors">
+            Enemies:
+            <div>
+              <label>
+                Level 2:
+                <select id="enemy-selector-level-2" onchange="selectedEnemy(this.id, this.value)">
+                  <option value="">---</option>
+                  <option value="brigands">Brigands</option>
+                  <option value="oreks">Oreks</option>
+                  <option value="shadow_wolves">Shadow Wolves</option>
+                  <option value="spine_fiend">Spine Fiend</option>
+                </select>
+              </label>
+            </div>
+            <div>
+              <label>
+                Level 3:
+                <select id="enemy-selector-level-3" onchange="selectedEnemy(this.id, this.value)">
+                  <option value="">---</option>
+                  <option value="clan_of_neuri">Clan of Neuri</option>
+                  <option value="frost_troll">Frost Troll</option>
+                  <option value="lemure">Lemure</option>
+                  <option value="widowmade_spider">Widowmade Spider</option>
+                </select>
+              </label>
+            </div>
+            <div>
+              <label>
+                Level 4:
+                <select id="enemy-selector-level-4" onchange="selectedEnemy(this.id, this.value)">
+                  <option value="">---</option>
+                  <option value="dragon">Dragon</option>
+                  <option value="mormo">Mormo</option>
+                  <option value="striga">Striga</option>
+                  <option value="titan">Titan</option>
+                </select>
+              </label>
+            </div>
+            <div>
+              <label>
+                Level 5:
+                <select id="enemy-selector-level-5" onchange="selectedEnemy(this.id, this.value)">
+                  <option value="">---</option>
+                  <option value="ashstrider">Ashstrider</option>
+                  <option value="bane_of_omens">Bane of Omens</option>
+                  <option value="empress_of_shades">Empress of Shades</option>
+                  <option value="gaze_eternal">Gaze Eternal</option>
+                  <option value="gravemaw">Gravemaw</option>
+                  <option value="isa_the_exile">Isa the Exile</option>
+                  <option value="lingering_rot">Lingering Rot</option>
+                  <option value="utuk_ku_the_ice_herald">Utuk-Ku the Ice Herald</option>
+                </select>
+              </label>
+            </div>
+          </section>
+  
+          <section id="alliances-guild-setup" class="hidden">
+            Guild locations:
+            <div id="arcane_scouts-setup">
+              <label>
+                Arcane Scouts:
+                <select id="arcane_scouts-location" onchange="allianceRegionSet(this.id, this.value)">
+                  <option value="">---</option>
+                  <option value="North">North</option>
+                  <option value="South">South</option>
+                  <option value="East">East</option>
+                  <option value="West">West</option>
+                </select>
+              </label>
+            </div>
+            <div id="druids_circle-setup">
+              <label>
+                Druids Circle:
+                <select id="druids_circle-location" onchange="allianceRegionSet(this.id, this.value)">
+                  <option value="">---</option>
+                  <option value="North">North</option>
+                  <option value="South">South</option>
+                  <option value="East">East</option>
+                  <option value="West">West</option>
+                </select>
+              </label>
+            </div>
+            <div id="paladins_order-setup">
+              <label>
+                Paladins Order:
+                <select id="paladins_order-location" onchange="allianceRegionSet(this.id, this.value)">
+                  <option value="">---</option>
+                  <option value="North">North</option>
+                  <option value="South">South</option>
+                  <option value="East">East</option>
+                  <option value="West">West</option>
+                </select>
+              </label>
+            </div>
+            <div id="thieves_guild-setup">
+              <label>
+                Thieves Guild:
+                <select id="thieves_guild-location" onchange="allianceRegionSet(this.id, this.value)">
+                  <option value="">---</option>
+                  <option value="North">North</option>
+                  <option value="South">South</option>
+                  <option value="East">East</option>
+                  <option value="West">West</option>
+                </select>
+              </label>
+            </div>
+          </section>
+        </section>
+      </details>
 
-          <div id="region-setup">
-            <label>
-              Choose your region:
-              <select name="guardian" id="guardian-selector" onchange="selectedRegion(this.value)">
-                <option value="">---</option>
-              </select>
-            </label>
-          </div>
+      <section>
+        <button onclick="startGame()">Start</button>
+        <button onclick="resetGame()">Reset</button>
+      </section>
+    </header>
 
-          <div id="alliances-options">
-            <label>
-              Is alliances expansion in play?
-              <select id="alliances-expansion" onchange="alliancesInclusion(this.value)">
-                <option value="">---</option>
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-              </select>
-            </label>
+    <details id="actions" class="hidden" open>
+      <summary>Actions</summary>
+      <div id="actions-display">
+        <div id="start-of-turn">
+          <h3>Start of Turn</h3>
+          <div>
+            <img src="icons/banner.png" title="banner" alt="banner" width="25" height="40" />
+            <span class="name">Banner</span>
+          </div>
+          <div id="banner-description"></div>
+        </div>
+        <div id="middle-of-turn">
+          <h3>Middle of Turn</h3>
+          <div id="move">
+            <div>
+              <img src="icons/move.png" title="banner" alt="banner" width="40" height="40" />
+              <span class="name">Move <span id="movement"></span></span> (Split as Needed)
+            </div>
+            <div>Spend 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to double your move</div>
+          </div>
+          <div id="heroic-action">
+            <h4>Heroic Action</h4>
+            <div class="choose-one">Choose One</div>
+            <dl>
+              <dt class="action"><img src="icons/cleanse.png" title="cleanse" alt="cleanse" width="40" height="40" /><span>Cleanse</span></dt>
+              <dd class="action"><span>Remove all skulls from your space</span></dd>
+              <dt class="action"><img src="icons/battle.png" title="cleanse" alt="cleanse" width="40" height="40" /><span>Battle</span></dt>
+              <dd class="action"><span>Battle a foe on your space</span></dd>
+              <dt class="action"><img src="icons/quest.png" title="cleanse" alt="cleanse" width="40" height="40" /><span>Quest</span></dt>
+              <dd class="action"><span>Complete a quest or explore a dungeon</span></dd>
+              <dt class="action"><img src="icons/influence-action.png" title="influence" alt="influence" width="40" height="40" /><span>Influence</span></dt>
+              <dd class="action"><span>When at a Guild Hall gain 2 <img src="icons/influence.png" title="influence" alt="influence" width="24" height="24"></span></dd>
+            </dl>
+            <div class="after">Gain 2 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> after</div>
+          </div>
+          <div id="reinforce">
+            <h4>Reinforce</h4>
+            <div class="choose-one">Choose One</div>
+            <dl>
+              <dt class="action"><span>Citadel</span></dt>
+              <dd class="action">
+                <dl>
+                  <dt><strong>Free:</strong></dt><dd>Gain 1 potion</dd>
+                  <dt><strong>5 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Gain 1 virtue</dd>
+                </dl>
+              </dd>
+              <dt class="action"><span>Sanctuary</span></dt>
+              <dd class="action">
+                <dl>
+                  <dt><strong>Free:</strong></dt><dd>Gain 1 spirit</dd>
+                  <dt><strong>5 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Remove all your corruptions</dd>
+                </dl>
+              </dd>
+              <dt class="action"><span>Village</span></dt>
+              <dd class="action">
+                <dl>
+                  <dt><strong>Free:</strong></dt><dd>Gain 6 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /></dd>
+                  <dt><strong>1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Gain 12 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /></dd>
+                </dl>
+              </dd>
+              <dt class="action"><span>Bazaar</span></dt>
+              <dd class="action">
+                <dl>
+                  <dt><strong>Free:</strong></dt><dd>Gain 1 gear</dd>
+                  <dt><strong>2 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Gain 1 treasure</dd>
+                </dl>
+              </dd>
+              <dt class="action"><span>Guild Hall</span></dt>
+              <dd class="action">
+                <dl>
+                  <dt><strong>5 <img src="icons/influence.png" title="influence" alt="influence" width="24" height="24">:</strong></dt>
+                  <dd>Gain 1 level in corresponding Guild</dd>
+                </dl>
+              </dd>
+            </dl>
           </div>
         </div>
-
-        <div id="enemy-selectors">
-          Enemies:
-          <div>
-            <label>
-              Level 2:
-              <select id="enemy-selector-level-2" onchange="selectedEnemy(this.id, this.value)">
-                <option value="">---</option>
-                <option value="brigands">Brigands</option>
-                <option value="oreks">Oreks</option>
-                <option value="shadow_wolves">Shadow Wolves</option>
-                <option value="spine_fiend">Spine Fiend</option>
-              </select>
-            </label>
-          </div>
-          <div>
-            <label>
-              Level 3:
-              <select id="enemy-selector-level-3" onchange="selectedEnemy(this.id, this.value)">
-                <option value="">---</option>
-                <option value="clan_of_neuri">Clan of Neuri</option>
-                <option value="frost_troll">Frost Troll</option>
-                <option value="lemure">Lemure</option>
-                <option value="widowmade_spider">Widowmade Spider</option>
-              </select>
-            </label>
-          </div>
-          <div>
-            <label>
-              Level 4:
-              <select id="enemy-selector-level-4" onchange="selectedEnemy(this.id, this.value)">
-                <option value="">---</option>
-                <option value="dragon">Dragon</option>
-                <option value="mormo">Mormo</option>
-                <option value="striga">Striga</option>
-                <option value="titan">Titan</option>
-              </select>
-            </label>
-          </div>
-          <div>
-            <label>
-              Level 5:
-              <select id="enemy-selector-level-5" onchange="selectedEnemy(this.id, this.value)">
-                <option value="">---</option>
-                <option value="ashstrider">Ashstrider</option>
-                <option value="bane_of_omens">Bane of Omens</option>
-                <option value="empress_of_shades">Empress of Shades</option>
-                <option value="gaze_eternal">Gaze Eternal</option>
-                <option value="gravemaw">Gravemaw</option>
-                <option value="isa_the_exile">Isa the Exile</option>
-                <option value="lingering_rot">Lingering Rot</option>
-                <option value="utuk_ku_the_ice_herald">Utuk-Ku the Ice Herald</option>
-              </select>
-            </label>
-          </div>
-        </div>
-
-        <div id="alliances-guild-setup" class="hidden">
-          Guild locations:
-          <div id="arcane_scouts-setup">
-            <label>
-              Arcane Scouts:
-              <select id="arcane_scouts-location" onchange="allianceRegionSet(this.id, this.value)">
-                <option value="">---</option>
-                <option value="North">North</option>
-                <option value="South">South</option>
-                <option value="East">East</option>
-                <option value="West">West</option>
-              </select>
-            </label>
-          </div>
-          <div id="druids_circle-setup">
-            <label>
-              Druids Circle:
-              <select id="druids_circle-location" onchange="allianceRegionSet(this.id, this.value)">
-                <option value="">---</option>
-                <option value="North">North</option>
-                <option value="South">South</option>
-                <option value="East">East</option>
-                <option value="West">West</option>
-              </select>
-            </label>
-          </div>
-          <div id="paladins_order-setup">
-            <label>
-              Paladins Order:
-              <select id="paladins_order-location" onchange="allianceRegionSet(this.id, this.value)">
-                <option value="">---</option>
-                <option value="North">North</option>
-                <option value="South">South</option>
-                <option value="East">East</option>
-                <option value="West">West</option>
-              </select>
-            </label>
-          </div>
-          <div id="thieves_guild-setup">
-            <label>
-              Thieves Guild:
-              <select id="thieves_guild-location" onchange="allianceRegionSet(this.id, this.value)">
-                <option value="">---</option>
-                <option value="North">North</option>
-                <option value="South">South</option>
-                <option value="East">East</option>
-                <option value="West">West</option>
-              </select>
-            </label>
-          </div>
+        <div id="end-of-turn">
+          <h3>End of Turn</h3>
+          <span class="action-description">Drop 1 skull into the Tower</span>
         </div>
       </div>
     </details>
 
-    <div>
-      <button onclick="startGame()">Start</button>
-      <button onclick="resetGame()">Reset</button>
-    </div>
-
     <div id="header">
-      <div id="counters" class="hidden">
+      <section id="counters" class="hidden">
         <div id="warriors">
           <div><img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />: <span id="warrior-counter" class="counter"></span></div>
           <button onclick="updateCount('warriors', -5)">-5</button>
@@ -170,98 +256,14 @@
           <button onclick="updateCount('spirit', 1)">+1</button>
           <button onclick="updateCount('spirit', 5)">+5</button>
         </div>
-      </div>
+      </section>
 
-      <div id="enemies" class="hidden">
+      <section id="enemies" class="hidden">
         <div id="enemy-level-2"></div>
         <div id="enemy-level-3"></div>
         <div id="enemy-level-4"></div>
         <div id="enemy-level-5"></div>
-      </div>
-    
-      <details id="actions" class="hidden" open>
-        <summary>Actions</summary>
-        <div id="actions-display">
-          <div id="start-of-turn">
-            <h3>Start of Turn</h3>
-            <div>
-              <img src="icons/banner.png" title="banner" alt="banner" width="25" height="40" />
-              <span class="name">Banner</span>
-            </div>
-            <div id="banner-description"></div>
-          </div>
-          <div id="middle-of-turn">
-            <h3>Middle of Turn</h3>
-            <div id="move">
-              <div>
-                <img src="icons/move.png" title="banner" alt="banner" width="40" height="40" />
-                <span class="name">Move <span id="movement"></span></span> (Split as Needed)
-              </div>
-              <div>Spend 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to double your move</div>
-            </div>
-            <div id="heroic-action">
-              <h4>Heroic Action</h4>
-              <div class="choose-one">Choose One</div>
-              <dl>
-                <dt class="action"><img src="icons/cleanse.png" title="cleanse" alt="cleanse" width="40" height="40" /><span>Cleanse</span></dt>
-                <dd class="action"><span>Remove all skulls from your space</span></dd>
-                <dt class="action"><img src="icons/battle.png" title="cleanse" alt="cleanse" width="40" height="40" /><span>Battle</span></dt>
-                <dd class="action"><span>Battle a foe on your space</span></dd>
-                <dt class="action"><img src="icons/quest.png" title="cleanse" alt="cleanse" width="40" height="40" /><span>Quest</span></dt>
-                <dd class="action"><span>Complete a quest or explore a dungeon</span></dd>
-                <dt class="action"><img src="icons/influence-action.png" title="influence" alt="influence" width="40" height="40" /><span>Influence</span></dt>
-                <dd class="action"><span>When at a Guild Hall gain 2 <img src="icons/influence.png" title="influence" alt="influence" width="24" height="24"></span></dd>
-              </dl>
-              <div class="after">Gain 2 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> after</div>
-            </div>
-            <div id="reinforce">
-              <h4>Reinforce</h4>
-              <div class="choose-one">Choose One</div>
-              <dl>
-                <dt class="action"><span>Citadel</span></dt>
-                <dd class="action">
-                  <dl>
-                    <dt><strong>Free:</strong></dt><dd>Gain 1 potion</dd>
-                    <dt><strong>5 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Gain 1 virtue</dd>
-                  </dl>
-                </dd>
-                <dt class="action"><span>Sanctuary</span></dt>
-                <dd class="action">
-                  <dl>
-                    <dt><strong>Free:</strong></dt><dd>Gain 1 spirit</dd>
-                    <dt><strong>5 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Remove all your corruptions</dd>
-                  </dl>
-                </dd>
-                <dt class="action"><span>Village</span></dt>
-                <dd class="action">
-                  <dl>
-                    <dt><strong>Free:</strong></dt><dd>Gain 6 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /></dd>
-                    <dt><strong>1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Gain 12 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /></dd>
-                  </dl>
-                </dd>
-                <dt class="action"><span>Bazaar</span></dt>
-                <dd class="action">
-                  <dl>
-                    <dt><strong>Free:</strong></dt><dd>Gain 1 gear</dd>
-                    <dt><strong>2 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Gain 1 treasure</dd>
-                  </dl>
-                </dd>
-                <dt class="action"><span>Guild Hall</span></dt>
-                <dd class="action">
-                  <dl>
-                    <dt><strong>5 <img src="icons/influence.png" title="influence" alt="influence" width="24" height="24">:</strong></dt>
-                    <dd>Gain 1 level in corresponding Guild</dd>
-                  </dl>
-                </dd>
-              </dl>
-            </div>
-          </div>
-          <div id="end-of-turn">
-            <h3>End of Turn</h3>
-            <span class="action-description">Drop 1 skull into the Tower</span>
-          </div>
-        </div>
-      </details>
+      </section>
     </div>
 
     <details id="virtues" class="hidden" open>
@@ -297,65 +299,65 @@
       </div>
     </details>
 
-    <div id="guilds" class="hidden">
-      <div id="arcane_scouts-a">
+    <section id="guilds" class="hidden">
+      <section id="arcane_scouts-a">
         <div class="guild-name">Arcane Scouts: Citadel || <span id="arcane_scouts-region"></span></div>
         <div id="arcane_scouts-rank-1" class="guild-rank" onclick="selectGuildLevel('arcane_scouts-rank-1')">If you start your move in this kingdom, your base move is -1.</div>
         <div id="arcane_scouts-rank-2" class="guild-rank" onclick="selectGuildLevel('arcane_scouts-rank-2')">You cannot spend <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to double your base move.</div>
         <div id="arcane_scouts-rank-3" class="guild-rank" onclick="selectGuildLevel('arcane_scouts-rank-3')">If you start your move in this kingdom, your base move is +1.</div>
         <div id="arcane_scouts-rank-4" class="guild-rank" onclick="selectGuildLevel('arcane_scouts-rank-4')">At the start of your turn you may place your hero on any space.</div>
-      </div>
-      <div id="druids_circle-a">
+      </section>
+      <section id="druids_circle-a">
         <div class="guild-name">Druids Circle: Village || <span id="druids_circle-region"></span></div>
         <div id="druids_circle-rank-1" class="guild-rank" onclick="selectGuildLevel('druids_circle-rank-1')">You cannot take a Banner action.</div>
         <div id="druids_circle-rank-2" class="guild-rank" onclick="selectGuildLevel('druids_circle-rank-2')">You must spend 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to take your Banner action.</div>
         <div id="druids_circle-rank-3" class="guild-rank" onclick="selectGuildLevel('druids_circle-rank-3')">When you take your Banner action, you may spend 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to take it twice.</div>
         <div id="druids_circle-rank-4" class="guild-rank" onclick="selectGuildLevel('druids_circle-rank-4')">When you take your Banner Action, all other heroes in this kingdom may take your Banner action.</div>
-      </div>
-      <div id="paladins_order-a">
+      </section>
+      <section id="paladins_order-a">
         <div class="guild-name">Paladins Order: Sanctuary || <span id="paladins_order-region"></span></div>
         <div id="paladins_order-rank-1" class="guild-rank" onclick="selectGuildLevel('paladins_order-rank-1')">You cannot Cleanse.</div>
         <div id="paladins_order-rank-2" class="guild-rank" onclick="selectGuildLevel('paladins_order-rank-2')">You must spend 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to Cleanse.</div>
         <div id="paladins_order-rank-3" class="guild-rank" onclick="selectGuildLevel('paladins_order-rank-3')">After you Cleanse, gain +1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.</div>
         <div id="paladins_order-rank-4" class="guild-rank" onclick="selectGuildLevel('paladins_order-rank-4')">After you Cleanse, gain +2 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.</div>
-      </div>
-      <div id="thieves_guild-a">
+      </section>
+      <section id="thieves_guild-a">
         <div class="guild-name">Thieves Guild: Bazaar || <span id="thieves_guild-region"></span></div>
         <div id="thieves_guild-rank-1" class="guild-rank" onclick="selectGuildLevel('thieves_guild-rank-1')">Treasures cost +2 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.</div>
         <div id="thieves_guild-rank-2" class="guild-rank" onclick="selectGuildLevel('thieves_guild-rank-2')">Treasures cost +1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.</div>
         <div id="thieves_guild-rank-3" class="guild-rank" onclick="selectGuildLevel('thieves_guild-rank-3')">Treasures cost 1 less <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.</div>
         <div id="thieves_guild-rank-4" class="guild-rank" onclick="selectGuildLevel('thieves_guild-rank-4')">When you Reinforce to gain a treasure, also gain the top card of the treasure deck.</div>
-      </div>
-    </div>
+      </section>
+    </section>
 
-    <div id="cards" class="hidden">
-      <div id="gear-cards">
+    <section id="cards" class="hidden">
+      <section id="gear-cards">
         <h2>Gear</h2>
         <button id="select-gear" value="select-gear" onclick="selectGear()">Select Gear</button>
         <select id="gear-selector" class="hidden"></select>
         <button id="add-gear" value="add-gear" class="hidden" onclick="addGear()">Add</button>
         <dl id="gear-list">
         </dl>
-      </div>
-      <div id="companion-cards">
+      </section>
+      <section id="companion-cards">
         <h2>Companions</h2>
         <button id="select-companion" value="select-companion" onclick="selectCompanion()">Select Companion</button>
         <select id="companion-selector" class="hidden"></select>
         <button id="add-companion" value="add-companion" class="hidden" onclick="addCompanion()">Add</button>
         <dl id="companion-list">
         </dl>
-      </div>
-      <div id="potion-cards">
+      </section>
+      <section id="potion-cards">
         <h2>Potions</h2>
         <button id="select-potion" value="select-potion" onclick="selectPotion()">Select Potion</button>
         <select id="potion-selector" class="hidden"></select>
         <button id="add-potion" value="add-potion" class="hidden" onclick="addPotion()">Add</button>
         <dl id="potion-list">
         </dl>
-      </div>
-    </div>
+      </section>
+    </section>
 
-    <div id="alliance-companion-modal" class="modal">
+    <aside id="alliance-companion-modal" class="modal">
       <strong>The rank of the <span id="alliance-companion-guild"></span> guild has increased.</strong>
       <br>Did you get a companion for that?
       <br><i>Don't forget to update the app with the new companion as well.</i>
@@ -366,7 +368,7 @@
       </div>
 
       <button id="alliance-companion-modal-close" onclick="closeModal('alliance-companion-modal')">Close</button>
-    </div>
+    </aside>
 
     <script type="module" src="main.js"></script>
     <script type="module">
