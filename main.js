@@ -48,15 +48,7 @@ const GUILDS = [
 ]
 
 window.resetGame=() => {
-    localStorage.setItem(CHARACTER_STORAGE, null);
-    localStorage.setItem(COMPANIONS_STORAGE, JSON.stringify([]));
-    localStorage.setItem(ENEMIES_STORAGE, null);
-    localStorage.setItem(GEAR_STORAGE, JSON.stringify([]));
-    localStorage.setItem(POTIONS_STORAGE, JSON.stringify([]));
-    localStorage.setItem(REGION_STORAGE, null);
-    localStorage.setItem(COUNTERS_STORAGE, null);
-    localStorage.setItem(ALLIANCES_STORAGE, null);
-    localStorage.setItem(STARTED_STORAGE, null);
+    localStorage.clear();
 
     hideSections();
 
@@ -82,6 +74,8 @@ window.startGame=() => {
 
     localStorage.setItem(STARTED_STORAGE, 'true');
 
+    initializeCardHolders();
+
     initializeCounters();
 
     pageUpdate();
@@ -102,6 +96,12 @@ function initializeCounters() {
     }
 
     updateStoredData(COUNTERS_STORAGE, counters);
+}
+
+function initializeCardHolders() {
+    localStorage.setItem(COMPANIONS_STORAGE, JSON.stringify([]));
+    localStorage.setItem(GEAR_STORAGE, JSON.stringify([]));
+    localStorage.setItem(POTIONS_STORAGE, JSON.stringify([]));
 }
 
 window.alliancesInclusion=(included) => {
