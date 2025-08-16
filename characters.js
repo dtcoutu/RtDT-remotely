@@ -1,6 +1,7 @@
 const archwright = {
   id: "archwright",
   name: "Archwright",
+  expansion: 'alliances',
   banner: "Place a battlement on any space or move a battlement up to 2 spaces.",
   move: 3,
   virtues: [
@@ -40,6 +41,7 @@ const archwright = {
 const brutal_warlord = {
   id: "brutal-warlord",
   name: "Brutal Warlord",
+  expansion: 'base',
   banner: 'Gain 5 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />',
   move: 3,
   virtues: [
@@ -79,6 +81,7 @@ const brutal_warlord = {
 const devious_swindler = {
   id: "devious-swindler",
   name: "Devious Swindler",
+  expansion: 'covenant',
   banner: "Roll the haggle die and gain the result",
   move: 3,
   virtues: [
@@ -118,6 +121,7 @@ const devious_swindler = {
 const haunted_recluse = {
   id: "haunted-recluse",
   name: "Haunted Recluse",
+  expansion: 'alliances',
   banner: "Move 1 skull from any building to any other building with 2 or fewer skulls",
   move: 3,
   virtues: [
@@ -157,6 +161,7 @@ const haunted_recluse = {
 const orphaned_scion = {
   id: "orphaned-scion",
   name: "Orphaned Scion",
+  expansion: 'base',
   banner: 'Gain 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />',
   move: 3,
   virtues: [
@@ -196,6 +201,7 @@ const orphaned_scion = {
 const relentless_warden = {
   id: "relentless-warden",
   name: "Relentless Warden",
+  expansion: 'covenant',
   banner: "If your quarry token is not on a foe, place it on a foe. Otherwise, move your quarry up to 2 spaces.",
   move: 3,
   virtues: [
@@ -235,6 +241,7 @@ const relentless_warden = {
 const reverent_astromancer = {
   id: "reverent-astromancer",
   name: "Reverent Astromancer",
+  expansion: 'covenant',
   banner: "Remove a skull on or adjacent to your space",
   move: 3,
   virtues: [
@@ -272,8 +279,9 @@ const reverent_astromancer = {
 }
 
 const relic_hunter = {
-  id: "relic-hunger",
+  id: "relic-hunter",
   name: "Relic Hunter",
+  expansion: 'base',
   banner: "Gain 1 potion",
   move: 3,
   virtues: [
@@ -313,6 +321,7 @@ const relic_hunter = {
 const spymaster = {
   id: "spymaster",
   name: "Spymaster",
+  expansion: 'base',
   banner: "Place your hero on any space in your current kingdom",
   move: 4,
   virtues: [
@@ -352,6 +361,7 @@ const spymaster = {
 const undaunted_ageis = {
   id: "undaunted_ageis",
   name: "Undaunted Ageis",
+  expansion: 'covenant',
   banner: 'For each corruption you have, gain 3 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />. You may spend 10 Warrior to remove one of your corruptions.',
   move: 3,
   virtues: [
