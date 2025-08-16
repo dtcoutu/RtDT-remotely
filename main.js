@@ -3,6 +3,7 @@ import { COMPANIONS, ALLIANCE_COMPANIONS } from "./companions.js";
 import { ENEMIES, TRAITS } from "./enemies.js";
 import { GEAR } from "./gear.js";
 import { POTIONS } from "./potions.js";
+import { TREASURES } from "./treasure.js";
 
 const CHARACTER_STORAGE = "character";
 const COMPANIONS_STORAGE = "companions";
@@ -10,6 +11,7 @@ const ENEMIES_STORAGE = "enemies";
 const GEAR_STORAGE = "gear";
 const POTIONS_STORAGE = "potions";
 const REGION_STORAGE = "region";
+const TREASURE_STORAGE = "treasures";
 const COUNTERS_STORAGE = "counters";
 const ALLIANCES_STORAGE = "alliances";
 const STARTED_STORAGE = "started";
@@ -102,6 +104,7 @@ function initializeCardHolders() {
     localStorage.setItem(COMPANIONS_STORAGE, JSON.stringify([]));
     localStorage.setItem(GEAR_STORAGE, JSON.stringify([]));
     localStorage.setItem(POTIONS_STORAGE, JSON.stringify([]));
+    localStorage.setItem(TREASURE_STORAGE, JSON.stringify([]));
 }
 
 window.alliancesInclusion=(included) => {
@@ -161,6 +164,10 @@ window.selectPotion=() => {
     selectCard("potion", POTIONS, POTIONS_STORAGE, true);
 }
 
+window.selectTreasure=() => {
+    selectCard("treasure", TREASURES, TREASURE_STORAGE);
+}
+
 function selectCard(elementIdPartial, dataSet, dataStorage, allowMultiple = false) {
     hideElement("select-" + elementIdPartial);
 
@@ -193,6 +200,10 @@ window.addCompanion=() => {
 
 window.addPotion=() => {
     addCard("potion", POTIONS, POTIONS_STORAGE, true);
+}
+
+window.addTreasure=() => {
+    addCard("treasure", TREASURES, TREASURE_STORAGE);
 }
 
 function addCard(elementIdPartial, dataSet, dataStorage, allowMultiple = false) {
@@ -239,6 +250,9 @@ function removeCard(buttonEvent) {
             break;
         case "potion":
             dataStorage = POTIONS_STORAGE;
+            break;
+        case "treasure":
+            dataStorage = TREASURE_STORAGE;
             break;
     }
 
@@ -475,6 +489,7 @@ window.showCards=() => {
     showCardsHelper("gear", GEAR_STORAGE);
     showCardsHelper("companion", COMPANIONS_STORAGE);
     showCardsHelper("potion", POTIONS_STORAGE);
+    showCardsHelper("treasure", TREASURE_STORAGE);
 }
 
 function showCardsHelper(elementIdPartial, dataStorage) {
@@ -551,6 +566,23 @@ function showCardsHelper(elementIdPartial, dataStorage) {
             const eventElement = document.createElement("div");
             eventElement.innerHTML = card.name + " " + card.event;
             cardBody.appendChild(eventElement);
+        } else if (elementIdPartial === "treasure") {
+            // benefit - optional with text and usage (optional)
+            if (card.benefit) {
+                const benefit = document.createElement("div");
+                const benefitText = document.createElement("span");
+                benefitText.innerHTML = card.benefit;
+                benefit.appendChild(benefitText);
+
+                cardBody.appendChild(benefit);
+            }
+
+            // advantage(s) - each with text and usage (optional)
+            if (card.advantage) {
+                const advantageElement = document.createElement("div");
+                advantageElement.innerHTML = card.advantage;
+                cardBody.appendChild(advantageElement);
+            }
         } else {
             cardBody.innerHTML = card.description;
         }

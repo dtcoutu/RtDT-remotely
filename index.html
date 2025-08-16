@@ -331,6 +331,14 @@
     </section>
 
     <section id="cards" class="hidden">
+      <section id="treasure-cards">
+        <h2>Treasure (default max of 4)</h2>
+        <button id="select-treasure" value="select-treasure" onclick="selectTreasure()">Select Treasure</button>
+        <select id="treasure-selector" class="hidden"></select>
+        <button id="add-treasure" value="add-treasure" class="hidden" onclick="addTreasure()">Add</button>
+        <dl id="treasure-list">
+        </dl>
+      </section>
       <section id="gear-cards">
         <h2>Gear</h2>
         <button id="select-gear" value="select-gear" onclick="selectGear()">Select Gear</button>

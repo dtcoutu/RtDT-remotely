@@ -14,6 +14,13 @@ export const TREASURES = [
     expansion: 'base'
   },
   {
+    id: 'archwrights-sledge',
+    name: "Archwright's Sledge",
+    benefit: "When you complete a quest, put an offering token on any foundation.",
+    advantage: '+1 Wild Advantage in kingdoms with a completed monument',
+    expansion: 'covenant'
+  },
+  {
     id: 'axe-of-soul-rending',
     name: "Axe of Soul Rending",
     benefit: 'When you defeat a MAGIC foe, gain 1 additional <spirit/>',
@@ -28,6 +35,13 @@ export const TREASURES = [
     expansion: 'base'
   },
   {
+    id: 'azkols-chakram',
+    name: "Azkol's Chakram",
+    benefit: "When you defeat a level 3 or level 4 foe, you may remove one of your corruptions or give another hero a blessing.",
+    advantage: '+1 BEAST Advantage',
+    expansion: 'covenant'
+  },
+  {
     id: 'azkols-horn',
     name: "Azkol's Horn",
     benefit: 'Do not spend spirit for glyphs facing you.',
@@ -35,11 +49,43 @@ export const TREASURES = [
     expansion: 'base'
   },
   {
+    id: 'azkols-ichor',
+    name: "Azkol's Ichor",
+    benefit: "When a foe's status changes, gain 7 <warrior/>.",
+    advantage: '+1 BEAST Advantage',
+    expansion: 'covenant'
+  },
+  {
     id: 'azkols-idol',
     name: "Azkol's Idol",
     benefit: 'Prevent up to 2 <warrior/> losses per dungeon room.',
     advantage: '+1 BEAST Advantage',
     expansion: 'base'
+  },
+  {
+    id: 'azkols-scroll',
+    name: "Azkol's Scroll",
+    advantage: 'Spend when you Battle to gain +6 Wild Advantages. You may not use other Advantages during that battle.',
+    expansion: 'covenant'
+  },
+  {
+    id: 'azkols-vambraces',
+    name: "Azkol's Vambraces",
+    benefit: 'At the start of your turn, you may place your hero in any space adjacent to the Tower. If you do, gain a blessing.',
+    expansion: 'covenant'
+  },
+  {
+    id: 'beacon-stone',
+    name: "Beacon Stone",
+    benefit: 'At the end of your turn, if you are on a space with a building, you may place your hero on any space in your home kingdom.',
+    advantage: '+1 UNDEAD Advantage',
+    expansion: 'covenant'
+  },
+  {
+    id: 'brutal-warlords-bell',
+    name: "Brutal Warlord's Bell",
+    benefit: 'When you fully upgrade a battle card, gain 3 <warrior/>.',
+    expansion: 'covenant'
   },
   {
     id: 'circlet-of-conviction',
@@ -56,11 +102,73 @@ export const TREASURES = [
     expansion: 'base'
   },
   {
+    id: 'coffer-of-the-master-thief',
+    name: 'Coffer of the Master Thief',
+    benefit: 'At the end of the month, gain 1 <influence/> for each rank of the Thieves Guild.',
+    advantage: '+1 Wild Advantage in the kindgom with the Thieves Guild',
+    expansion: 'alliances'
+  },
+  {
     id: 'crown-of-azkol',
     name: "Crown of Azkol",
     benefit: 'After you Reinforce at a sanctuary, also gain spirit equal to the current month.',
     advantage: '+1 HUMANOID Advantage',
     expansion: 'base'
+  },
+  {
+    id: 'crystal-blade',
+    name: 'Crystal Blade',
+    advantage: '+1 Wild Advantage for each other treasure you have',
+    expansion: 'alliances'
+  },
+  {
+    id: 'crystal-platemail',
+    name: 'Crystal Platemail',
+    benefit: 'Prevent up to 2 <warrior/> losses per battle card for each other treasure you have.',
+    advantage: '+1 MELEE Advantage',
+    expansion: 'alliances'
+  },
+  {
+    id: 'diadem-of-the-emissary',
+    name: 'Diadem of the Emissary',
+    benefit: 'You can Reinforce at any building to increase the rank of any guild.',
+    advantage: '+1 HUMANOID Advantage',
+    expansion: 'alliances'
+  },
+  {
+    id: 'druids-incense',
+    name: "Druid's Incense",
+    benefit: 'At the end of the month, choose 1 building for each rank of the Druids Circle. Remove 1 skull from each of those buildings.',
+    advantage: '+1 Wild Advantage in the kingdom with the Druids Circle',
+    expansion: 'alliances'
+  },
+  {
+    id: 'everfilled-chest',
+    name: "Everfilled Chest",
+    benefit: 'At the end of your turn, roll the haggle die and gain the result. (Ignore <bazaar-closed/>.',
+    advantage: '+1 Wild Advantage if you are on or adjacent to a Bazaar',
+    expansion: 'covenant'
+  },
+  {
+    id: 'everlasting-brazier',
+    name: 'Everlasting Brazier',
+    benefit: 'The rank of the guild in your current kingdom cannot be decreased.',
+    advantage: '+1 MAGIC Advantage',
+    expansion: 'alliances'
+  },
+  {
+    id: 'ewer-of-the-silent-child',
+    name: 'Ewer of the Silent Child',
+    benefit: 'During your turn, you can spend potions that belong to other heroes (with their permission).',
+    advantage: '+1 STEALTH Advantage',
+    expansion: 'alliances'
+  },
+  {
+    id: 'forbidden-grimoire',
+    name: 'Forbidden Grimoire',
+    benefit: 'If a power skull emerges in your current kingdom, lose this card and gain a corruption.',
+    advantage: '+3 Wild Advantages',
+    expansion: 'alliances'
   },
   {
     id: 'golden-mace-of-azkol',
@@ -70,11 +178,37 @@ export const TREASURES = [
     expansion: 'base'
   },
   {
+    id: 'grim-whisper',
+    name: "Grim Whisper",
+    advantage: '+2 Wild Advantage when you Battle in a wasteland',
+    expansion: 'covenant'
+  },
+  {
     id: 'hallowed-reliquary',
     name: "Hallowed Reliquary",
     benefit: 'After you Battle, remove 1 skull from a building in your current kingdom.',
     advantage: '+1 UNDEAD Advantage',
     expansion: 'base'
+  },
+  {
+    id: 'haunted-recluses-effigy',
+    name: "Haunted Recluse's Effigy",
+    benefit: 'When you Cleanse, you may spend this to remove all skulls in your current kingdom.',
+    advantage: '+1 MAGIC Advantage',
+    expansion: 'covenant'
+  },
+  {
+    id: 'iron-hound-of-azkol',
+    name: 'Iron Hound of Azkol',
+    benefit: 'Before you move, you can place your hero on any space with a foe.',
+    advantage: '+1 BEAST Advantage',
+    expansion: 'alliances'
+  },
+  {
+    id: 'jeweled-goblet-of-azkol',
+    name: 'Jeweled Goblet of Azkol',
+    benefit: 'When you Influence, gain an additional 2 <influence/> and also 1 potion.',
+    expansion: 'alliances'
   },
   {
     id: 'kamarias-carpet',
@@ -112,6 +246,20 @@ export const TREASURES = [
     expansion: 'base'
   },
   {
+    id: 'orphaned-scions-charm',
+    name: "Orphaned Scion's Charm",
+    benefit: 'Whenever a skull emerges from the Tower in your current kingdom, gain a blessing.',
+    advantage: '+1 MAGIC Advantage',
+    expansion: 'covenant'
+  },
+  {
+    id: 'paladins-greatshield',
+    name: "Paladin's Greatshield",
+    benefit: 'At the end of the month, gain 6 <warrior/> for each rank of the Paladins Order.',
+    advantage: '+1 Wild Advantage in the kingdom with the Paladins Order',
+    expansion: 'alliances'
+  },
+  {
     id: 'relic-hunters-flagon',
     name: "Relic Hunter's Flagon",
     benefit: 'When you gain a potion, look at the top 4 cards of the potion deck and choose one. Put the rest on the bottom.',
@@ -119,10 +267,36 @@ export const TREASURES = [
     expansion: 'base'
   },
   {
+    id: 'ring-of-the-emissary',
+    name: 'Ring of the Emissary',
+    benefit: 'When you Reinforce to increase the rank of a guild, spend 2 less <influence/>.',
+    expansion: 'alliances'
+  },
+  {
+    id: 'robes-of-the-last-sultan',
+    name: "Robes of the Last Sultan",
+    benefit: 'Spend 3 <influence/> to remove 1 foe from your space.',
+    expansion: 'alliances'
+  },
+  {
+    id: 'sanctified-flask',
+    name: "Sanctified Flash",
+    benefit: 'Spend to remove 1 corruption from any hero. That hero gains a blessing.',
+    advantage: '+1 UNDEAD Advantage',
+    expansion: 'convenant'
+  },
+  {
     id: 'scroll-of-burning-sands',
     name: 'Scroll of Burning Sands',
     advantage: 'Spend to gain +4 MAGIC Advantages',
     expansion: 'base'
+  },
+  {
+    id: 'scroll-of-the-forged-friendship',
+    name: 'Scroll of the Forged Friendship',
+    benefit: 'Spend to increase the rank of the guild in your current kingdom by 1.',
+    advantage: '+1 BEAST Advantage',
+    expansion: 'alliances'
   },
   {
     id: 'scroll-of-the-great-serpent',
@@ -144,114 +318,11 @@ export const TREASURES = [
     expansion: 'base'
   },
   {
-    id: 'tears-of-the-shedu',
-    name: 'Tears of the Shedu',
-    benefit: 'When you defeat a STEALTH foe, gain 1 potion.',
-    advantage: '+1 UNDEAD advantage',
-    expansion: 'base'
-  },
-  {
-    id: 'white-cauldron',
-    name: 'White Cauldron',
-    benefit: 'After you Reinforce at a citadel, also gain 1 potion.',
-    advantage: '+1 UNDEAD advantage',
-    expansion: 'base'
-  },
-
-  // Alliances
-  {
-    id: 'coffer-of-the-master-thief',
-    name: 'Coffer of the Master Thief',
-    benefit: 'At the end of the month, gain 1 <influence/> for each rank of the Thieves Guild.',
-    advantage: '+1 Wild Advantage in the kindgom with the Thieves Guild',
-    expansion: 'alliances'
-  },
-  {
-    id: 'crystal-blade',
-    name: 'Crystal Blade',
-    advantage: '+1 Wild Advantage for each other treasure you have',
-    expansion: 'alliances'
-  },
-  {
-    id: 'crystal-platemail',
-    name: 'Crystal Platemail',
-    benefit: 'Prevent up to 2 <warrior/> losses per battle card for each other treasure you have.',
-    advantage: '+1 MELEE Advantage',
-    expansion: 'alliances'
-  },
-  {
-    id: 'diadem-of-the-emissary',
-    name: 'Diadem of the Emissary',
-    benefit: 'You can Reinforce at any building to increase the rank of any guild.',
-    advantage: '+1 HUMANOID Advantage',
-    expansion: 'alliances'
-  },
-  {
-    id: 'druids-incense',
-    name: "Druid's Incense",
-    benefit: 'At the end of the month, choose 1 building for each rank of the Druids Circle. Remove 1 skull from each of those buildings.',
-    advantage: '+1 Wild Advantage in the kingdom with the Druids Circle',
-    expansion: 'alliances'
-  },
-  {
-    id: 'everlasting-brazier',
-    name: 'Everlasting Brazier',
-    benefit: 'The rank of the guild in your current kingdom cannot be decreased.',
-    advantage: '+1 MAGIC Advantage',
-    expansion: 'alliances'
-  },
-  {
-    id: 'ewer-of-the-silent-child',
-    name: 'Ewer of the Silent Child',
-    benefit: 'During your turn, you can spend potions that belong to other heroes (with their permission).',
+    id: 'spymasters-journal',
+    name: "Spymaster's Journal",
+    benefit: 'At the start of your turn, you may spend 1 <spirit/> to flip one of your inactive vitures. If you do, flip it back over at the end of the turn.',
     advantage: '+1 STEALTH Advantage',
-    expansion: 'alliances'
-  },
-  {
-    id: 'forbidden-grimoire',
-    name: 'Forbidden Grimoire',
-    benefit: 'If a power skull emerges in your current kingdom, lose this card and gain a corruption.',
-    advantage: '+3 Wild Advantages',
-    expansion: 'alliances'
-  },
-  {
-    id: 'jeweled-goblet-of-azkol',
-    name: 'Jeweled Goblet of Azkol',
-    benefit: 'When you Influence, gain an additional 2 <influence/> and also 1 potion.',
-    expansion: 'alliances'
-  },
-  {
-    id: 'iron-hound-of-azkol',
-    name: 'Iron Hound of Azkol',
-    benefit: 'Before you move, you can place your hero on any space with a foe.',
-    advantage: '+1 BEAST Advantage',
-    expansion: 'alliances'
-  },
-  {
-    id: 'paladins-greatshield',
-    name: "Paladin's Greatshield",
-    benefit: 'At the end of the month, gain 6 <warrior/> for each rank of the Paladins Order.',
-    advantage: '+1 Wild Advantage in the kingdom with the Paladins Order',
-    expansion: 'alliances'
-  },
-  {
-    id: 'ring-of-the-emissary',
-    name: 'Ring of the Emissary',
-    benefit: 'When you Reinforce to increase the rank of a guild, spend 2 less <influence/>.',
-    expansion: 'alliances'
-  },
-  {
-    id: 'robes-of-the-last-sultan',
-    name: "Robes of the Last Sultan",
-    benefit: 'Spend 3 <influence/> to remove 1 foe from your space.',
-    expansion: 'alliances'
-  },
-  {
-    id: 'scroll-of-the-forged-friendship',
-    name: 'Scroll of the Forged Friendship',
-    benefit: 'Spend to increase the rank of the guild in your current kingdom by 1.',
-    advantage: '+1 BEAST Advantage',
-    expansion: 'alliances'
+    expansion: 'convenant'
   },
   {
     id: 'staff-of-wishes',
@@ -268,113 +339,11 @@ export const TREASURES = [
     expansion: 'alliances'
   },
   {
-    id: 'trebbloks-hammer',
-    name: "Treeblok's Hammer",
-    benefit: 'When you defat a foe, gain 2 <img src="icons/influence.png" title="influence" alt="influence" width="18" height="18" />.',
-    advantage: '+1 MELEE Advantage',
-    expansion: 'alliances'
-  },
-  {
-    id: 'vestments-of-the-emissary',
-    name: "Vestments of the Emissary",
-    benefit: 'After you Reinforce to increase the rank of a guild, gain 10 <warrior/>,',
-    advantage: '+1 Wild Advantage if the guild in your current kingdom is rank 2 or higher',
-    expansion: 'alliances'
-  },
-  {
-    id: 'zemayirs-teeth',
-    name: "Zemayir's Teeth",
-    benefit: 'When you Cleanse power skulls, remove them from the game and add a regular skull to the bag for each power skull you removed.',
-    expansion: 'alliances'
-  },
-
-  // Covenant
-  {
-    id: 'archwrights-sledge',
-    name: "Archwright's Sledge",
-    benefit: "When you complete a quest, put an offering token on any foundation.",
-    advantage: '+1 Wild Advantage in kingdoms with a completed monument',
-    expansion: 'covenant'
-  },
-  {
-    id: 'azkols-ichor',
-    name: "Azkol's Ichor",
-    benefit: "When a foe's status changes, gain 7 <warrior/>.",
-    advantage: '+1 BEAST Advantage',
-    expansion: 'covenant'
-  },
-  {
-    id: 'azkols-chakram',
-    name: "Azkol's Chakram",
-    benefit: "When you defeat a level 3 or level 4 foe, you may remove one of your corruptions or give another hero a blessing.",
-    advantage: '+1 BEAST Advantage',
-    expansion: 'covenant'
-  },
-  {
-    id: 'azkols-scroll',
-    name: "Azkol's Scroll",
-    advantage: 'Spend when you Battle to gain +6 Wild Advantages. You may not use other Advantages during that battle.',
-    expansion: 'covenant'
-  },
-  {
-    id: 'azkols-vambraces',
-    name: "Azkol's Vambraces",
-    benefit: 'At the start of your turn, you may place your hero in any space adjacent to the Tower. If you do, gain a blessing.',
-    expansion: 'covenant'
-  },
-  {
-    id: 'beacon-stone',
-    name: "Beacon Stone",
-    benefit: 'At the end of your turn, if you are on a space with a building, you may place your hero on any space in your home kingdom.',
-    advantage: '+1 UNDEAD Advantage',
-    expansion: 'covenant'
-  },
-  {
-    id: 'brutal-warlords-bell',
-    name: "Brutal Warlord's Bell",
-    benefit: 'When you fully upgrade a battle card, gain 3 <warrior/>.',
-    expansion: 'covenant'
-  },
-  {
-    id: 'everfilled-chest',
-    name: "Everfilled Chest",
-    benefit: 'At the end of your turn, roll the haggle die and gain the result. (Ignore <bazaar-closed/>.',
-    advantage: '+1 Wild Advantage if you are on or adjacent to a Bazaar',
-    expansion: 'covenant'
-  },
-  {
-    id: 'grim-whisper',
-    name: "Grim Whisper",
-    advantage: '+2 Wild Advantage when you Battle in a wasteland',
-    expansion: 'covenant'
-  },
-  {
-    id: 'haunted-recluses-effigy',
-    name: "Haunted Recluse's Effigy",
-    benefit: 'When you Cleanse, you may spend this to remove all skulls in your current kingdom.',
-    advantage: '+1 MAGIC Advantage',
-    expansion: 'covenant'
-  },
-  {
-    id: 'orphaned-scions-charm',
-    name: "Orphaned Scion's Charm",
-    benefit: 'Whenever a skull emerges from the Tower in your current kingdom, gain a blessing.',
-    advantage: '+1 MAGIC Advantage',
-    expansion: 'covenant'
-  },
-  {
-    id: 'sanctified-flask',
-    name: "Sanctified Flash",
-    benefit: 'Spend to remove 1 corruption from any hero. That hero gains a blessing.',
-    advantage: '+1 UNDEAD Advantage',
-    expansion: 'convenant'
-  },
-  {
-    id: 'spymasters-journal',
-    name: "Spymaster's Journal",
-    benefit: 'At the start of your turn, you may spend 1 <spirit/> to flip one of your inactive vitures. If you do, flip it back over at the end of the turn.',
-    advantage: '+1 STEALTH Advantage',
-    expansion: 'convenant'
+    id: 'tears-of-the-shedu',
+    name: 'Tears of the Shedu',
+    benefit: 'When you defeat a STEALTH foe, gain 1 potion.',
+    advantage: '+1 UNDEAD advantage',
+    expansion: 'base'
   },
   {
     id: 'tent-of-revelry',
@@ -389,6 +358,20 @@ export const TREASURES = [
     benefit: 'Spend to ignore all losses on a battle card, event, or dungeon room that would cause you to lose 10+ <warrior/>',
     advantage: '+1 HUMANOID Advantage',
     expansion: 'convenant'
+  },
+  {
+    id: 'trebbloks-hammer',
+    name: "Treeblok's Hammer",
+    benefit: 'When you defat a foe, gain 2 <img src="icons/influence.png" title="influence" alt="influence" width="18" height="18" />.',
+    advantage: '+1 MELEE Advantage',
+    expansion: 'alliances'
+  },
+  {
+    id: 'vestments-of-the-emissary',
+    name: "Vestments of the Emissary",
+    benefit: 'After you Reinforce to increase the rank of a guild, gain 10 <warrior/>,',
+    advantage: '+1 Wild Advantage if the guild in your current kingdom is rank 2 or higher',
+    expansion: 'alliances'
   },
   {
     id: 'wand-of-celerity',
@@ -410,5 +393,18 @@ export const TREASURES = [
     benefit: 'When acquired: 1 <charge/>. Spend 1 <charge/> to remove all skulls on or adjacent to your space. When you Battle a UNDEAD foe, gain 1 <charge/>.',
     advantage: '+1 UNDEAD Advantage',
     expansion: 'covenant'
+  },
+  {
+    id: 'white-cauldron',
+    name: 'White Cauldron',
+    benefit: 'After you Reinforce at a citadel, also gain 1 potion.',
+    advantage: '+1 UNDEAD advantage',
+    expansion: 'base'
+  },
+  {
+    id: 'zemayirs-teeth',
+    name: "Zemayir's Teeth",
+    benefit: 'When you Cleanse power skulls, remove them from the game and add a regular skull to the bag for each power skull you removed.',
+    expansion: 'alliances'
   }
 ]

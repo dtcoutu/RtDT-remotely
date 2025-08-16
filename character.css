@@ -350,13 +350,18 @@
   margin-right: 5px;
 }
 
+#treasure-cards {
+  flex: 3;
+  min-width: 500px;
+}
+
 #gear-cards {
-  flex: 1;
+  flex: 2;
   min-width: 325px;
 }
 
 #companion-cards {
-  flex: 2;
+  flex: 3;
   min-width: 500px;
 }
 
@@ -373,7 +378,7 @@
 }
 
 #potion-cards {
-  flex: 1;
+  flex: 2;
   min-width: 380px;
 }
 
