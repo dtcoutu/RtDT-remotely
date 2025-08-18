@@ -23,7 +23,7 @@ export const TREASURES = [
   {
     id: 'axe-of-soul-rending',
     name: "Axe of Soul Rending",
-    benefit: 'When you defeat a MAGIC foe, gain 1 additional <spirit/>',
+    benefit: 'When you defeat a MAGIC foe, gain 1 additional <img src="icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />',
     advantage: '+1 HUMANOID Advantage',
     expansion: 'base'
   },
@@ -51,14 +51,14 @@ export const TREASURES = [
   {
     id: 'azkols-ichor',
     name: "Azkol's Ichor",
-    benefit: "When a foe's status changes, gain 7 <warrior/>.",
+    benefit: 'When a foe\'s status changes, gain 7 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" />.',
     advantage: '+1 BEAST Advantage',
     expansion: 'covenant'
   },
   {
     id: 'azkols-idol',
     name: "Azkol's Idol",
-    benefit: 'Prevent up to 2 <warrior/> losses per dungeon room.',
+    benefit: 'Prevent up to 2 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" /> losses per dungeon room.',
     advantage: '+1 BEAST Advantage',
     expansion: 'base'
   },
@@ -84,7 +84,7 @@ export const TREASURES = [
   {
     id: 'brutal-warlords-bell',
     name: "Brutal Warlord's Bell",
-    benefit: 'When you fully upgrade a battle card, gain 3 <warrior/>.',
+    benefit: 'When you fully upgrade a battle card, gain 3 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" />.',
     expansion: 'covenant'
   },
   {
@@ -104,7 +104,7 @@ export const TREASURES = [
   {
     id: 'coffer-of-the-master-thief',
     name: 'Coffer of the Master Thief',
-    benefit: 'At the end of the month, gain 1 <influence/> for each rank of the Thieves Guild.',
+    benefit: 'At the end of the month, gain 1 <img src="icons/influence.png" title="influence" alt="influence" width="18" height="18" /> for each rank of the Thieves Guild.',
     advantage: '+1 Wild Advantage in the kindgom with the Thieves Guild',
     expansion: 'alliances'
   },
@@ -124,7 +124,7 @@ export const TREASURES = [
   {
     id: 'crystal-platemail',
     name: 'Crystal Platemail',
-    benefit: 'Prevent up to 2 <warrior/> losses per battle card for each other treasure you have.',
+    benefit: 'Prevent up to 2 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" /> losses per battle card for each other treasure you have.',
     advantage: '+1 MELEE Advantage',
     expansion: 'alliances'
   },
@@ -207,13 +207,13 @@ export const TREASURES = [
   {
     id: 'jeweled-goblet-of-azkol',
     name: 'Jeweled Goblet of Azkol',
-    benefit: 'When you Influence, gain an additional 2 <influence/> and also 1 potion.',
+    benefit: 'When you Influence, gain an additional 2 <img src="icons/influence.png" title="influence" alt="influence" width="18" height="18" /> and also 1 potion.',
     expansion: 'alliances'
   },
   {
     id: 'kamarias-carpet',
     name: "Karmaria's Carpet",
-    benefit: 'Once per turn, spend 1 <spirit/> to place your hero on any space.',
+    benefit: 'Once per turn, spend 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" /> to place your hero on any space.',
     advantage: '+1 MAGIC Advantage',
     expansion: 'base'
   },
@@ -255,7 +255,7 @@ export const TREASURES = [
   {
     id: 'paladins-greatshield',
     name: "Paladin's Greatshield",
-    benefit: 'At the end of the month, gain 6 <warrior/> for each rank of the Paladins Order.',
+    benefit: 'At the end of the month, gain 6 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" /> for each rank of the Paladins Order.',
     advantage: '+1 Wild Advantage in the kingdom with the Paladins Order',
     expansion: 'alliances'
   },
@@ -269,13 +269,13 @@ export const TREASURES = [
   {
     id: 'ring-of-the-emissary',
     name: 'Ring of the Emissary',
-    benefit: 'When you Reinforce to increase the rank of a guild, spend 2 less <influence/>.',
+    benefit: 'When you Reinforce to increase the rank of a guild, spend 2 less <img src="icons/influence.png" title="influence" alt="influence" width="18" height="18" />.',
     expansion: 'alliances'
   },
   {
     id: 'robes-of-the-last-sultan',
     name: "Robes of the Last Sultan",
-    benefit: 'Spend 3 <influence/> to remove 1 foe from your space.',
+    benefit: 'Spend 3 <img src="icons/influence.png" title="influence" alt="influence" width="18" height="18" /> to remove 1 foe from your space.',
     expansion: 'alliances'
   },
   {
@@ -313,14 +313,14 @@ export const TREASURES = [
   {
     id: 'spear-of-atish',
     name: 'Spear of Atish',
-    benefit: 'When you defeat a MELEE foe, gain 10 <warrior/>.',
+    benefit: 'When you defeat a MELEE foe, gain 10 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" />.',
     advantage: '+1 BEAST advantage',
     expansion: 'base'
   },
   {
     id: 'spymasters-journal',
     name: "Spymaster's Journal",
-    benefit: 'At the start of your turn, you may spend 1 <spirit/> to flip one of your inactive vitures. If you do, flip it back over at the end of the turn.',
+    benefit: 'At the start of your turn, you may spend 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" /> to flip one of your inactive vitures. If you do, flip it back over at the end of the turn.',
     advantage: '+1 STEALTH Advantage',
     expansion: 'convenant'
   },
@@ -355,7 +355,7 @@ export const TREASURES = [
   {
     id: 'the-iron-wall',
     name: "The Iron Wall",
-    benefit: 'Spend to ignore all losses on a battle card, event, or dungeon room that would cause you to lose 10+ <warrior/>',
+    benefit: 'Spend to ignore all losses on a battle card, event, or dungeon room that would cause you to lose 10+ <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" />',
     advantage: '+1 HUMANOID Advantage',
     expansion: 'convenant'
   },
@@ -369,28 +369,28 @@ export const TREASURES = [
   {
     id: 'vestments-of-the-emissary',
     name: "Vestments of the Emissary",
-    benefit: 'After you Reinforce to increase the rank of a guild, gain 10 <warrior/>,',
+    benefit: 'After you Reinforce to increase the rank of a guild, gain 10 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" />,',
     advantage: '+1 Wild Advantage if the guild in your current kingdom is rank 2 or higher',
     expansion: 'alliances'
   },
   {
     id: 'wand-of-celerity',
     name: "Wand of Celerity",
-    benefit: 'When acquired: 4 <charge/>. Spend any number of <charge/> to place your hero that many spaces away. When you Battle a MELEE foe, gain 1 <charge/>.',
+    benefit: 'When acquired: 4 <img src="icons/charge.png" title="charge" alt="charge" width="18" height="18" />. Spend any number of <img src="icons/charge.png" title="charge" alt="charge" width="18" height="18" /> to place your hero that many spaces away. When you Battle a MELEE foe, gain 1 <img src="icons/charge.png" title="charge" alt="charge" width="18" height="18" />.',
     advantage: '+1 MELEE Advantage',
     expansion: 'covenant'
   },
   {
     id: 'wand-of-conflagration',
     name: "Wand of Conflagration",
-    benefit: 'When acquired: 3 <charge/>. Spend any number of <charge/> to remove a foe of that level in your space. At the end of each month gain 1 <charge/>.',
+    benefit: 'When acquired: 3 <img src="icons/charge.png" title="charge" alt="charge" width="18" height="18" />. Spend any number of <img src="icons/charge.png" title="charge" alt="charge" width="18" height="18" /> to remove a foe of that level in your space. At the end of each month gain 1 <img src="icons/charge.png" title="charge" alt="charge" width="18" height="18" />.',
     advantage: '+1 MAGIC Advantage',
     expansion: 'covenant'
   },
   {
     id: 'wand-of-pacification',
     name: "Wand of Pacification",
-    benefit: 'When acquired: 1 <charge/>. Spend 1 <charge/> to remove all skulls on or adjacent to your space. When you Battle a UNDEAD foe, gain 1 <charge/>.',
+    benefit: 'When acquired: 1 <img src="icons/charge.png" title="charge" alt="charge" width="18" height="18" />. Spend 1 <img src="icons/charge.png" title="charge" alt="charge" width="18" height="18" /> to remove all skulls on or adjacent to your space. When you Battle a UNDEAD foe, gain 1 <img src="icons/charge.png" title="charge" alt="charge" width="18" height="18" />.',
     advantage: '+1 UNDEAD Advantage',
     expansion: 'covenant'
   },
