@@ -258,6 +258,54 @@
         </div>
       </section>
 
+      <section id="advantages" class="hidden">
+        <h2>Advantages</h2>
+        <div id="advantages-wrapper">
+          <div>
+            <span class="advantage">BEAST: </span>
+            <span id="beast-counter" class="counter"></span>
+            <button onclick="updateAdvantage('beast', -1)">-1</button>
+            <button onclick="updateAdvantage('beast', 1)">+1</button>
+          </div>
+          <div>
+            <span class="advantage">HUMANOID: </span>
+            <span id="humanoid-counter" class="counter"></span>
+            <button onclick="updateAdvantage('humanoid', -1)">-1</button>
+            <button onclick="updateAdvantage('humanoid', 1)">+1</button>
+          </div>
+          <div>
+            <span class="advantage">MAGIC: </span>
+            <span id="magic-counter" class="counter"></span>
+            <button onclick="updateAdvantage('magic', -1)">-1</button>
+            <button onclick="updateAdvantage('magic', 1)">+1</button>
+          </div>
+          <div>
+            <span class="advantage">MELEE: </span>
+            <span id="melee-counter" class="counter"></span>
+            <button onclick="updateAdvantage('melee', -1)">-1</button>
+            <button onclick="updateAdvantage('melee', 1)">+1</button>
+          </div>
+          <div>
+            <span class="advantage">STEALTH: </span>
+            <span id="stealth-counter" class="counter"></span>
+            <button onclick="updateAdvantage('stealth', -1)">-1</button>
+            <button onclick="updateAdvantage('stealth', 1)">+1</button>
+          </div>
+          <div>
+            <span class="advantage">UNDEAD: </span>
+            <span id="undead-counter" class="counter"></span>
+            <button onclick="updateAdvantage('undead', -1)">-1</button>
+            <button onclick="updateAdvantage('undead', 1)">+1</button>
+          </div>
+          <div>
+            <span class="advantage">Wild: </span>
+            <span id="wild-counter" class="counter"></span>
+            <button onclick="updateAdvantage('wild', -1)">-1</button>
+            <button onclick="updateAdvantage('wild', 1)">+1</button>
+          </div>
+        </div>
+      </section>
+
       <section id="enemies" class="hidden">
         <div id="enemy-level-2"></div>
         <div id="enemy-level-3"></div>

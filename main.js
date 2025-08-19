@@ -12,6 +12,7 @@ const GEAR_STORAGE = "gear";
 const POTIONS_STORAGE = "potions";
 const REGION_STORAGE = "region";
 const TREASURE_STORAGE = "treasures";
+const ADVANTAGES_STORAGE = "advantages";
 const COUNTERS_STORAGE = "counters";
 const ALLIANCES_STORAGE = "alliances";
 const STARTED_STORAGE = "started";
@@ -79,6 +80,7 @@ window.startGame=() => {
     initializeCardHolders();
 
     initializeCounters();
+    initializeAdvantages();
 
     pageUpdate();
 }
@@ -98,6 +100,20 @@ function initializeCounters() {
     }
 
     updateStoredData(COUNTERS_STORAGE, counters);
+}
+
+function initializeAdvantages() {
+    const advantages = {
+        beast: 0,
+        humanoid: 0,
+        magic: 0,
+        melee: 0,
+        stealth: 0,
+        undead: 0,
+        wild: 0,
+    }
+
+    updateStoredData(ADVANTAGES_STORAGE, advantages);
 }
 
 function initializeCardHolders() {
@@ -327,6 +343,7 @@ window.pageUpdate=() => {
     const enemies = getStoredData(ENEMIES_STORAGE);
     const region = getStoredData(REGION_STORAGE);
     const counters = getStoredData(COUNTERS_STORAGE);
+    const advantages = getStoredData(ADVANTAGES_STORAGE);
     const alliances = getStoredData(ALLIANCES_STORAGE);
     const started = localStorage.getItem(STARTED_STORAGE) === 'true';
 
@@ -360,6 +377,7 @@ window.pageUpdate=() => {
     if (started) {
         revealSections(alliances);
         setCounters(counters);
+        setAdvantages(advantages);
         showCharacterDetails(character);
         showEnemyDetails(enemies);
         showRegionDetails(region);
@@ -373,6 +391,7 @@ window.pageUpdate=() => {
 function revealSections(alliances) {
     [
         "counters",
+        "advantages",
         "enemies",
         "actions",
         "virtues",
@@ -390,6 +409,7 @@ function hideSections() {
     [
         "alliances-guild-setup",
         "counters",
+        "advantages",
         "actions",
         "enemies",
         "virtues",
@@ -403,6 +423,16 @@ function hideSections() {
 function setCounters(counters) {
     document.getElementById("warrior-counter").innerHTML = counters.warriors;
     document.getElementById("spirit-counter").innerHTML = counters.spirit;
+}
+
+function setAdvantages(advantages) {
+    document.getElementById("beast-counter").innerHTML = advantages.beast;
+    document.getElementById("humanoid-counter").innerHTML = advantages.humanoid;
+    document.getElementById("magic-counter").innerHTML = advantages.magic;
+    document.getElementById("melee-counter").innerHTML = advantages.melee;
+    document.getElementById("stealth-counter").innerHTML = advantages.stealth;
+    document.getElementById("undead-counter").innerHTML = advantages.undead;
+    document.getElementById("wild-counter").innerHTML = advantages.wild;
 }
 
 function showCharacterDetails(character) {
@@ -672,6 +702,14 @@ window.updateCount=(counter, amount) => {
     counters[counter] += amount;
 
     updateStoredData(COUNTERS_STORAGE, counters);
+}
+
+window.updateAdvantage=(advantage, amount) => {
+    let advantages = getStoredData(ADVANTAGES_STORAGE);
+
+    advantages[advantage] += amount;
+
+    updateStoredData(ADVANTAGES_STORAGE, advantages);
 }
 
 window.toggleVirtue=(value) => {
