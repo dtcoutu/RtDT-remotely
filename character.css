@@ -440,6 +440,10 @@
   margin: 8px 0px;
 }
 
+.highlight {
+  border: 2px solid red;
+}
+
 dl {
   display: grid;
   grid-template-columns: max-content auto;

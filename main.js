@@ -16,6 +16,9 @@ const ADVANTAGES_STORAGE = "advantages";
 const COUNTERS_STORAGE = "counters";
 const ALLIANCES_STORAGE = "alliances";
 const STARTED_STORAGE = "started";
+const HIGHLIGHT_ADVANTAGES_STORAGE = "highlight_advantages"
+const HIGHLIGHT_END_OF_TURNS_STORAGE = "highlight_end_of_turns"
+const HIGHLIGHT_END_OF_MONTHS_STORAGE = "highlight_end_of_months"
 
 const NORTH = {
     id: "North",
@@ -81,6 +84,7 @@ window.startGame=() => {
 
     initializeCounters();
     initializeAdvantages();
+    initializeHighlights();
 
     pageUpdate();
 }
@@ -116,47 +120,62 @@ function initializeAdvantages() {
     updateStoredData(ADVANTAGES_STORAGE, advantages);
 }
 
+function initializeHighlights() {
+  const initial_highlight_advantages = {
+    BEAST: [],
+    HUMANOID: [],
+    MAGIC: [],
+    MELEE: [],
+    STEALTH: [],
+    UNDEAD: [],
+    Wild: []
+  }
+  localStorage.setItem(HIGHLIGHT_ADVANTAGES_STORAGE, JSON.stringify(initial_highlight_advantages));
+  localStorage.setItem(HIGHLIGHT_END_OF_TURNS_STORAGE, JSON.stringify([]));
+  localStorage.setItem(HIGHLIGHT_END_OF_MONTHS_STORAGE, JSON.stringify([]));
+}
+
 function initializeCardHolders() {
-    localStorage.setItem(COMPANIONS_STORAGE, JSON.stringify([]));
-    localStorage.setItem(GEAR_STORAGE, JSON.stringify([]));
-    localStorage.setItem(POTIONS_STORAGE, JSON.stringify([]));
-    localStorage.setItem(TREASURE_STORAGE, JSON.stringify([]));
+  localStorage.setItem(COMPANIONS_STORAGE, JSON.stringify([]));
+  localStorage.setItem(GEAR_STORAGE, JSON.stringify([]));
+  localStorage.setItem(POTIONS_STORAGE, JSON.stringify([]));
+  localStorage.setItem(TREASURE_STORAGE, JSON.stringify([]));
 }
 
 window.alliancesInclusion=(included) => {
-    if (included === '---') {
-        return;
+  if (included === '---') {
+      return;
+  }
+
+  const alliancesIncluded = included === 'true';
+
+  const alliances = {
+    included: alliancesIncluded,
+    guilds: {
+      arcane_scouts: {
+        region: '',
+        side: 'a',
+        level: 1
+      },
+      druids_circle: {
+        region: '',
+        side: 'a',
+        level: 1
+      },
+      paladins_order: {
+        region: '',
+        side: 'a',
+        level: 1
+      },
+      thieves_guild: {
+        region: '',
+        side: 'a',
+        level: 1
+      }
     }
+  }
 
-    const alliancesIncluded = included === 'true';
-
-    const alliances = {
-        included: alliancesIncluded,
-        guilds: {
-            arcane_scouts: {
-                region: '',
-                side: 'a',
-                level: 1
-            },
-            druids_circle: {
-                region: '',
-                side: 'a',
-                level: 1
-            },
-            paladins_order: {
-                region: '',
-                side: 'a',
-                level: 1
-            },
-            thieves_guild: {
-                region: '',
-                side: 'a',
-                level: 1
-            }
-        }
-    }
-
-    updateStoredData(ALLIANCES_STORAGE, alliances);
+  updateStoredData(ALLIANCES_STORAGE, alliances);
 }
 
 window.allianceRegionSet=(selectorId, value) => {
@@ -241,6 +260,8 @@ function addCard(elementIdPartial, dataSet, dataStorage, allowMultiple = false) 
     } else {
         itemList.push(item);
     }
+
+    handleHighlights(item);
 
     updateStoredData(dataStorage, itemList);
     selector.classList.add("hidden");
@@ -388,21 +409,48 @@ window.pageUpdate=() => {
     }
 }
 
-function revealSections(alliances) {
-    [
-        "counters",
-        "advantages",
-        "enemies",
-        "actions",
-        "virtues",
-        "cards"
-    ].forEach((id) => {
-        document.getElementById(id).classList.remove("hidden");
-    });
+function handleHighlights(item) {
+  if (item.system) {
+    if (item.system.advantage) {
+      let highlightAdvantages = getStoredData(HIGHLIGHT_ADVANTAGES_STORAGE);
 
-    if (alliances.included) {
-        document.getElementById("guilds").classList.remove("hidden");
+      highlightAdvantages[item.system.advantage].push({
+        type: item.type,
+        id: item.id
+      });
+
+      updateStoredData(HIGHLIGHT_ADVANTAGES_STORAGE, highlightAdvantages);
+    // for advantage - add details to advantage highlight storage
+      // item.id, item.type, item.system.advantage.type
+    // with value - update counter for advantage
     }
+
+    if (item.system.end_of_turn) {
+      // for end of turn - add details to end of turn highlight storage
+      // item.id, item.type
+    }
+
+    if (item.system.end_of_month) {
+      // for end of month - add details to end of month highlight storage
+    }
+  }
+}
+
+function revealSections(alliances) {
+  [
+    "counters",
+    "advantages",
+    "enemies",
+    "actions",
+    "virtues",
+    "cards"
+  ].forEach((id) => {
+    document.getElementById(id).classList.remove("hidden");
+  });
+
+  if (alliances.included) {
+    document.getElementById("guilds").classList.remove("hidden");
+  }
 }
 
 function hideSections() {
@@ -531,6 +579,7 @@ function showCardsHelper(elementIdPartial, dataStorage) {
 
     storedData.map((card) => {
         const cardHeader = document.createElement("dt");
+        cardHeader.id = card.type + '-' + card.id;
 
         const button = document.createElement("button");
         button.addEventListener("click", removeCard, false);
@@ -718,6 +767,26 @@ window.toggleVirtue=(value) => {
     character.virtues.find(virtue => virtue.id === value).active = !character.virtues.find(virtue => virtue.id === value).active;
 
     updateStoredData(CHARACTER_STORAGE, character);
+}
+
+window.highlightAdvantage=(classList, type) => {
+  const highlightAdvantages = getStoredData(HIGHLIGHT_ADVANTAGES_STORAGE);
+
+  if (classList.contains('highlight')) {
+    classList.remove('highlight');
+
+    highlightAdvantages[type].forEach((item) => {
+      const element = document.getElementById(item.type + '-' + item.id);
+      element.classList.remove("highlight");
+    });
+  } else {
+    classList.add('highlight');
+
+    highlightAdvantages[type].forEach((item) => {
+      const element = document.getElementById(item.type + '-' + item.id);
+      element.classList.add("highlight");
+    });
+  }
 }
 
 function getStoredData(key) {
