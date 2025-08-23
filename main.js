@@ -108,13 +108,13 @@ function initializeCounters() {
 
 function initializeAdvantages() {
     const advantages = {
-        beast: 0,
-        humanoid: 0,
-        magic: 0,
-        melee: 0,
-        stealth: 0,
-        undead: 0,
-        wild: 0,
+        BEAST: 0,
+        HUMANOID: 0,
+        MAGIC: 0,
+        MELEE: 0,
+        STEALTH: 0,
+        UNDEAD: 0,
+        Wild: 0,
     }
 
     updateStoredData(ADVANTAGES_STORAGE, advantages);
@@ -261,7 +261,7 @@ function addCard(elementIdPartial, dataSet, dataStorage, allowMultiple = false) 
         itemList.push(item);
     }
 
-    handleHighlights(item);
+    addAdvantages(item);
 
     updateStoredData(dataStorage, itemList);
     selector.classList.add("hidden");
@@ -299,15 +299,41 @@ function removeCard(buttonEvent) {
 
     if (index === -1) return;
 
+    const card = cardList[index];
+
     if (cardList[index].count > 1) {
         cardList[index].count--;
     } else {
         cardList.splice(index, 1);
     }
 
+    removeAdvantages(card);
     updateStoredData(dataStorage, cardList);
 
     enableElement("select-" + cardType);
+}
+
+function removeAdvantages(card) {
+  if (card.system) {
+    if (card.system.advantage) {
+      let highlightAdvantages = getStoredData(HIGHLIGHT_ADVANTAGES_STORAGE);
+
+      let advantageItems = highlightAdvantages[card.system.advantage];
+      const index = advantageItems.findIndex((item) => item.id === card.id);
+
+      advantageItems.splice(index, 1);
+
+      updateStoredData(HIGHLIGHT_ADVANTAGES_STORAGE, highlightAdvantages);
+
+      if (card.system.amount) {
+        let advantages = getStoredData(ADVANTAGES_STORAGE);
+
+        advantages[card.system.advantage] -= card.system.amount;
+
+        updateStoredData(ADVANTAGES_STORAGE, advantages);
+      }
+    }
+  }
 }
 
 export function characterSelector() {
@@ -409,7 +435,7 @@ window.pageUpdate=() => {
     }
 }
 
-function handleHighlights(item) {
+function addAdvantages(item) {
   if (item.system) {
     if (item.system.advantage) {
       let highlightAdvantages = getStoredData(HIGHLIGHT_ADVANTAGES_STORAGE);
@@ -420,9 +446,13 @@ function handleHighlights(item) {
       });
 
       updateStoredData(HIGHLIGHT_ADVANTAGES_STORAGE, highlightAdvantages);
-    // for advantage - add details to advantage highlight storage
-      // item.id, item.type, item.system.advantage.type
-    // with value - update counter for advantage
+
+      if (item.system.amount) {
+        let advantages = getStoredData(ADVANTAGES_STORAGE);
+        advantages[item.system.advantage] += item.system.amount
+
+        updateStoredData(ADVANTAGES_STORAGE, advantages);
+      }
     }
 
     if (item.system.end_of_turn) {
@@ -474,13 +504,13 @@ function setCounters(counters) {
 }
 
 function setAdvantages(advantages) {
-    document.getElementById("beast-counter").innerHTML = advantages.beast;
-    document.getElementById("humanoid-counter").innerHTML = advantages.humanoid;
-    document.getElementById("magic-counter").innerHTML = advantages.magic;
-    document.getElementById("melee-counter").innerHTML = advantages.melee;
-    document.getElementById("stealth-counter").innerHTML = advantages.stealth;
-    document.getElementById("undead-counter").innerHTML = advantages.undead;
-    document.getElementById("wild-counter").innerHTML = advantages.wild;
+    document.getElementById("beast-counter").innerHTML = advantages.BEAST;
+    document.getElementById("humanoid-counter").innerHTML = advantages.HUMANOID;
+    document.getElementById("magic-counter").innerHTML = advantages.MAGIC;
+    document.getElementById("melee-counter").innerHTML = advantages.MELEE;
+    document.getElementById("stealth-counter").innerHTML = advantages.STEALTH;
+    document.getElementById("undead-counter").innerHTML = advantages.UNDEAD;
+    document.getElementById("wild-counter").innerHTML = advantages.Wild;
 }
 
 function showCharacterDetails(character) {
