@@ -333,7 +333,33 @@ function removeAdvantages(card) {
         updateStoredData(ADVANTAGES_STORAGE, advantages);
       }
     }
+
+    if (card.system.end_of_turn) {
+      let endOfTurns = getStoredData(HIGHLIGHT_END_OF_TURNS_STORAGE);
+
+      const index = endOfTurns.findIndex((item) => item.id === card.id);
+      endOfTurns.splice(index, 1);
+
+      updateStoredData(HIGHLIGHT_END_OF_TURNS_STORAGE, endOfTurns);
+    }
+
+    if (card.system.end_of_month) {
+      let endOfMonths = getStoredData(HIGHLIGHT_END_OF_MONTHS_STORAGE);
+
+      const index = endOfMonths.findIndex((item) => item.id === card.id);
+      endOfMonths.splice(index, 1);
+
+      updateStoredData(HIGHLIGHT_END_OF_MONTHS_STORAGE, endOfMonths);
+    }
   }
+}
+
+const updateStorage = (storageKey, func) => {
+  let storageData = getStoredData(storageKey);
+
+  func(storageData);
+
+  updateStoredData(storageKey, storageData);
 }
 
 export function characterSelector() {
@@ -456,12 +482,23 @@ function addAdvantages(item) {
     }
 
     if (item.system.end_of_turn) {
-      // for end of turn - add details to end of turn highlight storage
-      // item.id, item.type
+      let endOfTurns = getStoredData(HIGHLIGHT_END_OF_TURNS_STORAGE);
+      endOfTurns.push({
+        type: item.type,
+        id: item.id
+      });
+
+      updateStoredData(HIGHLIGHT_END_OF_TURNS_STORAGE, endOfTurns);
     }
 
     if (item.system.end_of_month) {
-      // for end of month - add details to end of month highlight storage
+      let endOfMonths = getStoredData(HIGHLIGHT_END_OF_MONTHS_STORAGE);
+      endOfMonths.push({
+        type: item.type,
+        id: item.id
+      });
+
+      updateStoredData(HIGHLIGHT_END_OF_MONTHS_STORAGE, endOfMonths);
     }
   }
 }
@@ -815,6 +852,46 @@ window.highlightAdvantage=(classList, type) => {
     highlightAdvantages[type].forEach((item) => {
       const element = document.getElementById(item.type + '-' + item.id);
       element.classList.add("highlight");
+    });
+  }
+}
+
+window.highlightEndOfTurn=(classList) => {
+  const hightlightEndOfTurns = getStoredData(HIGHLIGHT_END_OF_TURNS_STORAGE);
+
+  if (classList.contains('highlight')) {
+    classList.remove('highlight');
+
+    hightlightEndOfTurns.forEach((item) => {
+      const element = document.getElementById(item.type + '-' + item.id);
+      element.classList.remove('highlight');
+    });
+  } else {
+    classList.add('highlight');
+
+    hightlightEndOfTurns.forEach((item) => {
+      const element = document.getElementById(item.type + '-' + item.id);
+      element.classList.add("highlight");
+    });
+  }
+}
+
+window.highlightEndOfMonth=(classList) => {
+  const hightlightEndOfMonths = getStoredData(HIGHLIGHT_END_OF_MONTHS_STORAGE);
+
+  if (classList.contains('highlight')) {
+    classList.remove('highlight');
+
+    hightlightEndOfMonths.forEach((item) => {
+      const element = document.getElementById(item.type + '-' + item.id);
+      element.classList.remove('highlight');
+    });
+  } else {
+    classList.add('highlight');
+
+    hightlightEndOfMonths.forEach((item) => {
+      const element = document.getElementById(item.type + '-' + item.id);
+      element.classList.add('highlight');
     });
   }
 }
