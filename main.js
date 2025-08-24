@@ -316,40 +316,32 @@ function removeCard(buttonEvent) {
 function removeAdvantages(card) {
   if (card.system) {
     if (card.system.advantage) {
-      let highlightAdvantages = getStoredData(HIGHLIGHT_ADVANTAGES_STORAGE);
+      updateStorage(HIGHLIGHT_ADVANTAGES_STORAGE, (data) => {
+        let advantageItems = data[card.system.advantage];
+        const index = advantageItems.findIndex((item) => item.id === card.id);
 
-      let advantageItems = highlightAdvantages[card.system.advantage];
-      const index = advantageItems.findIndex((item) => item.id === card.id);
-
-      advantageItems.splice(index, 1);
-
-      updateStoredData(HIGHLIGHT_ADVANTAGES_STORAGE, highlightAdvantages);
+        advantageItems.splice(index, 1);
+      });
 
       if (card.system.amount) {
-        let advantages = getStoredData(ADVANTAGES_STORAGE);
-
-        advantages[card.system.advantage] -= card.system.amount;
-
-        updateStoredData(ADVANTAGES_STORAGE, advantages);
+        updateStorage(ADVANTAGES_STORAGE, (data) => {
+          data[card.system.advantage] -= card.system.amount;
+        })
       }
     }
 
     if (card.system.end_of_turn) {
-      let endOfTurns = getStoredData(HIGHLIGHT_END_OF_TURNS_STORAGE);
-
-      const index = endOfTurns.findIndex((item) => item.id === card.id);
-      endOfTurns.splice(index, 1);
-
-      updateStoredData(HIGHLIGHT_END_OF_TURNS_STORAGE, endOfTurns);
+      updateStorage(HIGHLIGHT_END_OF_TURNS_STORAGE, (data) => {
+        const index = data.findIndex((item) => item.id === card.id);
+        data.splice(index, 1);
+      });
     }
 
     if (card.system.end_of_month) {
-      let endOfMonths = getStoredData(HIGHLIGHT_END_OF_MONTHS_STORAGE);
-
-      const index = endOfMonths.findIndex((item) => item.id === card.id);
-      endOfMonths.splice(index, 1);
-
-      updateStoredData(HIGHLIGHT_END_OF_MONTHS_STORAGE, endOfMonths);
+      updateStorage(HIGHLIGHT_END_OF_MONTHS_STORAGE, (data) => {
+        const index = data.findIndex((item) => item.id === card.id);
+        data.splice(index, 1);
+      });
     }
   }
 }
@@ -398,17 +390,15 @@ window.selectedCharacter=(value) => {
 window.selectedEnemy=(id, value) => {
     const level = id.slice(-1);
 
-    let enemies = getStoredData(ENEMIES_STORAGE);
+    updateStorage(ENEMIES_STORAGE, (data) => {
+      if (data === null) {
+        data = {};
+      }
 
-    if (enemies === null) {
-        enemies = {};
-    }
+      const foundEnemy = ENEMIES.find(element => element.id === value );
 
-    const foundEnemy = ENEMIES.find(element => element.id === value );
-
-    enemies[level] = foundEnemy;
-
-    updateStoredData(ENEMIES_STORAGE, enemies);
+      data[level] = foundEnemy;
+    });
 }
 
 window.pageUpdate=() => {
@@ -464,41 +454,36 @@ window.pageUpdate=() => {
 function addAdvantages(item) {
   if (item.system) {
     if (item.system.advantage) {
-      let highlightAdvantages = getStoredData(HIGHLIGHT_ADVANTAGES_STORAGE);
-
-      highlightAdvantages[item.system.advantage].push({
-        type: item.type,
-        id: item.id
+      updateStorage(HIGHLIGHT_ADVANTAGES_STORAGE, (data) => {
+        data[item.system.advantage].push({
+          type: item.type,
+          id: item.id
+        });
       });
 
-      updateStoredData(HIGHLIGHT_ADVANTAGES_STORAGE, highlightAdvantages);
-
       if (item.system.amount) {
-        let advantages = getStoredData(ADVANTAGES_STORAGE);
-        advantages[item.system.advantage] += item.system.amount
-
-        updateStoredData(ADVANTAGES_STORAGE, advantages);
+        updateStorage(ADVANTAGES_STORAGE, (data) => {
+          data[item.system.advantage] += item.system.amount
+        });
       }
     }
 
     if (item.system.end_of_turn) {
-      let endOfTurns = getStoredData(HIGHLIGHT_END_OF_TURNS_STORAGE);
-      endOfTurns.push({
-        type: item.type,
-        id: item.id
+      updateStorage(HIGHLIGHT_END_OF_TURNS_STORAGE, (data) => {
+        data.push({
+          type: item.type,
+          id: item.id
+        });
       });
-
-      updateStoredData(HIGHLIGHT_END_OF_TURNS_STORAGE, endOfTurns);
     }
 
     if (item.system.end_of_month) {
-      let endOfMonths = getStoredData(HIGHLIGHT_END_OF_MONTHS_STORAGE);
-      endOfMonths.push({
-        type: item.type,
-        id: item.id
+      updateStorage(HIGHLIGHT_END_OF_MONTHS_STORAGE, (data) => {
+        data.push({
+          type: item.type,
+          id: item.id
+        });
       });
-
-      updateStoredData(HIGHLIGHT_END_OF_MONTHS_STORAGE, endOfMonths);
     }
   }
 }
