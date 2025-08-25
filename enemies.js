@@ -1,10 +1,10 @@
 export const TRAITS = {
-  beast: 'foes make you lose extra warriors',
-  humanoid: 'foes add skulls to buildings',
-  magic: 'foes manipulate the tower',
-  melee: 'foes make you lose gear',
-  stealth: 'foes make you lose potions',
-  undead: 'foes make you lose spirit',
+  BEAST: 'foes make you lose extra warriors',
+  HUMANOID: 'foes add skulls to buildings',
+  MAGIC: 'foes manipulate the tower',
+  MELEE: 'foes make you lose gear',
+  STEALTH: 'foes make you lose potions',
+  UNDEAD: 'foes make you lose spirit',
 };
 
 export const ENEMIES = [
@@ -12,9 +12,10 @@ export const ENEMIES = [
     id: 'brigands',
     level: "2",
     name: 'Brigands',
+    type: 'enemy',
     traits: [
-      'stealth',
-      'humanoid'
+      'STEALTH',
+      'HUMANOID'
     ],
     strike_event: 'Brigands make you lose items.'
   },
@@ -22,9 +23,10 @@ export const ENEMIES = [
     id: 'oreks',
     level: "2",
     name: 'Oreks',
+    type: 'enemy',
     traits: [
-      'melee',
-      'undead'
+      'MELEE',
+      'UNDEAD'
     ],
     strike_event: 'Oreks add skulls to buildings in their kingdoms.'
   },
@@ -32,9 +34,10 @@ export const ENEMIES = [
     id: 'shadow_wolves',
     level: "2",
     name: 'Shadow Wolves',
+    type: 'enemy',
     traits: [
-      'stealth',
-      'beast'
+      'STEALTH',
+      'BEAST'
     ],
     strike_event: 'Shadow wolves move to your space and make you lose warriors.'
   },
@@ -42,9 +45,10 @@ export const ENEMIES = [
     id: 'spine_fiend',
     level: "2",
     name: 'Spine Fiend',
+    type: 'enemy',
     traits: [
-      'magic',
-      'beast'
+      'MAGIC',
+      'BEAST'
     ],
     strike_event: 'Spine fiends make you lose warriors.'
   },
@@ -52,9 +56,10 @@ export const ENEMIES = [
     id: 'clan_of_neuri',
     level: "3",
     name: 'Clan of Neuri',
+    type: 'enemy',
     traits: [
-      'magic',
-      'humanoid'
+      'MAGIC',
+      'HUMANOID'
     ],
     strike_event: 'Clan of Neuri make you lose spirit.'
   },
@@ -62,9 +67,10 @@ export const ENEMIES = [
     id: 'frost_troll',
     level: "3",
     name: 'Frost Troll',
+    type: 'enemy',
     traits: [
-      'melee',
-      'humanoid'
+      'MELEE',
+      'HUMANOID'
     ],
     strike_event: 'Frost trolls add skulls to nearby buildings.'
   },
@@ -72,9 +78,10 @@ export const ENEMIES = [
     id: 'lemure',
     level: "3",
     name: 'Lemure',
+    type: 'enemy',
     traits: [
-      'magic',
-      'undead'
+      'MAGIC',
+      'UNDEAD'
     ],
     strike_event: 'Lemures add skulls to citadels and sanctuaries.'
   },
@@ -82,9 +89,10 @@ export const ENEMIES = [
     id: 'widowmade_spider',
     level: "3",
     name: 'Widowmade Spider',
+    type: 'enemy',
     traits: [
-      'stealth',
-      'beast'
+      'STEALTH',
+      'BEAST'
     ],
     strike_event: 'Widowmade spiders chase one hero and drain their spirit.'
   },
@@ -92,9 +100,10 @@ export const ENEMIES = [
     id: 'dragon',
     level: "4",
     name: 'Dragon',
+    type: 'enemy',
     traits: [
-      'melee',
-      'beast'
+      'MELEE',
+      'BEAST'
     ],
     strike_event: 'Dragons make you lose treasures.'
   },
@@ -102,9 +111,10 @@ export const ENEMIES = [
     id: 'mormo',
     level: "4",
     name: 'Mormo',
+    type: 'enemy',
     traits: [
-      'stealth',
-      'undead'
+      'STEALTH',
+      'UNDEAD'
     ],
     strike_event: 'Mormos give you corruptions.'
   },
@@ -112,9 +122,10 @@ export const ENEMIES = [
     id: 'striga',
     level: "4",
     name: 'Striga',
+    type: 'enemy',
     traits: [
-      'magic',
-      'undead'
+      'MAGIC',
+      'UNDEAD'
     ],
     strike_event: 'Strigas make you lose virtues.'
   },
@@ -122,9 +133,10 @@ export const ENEMIES = [
     id: 'titan',
     level: "4",
     name: 'Titan',
+    type: 'enemy',
     traits: [
-      'melee',
-      'humanoid'
+      'MELEE',
+      'HUMANOID'
     ],
     strike_event: 'The titan destroy buildings.'
   },
@@ -132,9 +144,10 @@ export const ENEMIES = [
     id: 'ashstrider',
     level: "5",
     name: 'Ashstrider',
+    type: 'enemy',
     traits: [
-      'magic',
-      'beast',
+      'MAGIC',
+      'BEAST',
     ],
     when_battling: [
       'Ashstrider adds skulls to buildlings',
@@ -146,9 +159,10 @@ export const ENEMIES = [
     id: 'bane_of_omens',
     level: "5",
     name: 'Bane of Omens',
+    type: 'enemy',
     traits: [
-      'stealth',
-      'humanoid'
+      'STEALTH',
+      'HUMANOID'
     ],
     when_battling: [
       'The Bane of Omens gives you corruptions',
@@ -160,9 +174,10 @@ export const ENEMIES = [
     id: 'empress_of_shades',
     level: "5",
     name: 'Empress of Shades',
+    type: 'enemy',
     traits: [
-      'stealth',
-      'undead'
+      'STEALTH',
+      'UNDEAD'
     ],
     when_battling: [
       'The Empress targets heroes in certain terrain types',
@@ -174,9 +189,10 @@ export const ENEMIES = [
     id: 'gaze_eternal',
     level: "5",
     name: 'Gaze Eternal',
+    type: 'enemy',
     traits: [
-      'magic',
-      'humanoid'
+      'MAGIC',
+      'HUMANOID'
     ],
     when_battling: [
       'The Gaze Eternal makes you lose potions',
@@ -188,9 +204,10 @@ export const ENEMIES = [
     id: 'gravemaw',
     level: "5",
     name: 'Gravemaw',
+    type: 'enemy',
     traits: [
-      'melee',
-      'beast'
+      'MELEE',
+      'BEAST'
     ],
     when_battling: [
       'Gravemaw makes you lose a huge number of warriors',
@@ -202,8 +219,9 @@ export const ENEMIES = [
     id: 'isa_the_exile',
     level: "5",
     name: 'Isa the Exile',
+    type: 'enemy',
     traits: [
-      'humanoid'
+      'HUMANOID'
     ],
     when_battling: [
       'Isa makes you lose spirit',
@@ -215,9 +233,10 @@ export const ENEMIES = [
     id: 'lingering_rot',
     level: "5",
     name: 'Lingering Rot',
+    type: 'enemy',
     traits: [
-      'melee',
-      'undead'
+      'MELEE',
+      'UNDEAD'
     ],
     when_battling: [
       'The Lingering Rot gives you spore tokens',
@@ -229,9 +248,10 @@ export const ENEMIES = [
     id: 'utuk_ku_the_ice_herald',
     level: "5",
     name: 'Utuk-Ku the Ice Herald',
+    type: 'enemy',
     traits: [
-      'magic',
-      'undead'
+      'MAGIC',
+      'UNDEAD'
     ],
     when_battling: [
       'Utuk-Ku makes you lose spirit',

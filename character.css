@@ -441,7 +441,11 @@
 }
 
 .highlight {
-  border: 2px solid red;
+  border: 3px solid green;
+}
+
+.highlight-enemy {
+  border: 3px solid red;
 }
 
 dl {

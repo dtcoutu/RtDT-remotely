@@ -453,10 +453,9 @@ window.pageUpdate=() => {
     const characterSelector = document.getElementById("character-selector");
     characterSelector.value = character ? character.id : '';
 
-    document.getElementById("enemy-selector-level-2").value = enemies["2"]?.id || '';
-    document.getElementById("enemy-selector-level-3").value = enemies["3"]?.id || '';
-    document.getElementById("enemy-selector-level-4").value = enemies["4"]?.id || '';
-    document.getElementById("enemy-selector-level-5").value = enemies["5"]?.id || '';
+    for (let level = 2; level <= 5; level++) {
+      document.getElementById("enemy-selector-level-" + level).value = enemies[level]?.id || '';      
+    }
 
     const regionSelector = document.getElementById("guardian-selector");
     regionSelector.value = region ? region.id : '';
@@ -619,7 +618,7 @@ function showEnemyDetails(enemies) {
         traitDiv.id = "enemy-traits";      
         enemy.traits.forEach((trait) => {
             const traitSpan = document.createElement("span");
-            traitSpan.classList.add("enemy-trait");
+            traitSpan.classList.add("enemy-trait", "enemy-trait-" + trait);
             traitSpan.innerHTML = trait;
             traitDiv.appendChild(traitSpan);
         });
@@ -887,6 +886,10 @@ window.highlightAdvantage=(classList, type) => {
       const element = document.getElementById(item.type + '-' + item.id);
       element.classList.remove("highlight");
     });
+
+    document.querySelectorAll(".enemy-trait-" + type).forEach((element) => {
+      element.classList.remove("highlight-enemy");
+    })
   } else {
     classList.add('highlight');
 
@@ -894,6 +897,10 @@ window.highlightAdvantage=(classList, type) => {
       const element = document.getElementById(item.type + '-' + item.id);
       element.classList.add("highlight");
     });
+
+    document.querySelectorAll(".enemy-trait-" + type).forEach((element) => {
+      element.classList.add("highlight-enemy");
+    })
   }
 }
 
