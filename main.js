@@ -23,25 +23,41 @@ const HIGHLIGHT_END_OF_MONTHS_STORAGE = "highlight_end_of_months"
 const NORTH = {
     id: "North",
     name: "Champion of the North",
-    description: "+2 WILD Advantages in mountains",
+    type: "region",
+    description: "+2 Wild Advantages in mountains",
+    system: {
+      advantage: 'Wild'
+    }
 }
 
 const SOUTH = {
     id: "South",
     name: "Champion of the South",
-    description: "+2 WILD Advantages in desert",
+    type: "region",
+    description: "+2 Wild Advantages in desert",
+    system: {
+      advantage: 'Wild'
+    }
 }
 
 const EAST = {
     id: "East",
     name: "Champion of the East",
-    description: "+2 WILD Advantages in hills",
+    type: "region",
+    description: "+2 Wild Advantages in hills",
+    system: {
+      advantage: 'Wild'
+    }
 }
 
 const WEST = {
     id: "West",
     name: "Champion of the West",
-    description: "+2 WILD Advantages in forest",
+    type: "region",
+    description: "+2 Wild Advantages in forest",
+    system: {
+      advantage: 'Wild'
+    }
 }
 
 const REGIONS = [ NORTH, SOUTH, EAST, WEST]
@@ -89,6 +105,7 @@ window.startGame=() => {
     initializeHighlights();
 
     applyPermanentVirtues();
+    addAdvantages(region);
 
     pageUpdate();
 }
@@ -634,8 +651,27 @@ function showEnemyDetails(enemies) {
 }
 
 function showRegionDetails(region) {
-    document.getElementById("champion-virtue-name").innerHTML = region.name;
-    document.getElementById("champion-virtue-description").innerHTML = region.description;
+  // TODO: This is no good because it executes multiple times.
+  // Might need to build up the element or introduce a nested div...
+    const regionVirtueElement = document.getElementById("virtue-champion-virtue")
+
+    const divContainer = document.createElement("div");
+    divContainer.id = region.type + '-' + region.id;
+    divContainer.style = "height: 100%;";
+
+    const nameContainer = document.createElement("div");
+    nameContainer.id = "champion-virtue-name";
+    nameContainer.classList.add("name");
+    nameContainer.innerHTML = region.name;
+    divContainer.appendChild(nameContainer);
+
+    const descriptionContainer = document.createElement("div");
+    descriptionContainer.id = "champion-virtue-description"
+    descriptionContainer.classList.add("description");
+    descriptionContainer.innerHTML = region.description;
+    divContainer.appendChild(descriptionContainer);
+
+    regionVirtueElement.replaceChildren(divContainer);
 }
 
 window.showCards=() => {
