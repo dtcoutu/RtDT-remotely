@@ -56,6 +56,8 @@ const GUILDS = [
 window.resetGame=() => {
     localStorage.clear();
 
+    initializeEnemies();
+
     hideSections();
 
     document.getElementById("alliances-expansion").value = "";
@@ -86,6 +88,8 @@ window.startGame=() => {
     initializeAdvantages();
     initializeHighlights();
 
+    applyPermanentVirtues();
+
     pageUpdate();
 }
 
@@ -97,13 +101,24 @@ function guildRegionsValid() {
     return guildRegions.length === uniqueGuildRegions.length;
 }
 
+function initializeEnemies() {
+  const enemies = {
+    '2': '',
+    '3': '',
+    '4': '',
+    '5': ''
+  }
+
+  updateStoredData(ENEMIES_STORAGE, enemies);
+}
+
 function initializeCounters() {
     const counters = {
         warriors: 7,
         spirit: 1,
     }
 
-    updateStoredData(COUNTERS_STORAGE, counters);
+    localStorage.setItem(COUNTERS_STORAGE, JSON.stringify(counters));
 }
 
 function initializeAdvantages() {
@@ -117,7 +132,7 @@ function initializeAdvantages() {
         Wild: 0,
     }
 
-    updateStoredData(ADVANTAGES_STORAGE, advantages);
+    localStorage.setItem(ADVANTAGES_STORAGE, JSON.stringify(advantages));
 }
 
 function initializeHighlights() {
@@ -140,6 +155,14 @@ function initializeCardHolders() {
   localStorage.setItem(GEAR_STORAGE, JSON.stringify([]));
   localStorage.setItem(POTIONS_STORAGE, JSON.stringify([]));
   localStorage.setItem(TREASURE_STORAGE, JSON.stringify([]));
+}
+
+function applyPermanentVirtues() {
+  const virtues = getStoredData(CHARACTER_STORAGE).virtues;
+
+  virtues.filter((virtue) => virtue.permanent === true).forEach((virtue) => {
+    addAdvantages(virtue);
+  });
 }
 
 window.alliancesInclusion=(included) => {
@@ -413,10 +436,10 @@ window.pageUpdate=() => {
     const characterSelector = document.getElementById("character-selector");
     characterSelector.value = character ? character.id : '';
 
-    document.getElementById("enemy-selector-level-2").value = enemies ? enemies["2"]?.id : '';
-    document.getElementById("enemy-selector-level-3").value = enemies ? enemies["3"]?.id : '';
-    document.getElementById("enemy-selector-level-4").value = enemies ? enemies["4"]?.id : '';
-    document.getElementById("enemy-selector-level-5").value = enemies ? enemies["5"]?.id : '';
+    document.getElementById("enemy-selector-level-2").value = enemies["2"]?.id || '';
+    document.getElementById("enemy-selector-level-3").value = enemies["3"]?.id || '';
+    document.getElementById("enemy-selector-level-4").value = enemies["4"]?.id || '';
+    document.getElementById("enemy-selector-level-5").value = enemies["5"]?.id || '';
 
     const regionSelector = document.getElementById("guardian-selector");
     regionSelector.value = region ? region.id : '';
@@ -541,7 +564,7 @@ function showCharacterDetails(character) {
 
     // populate virtues
     character.virtues.map((virtue) => {
-        const virtueElement = document.getElementById(virtue.id);
+        const virtueElement = document.getElementById(virtue.type + '-' + virtue.id);
 
         document.getElementById(virtue.id + "-name").innerHTML = virtue.name
         document.getElementById(virtue.id + "-description").innerHTML = virtue.description
@@ -814,11 +837,17 @@ window.updateAdvantage=(advantage, amount) => {
 }
 
 window.toggleVirtue=(value) => {
-    const character = getStoredData(CHARACTER_STORAGE);
+  updateStorage(CHARACTER_STORAGE, (data) => {
+    let virtue = data.virtues.find((v) => v.id === value)
 
-    character.virtues.find(virtue => virtue.id === value).active = !character.virtues.find(virtue => virtue.id === value).active;
+    virtue.active = !virtue.active;
 
-    updateStoredData(CHARACTER_STORAGE, character);
+    if (virtue.active) {
+      addAdvantages(virtue);
+    } else {
+      removeAdvantages(virtue);
+    }
+  });
 }
 
 window.highlightAdvantage=(classList, type) => {
