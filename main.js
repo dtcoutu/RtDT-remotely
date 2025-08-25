@@ -841,12 +841,13 @@ window.selectGuildLevel=(guildLevelId) => {
 
 window.addAllianceCompanion=() => {
     const selector = document.getElementById("alliance-companion-selector");
-    let itemList = getStoredData(COMPANIONS_STORAGE);
-    const item = structuredClone(ALLIANCE_COMPANIONS.find(element => element.id === selector.value));
+    updateStorage(COMPANIONS_STORAGE, (data) => {
+      const item = structuredClone(ALLIANCE_COMPANIONS.find(element => element.id === selector.value));
 
-    itemList.push(item);
+      data.push(item);
 
-    updateStoredData(COMPANIONS_STORAGE, itemList);
+      addAdvantages(item);
+    });
 
     closeModal("alliance-companion-modal")
 }
@@ -857,19 +858,9 @@ window.closeModal=(modalId) => {
 }
 
 window.updateCount=(counter, amount) => {
-    let counters = getStoredData(COUNTERS_STORAGE);
-
-    counters[counter] += amount;
-
-    updateStoredData(COUNTERS_STORAGE, counters);
-}
-
-window.updateAdvantage=(advantage, amount) => {
-    let advantages = getStoredData(ADVANTAGES_STORAGE);
-
-    advantages[advantage] += amount;
-
-    updateStoredData(ADVANTAGES_STORAGE, advantages);
+    updateStorage(COUNTERS_STORAGE, (data) => {
+      data[counter] += amount;
+    });
 }
 
 window.toggleVirtue=(value) => {
