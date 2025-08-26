@@ -2,6 +2,7 @@ import { CHARACTERS } from "./characters.js";
 import { COMPANIONS, ALLIANCE_COMPANIONS } from "./companions.js";
 import { ENEMIES, TRAITS } from "./enemies.js";
 import { GEAR } from "./gear.js";
+import { ARCANE_SCOUTS, DRUIDS_CIRCLE, NEW_GUILDS, PALADINS_ORDER, THIEVES_GUILD } from "./guilds.js"
 import { POTIONS } from "./potions.js";
 import { TREASURES } from "./treasure.js";
 
@@ -189,42 +190,25 @@ window.alliancesInclusion=(included) => {
 
   const alliancesIncluded = included === 'true';
 
+  // TODO: I think I need to include the guild definitions from guilds.js instead of these
   const alliances = {
     included: alliancesIncluded,
-    guilds: {
-      arcane_scouts: {
-        region: '',
-        side: 'a',
-        level: 1
-      },
-      druids_circle: {
-        region: '',
-        side: 'a',
-        level: 1
-      },
-      paladins_order: {
-        region: '',
-        side: 'a',
-        level: 1
-      },
-      thieves_guild: {
-        region: '',
-        side: 'a',
-        level: 1
-      }
-    }
+    guilds: [
+      ARCANE_SCOUTS,
+      DRUIDS_CIRCLE,
+      PALADINS_ORDER,
+      THIEVES_GUILD
+    ]
   }
 
   updateStoredData(ALLIANCES_STORAGE, alliances);
 }
 
 window.allianceRegionSet=(selectorId, value) => {
-    const alliances = getStoredData(ALLIANCES_STORAGE);
-
-    const guildName = selectorId.split('-')[0];
-    alliances.guilds[guildName].region = value;
-
-    updateStoredData(ALLIANCES_STORAGE, alliances);
+  updateStorage(ALLIANCES_STORAGE, (data) => {
+    const guild = data.guilds.find((guild) => guild.id === selectorId.split('-')[0])
+    guild.region = value;
+  });
 }
 
 window.selectGear=() => {
@@ -475,9 +459,9 @@ window.pageUpdate=() => {
             alliances_guild_setup.classList.add('hidden');
         }
 
-        GUILDS.map(guild =>
-            document.getElementById(guild + '-location').value = alliances.guilds[guild].region
-        );
+        alliances.guilds.forEach((guild) => {
+          document.getElementById(guild.id + '-location').value = guild.region;
+        })
     }
 
     if (started) {
@@ -809,61 +793,65 @@ function showCardsHelper(elementIdPartial, dataStorage) {
 }
 
 function showAlliancesGuilds(alliances, region) {
-    GUILDS.map(guild => {
-        document.getElementById(guild + '-region').innerHTML = alliances.guilds[guild].region;
+  alliances.guilds.forEach((guild) => {
+    console.log(guild);
 
-        for (let i = 1; i <= 4; i++) {
-            document.getElementById(guild + '-rank-' + i).classList.remove("selected");
-        }
+    document.getElementById(guild.id + '-region').innerHTML = guild.region;
 
-        document.getElementById(guild + '-rank-' + alliances.guilds[guild].level).classList.add("selected");
-    });
+    for (let i = 1; i <= 4; i++) {
+      const guildRankElement = document.getElementById(guild.id + '-rank-' + i);
+      if (i === guild.level) {
+        guildRankElement.classList.add("selected");
+      } else {
+        guildRankElement.classList.remove("selected");
+      }
+    }
+  });
 
-    // Order guilds by region in relation to players region
-    const regions = ['North', 'East', 'South', 'West'];
+  // Order guilds by region in relation to players region
+  const regions = ['North', 'East', 'South', 'West'];
 
-    const index = regions.indexOf(region.id);
+  const index = regions.indexOf(region.id);
 
-    const sorted_regions = regions.splice(index);
-    sorted_regions.push(...regions);
+  const sorted_regions = regions.splice(index);
+  sorted_regions.push(...regions);
 
-    // update the guild container with a new class based on the sort order
-    sorted_regions.forEach((area, index) => {
-        const guild = Object.keys(alliances.guilds).find(guild => alliances.guilds[guild].region === area);
-        const guildElement = document.getElementById(guild + '-' + alliances.guilds[guild].side);
-        guildElement.removeAttribute('class');
-        guildElement.classList.add('region-' + (index+1));
-    });
+  // update the guild container with a new class based on the sort order
+  sorted_regions.forEach((area, index) => {
+      const guild = alliances.guilds.find(guild => guild.region === area);
+      const guildElement = document.getElementById(guild.id);
+      guildElement.removeAttribute('class');
+      guildElement.classList.add('region-' + (index+1));
+  });
 }
 
 window.selectGuildLevel=(guildLevelId) => {
-    const [guild, level] = guildLevelId.split("-rank-");
+  const [guildId, level] = guildLevelId.split("-rank-");
 
-    const alliances = getStoredData(ALLIANCES_STORAGE);
+  updateStorage(ALLIANCES_STORAGE, (data) => {
+    const guild = data.guilds.find((guild) => guild.id === guildId);
+    const guildlevelIncreased = guild.level < level;
 
-    const guildLevelIncreased = alliances.guilds[guild].level < level;
+    guild.level = level;
 
-    alliances.guilds[guild].level = level;
+    if (guildlevelIncreased) {
+      var modal = document.getElementById("alliance-companion-modal");
 
-    updateStoredData(ALLIANCES_STORAGE, alliances);
+      document.getElementById("alliance-companion-guild").innerHTML = guild.name;
 
-    if (guildLevelIncreased) {
-        var modal = document.getElementById("alliance-companion-modal");
+      const selector = document.getElementById("alliance-companion-selector");
+      selector.innerHTML = "";
+  
+      ALLIANCE_COMPANIONS.filter((companion) => companion.guild == guild.id).map((item) => {
+        let opt = document.createElement("option");
+        opt.value = item.id;
+        opt.innerHTML = item.name;
+        selector.append(opt);
+      });
 
-        document.getElementById("alliance-companion-guild").innerHTML = guild.replace("_", " ");
-
-        const selector = document.getElementById("alliance-companion-selector");
-        selector.innerHTML = "";
-    
-        ALLIANCE_COMPANIONS.filter((companion) => companion.guild == guild).map((item) => {
-            let opt = document.createElement("option");
-            opt.value = item.id;
-            opt.innerHTML = item.name;
-            selector.append(opt);
-        });
-
-        modal.style.display = "block";
+      modal.style.display = "block";
     }
+  });
 }
 
 window.addAllianceCompanion=() => {
