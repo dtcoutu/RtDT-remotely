@@ -204,6 +204,13 @@ window.allianceRegionSet=(selectorId, value) => {
   });
 }
 
+window.allianceGuildSideSet=(selectorId, value) => {
+  updateStorage(ALLIANCES_STORAGE, (data) => {
+    const guild = data.guilds.find((guild) => guild.id === selectorId.split('-')[0])
+    guild.side = value;
+  });
+}
+
 window.selectGear=() => {
     selectCard("gear", GEAR, GEAR_STORAGE);
 }
