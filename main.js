@@ -805,6 +805,8 @@ function showAlliancesGuilds(alliances, region) {
       } else {
         guildRankElement.classList.remove("selected");
       }
+
+      guildRankElement.innerHTML = guild[guild.side]['rank_' + i].text
     }
   });
 
@@ -832,7 +834,7 @@ window.selectGuildLevel=(guildLevelId) => {
     const guild = data.guilds.find((guild) => guild.id === guildId);
     const guildlevelIncreased = guild.level < level;
 
-    guild.level = level;
+    guild.level = Number(level);
 
     if (guildlevelIncreased) {
       var modal = document.getElementById("alliance-companion-modal");
