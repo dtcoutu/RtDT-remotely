@@ -298,7 +298,11 @@ function addCard(elementIdPartial, dataSet, dataStorage, allowMultiple = false) 
             matchedItem.count++
         }
     } else {
-        itemList.push(item);
+      if (item.system?.charge) {
+        item.currentCharges = item.system.charge;
+      }
+
+      itemList.push(item);
     }
 
     addAdvantages(item);
@@ -772,6 +776,30 @@ function showCardsHelper(elementIdPartial, dataStorage) {
                 advantageElement.innerHTML = card.advantage;
                 cardBody.appendChild(advantageElement);
             }
+
+            if (card.currentCharges) {
+              const chargeElement = document.createElement("div");
+
+              const amountElement = document.createElement("span");
+              amountElement.innerHTML = card.currentCharges;
+
+              const chargeImg = document.createElement("img");
+              chargeImg.src = "icons/charge.png";
+              chargeImg.height = "15";
+              chargeImg.width = "15";
+              chargeImg.style = "padding-left: 4px; padding-right: 4px;";
+
+              const subtractButton = document.createElement("button");
+              subtractButton.onclick = function() { updateCharge(card.type + "-" + card.id, -1); };
+              subtractButton.innerHTML = "-1";
+
+              const addButton = document.createElement("button");
+              addButton.onclick = function() { updateCharge(card.type + "-" + card.id, 1); };
+              addButton.innerHTML = "+1";
+
+              chargeElement.replaceChildren(amountElement, chargeImg, subtractButton, addButton);
+              cardBody.appendChild(chargeElement);
+            }
         } else {
             cardBody.innerHTML = card.description;
         }
@@ -854,6 +882,13 @@ window.addAllianceCompanion=() => {
 window.closeModal=(modalId) => {
     const modal = document.getElementById(modalId);
     modal.style.display = "none";
+}
+
+window.updateCharge=(item, amount) => {
+  updateStorage(TREASURE_STORAGE, (data) => {
+    let found = data.find((d) => d.type + "-" + d.id === item);
+    found.currentCharges += amount;
+  });
 }
 
 window.updateCount=(counter, amount) => {

@@ -639,6 +639,7 @@ export const TREASURES = [
     system: {
       advantage: 'MELEE',
       amount: 1,
+      charge: 4,
     }
   },
   {
@@ -651,6 +652,7 @@ export const TREASURES = [
     system: {
       advantage: 'MAGIC',
       amount: 1,
+      charge: 3,
       end_of_month: true
     }
   },
@@ -664,6 +666,7 @@ export const TREASURES = [
     system: {
       advantage: 'UNDEAD',
       amount: 1,
+      charge: 1,
     }
   },
   {
