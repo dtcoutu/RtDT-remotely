@@ -198,7 +198,7 @@ export const THIEVES_GUILD = {
   }
 };
 
-export const NEW_GUILDS = [
+export const GUILDS = [
   ARCANE_SCOUTS,
   DRUIDS_CIRCLE,
   PALADINS_ORDER,

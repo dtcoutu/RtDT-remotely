@@ -2,7 +2,7 @@ import { CHARACTERS } from "./characters.js";
 import { COMPANIONS, ALLIANCE_COMPANIONS } from "./companions.js";
 import { ENEMIES, TRAITS } from "./enemies.js";
 import { GEAR } from "./gear.js";
-import { ARCANE_SCOUTS, DRUIDS_CIRCLE, NEW_GUILDS, PALADINS_ORDER, THIEVES_GUILD } from "./guilds.js"
+import { ARCANE_SCOUTS, DRUIDS_CIRCLE, GUILDS, PALADINS_ORDER, THIEVES_GUILD } from "./guilds.js"
 import { POTIONS } from "./potions.js";
 import { TREASURES } from "./treasure.js";
 
@@ -63,13 +63,6 @@ const WEST = {
 
 const REGIONS = [ NORTH, SOUTH, EAST, WEST]
 
-const GUILDS = [
-    'arcane_scouts',
-    'druids_circle',
-    'paladins_order',
-    'thieves_guild'
-]
-
 window.resetGame=() => {
     localStorage.clear();
 
@@ -112,7 +105,7 @@ window.startGame=() => {
 }
 
 function guildRegionsValid() {
-    const guildRegions = GUILDS.map(guild => document.getElementById(guild + '-location').value);
+    const guildRegions = GUILDS.map(guild => document.getElementById(guild.id + '-location').value);
 
     const uniqueGuildRegions = guildRegions.filter((region, index, array) => array.indexOf(region) === index)
 
