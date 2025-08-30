@@ -351,46 +351,48 @@ function removeCard(buttonEvent) {
 }
 
 function removeSystemDetails(item) {
-  if (item.system) {
-    if (item.system.advantage) {
-      updateStorage(HIGHLIGHT_ADVANTAGES_STORAGE, (data) => {
-        let advantageItems = data[item.system.advantage];
-        const index = advantageItems.findIndex((i) => i.id === item.id);
+  if (item.system === undefined) {
+    return;
+  }
 
-        advantageItems.splice(index, 1);
-      });
+  if (item.system.advantage) {
+    updateStorage(HIGHLIGHT_ADVANTAGES_STORAGE, (data) => {
+      let advantageItems = data[item.system.advantage];
+      const index = advantageItems.findIndex((i) => i.id === item.id);
 
-      if (item.system.amount) {
-        updateStorage(ADVANTAGES_STORAGE, (data) => {
-          data[item.system.advantage] -= item.system.amount;
-        })
+      advantageItems.splice(index, 1);
+    });
+
+    if (item.system.amount) {
+      updateStorage(ADVANTAGES_STORAGE, (data) => {
+        data[item.system.advantage] -= item.system.amount;
+      })
+    }
+  }
+
+  if (item.system.end_of_turn) {
+    updateStorage(HIGHLIGHT_END_OF_TURNS_STORAGE, (data) => {
+      const index = data.findIndex((u) => u.id === item.id);
+      data.splice(index, 1);
+    });
+  }
+
+  if (item.system.end_of_month) {
+    updateStorage(HIGHLIGHT_END_OF_MONTHS_STORAGE, (data) => {
+      const index = data.findIndex((u) => u.id === item.id);
+      data.splice(index, 1);
+    });
+  }
+
+  if (item.system.spells) {
+    updateStorage(INCLUDE_SPELLS_STORAGE, (data) => {
+      const index = data.findIndex((u) => u === item.system.spells)
+      data.splice(index, 1);
+
+      if (data.size === 0) {
+        document.getElementById("spell-cards").classList.add("hidden");
       }
-    }
-
-    if (item.system.end_of_turn) {
-      updateStorage(HIGHLIGHT_END_OF_TURNS_STORAGE, (data) => {
-        const index = data.findIndex((u) => u.id === item.id);
-        data.splice(index, 1);
-      });
-    }
-
-    if (item.system.end_of_month) {
-      updateStorage(HIGHLIGHT_END_OF_MONTHS_STORAGE, (data) => {
-        const index = data.findIndex((u) => u.id === item.id);
-        data.splice(index, 1);
-      });
-    }
-
-    if (item.system.spells) {
-      updateStorage(INCLUDE_SPELLS_STORAGE, (data) => {
-        const index = data.findIndex((u) => u === item.system.spells)
-        data.splice(index, 1);
-
-        if (data.size === 0) {
-          document.getElementById("spell-cards").classList.add("hidden");
-        }
-      });
-    }
+    });
   }
 }
 
@@ -504,47 +506,45 @@ function addSystemDetails(item) {
     return;
   }
 
-  if (item.system) {
-    if (item.system.advantage) {
-      updateStorage(HIGHLIGHT_ADVANTAGES_STORAGE, (data) => {
-        data[item.system.advantage].push({
-          type: item.type,
-          id: item.id
-        });
+  if (item.system.advantage) {
+    updateStorage(HIGHLIGHT_ADVANTAGES_STORAGE, (data) => {
+      data[item.system.advantage].push({
+        type: item.type,
+        id: item.id
       });
+    });
 
-      if (item.system.amount) {
-        updateStorage(ADVANTAGES_STORAGE, (data) => {
-          data[item.system.advantage] += item.system.amount
-        });
-      }
-    }
-
-    if (item.system.end_of_turn) {
-      updateStorage(HIGHLIGHT_END_OF_TURNS_STORAGE, (data) => {
-        data.push({
-          type: item.type,
-          id: item.id
-        });
+    if (item.system.amount) {
+      updateStorage(ADVANTAGES_STORAGE, (data) => {
+        data[item.system.advantage] += item.system.amount
       });
     }
+  }
 
-    if (item.system.end_of_month) {
-      updateStorage(HIGHLIGHT_END_OF_MONTHS_STORAGE, (data) => {
-        data.push({
-          type: item.type,
-          id: item.id
-        });
+  if (item.system.end_of_turn) {
+    updateStorage(HIGHLIGHT_END_OF_TURNS_STORAGE, (data) => {
+      data.push({
+        type: item.type,
+        id: item.id
       });
-    }
+    });
+  }
 
-    if (item.system.spells) {
-      updateStorage(INCLUDE_SPELLS_STORAGE, (data) => {
-        data.push(item.system.spells);
-
-        document.getElementById("spell-cards").classList.remove("hidden");
+  if (item.system.end_of_month) {
+    updateStorage(HIGHLIGHT_END_OF_MONTHS_STORAGE, (data) => {
+      data.push({
+        type: item.type,
+        id: item.id
       });
-    }
+    });
+  }
+
+  if (item.system.spells) {
+    updateStorage(INCLUDE_SPELLS_STORAGE, (data) => {
+      data.push(item.system.spells);
+
+      document.getElementById("spell-cards").classList.remove("hidden");
+    });
   }
 }
 
