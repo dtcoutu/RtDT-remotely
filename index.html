@@ -367,6 +367,15 @@
       </div>
     </details>
 
+    <details id="spell-cards" class="hidden" open>
+      <summary>Spells</summary>
+      <button id="select-spell" value="select-spell" onclick="selectSpell()">Select Spell</button>
+      <select id="spell-selector" class="hidden"></select>
+      <button id="add-spell" value="add-spell" class="hidden" onclick="addSpell()">Add</button>
+      <dl id="spell-list">
+      </dl>
+    </details>
+
     <section id="guilds" class="hidden">
       <section id="arcane_scouts">
         <div class="guild-name">Arcane Scouts: Citadel || <span id="arcane_scouts-region"></span></div>

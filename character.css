@@ -395,6 +395,24 @@
   min-width: 500px;
 }
 
+#spell-list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  column-gap: 6px;
+  align-content: flex-start;
+  max-height: 150px;
+}
+
+#spell-list > dt {
+  max-width: 200px;
+}
+
+#spell-list > dd {
+  max-width: 200px;
+  min-height: 100px;
+}
+
 .companion-title {
   font-style: italic;
   font-weight: normal;

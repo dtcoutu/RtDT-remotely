@@ -4,22 +4,37 @@ import { ENEMIES, TRAITS } from "./enemies.js";
 import { GEAR } from "./gear.js";
 import { ARCANE_SCOUTS, DRUIDS_CIRCLE, GUILDS, PALADINS_ORDER, THIEVES_GUILD } from "./guilds.js"
 import { POTIONS } from "./potions.js";
+import { SPELLS } from "./spells.js";
 import { TREASURES } from "./treasure.js";
 
 const CHARACTER_STORAGE = "character";
-const COMPANIONS_STORAGE = "companions";
-const ENEMIES_STORAGE = "enemies";
-const GEAR_STORAGE = "gear";
-const POTIONS_STORAGE = "potions";
+const ENEMY_STORAGE = "enemy";
 const REGION_STORAGE = "region";
-const TREASURE_STORAGE = "treasures";
-const ADVANTAGES_STORAGE = "advantages";
 const COUNTERS_STORAGE = "counters";
+
 const ALLIANCES_STORAGE = "alliances";
+
+const INCLUDE_SPELLS_STORAGE = "include_spells";
 const STARTED_STORAGE = "started";
+
+const COMPANION_STORAGE = "companion";
+const GEAR_STORAGE = "gear";
+const POTION_STORAGE = "potion";
+const SPELL_STORAGE = "spell";
+const TREASURE_STORAGE = "treasure";
+
+const ADVANTAGES_STORAGE = "advantages";
 const HIGHLIGHT_ADVANTAGES_STORAGE = "highlight_advantages"
 const HIGHLIGHT_END_OF_TURNS_STORAGE = "highlight_end_of_turns"
 const HIGHLIGHT_END_OF_MONTHS_STORAGE = "highlight_end_of_months"
+
+const CARD_STORAGES =   [
+  COMPANION_STORAGE,
+  GEAR_STORAGE,
+  POTION_STORAGE,
+  SPELL_STORAGE,
+  TREASURE_STORAGE
+]
 
 const NORTH = {
     id: "North",
@@ -92,14 +107,14 @@ window.startGame=() => {
 
     localStorage.setItem(STARTED_STORAGE, 'true');
 
+    localStorage.setItem(INCLUDE_SPELLS_STORAGE, JSON.stringify([]));
     initializeCardHolders();
-
     initializeCounters();
     initializeAdvantages();
     initializeHighlights();
 
     applyPermanentVirtues();
-    addAdvantages(region);
+    addSystemDetails(region);
 
     pageUpdate();
 }
@@ -120,7 +135,7 @@ function initializeEnemies() {
     '5': ''
   }
 
-  updateStoredData(ENEMIES_STORAGE, enemies);
+  updateStoredData(ENEMY_STORAGE, enemies);
 }
 
 function initializeCounters() {
@@ -162,17 +177,14 @@ function initializeHighlights() {
 }
 
 function initializeCardHolders() {
-  localStorage.setItem(COMPANIONS_STORAGE, JSON.stringify([]));
-  localStorage.setItem(GEAR_STORAGE, JSON.stringify([]));
-  localStorage.setItem(POTIONS_STORAGE, JSON.stringify([]));
-  localStorage.setItem(TREASURE_STORAGE, JSON.stringify([]));
+  CARD_STORAGES.forEach(type => localStorage.setItem(type, JSON.stringify([])));
 }
 
 function applyPermanentVirtues() {
   const virtues = getStoredData(CHARACTER_STORAGE).virtues;
 
   virtues.filter((virtue) => virtue.permanent === true).forEach((virtue) => {
-    addAdvantages(virtue);
+    addSystemDetails(virtue);
   });
 }
 
@@ -216,11 +228,18 @@ window.selectGear=() => {
 }
 
 window.selectCompanion=() => {
-    selectCard("companion", COMPANIONS, COMPANIONS_STORAGE);
+    selectCard("companion", COMPANIONS, COMPANION_STORAGE);
 }
 
 window.selectPotion=() => {
-    selectCard("potion", POTIONS, POTIONS_STORAGE, true);
+    selectCard("potion", POTIONS, POTION_STORAGE, true);
+}
+
+window.selectSpell=() => {
+  const include_spell_types = getStoredData(INCLUDE_SPELLS_STORAGE);
+
+  const filteredSpells = SPELLS.filter(spell => include_spell_types.includes(spell.type));
+  selectCard("spell", filteredSpells, SPELL_STORAGE);
 }
 
 window.selectTreasure=() => {
@@ -254,11 +273,15 @@ window.addGear=() => {
 }
 
 window.addCompanion=() => {
-    addCard("companion", COMPANIONS, COMPANIONS_STORAGE);
+    addCard("companion", COMPANIONS, COMPANION_STORAGE);
 }
 
 window.addPotion=() => {
-    addCard("potion", POTIONS, POTIONS_STORAGE, true);
+    addCard("potion", POTIONS, POTION_STORAGE, true);
+}
+
+window.addSpell=() => {
+  addCard("spell", SPELLS, SPELL_STORAGE);
 }
 
 window.addTreasure=() => {
@@ -289,7 +312,7 @@ function addCard(elementIdPartial, dataSet, dataStorage, allowMultiple = false) 
       itemList.push(item);
     }
 
-    addAdvantages(item);
+    addSystemDetails(item);
 
     updateStoredData(dataStorage, itemList);
     selector.classList.add("hidden");
@@ -305,21 +328,7 @@ function removeCard(buttonEvent) {
     const cardId = buttonEvent.target.value;
     const cardType = buttonEvent.target.name;
 
-    let dataStorage = "";
-    switch (cardType) {
-        case "companion":
-            dataStorage = COMPANIONS_STORAGE;
-            break;
-        case "gear":
-            dataStorage = GEAR_STORAGE;
-            break;
-        case "potion":
-            dataStorage = POTIONS_STORAGE;
-            break;
-        case "treasure":
-            dataStorage = TREASURE_STORAGE;
-            break;
-    }
+    const dataStorage = CARD_STORAGES.find(type => type === cardType);
 
     let cardList = getStoredData(dataStorage);
 
@@ -335,40 +344,51 @@ function removeCard(buttonEvent) {
         cardList.splice(index, 1);
     }
 
-    removeAdvantages(card);
+    removeSystemDetails(card);
     updateStoredData(dataStorage, cardList);
 
     enableElement("select-" + cardType);
 }
 
-function removeAdvantages(card) {
-  if (card.system) {
-    if (card.system.advantage) {
+function removeSystemDetails(item) {
+  if (item.system) {
+    if (item.system.advantage) {
       updateStorage(HIGHLIGHT_ADVANTAGES_STORAGE, (data) => {
-        let advantageItems = data[card.system.advantage];
-        const index = advantageItems.findIndex((item) => item.id === card.id);
+        let advantageItems = data[item.system.advantage];
+        const index = advantageItems.findIndex((i) => i.id === item.id);
 
         advantageItems.splice(index, 1);
       });
 
-      if (card.system.amount) {
+      if (item.system.amount) {
         updateStorage(ADVANTAGES_STORAGE, (data) => {
-          data[card.system.advantage] -= card.system.amount;
+          data[item.system.advantage] -= item.system.amount;
         })
       }
     }
 
-    if (card.system.end_of_turn) {
+    if (item.system.end_of_turn) {
       updateStorage(HIGHLIGHT_END_OF_TURNS_STORAGE, (data) => {
-        const index = data.findIndex((item) => item.id === card.id);
+        const index = data.findIndex((u) => u.id === item.id);
         data.splice(index, 1);
       });
     }
 
-    if (card.system.end_of_month) {
+    if (item.system.end_of_month) {
       updateStorage(HIGHLIGHT_END_OF_MONTHS_STORAGE, (data) => {
-        const index = data.findIndex((item) => item.id === card.id);
+        const index = data.findIndex((u) => u.id === item.id);
         data.splice(index, 1);
+      });
+    }
+
+    if (item.system.spells) {
+      updateStorage(INCLUDE_SPELLS_STORAGE, (data) => {
+        const index = data.findIndex((u) => u === item.system.spells)
+        data.splice(index, 1);
+
+        if (data.size === 0) {
+          document.getElementById("spell-cards").classList.add("hidden");
+        }
       });
     }
   }
@@ -418,7 +438,7 @@ window.selectedCharacter=(value) => {
 window.selectedEnemy=(id, value) => {
     const level = id.slice(-1);
 
-    updateStorage(ENEMIES_STORAGE, (data) => {
+    updateStorage(ENEMY_STORAGE, (data) => {
       if (data === null) {
         data = {};
       }
@@ -431,12 +451,13 @@ window.selectedEnemy=(id, value) => {
 
 window.pageUpdate=() => {
     const character = getStoredData(CHARACTER_STORAGE);
-    const enemies = getStoredData(ENEMIES_STORAGE);
+    const enemies = getStoredData(ENEMY_STORAGE);
     const region = getStoredData(REGION_STORAGE);
     const counters = getStoredData(COUNTERS_STORAGE);
     const advantages = getStoredData(ADVANTAGES_STORAGE);
     const alliances = getStoredData(ALLIANCES_STORAGE);
     const started = localStorage.getItem(STARTED_STORAGE) === 'true';
+    const includeSpells = getStoredData(INCLUDE_SPELLS_STORAGE);
 
     const characterSelector = document.getElementById("character-selector");
     characterSelector.value = character ? character.id : '';
@@ -465,20 +486,24 @@ window.pageUpdate=() => {
     }
 
     if (started) {
-        revealSections(alliances);
+        revealSections(alliances, includeSpells);
         setCounters(counters);
         setAdvantages(advantages);
         showCharacterDetails(character);
         showEnemyDetails(enemies);
         showRegionDetails(region);
-        showCards();
+        showCards(includeSpells);
         if (alliances.included) {
             showAlliancesGuilds(alliances, region);
         }
     }
 }
 
-function addAdvantages(item) {
+function addSystemDetails(item) {
+  if (item.system === undefined) {
+    return;
+  }
+
   if (item.system) {
     if (item.system.advantage) {
       updateStorage(HIGHLIGHT_ADVANTAGES_STORAGE, (data) => {
@@ -512,10 +537,18 @@ function addAdvantages(item) {
         });
       });
     }
+
+    if (item.system.spells) {
+      updateStorage(INCLUDE_SPELLS_STORAGE, (data) => {
+        data.push(item.system.spells);
+
+        document.getElementById("spell-cards").classList.remove("hidden");
+      });
+    }
   }
 }
 
-function revealSections(alliances) {
+function revealSections(alliances, includeSpells) {
   [
     "counters",
     "advantages",
@@ -530,6 +563,10 @@ function revealSections(alliances) {
   if (alliances.included) {
     document.getElementById("guilds").classList.remove("hidden");
   }
+
+  if (includeSpells.length > 0) {
+    document.getElementById("spell-cards").classList.remove("hidden");
+  }
 }
 
 function hideSections() {
@@ -541,6 +578,7 @@ function hideSections() {
         "enemies",
         "virtues",
         "cards",
+        "spell-cards",
         "guilds"
     ].forEach((id) => {
         document.getElementById(id).classList.add("hidden");
@@ -661,11 +699,15 @@ function showRegionDetails(region) {
     regionVirtueElement.replaceChildren(divContainer);
 }
 
-window.showCards=() => {
-    showCardsHelper("gear", GEAR_STORAGE);
-    showCardsHelper("companion", COMPANIONS_STORAGE);
-    showCardsHelper("potion", POTIONS_STORAGE);
-    showCardsHelper("treasure", TREASURE_STORAGE);
+function showCards(includeSpells) {
+  showCardsHelper("gear", GEAR_STORAGE);
+  showCardsHelper("companion", COMPANION_STORAGE);
+  showCardsHelper("potion", POTION_STORAGE);
+  showCardsHelper("treasure", TREASURE_STORAGE);
+
+  if (includeSpells.length > 0) {
+    showCardsHelper("spell", SPELL_STORAGE);
+  }
 }
 
 function showCardsHelper(elementIdPartial, dataStorage) {
@@ -858,12 +900,12 @@ window.selectGuildLevel=(guildLevelId) => {
 
 window.addAllianceCompanion=() => {
     const selector = document.getElementById("alliance-companion-selector");
-    updateStorage(COMPANIONS_STORAGE, (data) => {
+    updateStorage(COMPANION_STORAGE, (data) => {
       const item = structuredClone(ALLIANCE_COMPANIONS.find(element => element.id === selector.value));
 
       data.push(item);
 
-      addAdvantages(item);
+      addSystemDetails(item);
     });
 
     closeModal("alliance-companion-modal")
@@ -894,9 +936,9 @@ window.toggleVirtue=(value) => {
     virtue.active = !virtue.active;
 
     if (virtue.active) {
-      addAdvantages(virtue);
+      addSystemDetails(virtue);
     } else {
-      removeAdvantages(virtue);
+      removeSystemDetails(virtue);
     }
   });
 }

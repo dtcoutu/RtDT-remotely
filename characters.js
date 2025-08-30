@@ -368,7 +368,8 @@ const reverent_astromancer = {
           description: "At the start of each month, prepare spells equal to the month number.",
           permanent: true,
           system: {
-            end_of_month: true
+            end_of_month: true,
+            spells: 'spell'
           }
       },
       {
@@ -387,6 +388,7 @@ const reverent_astromancer = {
           description: "You can prepare invocations.",
           active: false,
           system: {
+            spells: 'invocation'
           }
       },
       {
