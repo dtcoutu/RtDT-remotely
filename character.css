@@ -141,9 +141,9 @@
   display: none !important;
 }
 
-.inactive > div {
+.inactive {
   opacity: 0.2;
-}
+} 
 
 #header {
   display: flex;
@@ -296,7 +296,7 @@
   position: relative;
 }
 
-#guilds {
+#guilds, #monuments {
   display: grid;
   grid-template-columns: 24% 24% 24% 24%;
   gap: 24px;
@@ -348,6 +348,29 @@
 
 .guild-rank {
   flex: 1;
+}
+
+.monument-name {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  font-weight: bold;
+  flex: 0 0 100%;
+  text-align: center;
+}
+
+.monument-offering::before {
+  content: 'Offering:';
+  font-weight: bold;
+  padding-right: 2px;
+}
+
+.monument-offering {
+  border-bottom: 1px solid black;
+  padding: 4px 0;
+}
+
+.monument-reinforcement {
+  padding: 4px 0;
 }
 
 #cards {

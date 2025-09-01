@@ -28,13 +28,14 @@
               </label>
             </section>
   
-            <section id="alliances-options">
+            <section id="expansion-options">
               <label>
                 Is alliances expansion in play?
-                <select id="alliances-expansion" onchange="alliancesInclusion(this.value)">
-                  <option value="">---</option>
-                  <option value="true">Yes</option>
-                  <option value="false">No</option>
+                <select id="expansion-select" onchange="expansionSelection(this.value)">
+                  <option value="" selected="true">---</option>
+                  <option value="none">Neither</option>
+                  <option value="alliances">Alliances</option>
+                  <option value="covenant">Covenant</option>
                 </select>
               </label>
             </section>
@@ -163,6 +164,74 @@
               </label>
             </div>
           </section>
+
+          <section id="covenant-setup" class="hidden">
+            Monument locations:
+            <div>
+              <label>
+                North:
+                <select id="monument-setup-North" onchange="monumentRegionSet(this.id, this.value)">
+                  <option value="" selected="true">---</option>
+                  <option value="arch-of-the-golden-sun">Arch of the Golden Sun</option>
+                  <option value="argent-oak">Argent Oak</option>
+                  <option value="cenotaph-of-the-first-prophet">Cenotaph of the First Prophet</option>
+                  <option value="colossus-of-bjorn">Colossus of Björn</option>
+                  <option value="moonstone-temple">Moonstone Temple</option>
+                  <option value="endless-necropolis">Endless Necropolis</option>
+                  <option value="nightmare-cage">Nightmare Cage</option>
+                  <option value="tower-shard">Tower Shard</option>
+                </select>
+              </label>
+            </div>
+            <div>
+              <label>
+                South:
+                <select id="monument-setup-South" onchange="monumentRegionSet(this.id, this.value)">
+                  <option value="" selected="true">---</option>
+                  <option value="arch-of-the-golden-sun">Arch of the Golden Sun</option>
+                  <option value="argent-oak">Argent Oak</option>
+                  <option value="cenotaph-of-the-first-prophet">Cenotaph of the First Prophet</option>
+                  <option value="colossus-of-bjorn">Colossus of Björn</option>
+                  <option value="moonstone-temple">Moonstone Temple</option>
+                  <option value="endless-necropolis">Endless Necropolis</option>
+                  <option value="nightmare-cage">Nightmare Cage</option>
+                  <option value="tower-shard">Tower Shard</option>
+                </select>
+              </label>
+            </div>
+            <div>
+              <label>
+                East:
+                <select id="monument-setup-East" onchange="monumentRegionSet(this.id, this.value)">
+                  <option value="" selected="true">---</option>
+                  <option value="arch-of-the-golden-sun">Arch of the Golden Sun</option>
+                  <option value="argent-oak">Argent Oak</option>
+                  <option value="cenotaph-of-the-first-prophet">Cenotaph of the First Prophet</option>
+                  <option value="colossus-of-bjorn">Colossus of Björn</option>
+                  <option value="moonstone-temple">Moonstone Temple</option>
+                  <option value="endless-necropolis">Endless Necropolis</option>
+                  <option value="nightmare-cage">Nightmare Cage</option>
+                  <option value="tower-shard">Tower Shard</option>
+                </select>
+              </label>
+            </div>
+            <div>
+              <label>
+                West:
+                <select id="monument-setup-West" onchange="monumentRegionSet(this.id, this.value)">
+                  <option value="" selected="true">---</option>
+                  <option value="arch-of-the-golden-sun">Arch of the Golden Sun</option>
+                  <option value="argent-oak">Argent Oak</option>
+                  <option value="cenotaph-of-the-first-prophet">Cenotaph of the First Prophet</option>
+                  <option value="colossus-of-bjorn">Colossus of Björn</option>
+                  <option value="moonstone-temple">Moonstone Temple</option>
+                  <option value="endless-necropolis">Endless Necropolis</option>
+                  <option value="nightmare-cage">Nightmare Cage</option>
+                  <option value="tower-shard">Tower Shard</option>
+                </select>
+              </label>
+            </div>
+          </section>
         </section>
       </details>
 
@@ -196,19 +265,19 @@
             <h4>Heroic Action</h4>
             <div class="choose-one">Choose One</div>
             <dl>
-              <dt class="action"><img src="icons/cleanse.png" title="cleanse" alt="cleanse" width="40" height="40" /><div>Cleanse</div></dt>
+              <dt class="action"><img src="icons/cleanse.png" title="cleanse" alt="cleanse" width="50%" /><div>Cleanse</div></dt>
               <dd class="action"><span>Remove all skulls from your space</span></dd>
-              <dt class="action"><img src="icons/battle.png" title="cleanse" alt="cleanse" width="40" height="40" /><div>Battle</div></dt>
+              <dt class="action"><img src="icons/battle.png" title="cleanse" alt="cleanse" width="50%" /><div>Battle</div></dt>
               <dd class="action"><span>Battle a foe on your space</span></dd>
-              <dt class="action"><img src="icons/quest.png" title="cleanse" alt="cleanse" width="40" height="40" /><div>Quest</div></dt>
+              <dt class="action"><img src="icons/quest.png" title="cleanse" alt="cleanse" width="50%" /><div>Quest</div></dt>
               <dd class="action"><span>Complete a quest or explore a dungeon</span></dd>
-              <dt class="action"><img src="icons/influence-action.png" title="influence" alt="influence" width="40" height="40" /><div>Influence</div></dt>
+              <dt class="action"><img src="icons/influence-action.png" title="influence" alt="influence" width="50%" /><div>Influence</div></dt>
               <dd class="action"><span>When at a Guild Hall gain 2 <img src="icons/influence.png" title="influence" alt="influence" width="24" height="24"></span></dd>
             </dl>
             <div class="after">Gain 2 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> after</div>
           </div>
           <div id="reinforce">
-            <h4>Reinforce</h4>
+            <h4><img src="icons/reinforce.png" title="reinforce" alt="reinforce" width="20px" />Reinforce</h4>
             <div class="choose-one">Choose One</div>
             <dl>
               <dt class="action"><img src="icons/citadel.png" title="citadel" alt="citadel" /><div>Citadel</div></dt>
@@ -404,6 +473,81 @@
         <div id="thieves_guild-rank-2" class="guild-rank" onclick="selectGuildLevel('thieves_guild-rank-2')"></div>
         <div id="thieves_guild-rank-3" class="guild-rank" onclick="selectGuildLevel('thieves_guild-rank-3')"></div>
         <div id="thieves_guild-rank-4" class="guild-rank" onclick="selectGuildLevel('thieves_guild-rank-4')"></div>
+      </section>
+    </section>
+
+    <section id="monuments" class="hidden">
+      <section id="North-monument">
+        <div class="monument-name">
+          <span id="North-monument-name"></span>
+           || North 
+           || <span id="North-monument-location"></span>
+          <button id="North-monument-build" onclick="toggleMonumentBuild(this.id);">Build</button>
+        </div>
+        <div id="North-monument-offering" class="monument-offering"></div>
+        <div id="North-monument-reinforcement" class="monument-reinforcement inactive">
+          <div><img src="icons/reinforce.png" title="reinforce" alt="reinforce" width="20px" /> Reinforce</div>
+          <dl class="action">
+            <dt><strong>Free:</strong></dt>
+            <dd id="North-monument-free-action"></dd>
+            <dt><strong id="North-monument-enhanced-cost"></strong></dt>
+            <dd id="North-monument-enhanced-action"></dd>
+          </dl>
+        </div>
+      </section>
+      <section id="South-monument">
+        <div class="monument-name">
+          <span id="South-monument-name"></span>
+           || South 
+           || <span id="South-monument-location"></span>
+          <button id="South-monument-build" onclick="toggleMonumentBuild(this.id);">Build</button>
+        </div>
+        <div id="South-monument-offering" class="monument-offering"></div>
+        <div id="South-monument-reinforcement" class="monument-reinforcement inactive">
+          <div><img src="icons/reinforce.png" title="reinforce" alt="reinforce" width="20px" /> Reinforce</div>
+          <dl class="action">
+            <dt><strong>Free:</strong></dt>
+            <dd id="South-monument-free-action"></dd>
+            <dt><strong id="South-monument-enhanced-cost"></strong></dt>
+            <dd id="South-monument-enhanced-action"></dd>
+          </dl>
+        </div>
+      </section>
+      <section id="East-monument">
+        <div class="monument-name">
+          <span id="East-monument-name"></span>
+           || East 
+           || <span id="East-monument-location"></span>
+          <button id="East-monument-build" onclick="toggleMonumentBuild(this.id);">Build</button>
+        </div>
+        <div id="East-monument-offering" class="monument-offering"></div>
+        <div id="East-monument-reinforcement" class="monument-reinforcement inactive">
+          <div><img src="icons/reinforce.png" title="reinforce" alt="reinforce" width="20px" /> Reinforce</div>
+          <dl class="action">
+            <dt><strong>Free:</strong></dt>
+            <dd id="East-monument-free-action"></dd>
+            <dt><strong id="East-monument-enhanced-cost"></strong></dt>
+            <dd id="East-monument-enhanced-action"></dd>
+          </dl>
+        </div>
+      </section>
+      <section id="West-monument">
+        <div class="monument-name">
+          <span id="West-monument-name"></span>
+           || West 
+           || <span id="West-monument-location"></span>
+          <button id="West-monument-build" onclick="toggleMonumentBuild(this.id);">Build</button>
+        </div>
+        <div id="West-monument-offering" class="monument-offering"></div>
+        <div id="West-monument-reinforcement" class="monument-reinforcement inactive">
+          <div><img src="icons/reinforce.png" title="reinforce" alt="reinforce" width="20px" /> Reinforce</div>
+          <dl class="action">
+            <dt><strong>Free:</strong></dt>
+            <dd id="West-monument-free-action"></dd>
+            <dt><strong id="West-monument-enhanced-cost"></strong></dt>
+            <dd id="West-monument-enhanced-action"></dd>
+          </dl>
+        </div>
       </section>
     </section>
 

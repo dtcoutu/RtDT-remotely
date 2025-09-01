@@ -2,8 +2,9 @@ import { CHARACTERS } from "./characters.js";
 import { COMPANIONS, ALLIANCE_COMPANIONS } from "./companions.js";
 import { ENEMIES, TRAITS } from "./enemies.js";
 import { GEAR } from "./gear.js";
-import { ARCANE_SCOUTS, DRUIDS_CIRCLE, GUILDS, PALADINS_ORDER, THIEVES_GUILD } from "./guilds.js"
+import { GUILDS } from "./guilds.js"
 import { POTIONS } from "./potions.js";
+import { MONUMENTS } from "./monuments.js";
 import { SPELLS } from "./spells.js";
 import { TREASURES } from "./treasure.js";
 
@@ -12,7 +13,9 @@ const ENEMY_STORAGE = "enemy";
 const REGION_STORAGE = "region";
 const COUNTERS_STORAGE = "counters";
 
+const EXPANSION_STORAGE = "expansions";
 const ALLIANCES_STORAGE = "alliances";
+const COVENANT_STORAGE = "covenant";
 
 const INCLUDE_SPELLS_STORAGE = "include_spells";
 const STARTED_STORAGE = "started";
@@ -27,6 +30,11 @@ const ADVANTAGES_STORAGE = "advantages";
 const HIGHLIGHT_ADVANTAGES_STORAGE = "highlight_advantages"
 const HIGHLIGHT_END_OF_TURNS_STORAGE = "highlight_end_of_turns"
 const HIGHLIGHT_END_OF_MONTHS_STORAGE = "highlight_end_of_months"
+
+// Expansion keys
+const NO_EXPANSION = "none";
+const ALLIANCES_EXPANSION = "alliances";
+const COVENANT_EXPANSION = "covenant";
 
 const CARD_STORAGES =   [
   COMPANION_STORAGE,
@@ -76,16 +84,17 @@ const WEST = {
     }
 }
 
-const REGIONS = [ NORTH, SOUTH, EAST, WEST]
+const REGIONS = [ NORTH, EAST, SOUTH, WEST]
 
 window.resetGame=() => {
     localStorage.clear();
 
     initializeEnemies();
+    initializeExpansions();
 
     hideSections();
 
-    document.getElementById("alliances-expansion").value = "";
+    document.getElementById("expansion-select").value = "";
 
     pageUpdate();
 }
@@ -93,16 +102,35 @@ window.resetGame=() => {
 window.startGame=() => {
     const character = getStoredData(CHARACTER_STORAGE);
     const region = getStoredData(REGION_STORAGE);
-    const alliances = getStoredData(ALLIANCES_STORAGE);
+    const expansion = localStorage.getItem(EXPANSION_STORAGE);
+    const enemies = getStoredData(ENEMY_STORAGE);
 
-    if ((character === null) || (region === null) || (alliances === null)) {
-        alert('You must select a character, a region, indicate if alliances expansion is in play.');
+    if ((character === null) || (region === null) || (expansion === '')) {
+        alert('You must select a character, a region, and indicate any expansion usage.');
         return;
     }
 
-    if (alliances.included && !guildRegionsValid()) {
-        alert('All guilds must have a region set and they must be unique');
-        return;
+    let missingEnemy = false;
+    for (const key in enemies) {
+      if (enemies[key] === '') {
+        missingEnemy = true;
+        break;
+      }
+    }
+
+    if (missingEnemy) {
+      alert('You must select an enemy for each level.');
+      return;
+    }
+
+    if (expansion === ALLIANCES_EXPANSION && !guildRegionsValid()) {
+      alert('All guilds must have a region set and they must be unique.');
+      return;
+    }
+
+    if (expansion === COVENANT_EXPANSION && !monumentRegionsValid()) {
+      alert('All monument regions must have a unique monument assigned.')
+      return;
     }
 
     localStorage.setItem(STARTED_STORAGE, 'true');
@@ -122,9 +150,18 @@ window.startGame=() => {
 function guildRegionsValid() {
     const guildRegions = GUILDS.map(guild => document.getElementById(guild.id + '-location').value);
 
-    const uniqueGuildRegions = guildRegions.filter((region, index, array) => array.indexOf(region) === index)
+    const uniqueGuildRegions = [...new Set(guildRegions)];
 
     return guildRegions.length === uniqueGuildRegions.length;
+}
+
+function monumentRegionsValid() {
+  const covenantDetails = getStoredData(COVENANT_STORAGE);
+
+  const monumentIds = covenantDetails.monuments.map(monument => monument.id);
+  const uniqMonumentIds = [...new Set(monumentIds)];
+
+  return uniqMonumentIds.length === 4;
 }
 
 function initializeEnemies() {
@@ -135,7 +172,11 @@ function initializeEnemies() {
     '5': ''
   }
 
-  updateStoredData(ENEMY_STORAGE, enemies);
+  localStorage.setItem(ENEMY_STORAGE, JSON.stringify(enemies));
+}
+
+function initializeExpansions() {
+  localStorage.setItem(EXPANSION_STORAGE, '');
 }
 
 function initializeCounters() {
@@ -188,25 +229,32 @@ function applyPermanentVirtues() {
   });
 }
 
-window.alliancesInclusion=(included) => {
-  if (included === '---') {
-      return;
+window.expansionSelection=(expansion) => {
+  localStorage.setItem(EXPANSION_STORAGE, expansion);
+
+  if (expansion === ALLIANCES_EXPANSION) {
+    alliancesInclusion();
+  } else if (expansion === COVENANT_EXPANSION) {
+    covenantInclusion();
   }
 
-  const alliancesIncluded = included === 'true';
+  pageUpdate();
+}
 
-  // TODO: I think I need to include the guild definitions from guilds.js instead of these
+function alliancesInclusion() {
   const alliances = {
-    included: alliancesIncluded,
-    guilds: [
-      ARCANE_SCOUTS,
-      DRUIDS_CIRCLE,
-      PALADINS_ORDER,
-      THIEVES_GUILD
-    ]
+    guilds: GUILDS
   }
 
   updateStoredData(ALLIANCES_STORAGE, alliances);
+}
+
+function covenantInclusion() {
+  const covenant = {
+    monuments: []
+  };
+
+  updateStoredData(COVENANT_STORAGE, covenant);
 }
 
 window.allianceRegionSet=(selectorId, value) => {
@@ -220,6 +268,21 @@ window.allianceGuildSideSet=(selectorId, value) => {
   updateStorage(ALLIANCES_STORAGE, (data) => {
     const guild = data.guilds.find((guild) => guild.id === selectorId.split('-')[0])
     guild.side = value;
+  });
+}
+
+window.monumentRegionSet=(selectorId, value) => {
+  const region = selectorId.split('-')[2];
+  const selectedMonument = MONUMENTS.find(monument => monument.id === value);
+
+  updateStorage(COVENANT_STORAGE, (data) => {
+    const index = data.monuments.findIndex(monument => monument.region === region);
+    if (index >= 0) {
+      data.monuments.splice(index, 1);
+    }
+
+    selectedMonument.region = region;
+    data.monuments.push(selectedMonument);
   });
 }
 
@@ -390,7 +453,7 @@ function removeSystemDetails(item) {
       data.splice(index, 1);
 
       if (data.size === 0) {
-        document.getElementById("spell-cards").classList.add("hidden");
+        hideElement("spell-cards");
       }
     });
   }
@@ -457,7 +520,9 @@ window.pageUpdate=() => {
     const region = getStoredData(REGION_STORAGE);
     const counters = getStoredData(COUNTERS_STORAGE);
     const advantages = getStoredData(ADVANTAGES_STORAGE);
+    const expansion = localStorage.getItem(EXPANSION_STORAGE);
     const alliances = getStoredData(ALLIANCES_STORAGE);
+    const covenant = getStoredData(COVENANT_STORAGE);
     const started = localStorage.getItem(STARTED_STORAGE) === 'true';
     const includeSpells = getStoredData(INCLUDE_SPELLS_STORAGE);
 
@@ -471,32 +536,44 @@ window.pageUpdate=() => {
     const regionSelector = document.getElementById("guardian-selector");
     regionSelector.value = region ? region.id : '';
 
-    const alliancesExpansionSelector = document.getElementById("alliances-expansion");
-    alliancesExpansionSelector.value = alliances ? alliances.included : '';
+    document.getElementById("expansion-select").value = expansion === null ? '' : expansion;
 
-    if (alliances !== null) {
-        const alliances_guild_setup = document.getElementById('alliances-guild-setup');
-        if (alliances.included) {
-            alliances_guild_setup.classList.remove('hidden');
-        } else {
-            alliances_guild_setup.classList.add('hidden');
-        }
+    if (expansion === ALLIANCES_EXPANSION) {
+      showElement('alliances-guild-setup');
 
-        alliances.guilds.forEach((guild) => {
-          document.getElementById(guild.id + '-location').value = guild.region;
-        })
+      alliances.guilds.forEach((guild) => {
+        document.getElementById(guild.id + '-location').value = guild.region;
+        document.getElementById(guild.id + '-side').value = guild.side
+      });
+    } else {
+      localStorage.removeItem(ALLIANCES_STORAGE);
+      hideElement('alliances-guild-setup');
+    }
+
+    if (expansion === COVENANT_EXPANSION) {
+      showElement('covenant-setup');
+
+      covenant.monuments.forEach((monument) => {
+        document.getElementById('monument-setup-' + monument.region).value = monument.id;
+      });
+    } else {
+      localStorage.removeItem(COVENANT_STORAGE);
+      hideElement('covenant-setup');
     }
 
     if (started) {
-        revealSections(alliances, includeSpells);
+        revealSections(expansion, includeSpells);
         setCounters(counters);
         setAdvantages(advantages);
         showCharacterDetails(character);
         showEnemyDetails(enemies);
         showRegionDetails(region);
         showCards(includeSpells);
-        if (alliances.included) {
+        if (expansion === ALLIANCES_EXPANSION) {
             showAlliancesGuilds(alliances, region);
+        }
+        if (expansion === COVENANT_EXPANSION) {
+          showCovenantMonuments(covenant, region);
         }
     }
 }
@@ -543,12 +620,12 @@ function addSystemDetails(item) {
     updateStorage(INCLUDE_SPELLS_STORAGE, (data) => {
       data.push(item.system.spells);
 
-      document.getElementById("spell-cards").classList.remove("hidden");
+      showElement("spell-cards");
     });
   }
 }
 
-function revealSections(alliances, includeSpells) {
+function revealSections(expansion, includeSpells) {
   [
     "counters",
     "advantages",
@@ -557,15 +634,19 @@ function revealSections(alliances, includeSpells) {
     "virtues",
     "cards"
   ].forEach((id) => {
-    document.getElementById(id).classList.remove("hidden");
+    showElement(id);
   });
 
-  if (alliances.included) {
-    document.getElementById("guilds").classList.remove("hidden");
+  if (expansion === ALLIANCES_EXPANSION) {
+    showElement("guilds");
+  }
+
+  if (expansion === COVENANT_EXPANSION) {
+    showElement("monuments");
   }
 
   if (includeSpells.length > 0) {
-    document.getElementById("spell-cards").classList.remove("hidden");
+    showElement("spell-cards");
   }
 }
 
@@ -579,9 +660,10 @@ function hideSections() {
         "virtues",
         "cards",
         "spell-cards",
-        "guilds"
+        "guilds",
+        "monuments"
     ].forEach((id) => {
-        document.getElementById(id).classList.add("hidden");
+        hideElement(id);
     });
 }
 
@@ -618,10 +700,10 @@ function showCharacterDetails(character) {
         const buyButton = document.getElementById("buy-" + virtue.id);
 
         if (virtue.active) {
-            virtueElement.classList.remove("inactive");
+            virtueElement.querySelectorAll('div').forEach(div => div.classList.remove("inactive"));
             buyButton.innerHTML = "Un Buy";
         } else {
-            virtueElement.classList.add("inactive");
+            virtueElement.querySelectorAll('div').forEach(div => div.classList.add("inactive"));
             buyButton.innerHTML = "Buy"
         }
     });
@@ -836,8 +918,6 @@ function showCardsHelper(elementIdPartial, dataStorage) {
 
 function showAlliancesGuilds(alliances, region) {
   alliances.guilds.forEach((guild) => {
-    console.log(guild);
-
     document.getElementById(guild.id + '-region').innerHTML = guild.region;
 
     for (let i = 1; i <= 4; i++) {
@@ -852,21 +932,52 @@ function showAlliancesGuilds(alliances, region) {
     }
   });
 
-  // Order guilds by region in relation to players region
-  const regions = ['North', 'East', 'South', 'West'];
-
-  const index = regions.indexOf(region.id);
-
-  const sorted_regions = regions.splice(index);
-  sorted_regions.push(...regions);
-
   // update the guild container with a new class based on the sort order
-  sorted_regions.forEach((area, index) => {
+  sortedRegions(region).forEach((area, index) => {
       const guild = alliances.guilds.find(guild => guild.region === area);
       const guildElement = document.getElementById(guild.id);
       guildElement.removeAttribute('class');
       guildElement.classList.add('region-' + (index+1));
   });
+}
+
+function showCovenantMonuments(covenant, region) {
+  covenant.monuments.forEach((monument) => {
+    document.getElementById(monument.region + '-monument-name').innerHTML = monument.name;
+    document.getElementById(monument.region + '-monument-location').innerHTML = monument.location;
+    document.getElementById(monument.region + '-monument-offering').innerHTML = monument.offering;
+    document.getElementById(monument.region + '-monument-free-action').innerHTML = monument.reinforce.free;
+    document.getElementById(monument.region + '-monument-enhanced-cost').innerHTML = monument.reinforce.enhanced.cost + ':';
+    document.getElementById(monument.region + '-monument-enhanced-action').innerHTML = monument.reinforce.enhanced.effect;
+
+    if (monument.built) {
+      document.getElementById(monument.region + '-monument-build').innerHTML = "Un Build";
+      document.getElementById(monument.region + '-monument-reinforcement').classList.remove('inactive');
+      document.getElementById(monument.region + '-monument-offering').classList.add('inactive');
+    } else {
+      document.getElementById(monument.region + '-monument-build').innerHTML = "Build";
+      document.getElementById(monument.region + '-monument-reinforcement').classList.add('inactive');
+      document.getElementById(monument.region + '-monument-offering').classList.remove('inactive');
+    }
+  });
+
+  sortedRegions(region).forEach((area, index) => {
+    const monumentElement = document.getElementById(area + '-monument');
+    monumentElement.removeAttribute('class');
+    monumentElement.classList.add('region-' + (index+1));
+  });
+}
+
+// Order guilds by region in relation to players region
+function sortedRegions(region) {
+  const regions = REGIONS.map(region => region.id);
+
+  const index = regions.indexOf(region.id);
+
+  const sortedRegions = regions.splice(index);
+  sortedRegions.push(...regions);
+
+  return sortedRegions;
 }
 
 window.selectGuildLevel=(guildLevelId) => {
@@ -940,6 +1051,15 @@ window.toggleVirtue=(value) => {
     } else {
       removeSystemDetails(virtue);
     }
+  });
+}
+
+window.toggleMonumentBuild=(value) => {
+  const region = value.split('-')[0];
+  updateStorage(COVENANT_EXPANSION, (data) => {
+    let monument = data.monuments.find(monument => monument.region === region);
+
+    monument.built = !monument.built;
   });
 }
 

@@ -3,12 +3,13 @@ export const MONUMENTS = [
     id: 'arch-of-the-golden-sun',
     name: 'Arch of the Golden Sun',
     type: 'monument',
-    location: 'bazaar',
+    location: 'Bazaar',
+    built: false,
     offering: 'End your turn with 2+ foes on or adjacent to your space.',
     reinforce: {
       free: 'Gain 1 gear',
       enhanced: {
-        cost: '5 <spirit>',
+        cost: '5 <img src="icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />',
         effect: 'Gain 1 virtue and the top two cards of the treasure deck'
       }
     }
@@ -17,10 +18,11 @@ export const MONUMENTS = [
     id: 'argent-oak',
     name: 'Argent Oak',
     type: 'monument',
-    location: 'sanctuary',
+    location: 'Sanctuary',
+    built: false,
     offering: 'Gain a corruption.',
     reinforce: {
-      free: 'Gain 1 <spirit>',
+      free: 'Gain 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />',
       enhanced: {
         cost: 'Free',
         effect: 'Spend any number of items to remove an equal number of your corruptions'
@@ -31,12 +33,13 @@ export const MONUMENTS = [
     id: 'cenotaph-of-the-first-prophet',
     name: 'Cenotaph of the First Prophet',
     type: 'monument',
-    location: 'citadel',
+    location: 'Citadel',
+    built: false,
     offering: 'Defeat a foe in a wasteland.',
     reinforce: {
       free: 'Gain 1 potion',
       enhanced: {
-        cost: '4 <spirit>',
+        cost: '4 <img src="icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />',
         effect: 'Gain an active virtue tile from outside the game'
       }
     }
@@ -45,10 +48,11 @@ export const MONUMENTS = [
     id: 'colossus-of-bjorn',
     name: 'Colossus of Björn',
     type: 'monument',
-    location: 'village',
+    location: 'Village',
+    built: false,
     offering: 'Lose 8+ warriors from a battle card.',
     reinforce: {
-      free: 'Gain 6 <warrior>',
+      free: 'Gain 6 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" />',
       enhanced: {
         cost: 'Free',
         effect: 'Place yourself and this building in any space without a building'
@@ -59,12 +63,13 @@ export const MONUMENTS = [
     id: 'moonstone-temple',
     name: 'Moonstone Temple',
     type: 'monument',
-    location: 'sanctuary',
+    location: 'Sanctuary',
+    built: false,
     offering: 'Complete a battle without using any advantages.',
     reinforce: {
-      free: 'Gain 1 <spirit>',
+      free: 'Gain 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />',
       enhanced: {
-        cost: '10 <spirit>',
+        cost: '10 <img src="icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />',
         effect: 'You may Battle and Cleanse any number of times this turn'
       }
     }
@@ -73,12 +78,13 @@ export const MONUMENTS = [
     id: 'endless-necropolis',
     name: 'Endless Necropolis',
     type: 'monument',
-    location: 'village',
+    location: 'Village',
+    built: false,
     offering: 'Spend or lose a treasure',
     reinforce: {
-      free: 'Gain 6 <warrior>',
+      free: 'Gain 6 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" />',
       enhanced: {
-        cost: '1 <spirit>',
+        cost: '1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />',
         effect: 'Remove any number of skulls from this building and return them to the supply'
       }
     }
@@ -87,12 +93,13 @@ export const MONUMENTS = [
     id: 'nightmare-cage',
     name: 'Nightmare Cage',
     type: 'monument',
-    location: 'bazaar',
+    location: 'Bazaar',
+    built: false,
     offering: 'End your turn with 4+ skulls on or adjacent to your space.',
     reinforce: {
       free: 'Gain 1 gear',
       enhanced: {
-        cost: '20 <warrior>',
+        cost: '20 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" />',
         effect: 'Remove a foe'
       }
     }
@@ -101,12 +108,13 @@ export const MONUMENTS = [
     id: 'tower-shard',
     name: 'Tower Shard',
     type: 'monument',
-    location: 'citadel',
+    location: 'Citadel',
+    built: false,
     offering: 'Defeat a foe in a space adjacent to the Tower.',
     reinforce: {
       free: 'Gain 1 potion',
       enhanced: {
-        cost: '1 <spirit>',
+        cost: '1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />',
         effect: 'Gain 2 potions'
       }
     }
