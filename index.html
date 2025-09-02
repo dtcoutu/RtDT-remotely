@@ -343,6 +343,12 @@
           <button onclick="updateCount('spirit', 1)">+1</button>
           <button onclick="updateCount('spirit', 5)">+5</button>
         </div>
+        <div id="blessing-blessing">
+          <strong>Blessings:</strong> <span id="blessing-counter" class="counter"></span>
+          <button onclick="updateCount('blessing', -1)">-1</button>
+          <button onclick="updateCount('blessing', 1)">+1</button>
+          <div>Spend during a Heroic action for +1 Wild. Lose at the end of your turn.</div>
+        </div>
         <div>
           <span onclick="highlightEndOfTurn(this.classList)">End of Turn Reminders</span>
         </div>

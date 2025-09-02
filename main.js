@@ -86,6 +86,15 @@ const WEST = {
 
 const REGIONS = [ NORTH, EAST, SOUTH, WEST]
 
+const BLESSING_ITEM = {
+  type: 'blessing',
+  id: 'blessing',
+  system: {
+    advantage: 'Wild',
+    end_of_turn: true
+  }
+}
+
 window.resetGame=() => {
     localStorage.clear();
 
@@ -180,12 +189,13 @@ function initializeExpansions() {
 }
 
 function initializeCounters() {
-    const counters = {
-        warriors: 7,
-        spirit: 1,
-    }
+  const counters = {
+    warrior: 7,
+    spirit: 1,
+    blessing: 0
+  }
 
-    localStorage.setItem(COUNTERS_STORAGE, JSON.stringify(counters));
+  localStorage.setItem(COUNTERS_STORAGE, JSON.stringify(counters));
 }
 
 function initializeAdvantages() {
@@ -212,6 +222,7 @@ function initializeHighlights() {
     UNDEAD: [],
     Wild: []
   }
+
   localStorage.setItem(HIGHLIGHT_ADVANTAGES_STORAGE, JSON.stringify(initial_highlight_advantages));
   localStorage.setItem(HIGHLIGHT_END_OF_TURNS_STORAGE, JSON.stringify([]));
   localStorage.setItem(HIGHLIGHT_END_OF_MONTHS_STORAGE, JSON.stringify([]));
@@ -672,8 +683,9 @@ function hideSections() {
 }
 
 function setCounters(counters) {
-    document.getElementById("warrior-counter").innerHTML = counters.warriors;
-    document.getElementById("spirit-counter").innerHTML = counters.spirit;
+  for (let key in counters) {
+    document.getElementById(key + '-counter').innerHTML = counters[key];
+  }
 }
 
 function setAdvantages(advantages) {
@@ -1069,6 +1081,14 @@ window.updateCharge=(item, amount) => {
 window.updateCount=(counter, amount) => {
     updateStorage(COUNTERS_STORAGE, (data) => {
       data[counter] += amount;
+
+      if (counter === 'blessing') {
+        if (data[counter] > 0) {
+          addSystemDetails(BLESSING_ITEM);
+        } else {
+          removeSystemDetails(BLESSING_ITEM);
+        }
+      }
     });
 }
 
