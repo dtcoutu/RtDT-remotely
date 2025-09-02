@@ -540,23 +540,27 @@ window.pageUpdate=() => {
 
     if (expansion === ALLIANCES_EXPANSION) {
       showElement('alliances-guild-setup');
+      toggleAlliancesActions(true);
 
       alliances.guilds.forEach((guild) => {
         document.getElementById(guild.id + '-location').value = guild.region;
         document.getElementById(guild.id + '-side').value = guild.side
       });
     } else {
+      toggleAlliancesActions(false);
       localStorage.removeItem(ALLIANCES_STORAGE);
       hideElement('alliances-guild-setup');
     }
 
     if (expansion === COVENANT_EXPANSION) {
       showElement('covenant-setup');
+      toggleCovenantActions(true);
 
       covenant.monuments.forEach((monument) => {
         document.getElementById('monument-setup-' + monument.region).value = monument.id;
       });
     } else {
+      toggleCovenantActions(false);
       localStorage.removeItem(COVENANT_STORAGE);
       hideElement('covenant-setup');
     }
@@ -574,6 +578,7 @@ window.pageUpdate=() => {
         }
         if (expansion === COVENANT_EXPANSION) {
           showCovenantMonuments(covenant, region);
+          showCovenantActions(covenant);
         }
     }
 }
@@ -941,6 +946,21 @@ function showAlliancesGuilds(alliances, region) {
   });
 }
 
+function toggleAlliancesActions(show) {
+  [
+    'alliances-heroic-action-name',
+    'alliances-heroic-action-description',
+    'alliances-reinforcement-action-name',
+    'alliances-reinforcement-action-description'
+  ].forEach(id => {
+    if (show) {
+      showElement(id);
+    } else {
+      hideElement(id);
+    }
+  });
+}
+
 function showCovenantMonuments(covenant, region) {
   covenant.monuments.forEach((monument) => {
     document.getElementById(monument.region + '-monument-name').innerHTML = monument.name;
@@ -966,6 +986,19 @@ function showCovenantMonuments(covenant, region) {
     monumentElement.removeAttribute('class');
     monumentElement.classList.add('region-' + (index+1));
   });
+}
+
+function toggleCovenantActions(show) {
+  [
+    'covenant-heroic-action-name',
+    'covenant-heroic-action-description'
+  ].forEach(id => {
+    if (show) {
+      showElement(id);
+    } else {
+      hideElement(id);
+    }
+  })
 }
 
 // Order guilds by region in relation to players region
