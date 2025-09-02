@@ -578,7 +578,6 @@ window.pageUpdate=() => {
         }
         if (expansion === COVENANT_EXPANSION) {
           showCovenantMonuments(covenant, region);
-          showCovenantActions(covenant);
         }
     }
 }
