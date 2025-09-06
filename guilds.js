@@ -12,7 +12,7 @@ export const ARCANE_SCOUTS = {
       system: {}
     },
     rank_2: {
-      text: 'You cannot spend <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to double your base move.',
+      text: 'You cannot spend <img src="/icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to double your base move.',
       system: {}
     },
     rank_3: {
@@ -60,11 +60,11 @@ export const DRUIDS_CIRCLE = {
       system: {}
     },
     rank_2: {
-      text: 'You must spend 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to take your Banner action.',
+      text: 'You must spend 1 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to take your Banner action.',
       system: {}
     },
     rank_3: {
-      text: 'When you take your Banner action, you may spend 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to take it twice.',
+      text: 'When you take your Banner action, you may spend 1 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to take it twice.',
       system: {}
     },
     rank_4: {
@@ -108,39 +108,39 @@ export const PALADINS_ORDER = {
       system: {}
     },
     rank_2: {
-      text: 'You must spend 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to Cleanse.',
+      text: 'You must spend 1 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to Cleanse.',
       system: {}
     },
     rank_3: {
-      text: 'After you Cleanse, gain +1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.',
+      text: 'After you Cleanse, gain +1 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.',
       system: {}
     },
     rank_4: {
-      text: 'After you Cleanse, gain +2 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.',
+      text: 'After you Cleanse, gain +2 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.',
       system: {}
     },
   },
   side_b: {
     rank_1: {
-      text: 'At the end of your turn lose 3 <img src="icons/warrior.png" title="warrior" alt="warrior" width="20" height="22" />.',
+      text: 'At the end of your turn lose 3 <img src="/icons/warrior.png" title="warrior" alt="warrior" width="20" height="22" />.',
       system: {
         end_of_turn: true
       }
     },
     rank_2: {
-      text: 'At the end of the month lose 6 <img src="icons/warrior.png" title="warrior" alt="warrior" width="20" height="22" />.',
+      text: 'At the end of the month lose 6 <img src="/icons/warrior.png" title="warrior" alt="warrior" width="20" height="22" />.',
       system: {
         end_of_month: true
       }
     },
     rank_3: {
-      text: 'At the end of your turn gain 3 <img src="icons/warrior.png" title="warrior" alt="warrior" width="20" height="22" />.',
+      text: 'At the end of your turn gain 3 <img src="/icons/warrior.png" title="warrior" alt="warrior" width="20" height="22" />.',
       system: {
         end_of_turn: true
       }
     },
     rank_4: {
-      text: 'At the end of the month, double the number of <img src="icons/warrior.png" title="warrior" alt="warrior" width="20" height="22" /> you have.',
+      text: 'At the end of the month, double the number of <img src="/icons/warrior.png" title="warrior" alt="warrior" width="20" height="22" /> you have.',
       system: {
         end_of_month: true
       }
@@ -158,15 +158,15 @@ export const THIEVES_GUILD = {
   region: '',
   side_a: {
     rank_1: {
-      text: 'Treasures cost +2 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.',
+      text: 'Treasures cost +2 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.',
       system: {}
     },
     rank_2: {
-      text: 'Treasures cost +1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.',
+      text: 'Treasures cost +1 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.',
       system: {}
     },
     rank_3: {
-      text: 'Treasures cost 1 less <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.',
+      text: 'Treasures cost 1 less <img src="/icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.',
       system: {}
     },
     rank_4: {

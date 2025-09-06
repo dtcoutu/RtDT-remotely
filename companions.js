@@ -5,7 +5,7 @@ export const COMPANIONS = [
       title: 'The Outlaw King',
       type: 'companion',
       benefit: {
-          text: 'If you end your turn in the mountains, gain 6 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" />'
+          text: 'If you end your turn in the mountains, gain 6 <img src="/icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" />'
       },
       advantage: [
           {
@@ -26,7 +26,7 @@ export const COMPANIONS = [
       type: 'companion',
       advantage: [
           {
-              text: 'Spend 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" /> to gain +1 Wild Advantage.',
+              text: 'Spend 1 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" /> to gain +1 Wild Advantage.',
               usage: 'You can do this 3 times per turn.'
           },
           {
@@ -64,7 +64,7 @@ export const COMPANIONS = [
       title: 'The Dryad',
       type: 'companion',
       benefit: {
-          text: 'If you end your turn in a forest, gain 6 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" />.',
+          text: 'If you end your turn in a forest, gain 6 <img src="/icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" />.',
       },
       advantage: [
           {
@@ -84,7 +84,7 @@ export const COMPANIONS = [
       title: 'The Horselord',
       type: 'companion',
       benefit: {
-          text: 'If you end your turn in a grasslands, gain 6 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" />.',
+          text: 'If you end your turn in a grasslands, gain 6 <img src="/icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" />.',
       },
       advantage: [
           {
@@ -103,7 +103,7 @@ export const COMPANIONS = [
       title: 'The Fathomless',
       type: 'companion',
       benefit: {
-          text: 'Spend 3 <img src="icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" /> to place a seal on the Tower.',
+          text: 'Spend 3 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" /> to place a seal on the Tower.',
           usage: 'You can do this once per turn.'
       },
       advantage: [
@@ -142,7 +142,7 @@ export const COMPANIONS = [
       title: 'The Divine',
       type: 'companion',
       benefit: {
-          text: 'Do not spend spirit for glyphs facing you. After you take an action matching a glyph facing you gain 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />.'
+          text: 'Do not spend spirit for glyphs facing you. After you take an action matching a glyph facing you gain 1 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />.'
       },
       advantage: [
           {
@@ -199,7 +199,7 @@ export const ALLIANCE_COMPANIONS = [
       type: 'companion',
       guild: "arcane_scouts",
       benefit: {
-          text: 'When you would gain a gear, you can spend 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" /> to gain the top card of the treasure deck instead.',
+          text: 'When you would gain a gear, you can spend 1 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" /> to gain the top card of the treasure deck instead.',
       },
       advantage: [
           {
@@ -275,7 +275,7 @@ export const ALLIANCE_COMPANIONS = [
       type: 'companion',
       guild: "druids_circle",
       benefit: {
-          text: 'You can Reinforce on a space without a building. If you do, gain 6 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" /> or 1 potion.',
+          text: 'You can Reinforce on a space without a building. If you do, gain 6 <img src="/icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" /> or 1 potion.',
       },
       advantage: [
           {
@@ -334,7 +334,7 @@ export const ALLIANCE_COMPANIONS = [
       type: 'companion',
       guild: "paladins_order",
       benefit: {
-          text: 'In each battle, place the first 5 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" /> that you lose on this card. At the end of the month, gain all <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" /> on this card.',
+          text: 'In each battle, place the first 5 <img src="/icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" /> that you lose on this card. At the end of the month, gain all <img src="/icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" /> on this card.',
       },
       advantage: [
           {
@@ -354,7 +354,7 @@ export const ALLIANCE_COMPANIONS = [
       type: 'companion',
       guild: "paladins_order",
       benefit: {
-          text: 'Virtues cost you 2 less <img src="icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />.',
+          text: 'Virtues cost you 2 less <img src="/icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />.',
       },
       advantage: [
           {

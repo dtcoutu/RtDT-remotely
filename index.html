@@ -6,13 +6,22 @@
   </head>
   <body>
     <header>
+      <details id="help">
+        <summary>Help</summary>
+        <ul>
+          <li><a href="help/usage.html" target="_blank">How to use this app?</a></li>
+          <li><a href="help/summary.html" target="_blank">Card summaries</a></li>
+          <li><a href="https://boardgamegeek.com/boardgame/256680/return-to-dark-tower" target="_blank">Board Game Geek entry</a></li>
+        </ul>
+        <div>Made with love, but not an official <a href="https://restorationgames.com/" target="_blank">Restoration Games</a> production.</div>
+      </details>
       <details id="setup" open>
         <summary>Setup</summary>
         <section id="setup-container">
           <section id="base-setup">
             <section id="character-setup">
               <label>
-                Choose a character:
+                Choose a hero:
                 <select name="character" id="character-selector" onchange="selectedCharacter(this.value)">
                   <option value="">---</option>
                 </select>
@@ -21,7 +30,7 @@
   
             <section id="region-setup">
               <label>
-                Choose your region:
+                Choose your home kingdom:
                 <select name="guardian" id="guardian-selector" onchange="selectedRegion(this.value)">
                   <option value="">---</option>
                 </select>
@@ -30,7 +39,7 @@
   
             <section id="expansion-options">
               <label>
-                Is alliances expansion in play?
+                Choose an expansion or "Neither":
                 <select id="expansion-select" onchange="expansionSelection(this.value)">
                   <option value="" selected="true">---</option>
                   <option value="none">Neither</option>
@@ -247,7 +256,7 @@
         <div id="start-of-turn">
           <h3>Start of Turn</h3>
           <div>
-            <img src="icons/banner.png" title="banner" alt="banner" width="25" height="40" />
+            <img src="/icons/banner.png" title="banner" alt="banner" width="25" height="40" />
             <span class="name">Banner</span>
           </div>
           <div id="banner-description"></div>
@@ -256,64 +265,64 @@
           <h3>Middle of Turn</h3>
           <div id="move">
             <div>
-              <img src="icons/move.png" title="banner" alt="banner" width="40" height="40" />
+              <img src="/icons/move.png" title="banner" alt="banner" width="40" height="40" />
               <span class="name">Move <span id="movement"></span></span> (Split as Needed)
             </div>
-            <div>Spend 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to double your move</div>
+            <div>Spend 1 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to double your move</div>
           </div>
           <div id="heroic-action">
             <h4>Heroic Action</h4>
             <div class="choose-one">Choose One</div>
             <dl>
-              <dt class="action"><img src="icons/cleanse.png" title="cleanse" alt="cleanse" width="50%" /><div>Cleanse</div></dt>
+              <dt class="action"><img src="/icons/cleanse.png" title="cleanse" alt="cleanse" width="50%" /><div>Cleanse</div></dt>
               <dd class="action"><span>Remove all skulls from your space</span></dd>
-              <dt class="action"><img src="icons/battle.png" title="cleanse" alt="cleanse" width="50%" /><div>Battle</div></dt>
+              <dt class="action"><img src="/icons/battle.png" title="cleanse" alt="cleanse" width="50%" /><div>Battle</div></dt>
               <dd class="action"><span>Battle a foe on your space</span></dd>
-              <dt class="action"><img src="icons/quest.png" title="cleanse" alt="cleanse" width="50%" /><div>Quest</div></dt>
+              <dt class="action"><img src="/icons/quest.png" title="cleanse" alt="cleanse" width="50%" /><div>Quest</div></dt>
               <dd class="action"><span>Complete a quest or explore a dungeon</span></dd>
-              <dt id="alliances-heroic-action-name" class="action hidden"><img src="icons/influence-action.png" title="influence" alt="influence" width="50%" /><div>Influence</div></dt>
-              <dd id="alliances-heroic-action-description" class="action hidden"><span>When at a Guild Hall gain 2 <img src="icons/influence.png" title="influence" alt="influence" width="24" height="24"></span></dd>
+              <dt id="alliances-heroic-action-name" class="action hidden"><img src="/icons/influence-action.png" title="influence" alt="influence" width="50%" /><div>Influence</div></dt>
+              <dd id="alliances-heroic-action-description" class="action hidden"><span>When at a Guild Hall gain 2 <img src="/icons/influence.png" title="influence" alt="influence" width="24" height="24"></span></dd>
               <dt id="covenant-heroic-action-name" class="action hidden"><div>Build</div></dt>
               <dd id="covenant-heroic-action-description" class="action hidden"><span>Spend 3 offering tokens from the foundation to complete the monument. (Be sure to indicate this in the app.)</span></dd>
             </dl>
-            <div class="after">Gain 2 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> after</div>
+            <div class="after">Gain 2 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> after</div>
           </div>
           <div id="reinforce">
-            <h4><img src="icons/reinforce.png" title="reinforce" alt="reinforce" width="20px" />Reinforce</h4>
+            <h4><img src="/icons/reinforce.png" title="reinforce" alt="reinforce" width="20px" />Reinforce</h4>
             <div class="choose-one">Choose One</div>
             <dl>
-              <dt class="action"><img src="icons/citadel.png" title="citadel" alt="citadel" /><div>Citadel</div></dt>
+              <dt class="action"><img src="/icons/citadel.png" title="citadel" alt="citadel" /><div>Citadel</div></dt>
               <dd class="action">
                 <dl>
                   <dt><strong>Free:</strong></dt><dd>Gain 1 potion</dd>
-                  <dt><strong>5 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Gain 1 virtue</dd>
+                  <dt><strong>5 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Gain 1 virtue</dd>
                 </dl>
               </dd>
-              <dt class="action"><img src="icons/sanctuary.png" title="sanctuary" alt="sanctuary" /><div>Sanctuary</div></dt>
+              <dt class="action"><img src="/icons/sanctuary.png" title="sanctuary" alt="sanctuary" /><div>Sanctuary</div></dt>
               <dd class="action">
                 <dl>
                   <dt><strong>Free:</strong></dt><dd>Gain 1 spirit</dd>
-                  <dt><strong>5 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Remove all your corruptions</dd>
+                  <dt><strong>5 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Remove all your corruptions</dd>
                 </dl>
               </dd>
-              <dt class="action"><img src="icons/village.png" title="village" alt="village" /><div>Village</div></dt>
+              <dt class="action"><img src="/icons/village.png" title="village" alt="village" /><div>Village</div></dt>
               <dd class="action">
                 <dl>
-                  <dt><strong>Free:</strong></dt><dd>Gain 6 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /></dd>
-                  <dt><strong>1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Gain 12 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /></dd>
+                  <dt><strong>Free:</strong></dt><dd>Gain 6 <img src="/icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /></dd>
+                  <dt><strong>1 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Gain 12 <img src="/icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /></dd>
                 </dl>
               </dd>
-              <dt class="action"><img src="icons/bazaar.png" title="bazaar" alt="bazaar" /><div>Bazaar</div></dt>
+              <dt class="action"><img src="/icons/bazaar.png" title="bazaar" alt="bazaar" /><div>Bazaar</div></dt>
               <dd class="action">
                 <dl>
                   <dt><strong>Free:</strong></dt><dd>Gain 1 gear</dd>
-                  <dt><strong>2 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Gain 1 treasure</dd>
+                  <dt><strong>2 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:</strong></dt><dd>Gain 1 treasure</dd>
                 </dl>
               </dd>
               <dt id="alliances-reinforcement-action-name" class="action hidden"><div>Guild Hall</div></dt>
               <dd id="alliances-reinforcement-action-description" class="action hidden">
                 <dl>
-                  <dt><strong>5 <img src="icons/influence.png" title="influence" alt="influence" width="24" height="24">:</strong></dt>
+                  <dt><strong>5 <img src="/icons/influence.png" title="influence" alt="influence" width="24" height="24">:</strong></dt>
                   <dd>Gain 1 level in corresponding Guild</dd>
                 </dl>
               </dd>
@@ -330,14 +339,14 @@
     <div id="header">
       <section id="counters" class="hidden">
         <div id="warriors">
-          <div><img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />: <span id="warrior-counter" class="counter"></span></div>
+          <div><img src="/icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />: <span id="warrior-counter" class="counter"></span></div>
           <button onclick="updateCount('warriors', -5)">-5</button>
           <button onclick="updateCount('warriors', -1)">-1</button>
           <button onclick="updateCount('warriors', 1)">+1</button>
           <button onclick="updateCount('warriors', 6)"><strong>+6</strong></button>
         </div>
         <div id="spirit">
-          <div><img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />: <span id="spirit-counter" class="counter"></span></div>
+          <div><img src="/icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />: <span id="spirit-counter" class="counter"></span></div>
           <button onclick="updateCount('spirit', -5)">-5</button>
           <button onclick="updateCount('spirit', -1)">-1</button>
           <button onclick="updateCount('spirit', 1)">+1</button>
@@ -361,43 +370,43 @@
         <h2>Advantages</h2>
         <div id="advantages-wrapper">
           <div>
-            <img src="icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
+            <img src="/icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
               onclick="highlightAdvantage(this.classList, 'BEAST')" />
             <span class="advantage">BEAST: </span>
             <span id="beast-counter" class="counter"></span>
           </div>
           <div>
-            <img src="icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
+            <img src="/icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
               onclick="highlightAdvantage(this.classList, 'HUMANOID')" />
             <span class="advantage">HUMANOID: </span>
             <span id="humanoid-counter" class="counter"></span>
           </div>
           <div>
-            <img src="icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
+            <img src="/icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
               onclick="highlightAdvantage(this.classList, 'MAGIC')" />
             <span class="advantage">MAGIC: </span>
             <span id="magic-counter" class="counter"></span>
           </div>
           <div>
-            <img src="icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
+            <img src="/icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
               onclick="highlightAdvantage(this.classList, 'MELEE')" />
             <span class="advantage">MELEE: </span>
             <span id="melee-counter" class="counter"></span>
           </div>
           <div>
-            <img src="icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
+            <img src="/icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
               onclick="highlightAdvantage(this.classList, 'STEALTH')" />
             <span class="advantage">STEALTH: </span>
             <span id="stealth-counter" class="counter"></span>
           </div>
           <div>
-            <img src="icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
+            <img src="/icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
               onclick="highlightAdvantage(this.classList, 'UNDEAD')" />
             <span class="advantage">UNDEAD: </span>
             <span id="undead-counter" class="counter"></span>
           </div>
           <div>
-            <img src="icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
+            <img src="/icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
               onclick="highlightAdvantage(this.classList, 'Wild')" />
             <span class="advantage">Wild: </span>
             <span id="wild-counter" class="counter"></span>
@@ -494,7 +503,7 @@
         </div>
         <div id="North-monument-offering" class="monument-offering"></div>
         <div id="North-monument-reinforcement" class="monument-reinforcement inactive">
-          <div><img src="icons/reinforce.png" title="reinforce" alt="reinforce" width="20px" /> Reinforce</div>
+          <div><img src="/icons/reinforce.png" title="reinforce" alt="reinforce" width="20px" /> Reinforce</div>
           <dl class="action">
             <dt><strong>Free:</strong></dt>
             <dd id="North-monument-free-action"></dd>
@@ -512,7 +521,7 @@
         </div>
         <div id="South-monument-offering" class="monument-offering"></div>
         <div id="South-monument-reinforcement" class="monument-reinforcement inactive">
-          <div><img src="icons/reinforce.png" title="reinforce" alt="reinforce" width="20px" /> Reinforce</div>
+          <div><img src="/icons/reinforce.png" title="reinforce" alt="reinforce" width="20px" /> Reinforce</div>
           <dl class="action">
             <dt><strong>Free:</strong></dt>
             <dd id="South-monument-free-action"></dd>
@@ -530,7 +539,7 @@
         </div>
         <div id="East-monument-offering" class="monument-offering"></div>
         <div id="East-monument-reinforcement" class="monument-reinforcement inactive">
-          <div><img src="icons/reinforce.png" title="reinforce" alt="reinforce" width="20px" /> Reinforce</div>
+          <div><img src="/icons/reinforce.png" title="reinforce" alt="reinforce" width="20px" /> Reinforce</div>
           <dl class="action">
             <dt><strong>Free:</strong></dt>
             <dd id="East-monument-free-action"></dd>
@@ -548,7 +557,7 @@
         </div>
         <div id="West-monument-offering" class="monument-offering"></div>
         <div id="West-monument-reinforcement" class="monument-reinforcement inactive">
-          <div><img src="icons/reinforce.png" title="reinforce" alt="reinforce" width="20px" /> Reinforce</div>
+          <div><img src="/icons/reinforce.png" title="reinforce" alt="reinforce" width="20px" /> Reinforce</div>
           <dl class="action">
             <dt><strong>Free:</strong></dt>
             <dd id="West-monument-free-action"></dd>
