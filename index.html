@@ -22,7 +22,7 @@
             <section id="character-setup">
               <label>
                 Choose a hero:
-                <select name="character" id="character-selector" onchange="selectedCharacter(this.value)">
+                <select name="hero" id="hero-selector" onchange="selectedHero(this.value)">
                   <option value="">---</option>
                 </select>
               </label>
@@ -618,10 +618,10 @@
 
     <script type="module" src="main.js"></script>
     <script type="module">
-      import { characterSelector, guardianSelector } from './main.js';
+      import { heroSelector, guardianSelector } from './main.js';
 
       function onLoad() {
-        characterSelector();
+        heroSelector();
         guardianSelector();
         pageUpdate();
       }

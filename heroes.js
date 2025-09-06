@@ -574,7 +574,7 @@ const undaunted_ageis = {
   ]
 }
 
-export const CHARACTERS = [
+export const HEROES = [
   archwright,
   brutal_warlord,
   devious_swindler,

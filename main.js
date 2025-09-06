@@ -1,4 +1,4 @@
-import { CHARACTERS } from "./characters.js";
+import { HEROES } from "./heroes.js";
 import { COMPANIONS, ALLIANCE_COMPANIONS } from "./companions.js";
 import { ENEMIES, TRAITS } from "./enemies.js";
 import { GEAR } from "./gear.js";
@@ -8,7 +8,7 @@ import { MONUMENTS } from "./monuments.js";
 import { SPELLS } from "./spells.js";
 import { TREASURES } from "./treasure.js";
 
-const CHARACTER_STORAGE = "character";
+const HERO_STORAGE = "hero";
 const ENEMY_STORAGE = "enemy";
 const REGION_STORAGE = "region";
 const COUNTERS_STORAGE = "counters";
@@ -109,13 +109,13 @@ window.resetGame=() => {
 }
 
 window.startGame=() => {
-    const character = getStoredData(CHARACTER_STORAGE);
+    const hero = getStoredData(HERO_STORAGE);
     const region = getStoredData(REGION_STORAGE);
     const expansion = localStorage.getItem(EXPANSION_STORAGE);
     const enemies = getStoredData(ENEMY_STORAGE);
 
-    if ((character === null) || (region === null) || (expansion === '')) {
-        alert('You must select a character, a region, and indicate any expansion usage.');
+    if ((hero === null) || (region === null) || (expansion === '')) {
+        alert('You must select a hero, a home kingdom, and indicate any expansion usage.');
         return;
     }
 
@@ -233,7 +233,7 @@ function initializeCardHolders() {
 }
 
 function applyPermanentVirtues() {
-  const virtues = getStoredData(CHARACTER_STORAGE).virtues;
+  const virtues = getStoredData(HERO_STORAGE).virtues;
 
   virtues.filter((virtue) => virtue.permanent === true).forEach((virtue) => {
     addSystemDetails(virtue);
@@ -478,13 +478,13 @@ const updateStorage = (storageKey, func) => {
   updateStoredData(storageKey, storageData);
 }
 
-export function characterSelector() {
-    const selector = document.getElementById('character-selector');
+export function heroSelector() {
+    const selector = document.getElementById('hero-selector');
 
-    CHARACTERS.map( (character) => {
+    HEROES.map(hero => {
         let opt = document.createElement("option");
-        opt.value = character.id;
-        opt.innerHTML = character.name;
+        opt.value = hero.id;
+        opt.innerHTML = hero.name;
         selector.append(opt);
     });
 }
@@ -506,9 +506,9 @@ window.selectedRegion=(value) => {
     updateStoredData(REGION_STORAGE, region);
 }
 
-window.selectedCharacter=(value) => {
-    const character = CHARACTERS.find(element => element.id === value);
-    updateStoredData(CHARACTER_STORAGE, character);
+window.selectedHero=(value) => {
+    const hero = HEROES.find(element => element.id === value);
+    updateStoredData(HERO_STORAGE, hero);
 }
 
 window.selectedEnemy=(id, value) => {
@@ -526,7 +526,7 @@ window.selectedEnemy=(id, value) => {
 }
 
 window.pageUpdate=() => {
-    const character = getStoredData(CHARACTER_STORAGE);
+    const hero = getStoredData(HERO_STORAGE);
     const enemies = getStoredData(ENEMY_STORAGE);
     const region = getStoredData(REGION_STORAGE);
     const counters = getStoredData(COUNTERS_STORAGE);
@@ -537,8 +537,8 @@ window.pageUpdate=() => {
     const started = localStorage.getItem(STARTED_STORAGE) === 'true';
     const includeSpells = getStoredData(INCLUDE_SPELLS_STORAGE);
 
-    const characterSelector = document.getElementById("character-selector");
-    characterSelector.value = character ? character.id : '';
+    const heroSelector = document.getElementById("hero-selector");
+    heroSelector.value = hero ? hero.id : '';
 
     for (let level = 2; level <= 5; level++) {
       document.getElementById("enemy-selector-level-" + level).value = enemies[level]?.id || '';      
@@ -580,7 +580,7 @@ window.pageUpdate=() => {
         revealSections(expansion, includeSpells);
         setCounters(counters);
         setAdvantages(advantages);
-        showCharacterDetails(character);
+        showHeroDetails(hero);
         showEnemyDetails(enemies);
         showRegionDetails(region);
         showCards(includeSpells);
@@ -698,12 +698,12 @@ function setAdvantages(advantages) {
     document.getElementById("wild-counter").innerHTML = advantages.Wild;
 }
 
-function showCharacterDetails(character) {
-    document.getElementById("banner-description").innerHTML = character.banner;
-    document.getElementById("movement").innerHTML = character.move;
+function showHeroDetails(hero) {
+    document.getElementById("banner-description").innerHTML = hero.banner;
+    document.getElementById("movement").innerHTML = hero.move;
 
     // populate virtues
-    character.virtues.map((virtue) => {
+    hero.virtues.map((virtue) => {
         const virtueElement = document.getElementById(virtue.type + '-' + virtue.id);
 
         document.getElementById(virtue.id + "-name").innerHTML = virtue.name
@@ -1093,7 +1093,7 @@ window.updateCount=(counter, amount) => {
 }
 
 window.toggleVirtue=(value) => {
-  updateStorage(CHARACTER_STORAGE, (data) => {
+  updateStorage(HERO_STORAGE, (data) => {
     let virtue = data.virtues.find((v) => v.id === value)
 
     virtue.active = !virtue.active;
