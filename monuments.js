@@ -9,7 +9,7 @@ export const MONUMENTS = [
     reinforce: {
       free: 'Gain 1 gear',
       enhanced: {
-        cost: '5 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />',
+        cost: '5 <img src="icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />',
         effect: 'Gain 1 virtue and the top two cards of the treasure deck'
       }
     }
@@ -22,7 +22,7 @@ export const MONUMENTS = [
     built: false,
     offering: 'Gain a corruption.',
     reinforce: {
-      free: 'Gain 1 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />',
+      free: 'Gain 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />',
       enhanced: {
         cost: 'Free',
         effect: 'Spend any number of items to remove an equal number of your corruptions'
@@ -39,7 +39,7 @@ export const MONUMENTS = [
     reinforce: {
       free: 'Gain 1 potion',
       enhanced: {
-        cost: '4 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />',
+        cost: '4 <img src="icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />',
         effect: 'Gain an active virtue tile from outside the game'
       }
     }
@@ -52,7 +52,7 @@ export const MONUMENTS = [
     built: false,
     offering: 'Lose 8+ warriors from a battle card.',
     reinforce: {
-      free: 'Gain 6 <img src="/icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" />',
+      free: 'Gain 6 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" />',
       enhanced: {
         cost: 'Free',
         effect: 'Place yourself and this building in any space without a building'
@@ -67,9 +67,9 @@ export const MONUMENTS = [
     built: false,
     offering: 'Complete a battle without using any advantages.',
     reinforce: {
-      free: 'Gain 1 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />',
+      free: 'Gain 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />',
       enhanced: {
-        cost: '10 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />',
+        cost: '10 <img src="icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />',
         effect: 'You may Battle and Cleanse any number of times this turn'
       }
     }
@@ -82,9 +82,9 @@ export const MONUMENTS = [
     built: false,
     offering: 'Spend or lose a treasure',
     reinforce: {
-      free: 'Gain 6 <img src="/icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" />',
+      free: 'Gain 6 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" />',
       enhanced: {
-        cost: '1 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />',
+        cost: '1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />',
         effect: 'Remove any number of skulls from this building and return them to the supply'
       }
     }
@@ -99,7 +99,7 @@ export const MONUMENTS = [
     reinforce: {
       free: 'Gain 1 gear',
       enhanced: {
-        cost: '20 <img src="/icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" />',
+        cost: '20 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" />',
         effect: 'Remove a foe'
       }
     }
@@ -114,7 +114,7 @@ export const MONUMENTS = [
     reinforce: {
       free: 'Gain 1 potion',
       enhanced: {
-        cost: '1 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />',
+        cost: '1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />',
         effect: 'Gain 2 potions'
       }
     }

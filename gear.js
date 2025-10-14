@@ -29,7 +29,7 @@ export const GEAR = [
     id: 'leather_armor',
     name: 'Leather Armor',
     type: 'gear',
-    description: 'Prevent up to 2 <img src="/icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" /> losses per battle card'
+    description: 'Prevent up to 2 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" /> losses per battle card'
   },
   {
     id: 'longswords',
