@@ -334,7 +334,7 @@ export const ALLIANCE_COMPANIONS = [
         type: 'companion',
         guild: "paladins_order",
         benefit: {
-            text: 'In each battle, place the first 5 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" /> that you lose on this card. At the end of the month, gain all <img src="/icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" /> on this card.',
+            text: 'In each battle, place the first 5 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" /> that you lose on this card. At the end of the month, gain all <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" /> on this card.',
         },
         advantage: [
             {

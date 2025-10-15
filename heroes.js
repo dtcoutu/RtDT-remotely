@@ -144,7 +144,7 @@ const devious_swindler = {
       id: "additional-virtue-1",
       name: "calculating",
       type: 'virtue',
-      description: 'You may ignore <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /> and <img src="/icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> losses on <b>critical hit</b> battle cards.',
+      description: 'You may ignore <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /> and <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> losses on <b>critical hit</b> battle cards.',
       active: false,
       system: {
       }

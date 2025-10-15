@@ -633,7 +633,7 @@ export const TREASURES = [
     id: 'wand-of-celerity',
     name: "Wand of Celerity",
     type: 'treasure',
-    benefit: 'When acquired: 4 <img src="icons/charge.png" title="charge" alt="charge" width="18" height="18" />. Spend any number of <img src="/icons/charge.png" title="charge" alt="charge" width="18" height="18" /> to place your hero that many spaces away. When you Battle a MELEE foe, gain 1 <img src="/icons/charge.png" title="charge" alt="charge" width="18" height="18" />.',
+    benefit: 'When acquired: 4 <img src="icons/charge.png" title="charge" alt="charge" width="18" height="18" />. Spend any number of <img src="icons/charge.png" title="charge" alt="charge" width="18" height="18" /> to place your hero that many spaces away. When you Battle a MELEE foe, gain 1 <img src="icons/charge.png" title="charge" alt="charge" width="18" height="18" />.',
     advantage: '+1 MELEE Advantage',
     expansion: 'covenant',
     system: {
@@ -646,7 +646,7 @@ export const TREASURES = [
     id: 'wand-of-conflagration',
     name: "Wand of Conflagration",
     type: 'treasure',
-    benefit: 'When acquired: 3 <img src="icons/charge.png" title="charge" alt="charge" width="18" height="18" />. Spend any number of <img src="/icons/charge.png" title="charge" alt="charge" width="18" height="18" /> to remove a foe of that level in your space. At the end of each month gain 1 <img src="/icons/charge.png" title="charge" alt="charge" width="18" height="18" />.',
+    benefit: 'When acquired: 3 <img src="icons/charge.png" title="charge" alt="charge" width="18" height="18" />. Spend any number of <img src="icons/charge.png" title="charge" alt="charge" width="18" height="18" /> to remove a foe of that level in your space. At the end of each month gain 1 <img src="icons/charge.png" title="charge" alt="charge" width="18" height="18" />.',
     advantage: '+1 MAGIC Advantage',
     expansion: 'covenant',
     system: {
@@ -660,7 +660,7 @@ export const TREASURES = [
     id: 'wand-of-pacification',
     name: "Wand of Pacification",
     type: 'treasure',
-    benefit: 'When acquired: 1 <img src="icons/charge.png" title="charge" alt="charge" width="18" height="18" />. Spend 1 <img src="/icons/charge.png" title="charge" alt="charge" width="18" height="18" /> to remove all skulls on or adjacent to your space. When you Battle a UNDEAD foe, gain 1 <img src="/icons/charge.png" title="charge" alt="charge" width="18" height="18" />.',
+    benefit: 'When acquired: 1 <img src="icons/charge.png" title="charge" alt="charge" width="18" height="18" />. Spend 1 <img src="icons/charge.png" title="charge" alt="charge" width="18" height="18" /> to remove all skulls on or adjacent to your space. When you Battle a UNDEAD foe, gain 1 <img src="icons/charge.png" title="charge" alt="charge" width="18" height="18" />.',
     advantage: '+1 UNDEAD Advantage',
     expansion: 'covenant',
     system: {
