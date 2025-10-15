@@ -36,7 +36,7 @@ const NO_EXPANSION = "none";
 const ALLIANCES_EXPANSION = "alliances";
 const COVENANT_EXPANSION = "covenant";
 
-const CARD_STORAGES =   [
+const CARD_STORAGES = [
   COMPANION_STORAGE,
   GEAR_STORAGE,
   POTION_STORAGE,
@@ -45,46 +45,46 @@ const CARD_STORAGES =   [
 ]
 
 const NORTH = {
-    id: "North",
-    name: "Champion of the North",
-    type: "region",
-    description: "+2 Wild Advantages in mountains",
-    system: {
-      advantage: 'Wild'
-    }
+  id: "North",
+  name: "Champion of the North",
+  type: "region",
+  description: "+2 Wild Advantages in mountains",
+  system: {
+    advantage: 'Wild'
+  }
 }
 
 const SOUTH = {
-    id: "South",
-    name: "Champion of the South",
-    type: "region",
-    description: "+2 Wild Advantages in desert",
-    system: {
-      advantage: 'Wild'
-    }
+  id: "South",
+  name: "Champion of the South",
+  type: "region",
+  description: "+2 Wild Advantages in desert",
+  system: {
+    advantage: 'Wild'
+  }
 }
 
 const EAST = {
-    id: "East",
-    name: "Champion of the East",
-    type: "region",
-    description: "+2 Wild Advantages in hills",
-    system: {
-      advantage: 'Wild'
-    }
+  id: "East",
+  name: "Champion of the East",
+  type: "region",
+  description: "+2 Wild Advantages in hills",
+  system: {
+    advantage: 'Wild'
+  }
 }
 
 const WEST = {
-    id: "West",
-    name: "Champion of the West",
-    type: "region",
-    description: "+2 Wild Advantages in forest",
-    system: {
-      advantage: 'Wild'
-    }
+  id: "West",
+  name: "Champion of the West",
+  type: "region",
+  description: "+2 Wild Advantages in forest",
+  system: {
+    advantage: 'Wild'
+  }
 }
 
-const REGIONS = [ NORTH, EAST, SOUTH, WEST]
+const REGIONS = [NORTH, EAST, SOUTH, WEST]
 
 const BLESSING_ITEM = {
   type: 'blessing',
@@ -95,73 +95,73 @@ const BLESSING_ITEM = {
   }
 }
 
-window.resetGame=() => {
-    localStorage.clear();
+window.resetGame = () => {
+  localStorage.clear();
 
-    initializeEnemies();
-    initializeExpansions();
+  initializeEnemies();
+  initializeExpansions();
 
-    hideSections();
+  hideSections();
 
-    document.getElementById("expansion-select").value = "";
+  document.getElementById("expansion-select").value = "";
 
-    pageUpdate();
+  pageUpdate();
 }
 
-window.startGame=() => {
-    const hero = getStoredData(HERO_STORAGE);
-    const region = getStoredData(REGION_STORAGE);
-    const expansion = localStorage.getItem(EXPANSION_STORAGE);
-    const enemies = getStoredData(ENEMY_STORAGE);
+window.startGame = () => {
+  const hero = getStoredData(HERO_STORAGE);
+  const region = getStoredData(REGION_STORAGE);
+  const expansion = localStorage.getItem(EXPANSION_STORAGE);
+  const enemies = getStoredData(ENEMY_STORAGE);
 
-    if ((hero === null) || (region === null) || (expansion === '')) {
-        alert('You must select a hero, a home kingdom, and indicate any expansion usage.');
-        return;
+  if ((hero === null) || (region === null) || (expansion === '')) {
+    alert('You must select a hero, a home kingdom, and indicate any expansion usage.');
+    return;
+  }
+
+  let missingEnemy = false;
+  for (const key in enemies) {
+    if (enemies[key] === '') {
+      missingEnemy = true;
+      break;
     }
+  }
 
-    let missingEnemy = false;
-    for (const key in enemies) {
-      if (enemies[key] === '') {
-        missingEnemy = true;
-        break;
-      }
-    }
+  if (missingEnemy) {
+    alert('You must select an enemy for each level.');
+    return;
+  }
 
-    if (missingEnemy) {
-      alert('You must select an enemy for each level.');
-      return;
-    }
+  if (expansion === ALLIANCES_EXPANSION && !guildRegionsValid()) {
+    alert('All guilds must have a region set and they must be unique.');
+    return;
+  }
 
-    if (expansion === ALLIANCES_EXPANSION && !guildRegionsValid()) {
-      alert('All guilds must have a region set and they must be unique.');
-      return;
-    }
+  if (expansion === COVENANT_EXPANSION && !monumentRegionsValid()) {
+    alert('All monument regions must have a unique monument assigned.')
+    return;
+  }
 
-    if (expansion === COVENANT_EXPANSION && !monumentRegionsValid()) {
-      alert('All monument regions must have a unique monument assigned.')
-      return;
-    }
+  localStorage.setItem(STARTED_STORAGE, 'true');
 
-    localStorage.setItem(STARTED_STORAGE, 'true');
+  localStorage.setItem(INCLUDE_SPELLS_STORAGE, JSON.stringify([]));
+  initializeCardHolders();
+  initializeCounters();
+  initializeAdvantages();
+  initializeHighlights();
 
-    localStorage.setItem(INCLUDE_SPELLS_STORAGE, JSON.stringify([]));
-    initializeCardHolders();
-    initializeCounters();
-    initializeAdvantages();
-    initializeHighlights();
+  applyPermanentVirtues();
+  addSystemDetails(region);
 
-    applyPermanentVirtues();
-    addSystemDetails(region);
-
-    pageUpdate();
+  pageUpdate();
 }
 
 function guildRegionsValid() {
-    const guildRegions = GUILDS.map(guild => document.getElementById(guild.id + '-location').value);
+  const guildRegions = GUILDS.map(guild => document.getElementById(guild.id + '-location').value);
 
-    const uniqueGuildRegions = [...new Set(guildRegions)];
+  const uniqueGuildRegions = [...new Set(guildRegions)];
 
-    return guildRegions.length === uniqueGuildRegions.length;
+  return guildRegions.length === uniqueGuildRegions.length;
 }
 
 function monumentRegionsValid() {
@@ -199,17 +199,17 @@ function initializeCounters() {
 }
 
 function initializeAdvantages() {
-    const advantages = {
-        BEAST: 0,
-        HUMANOID: 0,
-        MAGIC: 0,
-        MELEE: 0,
-        STEALTH: 0,
-        UNDEAD: 0,
-        Wild: 0,
-    }
+  const advantages = {
+    BEAST: 0,
+    HUMANOID: 0,
+    MAGIC: 0,
+    MELEE: 0,
+    STEALTH: 0,
+    UNDEAD: 0,
+    Wild: 0,
+  }
 
-    localStorage.setItem(ADVANTAGES_STORAGE, JSON.stringify(advantages));
+  localStorage.setItem(ADVANTAGES_STORAGE, JSON.stringify(advantages));
 }
 
 function initializeHighlights() {
@@ -240,7 +240,7 @@ function applyPermanentVirtues() {
   });
 }
 
-window.expansionSelection=(expansion) => {
+window.expansionSelection = (expansion) => {
   localStorage.setItem(EXPANSION_STORAGE, expansion);
 
   if (expansion === ALLIANCES_EXPANSION) {
@@ -268,21 +268,21 @@ function covenantInclusion() {
   updateStoredData(COVENANT_STORAGE, covenant);
 }
 
-window.allianceRegionSet=(selectorId, value) => {
+window.allianceRegionSet = (selectorId, value) => {
   updateStorage(ALLIANCES_STORAGE, (data) => {
     const guild = data.guilds.find((guild) => guild.id === selectorId.split('-')[0])
     guild.region = value;
   });
 }
 
-window.allianceGuildSideSet=(selectorId, value) => {
+window.allianceGuildSideSet = (selectorId, value) => {
   updateStorage(ALLIANCES_STORAGE, (data) => {
     const guild = data.guilds.find((guild) => guild.id === selectorId.split('-')[0])
     guild.side = value;
   });
 }
 
-window.monumentRegionSet=(selectorId, value) => {
+window.monumentRegionSet = (selectorId, value) => {
   const region = selectorId.split('-')[2];
   const selectedMonument = MONUMENTS.find(monument => monument.id === value);
 
@@ -297,131 +297,128 @@ window.monumentRegionSet=(selectorId, value) => {
   });
 }
 
-window.selectGear=() => {
-    selectCard("gear", GEAR, GEAR_STORAGE);
+window.selectGear = () => {
+  selectCard("gear", GEAR, GEAR_STORAGE);
 }
 
-window.selectCompanion=() => {
-    selectCard("companion", COMPANIONS, COMPANION_STORAGE);
+window.selectCompanion = () => {
+  selectCard("companion", COMPANIONS, COMPANION_STORAGE);
 }
 
-window.selectPotion=() => {
-    selectCard("potion", POTIONS, POTION_STORAGE, true);
+window.selectPotion = () => {
+  selectCard("potion", POTIONS, POTION_STORAGE, true);
 }
 
-window.selectSpell=() => {
+window.selectSpell = () => {
   const include_spell_types = getStoredData(INCLUDE_SPELLS_STORAGE);
 
   const filteredSpells = SPELLS.filter(spell => include_spell_types.includes(spell.type));
   selectCard("spell", filteredSpells, SPELL_STORAGE);
 }
 
-window.selectTreasure=() => {
-    selectCard("treasure", TREASURES, TREASURE_STORAGE);
+window.selectTreasure = () => {
+  selectCard("treasure", TREASURES, TREASURE_STORAGE);
 }
 
 function selectCard(elementIdPartial, dataSet, dataStorage, allowMultiple = false) {
-    hideElement("select-" + elementIdPartial);
+  hideElement("select-" + elementIdPartial);
 
-    const selector = document.getElementById(elementIdPartial + "-selector");
-    selector.innerHTML = "";
+  const selector = document.getElementById(elementIdPartial + "-selector");
+  selector.innerHTML = "";
 
-    const currentData = getStoredData(dataStorage);
+  const currentData = getStoredData(dataStorage);
 
-    const filterFunction = allowMultiple ? (item) => item : (item) => currentData.find((i) => i.id === item.id) === undefined
+  const filterFunction = allowMultiple ? (item) => item : (item) => currentData.find((i) => i.id === item.id) === undefined
 
-    dataSet.filter(filterFunction).map((item) => {
-        let opt = document.createElement("option");
-        opt.value = item.id;
-        opt.innerHTML = item.name;
-        selector.append(opt);
-    });
+  dataSet.filter(filterFunction).map((item) => {
+    let opt = document.createElement("option");
+    opt.value = item.id;
+    opt.innerHTML = item.name;
+    selector.append(opt);
+  });
 
-    selector.classList.remove("hidden");
+  selector.classList.remove("hidden");
 
-    showElement("add-" + elementIdPartial);
+  showElement("add-" + elementIdPartial);
 }
 
-window.addGear=() => {
-    addCard("gear", GEAR, GEAR_STORAGE);
+window.addGear = () => {
+  addCard("gear", GEAR, GEAR_STORAGE);
 }
 
-window.addCompanion=() => {
-    addCard("companion", COMPANIONS, COMPANION_STORAGE);
+window.addCompanion = () => {
+  addCard("companion", COMPANIONS, COMPANION_STORAGE);
 }
 
-window.addPotion=() => {
-    addCard("potion", POTIONS, POTION_STORAGE, true);
+window.addPotion = () => {
+  addCard("potion", POTIONS, POTION_STORAGE, true);
 }
 
-window.addSpell=() => {
+window.addSpell = () => {
   addCard("spell", SPELLS, SPELL_STORAGE);
 }
 
-window.addTreasure=() => {
-    addCard("treasure", TREASURES, TREASURE_STORAGE);
+window.addTreasure = () => {
+  addCard("treasure", TREASURES, TREASURE_STORAGE);
 }
 
 function addCard(elementIdPartial, dataSet, dataStorage, allowMultiple = false) {
-    hideElement("add-" + elementIdPartial);
+  hideElement("add-" + elementIdPartial);
 
-    const selector = document.getElementById(elementIdPartial + "-selector");
-    let itemList = getStoredData(dataStorage);
-    const item = structuredClone(dataSet.find(element => element.id === selector.value));
+  const selector = document.getElementById(elementIdPartial + "-selector");
+  let itemList = getStoredData(dataStorage);
+  const item = structuredClone(dataSet.find(element => element.id === selector.value));
 
-    if (allowMultiple) {
-        let matchedItem = itemList.find(i => i.id === item.id)
+  if (allowMultiple) {
+    let matchedItem = itemList.find(i => i.id === item.id)
 
-        if (matchedItem === undefined) {
-            item.count = 1;
-            itemList.push(item);
-        } else {
-            matchedItem.count++
-        }
-    } else {
-      if (item.system?.charge) {
-        item.currentCharges = item.system.charge;
-      }
-
+    if (matchedItem === undefined) {
+      item.count = 1;
       itemList.push(item);
+    } else {
+      matchedItem.count++
+    }
+  } else {
+    if (item.system?.charge) {
+      item.currentCharges = item.system.charge;
     }
 
-    addSystemDetails(item);
+    itemList.push(item);
+  }
 
-    updateStoredData(dataStorage, itemList);
-    selector.classList.add("hidden");
+  addSystemDetails(item);
 
-    if (itemList.length === dataSet.length && !allowMultiple) {
-        disableElement("select-" + elementIdPartial);
-    }
+  updateStoredData(dataStorage, itemList);
+  selector.classList.add("hidden");
 
-    showElement("select-" + elementIdPartial);
+  if (itemList.length === dataSet.length && !allowMultiple) {
+    disableElement("select-" + elementIdPartial);
+  }
+
+  showElement("select-" + elementIdPartial);
 }
 
-function removeCard(buttonEvent) {
-    const cardId = buttonEvent.target.value;
-    const cardType = buttonEvent.target.name;
+function removeCard(cardType, id) {
+  const dataStorage = CARD_STORAGES.find(type => type === cardType);
 
-    const dataStorage = CARD_STORAGES.find(type => type === cardType);
+  let cardList = getStoredData(dataStorage);
 
-    let cardList = getStoredData(dataStorage);
+  const index = cardList.findIndex((card) => card.id === id);
 
-    const index = cardList.findIndex((card) => card.id === cardId);
+  if (index === -1) return;
 
-    if (index === -1) return;
+  const card = cardList[index];
 
-    const card = cardList[index];
+  if (cardList[index].count > 1) {
+    cardList[index].count--;
+  } else {
+    cardList.splice(index, 1);
+  }
 
-    if (cardList[index].count > 1) {
-        cardList[index].count--;
-    } else {
-        cardList.splice(index, 1);
-    }
+  removeSystemDetails(card);
+  updateStoredData(dataStorage, cardList);
 
-    removeSystemDetails(card);
-    updateStoredData(dataStorage, cardList);
-
-    enableElement("select-" + cardType);
+  enableElement("select-" + cardType);
 }
 
 function removeSystemDetails(item) {
@@ -479,118 +476,136 @@ const updateStorage = (storageKey, func) => {
 }
 
 export function heroSelector() {
-    const selector = document.getElementById('hero-selector');
+  const selector = document.getElementById('hero-selector');
 
-    HEROES.map(hero => {
-        let opt = document.createElement("option");
-        opt.value = hero.id;
-        opt.innerHTML = hero.name;
-        selector.append(opt);
-    });
+  HEROES.map(hero => {
+    let opt = document.createElement("option");
+    opt.value = hero.id;
+    opt.innerHTML = hero.name;
+    selector.append(opt);
+  });
 }
 
 export function guardianSelector() {
-    const selector = document.getElementById('guardian-selector');
+  const selector = document.getElementById('guardian-selector');
 
-    REGIONS.map( region => {
-        let opt = document.createElement("option");
-        opt.value = region.id;
-        opt.innerHTML = region.name;
-        selector.append(opt);
-    });
+  REGIONS.map(region => {
+    let opt = document.createElement("option");
+    opt.value = region.id;
+    opt.innerHTML = region.name;
+    selector.append(opt);
+  });
 }
 
-window.selectedRegion=(value) => {
-    const region = REGIONS.find(element => element.id === value);
+window.selectedRegion = (value) => {
+  const region = REGIONS.find(element => element.id === value);
 
-    updateStoredData(REGION_STORAGE, region);
+  updateStoredData(REGION_STORAGE, region);
 }
 
-window.selectedHero=(value) => {
-    const hero = HEROES.find(element => element.id === value);
-    updateStoredData(HERO_STORAGE, hero);
+window.selectedHero = (value) => {
+  const hero = HEROES.find(element => element.id === value);
+  updateStoredData(HERO_STORAGE, hero);
 }
 
-window.selectedEnemy=(id, value) => {
-    const level = id.slice(-1);
+window.selectedEnemy = (id, value) => {
+  const level = id.slice(-1);
 
-    updateStorage(ENEMY_STORAGE, (data) => {
-      if (data === null) {
-        data = {};
-      }
-
-      const foundEnemy = ENEMIES.find(element => element.id === value );
-
-      data[level] = foundEnemy;
-    });
-}
-
-window.pageUpdate=() => {
-    const hero = getStoredData(HERO_STORAGE);
-    const enemies = getStoredData(ENEMY_STORAGE);
-    const region = getStoredData(REGION_STORAGE);
-    const counters = getStoredData(COUNTERS_STORAGE);
-    const advantages = getStoredData(ADVANTAGES_STORAGE);
-    const expansion = localStorage.getItem(EXPANSION_STORAGE);
-    const alliances = getStoredData(ALLIANCES_STORAGE);
-    const covenant = getStoredData(COVENANT_STORAGE);
-    const started = localStorage.getItem(STARTED_STORAGE) === 'true';
-    const includeSpells = getStoredData(INCLUDE_SPELLS_STORAGE);
-
-    const heroSelector = document.getElementById("hero-selector");
-    heroSelector.value = hero ? hero.id : '';
-
-    for (let level = 2; level <= 5; level++) {
-      document.getElementById("enemy-selector-level-" + level).value = enemies[level]?.id || '';      
+  updateStorage(ENEMY_STORAGE, (data) => {
+    if (data === null) {
+      data = {};
     }
 
-    const regionSelector = document.getElementById("guardian-selector");
-    regionSelector.value = region ? region.id : '';
+    const foundEnemy = ENEMIES.find(element => element.id === value);
 
-    document.getElementById("expansion-select").value = expansion === null ? '' : expansion;
+    data[level] = foundEnemy;
+  });
+}
 
+window.setup = () => {
+  document.getElementById('cards').addEventListener('click', (e) => {
+    const card = e.target.closest('.card');
+
+    if (e.target.dataset.action === 'remove') {
+      removeCard(card.dataset.cardType, card.dataset.cardId);
+    }
+
+    if (e.target.dataset.action === 'recover-charge') {
+      updateCharge(card.dataset.cardType + "-" + card.dataset.cardId, 1)
+    }
+
+    if (e.target.dataset.action === 'use-charge') {
+      updateCharge(card.dataset.cardType + "-" + card.dataset.cardId, -1)
+    }
+  });
+}
+
+window.pageUpdate = () => {
+  const hero = getStoredData(HERO_STORAGE);
+  const enemies = getStoredData(ENEMY_STORAGE);
+  const region = getStoredData(REGION_STORAGE);
+  const counters = getStoredData(COUNTERS_STORAGE);
+  const advantages = getStoredData(ADVANTAGES_STORAGE);
+  const expansion = localStorage.getItem(EXPANSION_STORAGE);
+  const alliances = getStoredData(ALLIANCES_STORAGE);
+  const covenant = getStoredData(COVENANT_STORAGE);
+  const started = localStorage.getItem(STARTED_STORAGE) === 'true';
+  const includeSpells = getStoredData(INCLUDE_SPELLS_STORAGE);
+
+  const heroSelector = document.getElementById("hero-selector");
+  heroSelector.value = hero ? hero.id : '';
+
+  for (let level = 2; level <= 5; level++) {
+    document.getElementById("enemy-selector-level-" + level).value = enemies[level]?.id || '';
+  }
+
+  const regionSelector = document.getElementById("guardian-selector");
+  regionSelector.value = region ? region.id : '';
+
+  document.getElementById("expansion-select").value = expansion === null ? '' : expansion;
+
+  if (expansion === ALLIANCES_EXPANSION) {
+    showElement('alliances-guild-setup');
+    toggleAlliancesActions(true);
+
+    alliances.guilds.forEach((guild) => {
+      document.getElementById(guild.id + '-location').value = guild.region;
+      document.getElementById(guild.id + '-side').value = guild.side
+    });
+  } else {
+    toggleAlliancesActions(false);
+    localStorage.removeItem(ALLIANCES_STORAGE);
+    hideElement('alliances-guild-setup');
+  }
+
+  if (expansion === COVENANT_EXPANSION) {
+    showElement('covenant-setup');
+    toggleCovenantActions(true);
+
+    covenant.monuments.forEach((monument) => {
+      document.getElementById('monument-setup-' + monument.region).value = monument.id;
+    });
+  } else {
+    toggleCovenantActions(false);
+    localStorage.removeItem(COVENANT_STORAGE);
+    hideElement('covenant-setup');
+  }
+
+  if (started) {
+    revealSections(expansion, includeSpells);
+    setCounters(counters);
+    setAdvantages(advantages);
+    showHeroDetails(hero);
+    showEnemyDetails(enemies);
+    showRegionDetails(region);
+    showCards(includeSpells);
     if (expansion === ALLIANCES_EXPANSION) {
-      showElement('alliances-guild-setup');
-      toggleAlliancesActions(true);
-
-      alliances.guilds.forEach((guild) => {
-        document.getElementById(guild.id + '-location').value = guild.region;
-        document.getElementById(guild.id + '-side').value = guild.side
-      });
-    } else {
-      toggleAlliancesActions(false);
-      localStorage.removeItem(ALLIANCES_STORAGE);
-      hideElement('alliances-guild-setup');
+      showAlliancesGuilds(alliances, region);
     }
-
     if (expansion === COVENANT_EXPANSION) {
-      showElement('covenant-setup');
-      toggleCovenantActions(true);
-
-      covenant.monuments.forEach((monument) => {
-        document.getElementById('monument-setup-' + monument.region).value = monument.id;
-      });
-    } else {
-      toggleCovenantActions(false);
-      localStorage.removeItem(COVENANT_STORAGE);
-      hideElement('covenant-setup');
+      showCovenantMonuments(covenant, region);
     }
-
-    if (started) {
-        revealSections(expansion, includeSpells);
-        setCounters(counters);
-        setAdvantages(advantages);
-        showHeroDetails(hero);
-        showEnemyDetails(enemies);
-        showRegionDetails(region);
-        showCards(includeSpells);
-        if (expansion === ALLIANCES_EXPANSION) {
-            showAlliancesGuilds(alliances, region);
-        }
-        if (expansion === COVENANT_EXPANSION) {
-          showCovenantMonuments(covenant, region);
-        }
-    }
+  }
 }
 
 function addSystemDetails(item) {
@@ -666,20 +681,20 @@ function revealSections(expansion, includeSpells) {
 }
 
 function hideSections() {
-    [
-        "alliances-guild-setup",
-        "counters",
-        "advantages",
-        "actions",
-        "enemies",
-        "virtues",
-        "cards",
-        "spell-cards",
-        "guilds",
-        "monuments"
-    ].forEach((id) => {
-        hideElement(id);
-    });
+  [
+    "alliances-guild-setup",
+    "counters",
+    "advantages",
+    "actions",
+    "enemies",
+    "virtues",
+    "cards",
+    "spell-cards",
+    "guilds",
+    "monuments"
+  ].forEach((id) => {
+    hideElement(id);
+  });
 }
 
 function setCounters(counters) {
@@ -689,112 +704,112 @@ function setCounters(counters) {
 }
 
 function setAdvantages(advantages) {
-    document.getElementById("beast-counter").innerHTML = advantages.BEAST;
-    document.getElementById("humanoid-counter").innerHTML = advantages.HUMANOID;
-    document.getElementById("magic-counter").innerHTML = advantages.MAGIC;
-    document.getElementById("melee-counter").innerHTML = advantages.MELEE;
-    document.getElementById("stealth-counter").innerHTML = advantages.STEALTH;
-    document.getElementById("undead-counter").innerHTML = advantages.UNDEAD;
-    document.getElementById("wild-counter").innerHTML = advantages.Wild;
+  document.getElementById("beast-counter").innerHTML = advantages.BEAST;
+  document.getElementById("humanoid-counter").innerHTML = advantages.HUMANOID;
+  document.getElementById("magic-counter").innerHTML = advantages.MAGIC;
+  document.getElementById("melee-counter").innerHTML = advantages.MELEE;
+  document.getElementById("stealth-counter").innerHTML = advantages.STEALTH;
+  document.getElementById("undead-counter").innerHTML = advantages.UNDEAD;
+  document.getElementById("wild-counter").innerHTML = advantages.Wild;
 }
 
 function showHeroDetails(hero) {
-    document.getElementById("banner-description").innerHTML = hero.banner;
-    document.getElementById("movement").innerHTML = hero.move;
+  document.getElementById("banner-description").innerHTML = hero.banner;
+  document.getElementById("movement").innerHTML = hero.move;
 
-    // populate virtues
-    hero.virtues.map((virtue) => {
-        const virtueElement = document.getElementById(virtue.type + '-' + virtue.id);
+  // populate virtues
+  hero.virtues.map((virtue) => {
+    const virtueElement = document.getElementById(virtue.type + '-' + virtue.id);
 
-        document.getElementById(virtue.id + "-name").innerHTML = virtue.name
-        document.getElementById(virtue.id + "-description").innerHTML = virtue.description
+    document.getElementById(virtue.id + "-name").innerHTML = virtue.name
+    document.getElementById(virtue.id + "-description").innerHTML = virtue.description
 
-        if (virtue.permanent) {
-            return;
-        }
+    if (virtue.permanent) {
+      return;
+    }
 
-        const buyButton = document.getElementById("buy-" + virtue.id);
+    const buyButton = document.getElementById("buy-" + virtue.id);
 
-        if (virtue.active) {
-            virtueElement.querySelectorAll('div').forEach(div => div.classList.remove("inactive"));
-            buyButton.innerHTML = "Un Buy";
-        } else {
-            virtueElement.querySelectorAll('div').forEach(div => div.classList.add("inactive"));
-            buyButton.innerHTML = "Buy"
-        }
-    });
+    if (virtue.active) {
+      virtueElement.querySelectorAll('div').forEach(div => div.classList.remove("inactive"));
+      buyButton.innerHTML = "Un Buy";
+    } else {
+      virtueElement.querySelectorAll('div').forEach(div => div.classList.add("inactive"));
+      buyButton.innerHTML = "Buy"
+    }
+  });
 }
 
 function showEnemyDetails(enemies) {
-    for (let l=2; l<=5; l++) {
-        const divContainer = document.getElementById("enemy-level-" + l);
-        const enemy = enemies[l.toString()];
+  for (let l = 2; l <= 5; l++) {
+    const divContainer = document.getElementById("enemy-level-" + l);
+    const enemy = enemies[l.toString()];
 
-        // Add name, traits, and strike event
-        const levelSpan = document.createElement("span");
-        levelSpan.classList.add("enemy-level")
-        levelSpan.innerHTML = enemy.level;
-        const nameSpan = document.createElement("span");
-        nameSpan.classList.add("enemy-name");
-        nameSpan.innerHTML = enemy.name;
+    // Add name, traits, and strike event
+    const levelSpan = document.createElement("span");
+    levelSpan.classList.add("enemy-level")
+    levelSpan.innerHTML = enemy.level;
+    const nameSpan = document.createElement("span");
+    nameSpan.classList.add("enemy-name");
+    nameSpan.innerHTML = enemy.name;
 
-        const traitDiv = document.createElement("div");  
-        traitDiv.id = "enemy-traits";      
-        enemy.traits.forEach((trait) => {
-            const traitSpan = document.createElement("span");
-            traitSpan.classList.add("enemy-trait", "enemy-trait-" + trait);
-            traitSpan.innerHTML = trait;
-            traitDiv.appendChild(traitSpan);
-        });
+    const traitDiv = document.createElement("div");
+    traitDiv.id = "enemy-traits";
+    enemy.traits.forEach((trait) => {
+      const traitSpan = document.createElement("span");
+      traitSpan.classList.add("enemy-trait", "enemy-trait-" + trait);
+      traitSpan.innerHTML = trait;
+      traitDiv.appendChild(traitSpan);
+    });
 
-        const battleDiv = document.createElement("div");
-        battleDiv.id = "enemy-battle-effects";
-        if (enemy.when_battling) {
-            enemy.when_battling.forEach((battleText) => {
-                const battleSpan = document.createElement("span");
-                battleSpan.classList.add("battle-effect");
-                battleSpan.innerHTML = battleText;
-                battleDiv.appendChild(battleSpan);
-            });
-        } else {
-            enemy.traits.forEach((trait) => {
-                const battleSpan = document.createElement("span");
-                battleSpan.classList.add("battle-effect");
-                battleSpan.innerHTML = trait.toUpperCase() + " " + TRAITS[trait];
-                battleDiv.appendChild(battleSpan);
-            });
-        }
-
-        const eventSpan = document.createElement("span");
-        eventSpan.classList.add("enemy-event");
-        eventSpan.innerHTML = enemy.strike_event;
-
-        divContainer.replaceChildren(levelSpan, nameSpan, traitDiv, battleDiv, eventSpan);
+    const battleDiv = document.createElement("div");
+    battleDiv.id = "enemy-battle-effects";
+    if (enemy.when_battling) {
+      enemy.when_battling.forEach((battleText) => {
+        const battleSpan = document.createElement("span");
+        battleSpan.classList.add("battle-effect");
+        battleSpan.innerHTML = battleText;
+        battleDiv.appendChild(battleSpan);
+      });
+    } else {
+      enemy.traits.forEach((trait) => {
+        const battleSpan = document.createElement("span");
+        battleSpan.classList.add("battle-effect");
+        battleSpan.innerHTML = trait.toUpperCase() + " " + TRAITS[trait];
+        battleDiv.appendChild(battleSpan);
+      });
     }
+
+    const eventSpan = document.createElement("span");
+    eventSpan.classList.add("enemy-event");
+    eventSpan.innerHTML = enemy.strike_event;
+
+    divContainer.replaceChildren(levelSpan, nameSpan, traitDiv, battleDiv, eventSpan);
+  }
 }
 
 function showRegionDetails(region) {
   // TODO: This is no good because it executes multiple times.
   // Might need to build up the element or introduce a nested div...
-    const regionVirtueElement = document.getElementById("virtue-champion-virtue")
+  const regionVirtueElement = document.getElementById("virtue-champion-virtue")
 
-    const divContainer = document.createElement("div");
-    divContainer.id = region.type + '-' + region.id;
-    divContainer.style = "height: 100%;";
+  const divContainer = document.createElement("div");
+  divContainer.id = region.type + '-' + region.id;
+  divContainer.style = "height: 100%;";
 
-    const nameContainer = document.createElement("div");
-    nameContainer.id = "champion-virtue-name";
-    nameContainer.classList.add("name");
-    nameContainer.innerHTML = region.name;
-    divContainer.appendChild(nameContainer);
+  const nameContainer = document.createElement("div");
+  nameContainer.id = "champion-virtue-name";
+  nameContainer.classList.add("name");
+  nameContainer.innerHTML = region.name;
+  divContainer.appendChild(nameContainer);
 
-    const descriptionContainer = document.createElement("div");
-    descriptionContainer.id = "champion-virtue-description"
-    descriptionContainer.classList.add("description");
-    descriptionContainer.innerHTML = region.description;
-    divContainer.appendChild(descriptionContainer);
+  const descriptionContainer = document.createElement("div");
+  descriptionContainer.id = "champion-virtue-description"
+  descriptionContainer.classList.add("description");
+  descriptionContainer.innerHTML = region.description;
+  divContainer.appendChild(descriptionContainer);
 
-    regionVirtueElement.replaceChildren(divContainer);
+  regionVirtueElement.replaceChildren(divContainer);
 }
 
 function showCards(includeSpells) {
@@ -809,127 +824,83 @@ function showCards(includeSpells) {
 }
 
 function showCardsHelper(elementIdPartial, dataStorage) {
-    const storedData = getStoredData(dataStorage);
+  const storedData = getStoredData(dataStorage);
 
-    const displayList = document.getElementById(elementIdPartial + "-list");
-    displayList.classList.add("card-list");
-    displayList.innerHTML = "";
+  const displayList = document.getElementById(elementIdPartial + "-list");
+  displayList.classList.add("card-list");
+  displayList.innerHTML = "";
 
-    storedData.map((card) => {
-        const cardHeader = document.createElement("dt");
-        cardHeader.id = card.type + '-' + card.id;
+  storedData.map((card) => {
+    const cardHeader = createElementFromHTML(`
+      <dt class="card" id="${card.type}-${card.id}" data-card-id="${card.id}" data-card-type="${card.type}">
+        <button data-action="remove">X</button>
+        <span>${card.name}</span>
+        ${card.type === "companion" ? `<span class="companion-title">${card.title}</span>` : ''}
+        ${card.count ? `<span class="count">x${card.count}</span>` : ''}
+      </dt>
+      `);
 
-        const button = document.createElement("button");
-        button.addEventListener("click", removeCard, false);
-        button.value = card.id;
-        button.name = elementIdPartial;
-        button.innerHTML = "X";
-        cardHeader.appendChild(button);
+    displayList.appendChild(cardHeader);
 
-        const cardName = document.createElement("span");
-        cardName.innerHTML = card.name;
-        cardHeader.appendChild(cardName);
+    let cardBody;
 
-        if (card.count) {
-            const count = document.createElement("span");
-            count.classList.add("count");
-            count.innerHTML = "x" + card.count;
-            cardHeader.appendChild(count);
-        }
+    if (elementIdPartial === "companion") {
+      // benefit - optional with text and usage (optional)
+      const benefitHTML = card.benefit ? `
+        <div>
+          <span>${card.benefit.text}</span>
+          ${card.benefit.usage ? `<span class="companion-usage">${card.benefit.usage}</span>` : ''}
+        </div>
+      ` : '';
 
-        displayList.appendChild(cardHeader);
-        const cardBody = document.createElement("dd");
+      // advantage(s) - each with text and usage (optional)
+      const advantagesHTML = card.advantage.map(adv => `
+        <div>
+          ${adv.text}
+          ${adv.usage ? `<span class="companion-usage">${adv.usage}</span>` : ''}
+        </div>
+        `).join('');
 
+      cardBody = createElementFromHTML(`
+        <dd>
+          ${benefitHTML}
+          ${advantagesHTML}
+          <div>${card.name} ${card.event}</div>
+        </dd>
+        `);
+    } else if (elementIdPartial === "treasure") {
+      const benefitHTML = card.benefit ? `<div>
+          <span>${card.benefit}</span>
+        </div>` : '';
 
-        if (elementIdPartial === "companion") {
-            const cardTitle = document.createElement("span");
-            cardTitle.innerHTML = card.title;
-            cardTitle.classList.add("companion-title");
-            cardHeader.appendChild(cardTitle);
+      const advantageHTML = card.advantage ? `<div>
+          ${card.advantage}
+        </div>` : '';
 
-            // benefit - optional with text and usage (optional)
-            if (card.benefit) {
-                const benefit = document.createElement("div");
-                const benefitText = document.createElement("span");
-                benefitText.innerHTML = card.benefit.text;
-                benefit.appendChild(benefitText);
+      const chargesHTML = card.currentCharges ? `<div>
+        <span>${card.currentCharges}</span>
+        <img src="icons/charge.png" height="15" width="15" style="padding-left: 4px; padding-right: 4px;" />
+        <button data-action="use-charge">-1</button>
+        <button data-action="recover-charge">+1</button>
+      </div>` : '';
 
-                if (card.benefit.usage) {
-                    const benefitUsage = document.createElement("span");
-                    benefitUsage.classList.add("companion-usage");
-                    benefitUsage.innerHTML = card.benefit.usage;
-                    benefit.appendChild(benefitUsage);
-                }
+      cardBody = createElementFromHTML(`
+        <dd class="card" data-card-id="${card.id}" data-card-type="${card.type}">
+          ${benefitHTML.trim()}
+          ${advantageHTML.trim()}
+          ${chargesHTML.trim()}
+        </dd>
+        `);
+    } else {
+      cardBody = createElementFromHTML(`
+        <dd>
+          ${card.description}
+        </dd>
+        `);
+    }
 
-                cardBody.appendChild(benefit);
-            }
-
-            // advantage(s) - each with text and usage (optional)
-            card.advantage.forEach((advantage) => {
-                const advantageElement = document.createElement("div");
-                advantageElement.innerHTML = advantage.text;
-
-                if (advantage.usage) {
-                    const advantageUsage = document.createElement("span");
-                    advantageUsage.classList.add("companion-usage");
-                    advantageUsage.innerHTML = advantage.usage;
-                    advantageElement.appendChild(advantageUsage);
-                }
-
-                cardBody.appendChild(advantageElement);
-            });
-
-            // event
-            const eventElement = document.createElement("div");
-            eventElement.innerHTML = card.name + " " + card.event;
-            cardBody.appendChild(eventElement);
-        } else if (elementIdPartial === "treasure") {
-            // benefit - optional with text and usage (optional)
-            if (card.benefit) {
-                const benefit = document.createElement("div");
-                const benefitText = document.createElement("span");
-                benefitText.innerHTML = card.benefit;
-                benefit.appendChild(benefitText);
-
-                cardBody.appendChild(benefit);
-            }
-
-            // advantage(s) - each with text and usage (optional)
-            if (card.advantage) {
-                const advantageElement = document.createElement("div");
-                advantageElement.innerHTML = card.advantage;
-                cardBody.appendChild(advantageElement);
-            }
-
-            if (card.currentCharges) {
-              const chargeElement = document.createElement("div");
-
-              const amountElement = document.createElement("span");
-              amountElement.innerHTML = card.currentCharges;
-
-              const chargeImg = document.createElement("img");
-              chargeImg.src = "icons/charge.png";
-              chargeImg.height = "15";
-              chargeImg.width = "15";
-              chargeImg.style = "padding-left: 4px; padding-right: 4px;";
-
-              const subtractButton = document.createElement("button");
-              subtractButton.onclick = function() { updateCharge(card.type + "-" + card.id, -1); };
-              subtractButton.innerHTML = "-1";
-
-              const addButton = document.createElement("button");
-              addButton.onclick = function() { updateCharge(card.type + "-" + card.id, 1); };
-              addButton.innerHTML = "+1";
-
-              chargeElement.replaceChildren(amountElement, chargeImg, subtractButton, addButton);
-              cardBody.appendChild(chargeElement);
-            }
-        } else {
-            cardBody.innerHTML = card.description;
-        }
-
-        displayList.appendChild(cardBody);
-    });
+    displayList.appendChild(cardBody);
+  });
 }
 
 function showAlliancesGuilds(alliances, region) {
@@ -950,10 +921,10 @@ function showAlliancesGuilds(alliances, region) {
 
   // update the guild container with a new class based on the sort order
   sortedRegions(region).forEach((area, index) => {
-      const guild = alliances.guilds.find(guild => guild.region === area);
-      const guildElement = document.getElementById(guild.id);
-      guildElement.removeAttribute('class');
-      guildElement.classList.add('region-' + (index+1));
+    const guild = alliances.guilds.find(guild => guild.region === area);
+    const guildElement = document.getElementById(guild.id);
+    guildElement.removeAttribute('class');
+    guildElement.classList.add('region-' + (index + 1));
   });
 }
 
@@ -995,7 +966,7 @@ function showCovenantMonuments(covenant, region) {
   sortedRegions(region).forEach((area, index) => {
     const monumentElement = document.getElementById(area + '-monument');
     monumentElement.removeAttribute('class');
-    monumentElement.classList.add('region-' + (index+1));
+    monumentElement.classList.add('region-' + (index + 1));
   });
 }
 
@@ -1024,7 +995,7 @@ function sortedRegions(region) {
   return sortedRegions;
 }
 
-window.selectGuildLevel=(guildLevelId) => {
+window.selectGuildLevel = (guildLevelId) => {
   const [guildId, level] = guildLevelId.split("-rank-");
 
   updateStorage(ALLIANCES_STORAGE, (data) => {
@@ -1040,7 +1011,7 @@ window.selectGuildLevel=(guildLevelId) => {
 
       const selector = document.getElementById("alliance-companion-selector");
       selector.innerHTML = "";
-  
+
       ALLIANCE_COMPANIONS.filter((companion) => companion.guild == guild.id).map((item) => {
         let opt = document.createElement("option");
         opt.value = item.id;
@@ -1053,46 +1024,46 @@ window.selectGuildLevel=(guildLevelId) => {
   });
 }
 
-window.addAllianceCompanion=() => {
-    const selector = document.getElementById("alliance-companion-selector");
-    updateStorage(COMPANION_STORAGE, (data) => {
-      const item = structuredClone(ALLIANCE_COMPANIONS.find(element => element.id === selector.value));
+window.addAllianceCompanion = () => {
+  const selector = document.getElementById("alliance-companion-selector");
+  updateStorage(COMPANION_STORAGE, (data) => {
+    const item = structuredClone(ALLIANCE_COMPANIONS.find(element => element.id === selector.value));
 
-      data.push(item);
+    data.push(item);
 
-      addSystemDetails(item);
-    });
+    addSystemDetails(item);
+  });
 
-    closeModal("alliance-companion-modal")
+  closeModal("alliance-companion-modal")
 }
 
-window.closeModal=(modalId) => {
-    const modal = document.getElementById(modalId);
-    modal.style.display = "none";
+window.closeModal = (modalId) => {
+  const modal = document.getElementById(modalId);
+  modal.style.display = "none";
 }
 
-window.updateCharge=(item, amount) => {
+window.updateCharge = (item, amount) => {
   updateStorage(TREASURE_STORAGE, (data) => {
     let found = data.find((d) => d.type + "-" + d.id === item);
     found.currentCharges += amount;
   });
 }
 
-window.updateCount=(counter, amount) => {
-    updateStorage(COUNTERS_STORAGE, (data) => {
-      data[counter] += amount;
+window.updateCount = (counter, amount) => {
+  updateStorage(COUNTERS_STORAGE, (data) => {
+    data[counter] += amount;
 
-      if (counter === 'blessing') {
-        if (data[counter] > 0) {
-          addSystemDetails(BLESSING_ITEM);
-        } else {
-          removeSystemDetails(BLESSING_ITEM);
-        }
+    if (counter === 'blessing') {
+      if (data[counter] > 0) {
+        addSystemDetails(BLESSING_ITEM);
+      } else {
+        removeSystemDetails(BLESSING_ITEM);
       }
-    });
+    }
+  });
 }
 
-window.toggleVirtue=(value) => {
+window.toggleVirtue = (value) => {
   updateStorage(HERO_STORAGE, (data) => {
     let virtue = data.virtues.find((v) => v.id === value)
 
@@ -1106,7 +1077,7 @@ window.toggleVirtue=(value) => {
   });
 }
 
-window.toggleMonumentBuild=(value) => {
+window.toggleMonumentBuild = (value) => {
   const region = value.split('-')[0];
   updateStorage(COVENANT_EXPANSION, (data) => {
     let monument = data.monuments.find(monument => monument.region === region);
@@ -1115,7 +1086,7 @@ window.toggleMonumentBuild=(value) => {
   });
 }
 
-window.highlightAdvantage=(classList, type) => {
+window.highlightAdvantage = (classList, type) => {
   const highlightAdvantages = getStoredData(HIGHLIGHT_ADVANTAGES_STORAGE);
 
   if (classList.contains('highlight')) {
@@ -1143,7 +1114,7 @@ window.highlightAdvantage=(classList, type) => {
   }
 }
 
-window.highlightEndOfTurn=(classList) => {
+window.highlightEndOfTurn = (classList) => {
   const hightlightEndOfTurns = getStoredData(HIGHLIGHT_END_OF_TURNS_STORAGE);
 
   if (classList.contains('highlight')) {
@@ -1163,7 +1134,7 @@ window.highlightEndOfTurn=(classList) => {
   }
 }
 
-window.highlightEndOfMonth=(classList) => {
+window.highlightEndOfMonth = (classList) => {
   const hightlightEndOfMonths = getStoredData(HIGHLIGHT_END_OF_MONTHS_STORAGE);
 
   if (classList.contains('highlight')) {
@@ -1184,31 +1155,37 @@ window.highlightEndOfMonth=(classList) => {
 }
 
 function getStoredData(key) {
-    return JSON.parse(localStorage.getItem(key));
+  return JSON.parse(localStorage.getItem(key));
 }
 
 function updateStoredData(key, data) {
-    localStorage.setItem(key, JSON.stringify(data));
+  localStorage.setItem(key, JSON.stringify(data));
 
-    pageUpdate();
+  pageUpdate();
 }
 
 function enableElement(elementId) {
-    const element = document.getElementById(elementId);
-    element.removeAttribute("disabled");
+  const element = document.getElementById(elementId);
+  element.removeAttribute("disabled");
 }
 
 function disableElement(elementId) {
-    const element = document.getElementById(elementId);
-    element.setAttribute("disabled", "disabled");
+  const element = document.getElementById(elementId);
+  element.setAttribute("disabled", "disabled");
 }
 
 function hideElement(elementId) {
-    const element = document.getElementById(elementId);
-    element.classList.add("hidden");
+  const element = document.getElementById(elementId);
+  element.classList.add("hidden");
 }
 
 function showElement(elementId) {
-    const element = document.getElementById(elementId);
-    element.classList.remove("hidden");
+  const element = document.getElementById(elementId);
+  element.classList.remove("hidden");
+}
+
+function createElementFromHTML(html) {
+  const template = document.createElement('template');
+  template.innerHTML = html.trim();
+  return template.content.firstChild;
 }
