@@ -103,6 +103,8 @@ window.resetGame = () => {
 
   hideSections();
 
+  expandElement('setup');
+
   document.getElementById("expansion-select").value = "";
 
   pageUpdate();
@@ -152,6 +154,8 @@ window.startGame = () => {
 
   applyPermanentVirtues();
   addSystemDetails(region);
+
+  collapseElement('setup');
 
   pageUpdate();
 }
@@ -339,7 +343,7 @@ function selectCard(elementIdPartial, dataSet, dataStorage, allowMultiple = fals
 
   selector.classList.remove("hidden");
 
-  showElement("add-" + elementIdPartial);
+  expandElement("add-" + elementIdPartial);
 }
 
 window.addGear = () => {
@@ -1182,6 +1186,16 @@ function hideElement(elementId) {
 function showElement(elementId) {
   const element = document.getElementById(elementId);
   element.classList.remove("hidden");
+}
+
+function collapseElement(elementId) {
+  const element = document.getElementById(elementId);
+  element.removeAttribute('open');
+}
+
+function expandElement(elementId) {
+  const element = document.getElementById(elementId);
+  element.setAttribute('open', 'true');
 }
 
 function createElementFromHTML(html) {
