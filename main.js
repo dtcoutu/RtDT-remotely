@@ -95,7 +95,7 @@ const BLESSING_ITEM = {
   }
 }
 
-window.resetGame = () => {
+function resetGame() {
   localStorage.clear();
 
   initializeEnemies();
@@ -110,7 +110,7 @@ window.resetGame = () => {
   pageUpdate();
 }
 
-window.startGame = () => {
+function startGame() {
   const hero = getStoredData(HERO_STORAGE);
   const region = getStoredData(REGION_STORAGE);
   const expansion = localStorage.getItem(EXPANSION_STORAGE);
@@ -540,6 +540,16 @@ window.setup = () => {
 
     if (e.target.dataset.action === 'use-charge') {
       updateCharge(card.dataset.cardType + "-" + card.dataset.cardId, -1)
+    }
+  });
+
+  document.getElementById('game-initializers').addEventListener('click', (e) => {
+    if (e.target.dataset.action === 'start') {
+      startGame();
+    }
+
+    if (e.target.dataset.action === 'reset') {
+      resetGame();
     }
   });
 }
