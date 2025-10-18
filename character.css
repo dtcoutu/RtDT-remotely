@@ -24,7 +24,7 @@
   padding-bottom: 5px;
 }
 
-#blessing-blessing {
+#blessing {
   border: var(--border);
 }
 
@@ -529,4 +529,8 @@ h4 {
 
 summary {
   padding-bottom: 8px;
+}
+
+.strong {
+  font-weight: bold;
 }

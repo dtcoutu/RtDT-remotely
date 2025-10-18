@@ -552,6 +552,21 @@ window.setup = () => {
       resetGame();
     }
   });
+
+  document.getElementById('counters').addEventListener('click', (e) => {
+    if (e.target.dataset.action === 'update-counter') {
+      const counter = e.target.closest('.counter').dataset.counter;
+      const amount = Number(e.target.dataset.amount);
+      updateCount(counter, amount);
+    }
+  });
+
+  document.getElementById('advantages').addEventListener('click', (e) => {
+    if (e.target.dataset.action === 'highlight') {
+      const type = e.target.dataset.type;
+      highlightAdvantage(e.target.classList, type);
+    }
+  });
 }
 
 window.pageUpdate = () => {
@@ -1063,7 +1078,7 @@ window.updateCharge = (item, amount) => {
   });
 }
 
-window.updateCount = (counter, amount) => {
+function updateCount(counter, amount) {
   updateStorage(COUNTERS_STORAGE, (data) => {
     data[counter] += amount;
 

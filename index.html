@@ -380,26 +380,30 @@
 
   <div id="header">
     <section id="counters" class="hidden">
-      <div id="warriors">
-        <div><img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />: <span
-            id="warrior-counter" class="counter"></span></div>
-        <button onclick="updateCount('warriors', -5)">-5</button>
-        <button onclick="updateCount('warriors', -1)">-1</button>
-        <button onclick="updateCount('warriors', 1)">+1</button>
-        <button onclick="updateCount('warriors', 6)"><strong>+6</strong></button>
+      <div id="warriors" class="counter" data-counter="warrior">
+        <div>
+          <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />:
+          <span id="warrior-counter" class="counter"></span>
+        </div>
+        <button data-action="update-counter" data-amount="-5">-5</button>
+        <button data-action="update-counter" data-amount="-1">-1</button>
+        <button data-action="update-counter" data-amount="1">+1</button>
+        <button data-action="update-counter" data-amount="6" class="strong">+6</button>
       </div>
-      <div id="spirit">
-        <div><img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />: <span
-            id="spirit-counter" class="counter"></span></div>
-        <button onclick="updateCount('spirit', -5)">-5</button>
-        <button onclick="updateCount('spirit', -1)">-1</button>
-        <button onclick="updateCount('spirit', 1)">+1</button>
-        <button onclick="updateCount('spirit', 5)">+5</button>
+      <div id="spirit" class="counter" data-counter="spirit">
+        <div>
+          <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />:
+          <span id="spirit-counter" class="counter"></span>
+        </div>
+        <button data-action="update-counter" data-amount="-5">-5</button>
+        <button data-action="update-counter" data-amount="-1">-1</button>
+        <button data-action="update-counter" data-amount="1">+1</button>
+        <button data-action="update-counter" data-amount="5">+5</button>
       </div>
-      <div id="blessing-blessing">
-        <strong>Blessings:</strong> <span id="blessing-counter" class="counter"></span>
-        <button onclick="updateCount('blessing', -1)">-1</button>
-        <button onclick="updateCount('blessing', 1)">+1</button>
+      <div id="blessing" class="counter" data-counter="blessing">
+        <strong>Blessings:</strong> <span id="blessing-counter" class="counter" data-counter="blessing"></span>
+        <button data-action="update-counter" data-amount="-1">-1</button>
+        <button data-action="update-counter" data-amount="1">+1</button>
         <div>Spend during a Heroic action for +1 Wild. Lose at the end of your turn.</div>
       </div>
       <div>
@@ -415,43 +419,43 @@
       <div id="advantages-wrapper">
         <div>
           <img src="icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
-            onclick="highlightAdvantage(this.classList, 'BEAST')" />
+            data-action="highlight" data-type="BEAST" />
           <span class="advantage">BEAST: </span>
           <span id="beast-counter" class="counter"></span>
         </div>
         <div>
           <img src="icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
-            onclick="highlightAdvantage(this.classList, 'HUMANOID')" />
+            data-action="highlight" data-type="HUMANOID" />
           <span class="advantage">HUMANOID: </span>
           <span id="humanoid-counter" class="counter"></span>
         </div>
         <div>
           <img src="icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
-            onclick="highlightAdvantage(this.classList, 'MAGIC')" />
+            data-action="highlight" data-type="MAGIC" />
           <span class="advantage">MAGIC: </span>
           <span id="magic-counter" class="counter"></span>
         </div>
         <div>
           <img src="icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
-            onclick="highlightAdvantage(this.classList, 'MELEE')" />
+            data-action="highlight" data-type="MELEE" />
           <span class="advantage">MELEE: </span>
           <span id="melee-counter" class="counter"></span>
         </div>
         <div>
           <img src="icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
-            onclick="highlightAdvantage(this.classList, 'STEALTH')" />
+            data-action="highlight" data-type="STEALTH" />
           <span class="advantage">STEALTH: </span>
           <span id="stealth-counter" class="counter"></span>
         </div>
         <div>
           <img src="icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
-            onclick="highlightAdvantage(this.classList, 'UNDEAD')" />
+            data-action="highlight" data-type="UNDEAD" />
           <span class="advantage">UNDEAD: </span>
           <span id="undead-counter" class="counter"></span>
         </div>
         <div>
           <img src="icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
-            onclick="highlightAdvantage(this.classList, 'Wild')" />
+            data-action="highlight" data-type="Wild" />
           <span class="advantage">Wild: </span>
           <span id="wild-counter" class="counter"></span>
         </div>
