@@ -1,10 +1,10 @@
 import { HEROES } from "./heroes.js";
 import { COMPANIONS, ALLIANCE_COMPANIONS } from "./companions.js";
-import { ENEMIES, TRAITS } from "./enemies.js";
-import { GEAR } from "./gear.js";
+import { ENEMIES, TRAITS } from "./docs/enemies.js";
+import { GEAR } from "./docs/gear.js";
 import { GUILDS } from "./guilds.js"
 import { POTIONS } from "./potions.js";
-import { MONUMENTS } from "../monuments.js";
+import { MONUMENTS } from "./monuments.js";
 import { SPELLS } from "./spells.js";
 import { TREASURES } from "./treasure.js";
 

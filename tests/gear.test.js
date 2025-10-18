@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { GEAR } from '../docs/gear.js';
+import { GEAR } from '../gear.js';
 
 describe('GEAR data', () => {
   it('should have all gear items', () => {

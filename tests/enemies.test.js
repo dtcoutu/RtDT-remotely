@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { ENEMIES, TRAITS } from '../docs/enemies.js';
+import { ENEMIES, TRAITS } from '../enemies.js';
 
 describe('ENEMIES data', () => {
   it('should have all expected enemies', () => {
