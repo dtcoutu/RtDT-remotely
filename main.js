@@ -567,6 +567,20 @@ window.setup = () => {
       highlightAdvantage(e.target.classList, type);
     }
   });
+
+  document.getElementById('virtues').addEventListener('click', (e) => {
+    if (e.target.dataset.action === 'toggle') {
+      toggleVirtue(e.target.value);
+    }
+  });
+
+  document.getElementById('guilds').addEventListener('click', (e) => {
+    if (e.target.dataset.action === 'select-level') {
+      const guild = e.target.closest('.guild').id;
+      const level = e.target.dataset.level;
+      selectGuildLevel(guild, level);
+    }
+  });
 }
 
 window.pageUpdate = () => {
@@ -954,6 +968,7 @@ function showAlliancesGuilds(alliances, region) {
     const guildElement = document.getElementById(guild.id);
     guildElement.removeAttribute('class');
     guildElement.classList.add('region-' + (index + 1));
+    guildElement.classList.add('guild');
   });
 }
 
@@ -1024,9 +1039,7 @@ function sortedRegions(region) {
   return sortedRegions;
 }
 
-window.selectGuildLevel = (guildLevelId) => {
-  const [guildId, level] = guildLevelId.split("-rank-");
-
+function selectGuildLevel(guildId, level) {
   updateStorage(ALLIANCES_STORAGE, (data) => {
     const guild = data.guilds.find((guild) => guild.id === guildId);
     const guildlevelIncreased = guild.level < level;
@@ -1092,7 +1105,7 @@ function updateCount(counter, amount) {
   });
 }
 
-window.toggleVirtue = (value) => {
+function toggleVirtue(value) {
   updateStorage(HERO_STORAGE, (data) => {
     let virtue = data.virtues.find((v) => v.id === value)
 
@@ -1115,7 +1128,7 @@ window.toggleMonumentBuild = (value) => {
   });
 }
 
-window.highlightAdvantage = (classList, type) => {
+function highlightAdvantage(classList, type) {
   const highlightAdvantages = getStoredData(HIGHLIGHT_ADVANTAGES_STORAGE);
 
   if (classList.contains('highlight')) {
