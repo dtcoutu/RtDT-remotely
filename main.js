@@ -44,6 +44,35 @@ const CARD_STORAGES = [
   TREASURE_STORAGE
 ]
 
+function cardMetadata(type) {
+  switch (type) {
+    case 'companion':
+      return new Object({
+        data: COMPANIONS,
+        storage: COMPANION_STORAGE,
+        duplicates: false
+      });
+    case 'gear':
+      return new Object({
+        data: GEAR,
+        storage: GEAR_STORAGE,
+        duplicates: false
+      });
+    case 'potion':
+      return new Object({
+        data: POTIONS,
+        storage: POTION_STORAGE,
+        duplicates: true
+      });
+    case 'treasure':
+      return new Object({
+        data: TREASURES,
+        storage: TREASURE_STORAGE,
+        duplicates: false
+      });
+  }
+}
+
 const NORTH = {
   id: "North",
   name: "Champion of the North",
@@ -301,27 +330,11 @@ window.monumentRegionSet = (selectorId, value) => {
   });
 }
 
-window.selectGear = () => {
-  selectCard("gear", GEAR, GEAR_STORAGE);
-}
-
-window.selectCompanion = () => {
-  selectCard("companion", COMPANIONS, COMPANION_STORAGE);
-}
-
-window.selectPotion = () => {
-  selectCard("potion", POTIONS, POTION_STORAGE, true);
-}
-
 window.selectSpell = () => {
   const include_spell_types = getStoredData(INCLUDE_SPELLS_STORAGE);
 
   const filteredSpells = SPELLS.filter(spell => include_spell_types.includes(spell.type));
   selectCard("spell", filteredSpells, SPELL_STORAGE);
-}
-
-window.selectTreasure = () => {
-  selectCard("treasure", TREASURES, TREASURE_STORAGE);
 }
 
 function selectCard(elementIdPartial, dataSet, dataStorage, allowMultiple = false) {
@@ -343,27 +356,7 @@ function selectCard(elementIdPartial, dataSet, dataStorage, allowMultiple = fals
 
   selector.classList.remove("hidden");
 
-  expandElement("add-" + elementIdPartial);
-}
-
-window.addGear = () => {
-  addCard("gear", GEAR, GEAR_STORAGE);
-}
-
-window.addCompanion = () => {
-  addCard("companion", COMPANIONS, COMPANION_STORAGE);
-}
-
-window.addPotion = () => {
-  addCard("potion", POTIONS, POTION_STORAGE, true);
-}
-
-window.addSpell = () => {
-  addCard("spell", SPELLS, SPELL_STORAGE);
-}
-
-window.addTreasure = () => {
-  addCard("treasure", TREASURES, TREASURE_STORAGE);
+  showElement("add-" + elementIdPartial);
 }
 
 function addCard(elementIdPartial, dataSet, dataStorage, allowMultiple = false) {
@@ -530,6 +523,20 @@ window.setup = () => {
   document.getElementById('cards').addEventListener('click', (e) => {
     const card = e.target.closest('.card');
 
+    if (e.target.dataset.action === 'select') {
+      const section = e.target.closest('section');
+      const type = section.dataset.type;
+      const metadata = cardMetadata(type);
+      selectCard(type, metadata.data, metadata.storage, metadata.duplicates);
+    }
+
+    if (e.target.dataset.action === 'add') {
+      const section = e.target.closest('section');
+      const type = section.dataset.type;
+      const metadata = cardMetadata(type);
+      addCard(type, metadata.data, metadata.storage, metadata.duplicates);
+    }
+
     if (e.target.dataset.action === 'remove') {
       removeCard(card.dataset.cardType, card.dataset.cardId);
     }
@@ -542,6 +549,25 @@ window.setup = () => {
       updateCharge(card.dataset.cardType + "-" + card.dataset.cardId, -1)
     }
   });
+
+  document.getElementById('spell-cards').addEventListener('click', (e) => {
+    if (e.target.dataset.action === 'select') {
+      const include_spell_types = getStoredData(INCLUDE_SPELLS_STORAGE);
+
+      const filteredSpells = SPELLS.filter(spell => include_spell_types.includes(spell.type));
+
+      selectCard('spell', filteredSpells, SPELL_STORAGE);
+    }
+
+    if (e.target.dataset.action === 'add') {
+      addCard(type, SPELLS, SPELL_STORAGE);
+    }
+
+    if (e.target.dataset.action === 'remove') {
+      const card = e.target.closest('.card');
+      removeCard(SPELL_STORAGE, card.dataset.cardId);
+    }
+  })
 
   document.getElementById('game-initializers').addEventListener('click', (e) => {
     if (e.target.dataset.action === 'start') {

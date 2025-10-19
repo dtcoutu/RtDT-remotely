@@ -503,9 +503,9 @@
 
   <details id="spell-cards" class="hidden" open>
     <summary>Spells</summary>
-    <button id="select-spell" value="select-spell" onclick="selectSpell()">Select Spell</button>
+    <button id="select-spell" value="select-spell" data-action="select">Select Spell</button>
     <select id="spell-selector" class="hidden"></select>
-    <button id="add-spell" value="add-spell" class="hidden" onclick="addSpell()">Add</button>
+    <button id="add-spell" value="add-spell" class="hidden" data-action="add">Add</button>
     <dl id="spell-list">
     </dl>
   </details>
@@ -545,35 +545,35 @@
   </section>
 
   <section id="cards" class="hidden">
-    <section id="treasure-cards">
+    <section id="treasure-cards" data-type="treasure">
       <h2>Treasure (default max of 4)</h2>
-      <button id="select-treasure" value="select-treasure" onclick="selectTreasure()">Select Treasure</button>
+      <button id="select-treasure" value="select-treasure" data-action="select">Select Treasure</button>
       <select id="treasure-selector" class="hidden"></select>
-      <button id="add-treasure" value="add-treasure" class="hidden" onclick="addTreasure()">Add</button>
+      <button id="add-treasure" value="add-treasure" class="hidden" data-action="add">Add</button>
       <dl id="treasure-list">
       </dl>
     </section>
-    <section id="gear-cards">
+    <section id="gear-cards" data-type="gear">
       <h2>Gear</h2>
-      <button id="select-gear" value="select-gear" onclick="selectGear()">Select Gear</button>
+      <button id="select-gear" value="select-gear" data-action="select">Select Gear</button>
       <select id="gear-selector" class="hidden"></select>
-      <button id="add-gear" value="add-gear" class="hidden" onclick="addGear()">Add</button>
+      <button id="add-gear" value="add-gear" class="hidden" data-action="add">Add</button>
       <dl id="gear-list">
       </dl>
     </section>
-    <section id="companion-cards">
+    <section id="companion-cards" data-type="companion">
       <h2>Companions</h2>
-      <button id="select-companion" value="select-companion" onclick="selectCompanion()">Select Companion</button>
+      <button id="select-companion" value="select-companion" data-action="select">Select Companion</button>
       <select id="companion-selector" class="hidden"></select>
-      <button id="add-companion" value="add-companion" class="hidden" onclick="addCompanion()">Add</button>
+      <button id="add-companion" value="add-companion" class="hidden" data-action="add">Add</button>
       <dl id="companion-list">
       </dl>
     </section>
-    <section id="potion-cards">
+    <section id="potion-cards" data-type="potion">
       <h2>Potions</h2>
-      <button id="select-potion" value="select-potion" onclick="selectPotion()">Select Potion</button>
+      <button id="select-potion" value="select-potion" data-action="select">Select Potion</button>
       <select id="potion-selector" class="hidden"></select>
-      <button id="add-potion" value="add-potion" class="hidden" onclick="addPotion()">Add</button>
+      <button id="add-potion" value="add-potion" class="hidden" data-action="add">Add</button>
       <dl id="potion-list">
       </dl>
     </section>
