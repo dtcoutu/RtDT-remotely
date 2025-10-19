@@ -581,6 +581,13 @@ window.setup = () => {
       selectGuildLevel(guild, level);
     }
   });
+
+  document.getElementById('monuments').addEventListener('click', (e) => {
+    if (e.target.dataset.action === 'toggle') {
+      const region = e.target.closest('.monument').dataset.region;
+      toggleMonumentBuild(region);
+    }
+  });
 }
 
 window.pageUpdate = () => {
@@ -987,30 +994,34 @@ function toggleAlliancesActions(show) {
   });
 }
 
-function showCovenantMonuments(covenant, region) {
-  covenant.monuments.forEach((monument) => {
-    document.getElementById(monument.region + '-monument-name').innerHTML = monument.name;
-    document.getElementById(monument.region + '-monument-location').innerHTML = monument.location;
-    document.getElementById(monument.region + '-monument-offering').innerHTML = monument.offering;
-    document.getElementById(monument.region + '-monument-free-action').innerHTML = monument.reinforce.free;
-    document.getElementById(monument.region + '-monument-enhanced-cost').innerHTML = monument.reinforce.enhanced.cost + ':';
-    document.getElementById(monument.region + '-monument-enhanced-action').innerHTML = monument.reinforce.enhanced.effect;
+function showCovenantMonuments(covenant, playerRegion) {
+  const monumentsSection = document.getElementById('monuments')
 
-    if (monument.built) {
-      document.getElementById(monument.region + '-monument-build').innerHTML = "Un Build";
-      document.getElementById(monument.region + '-monument-reinforcement').classList.remove('inactive');
-      document.getElementById(monument.region + '-monument-offering').classList.add('inactive');
-    } else {
-      document.getElementById(monument.region + '-monument-build').innerHTML = "Build";
-      document.getElementById(monument.region + '-monument-reinforcement').classList.add('inactive');
-      document.getElementById(monument.region + '-monument-offering').classList.remove('inactive');
-    }
-  });
+  monumentsSection.replaceChildren();
 
-  sortedRegions(region).forEach((area, index) => {
-    const monumentElement = document.getElementById(area + '-monument');
-    monumentElement.removeAttribute('class');
-    monumentElement.classList.add('region-' + (index + 1));
+  const sortedMonuments = sortRegionedObjects(sortedRegions(playerRegion), covenant.monuments);
+
+  sortedMonuments.forEach((monument, index) => {
+    const monumentElement = createElementFromHTML(`
+    <section id="${monument.region}-monument" class="region-${index + 1} monument" data-region="${monument.region}">
+      <div class="monument-name">
+        ${monument.name} || ${monument.region} || ${monument.location}
+        <button data-action="toggle">Build</button>
+      </div>
+      <div id="${monument.region}-monument-offering" class="monument-offering">${monument.offering}</div>
+      <div id="${monument.region}-monument-reinforcement" class="monument-reinforcement ${monument.built ? '' : 'inactive'}">
+        <div><img src="icons/reinforce.png" title="reinforce" alt="reinforce" width="20px" />Reinforce</div>
+        <dl class="action">
+          <dt><strong>Free:</strong></dt>
+          <dd>${monument.reinforce.free}</dd>
+          <dt><strong>${monument.reinforce.enhanced.cost}</dt>
+          <dd>${monument.reinforce.enhanced.effect}</dd>
+        </dl>
+      </div>
+    </section>
+    `);
+
+    monumentsSection.appendChild(monumentElement);
   });
 }
 
@@ -1037,6 +1048,14 @@ function sortedRegions(region) {
   sortedRegions.push(...regions);
 
   return sortedRegions;
+}
+
+function sortRegionedObjects(sortedRegions, objectCollection) {
+  const sortedObjects = sortedRegions.map(region =>
+    objectCollection.find((object) => object.region === region)
+  );
+
+  return sortedObjects;
 }
 
 function selectGuildLevel(guildId, level) {
@@ -1119,8 +1138,7 @@ function toggleVirtue(value) {
   });
 }
 
-window.toggleMonumentBuild = (value) => {
-  const region = value.split('-')[0];
+function toggleMonumentBuild(region) {
   updateStorage(COVENANT_EXPANSION, (data) => {
     let monument = data.monuments.find(monument => monument.region === region);
 
