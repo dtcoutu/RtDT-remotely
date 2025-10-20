@@ -817,50 +817,44 @@ function showHeroDetails(hero) {
 }
 
 function showEnemyDetails(enemies) {
+  const enemyContainer = document.getElementById('enemies');
+  enemyContainer.replaceChildren();
+
   for (let l = 2; l <= 5; l++) {
-    const divContainer = document.getElementById("enemy-level-" + l);
     const enemy = enemies[l.toString()];
 
-    // Add name, traits, and strike event
-    const levelSpan = document.createElement("span");
-    levelSpan.classList.add("enemy-level")
-    levelSpan.innerHTML = enemy.level;
-    const nameSpan = document.createElement("span");
-    nameSpan.classList.add("enemy-name");
-    nameSpan.innerHTML = enemy.name;
+    const traitsHTML = enemy.traits.map(trait =>
+      `
+      <span class="enemy-trait enemy-trait-${trait}">${trait}</span>
+      `
+    ).join('');
 
-    const traitDiv = document.createElement("div");
-    traitDiv.id = "enemy-traits";
-    enemy.traits.forEach((trait) => {
-      const traitSpan = document.createElement("span");
-      traitSpan.classList.add("enemy-trait", "enemy-trait-" + trait);
-      traitSpan.innerHTML = trait;
-      traitDiv.appendChild(traitSpan);
-    });
-
-    const battleDiv = document.createElement("div");
-    battleDiv.id = "enemy-battle-effects";
+    let battleHTML = '';
     if (enemy.when_battling) {
-      enemy.when_battling.forEach((battleText) => {
-        const battleSpan = document.createElement("span");
-        battleSpan.classList.add("battle-effect");
-        battleSpan.innerHTML = battleText;
-        battleDiv.appendChild(battleSpan);
-      });
+      battleHTML = enemy.when_battling.map(battleText =>
+        `<span class="battle-effect">${battleText}</span>`
+      ).join('');
     } else {
-      enemy.traits.forEach((trait) => {
-        const battleSpan = document.createElement("span");
-        battleSpan.classList.add("battle-effect");
-        battleSpan.innerHTML = trait.toUpperCase() + " " + TRAITS[trait];
-        battleDiv.appendChild(battleSpan);
-      });
+      battleHTML = enemy.traits.map(trait =>
+        `<span class="battle-effect">${trait.toUpperCase()} ${TRAITS[trait]}</span>`
+      ).join('');
     }
 
-    const eventSpan = document.createElement("span");
-    eventSpan.classList.add("enemy-event");
-    eventSpan.innerHTML = enemy.strike_event;
+    const enemyElement = createElementFromHTML(`
+      <div id="enemy-level-${enemy.level}">
+        <span class="enemy-level">${enemy.level}</span>
+        <span class="enemy-name">${enemy.name}</span>
+        <div class="enemy-traits">
+          ${traitsHTML}
+        </div>
+        <div class="enemy-battle-effects">
+          ${battleHTML}
+        </div>
+        <span class="enemy-event">${enemy.strike_event}</span>
+      </div>
+      `);
 
-    divContainer.replaceChildren(levelSpan, nameSpan, traitDiv, battleDiv, eventSpan);
+    enemyContainer.appendChild(enemyElement);
   }
 }
 

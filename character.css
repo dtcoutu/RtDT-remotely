@@ -78,7 +78,7 @@
   margin-bottom: 8px;
 }
 
-#enemy-traits {
+.enemy-traits {
   display: flex;
   justify-content: space-between;
   margin: 8px 0;
@@ -89,7 +89,7 @@
   margin: 0 8px;
 }
 
-#enemy-battle-effects {
+.enemy-battle-effects {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -98,7 +98,7 @@
   border: var(--border);
 }
 
-#enemy-battle-effects>* {
+.enemy-battle-effects>* {
   flex: 1 1 47%;
   padding: 4px;
 }
