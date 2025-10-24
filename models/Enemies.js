@@ -1,5 +1,5 @@
 import { ENEMIES, TRAITS } from "../enemies.js";
-import { Storable } from "../components/Storable.js";
+import { Storable } from "./Storable.js";
 
 export class Enemies extends Storable {
   static CONTAINER_ID = 'enemies';

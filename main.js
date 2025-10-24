@@ -6,7 +6,7 @@ import { POTIONS } from "./potions.js";
 import { MONUMENTS } from "./monuments.js";
 import { SPELLS } from "./spells.js";
 import { TREASURES } from "./treasure.js";
-import { GameState } from "./components/GameState.js";
+import { GameState } from "./models/GameState.js";
 import { Enemies } from "./models/Enemies.js";
 import { EnemySetup } from "./components/EnemySetup.js";
 
