@@ -1,24 +1,23 @@
 import { HEROES } from "./heroes.js";
 import { COMPANIONS, ALLIANCE_COMPANIONS } from "./companions.js";
-import { ENEMIES, TRAITS } from "./enemies.js";
 import { GEAR } from "./gear.js";
 import { GUILDS } from "./guilds.js"
 import { POTIONS } from "./potions.js";
 import { MONUMENTS } from "./monuments.js";
 import { SPELLS } from "./spells.js";
 import { TREASURES } from "./treasure.js";
+import { GameState } from "./components/GameState.js";
+import { Enemies } from "./models/Enemies.js";
+import { EnemySetup } from "./components/EnemySetup.js";
 
 const HERO_STORAGE = "hero";
-const ENEMY_STORAGE = "enemy";
 const REGION_STORAGE = "region";
 const COUNTERS_STORAGE = "counters";
 
-const EXPANSION_STORAGE = "expansions";
 const ALLIANCES_STORAGE = "alliances";
 const COVENANT_STORAGE = "covenant";
 
 const INCLUDE_SPELLS_STORAGE = "include_spells";
-const STARTED_STORAGE = "started";
 
 const COMPANION_STORAGE = "companion";
 const GEAR_STORAGE = "gear";
@@ -30,11 +29,6 @@ const ADVANTAGES_STORAGE = "advantages";
 const HIGHLIGHT_ADVANTAGES_STORAGE = "highlight_advantages"
 const HIGHLIGHT_END_OF_TURNS_STORAGE = "highlight_end_of_turns"
 const HIGHLIGHT_END_OF_MONTHS_STORAGE = "highlight_end_of_months"
-
-// Expansion keys
-const NO_EXPANSION = "none";
-const ALLIANCES_EXPANSION = "alliances";
-const COVENANT_EXPANSION = "covenant";
 
 const CARD_STORAGES = [
   COMPANION_STORAGE,
@@ -124,11 +118,17 @@ const BLESSING_ITEM = {
   }
 }
 
+// Model variables
+let gameStateModel;
+let enemiesModel;
+
+// Setup Component variables
+let enemySetup;
+
 function resetGame() {
   localStorage.clear();
 
-  initializeEnemies();
-  initializeExpansions();
+  initializeComponents();
 
   hideSections();
 
@@ -142,38 +142,28 @@ function resetGame() {
 function startGame() {
   const hero = getStoredData(HERO_STORAGE);
   const region = getStoredData(REGION_STORAGE);
-  const expansion = localStorage.getItem(EXPANSION_STORAGE);
-  const enemies = getStoredData(ENEMY_STORAGE);
 
-  if ((hero === null) || (region === null) || (expansion === '')) {
+  if ((hero === null) || (region === null) || (gameStateModel.expansion === '')) {
     alert('You must select a hero, a home kingdom, and indicate any expansion usage.');
     return;
   }
 
-  let missingEnemy = false;
-  for (const key in enemies) {
-    if (enemies[key] === '') {
-      missingEnemy = true;
-      break;
-    }
-  }
-
-  if (missingEnemy) {
+  if (!enemiesModel.valid()) {
     alert('You must select an enemy for each level.');
     return;
   }
 
-  if (expansion === ALLIANCES_EXPANSION && !guildRegionsValid()) {
+  if (gameStateModel.expansion === GameState.ALLIANCES_EXPANSION && !guildRegionsValid()) {
     alert('All guilds must have a region set and they must be unique.');
     return;
   }
 
-  if (expansion === COVENANT_EXPANSION && !monumentRegionsValid()) {
+  if (gameStateModel.expansion === GameState.COVENANT_EXPANSION && !monumentRegionsValid()) {
     alert('All monument regions must have a unique monument assigned.')
     return;
   }
 
-  localStorage.setItem(STARTED_STORAGE, 'true');
+  gameStateModel.started = 'true';
 
   localStorage.setItem(INCLUDE_SPELLS_STORAGE, JSON.stringify([]));
   initializeCardHolders();
@@ -206,19 +196,11 @@ function monumentRegionsValid() {
   return uniqMonumentIds.length === 4;
 }
 
-function initializeEnemies() {
-  const enemies = {
-    '2': '',
-    '3': '',
-    '4': '',
-    '5': ''
-  }
+function initializeComponents() {
+  gameStateModel = new GameState();
+  enemiesModel = new Enemies();
 
-  localStorage.setItem(ENEMY_STORAGE, JSON.stringify(enemies));
-}
-
-function initializeExpansions() {
-  localStorage.setItem(EXPANSION_STORAGE, '');
+  enemySetup = new EnemySetup(enemiesModel);
 }
 
 function initializeCounters() {
@@ -274,11 +256,11 @@ function applyPermanentVirtues() {
 }
 
 window.expansionSelection = (expansion) => {
-  localStorage.setItem(EXPANSION_STORAGE, expansion);
+  gameStateModel.expansion = expansion;
 
-  if (expansion === ALLIANCES_EXPANSION) {
+  if (expansion === GameState.ALLIANCES_EXPANSION) {
     alliancesInclusion();
-  } else if (expansion === COVENANT_EXPANSION) {
+  } else if (expansion === GameState.COVENANT_EXPANSION) {
     covenantInclusion();
   }
 
@@ -505,21 +487,9 @@ window.selectedHero = (value) => {
   updateStoredData(HERO_STORAGE, hero);
 }
 
-window.selectedEnemy = (id, value) => {
-  const level = id.slice(-1);
-
-  updateStorage(ENEMY_STORAGE, (data) => {
-    if (data === null) {
-      data = {};
-    }
-
-    const foundEnemy = ENEMIES.find(element => element.id === value);
-
-    data[level] = foundEnemy;
-  });
-}
-
 window.setup = () => {
+  initializeComponents();
+
   document.getElementById('cards').addEventListener('click', (e) => {
     const card = e.target.closest('.card');
 
@@ -618,29 +588,24 @@ window.setup = () => {
 
 window.pageUpdate = () => {
   const hero = getStoredData(HERO_STORAGE);
-  const enemies = getStoredData(ENEMY_STORAGE);
   const region = getStoredData(REGION_STORAGE);
   const counters = getStoredData(COUNTERS_STORAGE);
   const advantages = getStoredData(ADVANTAGES_STORAGE);
-  const expansion = localStorage.getItem(EXPANSION_STORAGE);
   const alliances = getStoredData(ALLIANCES_STORAGE);
   const covenant = getStoredData(COVENANT_STORAGE);
-  const started = localStorage.getItem(STARTED_STORAGE) === 'true';
   const includeSpells = getStoredData(INCLUDE_SPELLS_STORAGE);
 
   const heroSelector = document.getElementById("hero-selector");
   heroSelector.value = hero ? hero.id : '';
 
-  for (let level = 2; level <= 5; level++) {
-    document.getElementById("enemy-selector-level-" + level).value = enemies[level]?.id || '';
-  }
+  enemySetup.updateSelectorValues();
 
   const regionSelector = document.getElementById("guardian-selector");
   regionSelector.value = region ? region.id : '';
 
-  document.getElementById("expansion-select").value = expansion === null ? '' : expansion;
+  document.getElementById("expansion-select").value = gameStateModel.expansion;
 
-  if (expansion === ALLIANCES_EXPANSION) {
+  if (gameStateModel.expansion === GameState.ALLIANCES_EXPANSION) {
     showElement('alliances-guild-setup');
     toggleAlliancesActions(true);
 
@@ -654,7 +619,7 @@ window.pageUpdate = () => {
     hideElement('alliances-guild-setup');
   }
 
-  if (expansion === COVENANT_EXPANSION) {
+  if (gameStateModel.expansion === GameState.COVENANT_EXPANSION) {
     showElement('covenant-setup');
     toggleCovenantActions(true);
 
@@ -667,18 +632,18 @@ window.pageUpdate = () => {
     hideElement('covenant-setup');
   }
 
-  if (started) {
-    revealSections(expansion, includeSpells);
+  if (gameStateModel.started) {
+    revealSections(includeSpells);
     setCounters(counters);
     setAdvantages(advantages);
     showHeroDetails(hero);
-    showEnemyDetails(enemies);
+    enemiesModel.render();
     showRegionDetails(region);
     showCards(includeSpells);
-    if (expansion === ALLIANCES_EXPANSION) {
+    if (gameStateModel.expansion === GameState.ALLIANCES_EXPANSION) {
       showAlliancesGuilds(alliances, region);
     }
-    if (expansion === COVENANT_EXPANSION) {
+    if (gameStateModel.expansion === GameState.COVENANT_EXPANSION) {
       showCovenantMonuments(covenant, region);
     }
   }
@@ -731,7 +696,7 @@ function addSystemDetails(item) {
   }
 }
 
-function revealSections(expansion, includeSpells) {
+function revealSections(includeSpells) {
   [
     "counters",
     "advantages",
@@ -743,11 +708,11 @@ function revealSections(expansion, includeSpells) {
     showElement(id);
   });
 
-  if (expansion === ALLIANCES_EXPANSION) {
+  if (gameStateModel.expansion === GameState.ALLIANCES_EXPANSION) {
     showElement("guilds");
   }
 
-  if (expansion === COVENANT_EXPANSION) {
+  if (gameStateModel.expansion === GameState.COVENANT_EXPANSION) {
     showElement("monuments");
   }
 
@@ -814,48 +779,6 @@ function showHeroDetails(hero) {
       buyButton.innerHTML = "Buy"
     }
   });
-}
-
-function showEnemyDetails(enemies) {
-  const enemyContainer = document.getElementById('enemies');
-  enemyContainer.replaceChildren();
-
-  for (let l = 2; l <= 5; l++) {
-    const enemy = enemies[l.toString()];
-
-    const traitsHTML = enemy.traits.map(trait =>
-      `
-      <span class="enemy-trait enemy-trait-${trait}">${trait}</span>
-      `
-    ).join('');
-
-    let battleHTML = '';
-    if (enemy.when_battling) {
-      battleHTML = enemy.when_battling.map(battleText =>
-        `<span class="battle-effect">${battleText}</span>`
-      ).join('');
-    } else {
-      battleHTML = enemy.traits.map(trait =>
-        `<span class="battle-effect">${trait.toUpperCase()} ${TRAITS[trait]}</span>`
-      ).join('');
-    }
-
-    const enemyElement = createElementFromHTML(`
-      <div id="enemy-level-${enemy.level}">
-        <span class="enemy-level">${enemy.level}</span>
-        <span class="enemy-name">${enemy.name}</span>
-        <div class="enemy-traits">
-          ${traitsHTML}
-        </div>
-        <div class="enemy-battle-effects">
-          ${battleHTML}
-        </div>
-        <span class="enemy-event">${enemy.strike_event}</span>
-      </div>
-      `);
-
-    enemyContainer.appendChild(enemyElement);
-  }
 }
 
 function showRegionDetails(region) {
@@ -1159,7 +1082,7 @@ function toggleVirtue(value) {
 }
 
 function toggleMonumentBuild(region) {
-  updateStorage(COVENANT_EXPANSION, (data) => {
+  updateStorage(COVENANT_STORAGE, (data) => {
     let monument = data.monuments.find(monument => monument.region === region);
 
     monument.built = !monument.built;
