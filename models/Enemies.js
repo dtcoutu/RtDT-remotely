@@ -1,4 +1,4 @@
-import { ENEMIES, TRAITS } from "../enemies.js";
+import { ENEMIES, TRAITS } from "../data/enemies.js";
 import { Storable } from "./Storable.js";
 
 export class Enemies extends Storable {
@@ -35,6 +35,8 @@ export class Enemies extends Storable {
   // Should only be called once on page load or when app started
   // Consider splitting this to a different component.
   render() {
+    this.start();
+
     const enemyContainer = document.getElementById('enemies');
     enemyContainer.replaceChildren();
 
@@ -78,12 +80,22 @@ export class Enemies extends Storable {
 
   // This indicates if things are correctly set to start the game
   valid() {
-    const fields = Object.entries(this).filter(e => e[0] !== 'data');
+    const fields = Object.entries(this);
 
-    return fields.every(([_field, value]) => value !== '');
+    return fields.every(([_field, value]) => value !== null);
+  }
+
+  start() {
+    document.getElementById('enemies').classList.remove('hidden');
+  }
+
+  reset() {
+    super.reset();
+
+    document.getElementById('enemies').classList.add('hidden');
   }
 
   get storageKey() {
-    return "enemies";
+    return 'enemies';
   }
 }

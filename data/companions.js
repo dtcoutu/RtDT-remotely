@@ -16,7 +16,7 @@ export const COMPANIONS = [
         system: {
             advantage: 'HUMANOID',
             amount: 2,
-            end_of_turn: true,
+            endOfTurn: true,
         }
     },
     {
@@ -75,7 +75,7 @@ export const COMPANIONS = [
         system: {
             advantage: 'BEAST',
             amount: 2,
-            end_of_turn: true,
+            endOfTurn: true,
         }
     },
     {
@@ -94,7 +94,7 @@ export const COMPANIONS = [
         event: 'moves foes around the board.',
         system: {
             advantage: 'Wild',
-            end_of_turn: true,
+            endOfTurn: true,
         }
     },
     {
@@ -324,7 +324,7 @@ export const ALLIANCE_COMPANIONS = [
         event: 'increases guild ranks.',
         system: {
             advantage: 'Wild',
-            end_of_month: true,
+            endOfMonth: true,
         }
     },
     {
@@ -345,6 +345,7 @@ export const ALLIANCE_COMPANIONS = [
         system: {
             advantage: 'HUMANOID',
             amount: 2,
+            endOfMonth: true
         }
     },
     {

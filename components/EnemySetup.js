@@ -13,6 +13,7 @@ export class EnemySetup {
 
       if (selector.dataset.action === 'select') {
         this.enemiesModel.setEnemy(selector.dataset.level, e.target.value)
+        this.updateSelectorValues();
       }
     });
   }

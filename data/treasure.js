@@ -121,7 +121,7 @@ export const TREASURES = [
     benefit: 'At the start of your turn, you may place your hero in any space adjacent to the Tower. If you do, gain a blessing.',
     expansion: 'covenant',
     system: {
-      end_of_turn: true,
+      endOfTurn: true,
     }
   },
   {
@@ -134,7 +134,7 @@ export const TREASURES = [
     system: {
       advantage: 'UNDEAD',
       amount: 1,
-      end_of_turn: true,
+      endOfTurn: true,
     }
   },
   {
@@ -179,7 +179,7 @@ export const TREASURES = [
     expansion: 'alliances',
     system: {
       advantage: 'Wild',
-      end_of_month: true
+      endOfMonth: true
     }
   },
   {
@@ -237,19 +237,19 @@ export const TREASURES = [
     expansion: 'alliances',
     system: {
       advantage: 'Wild',
-      end_of_month: true
+      endOfMonth: true
     }
   },
   {
     id: 'everfilled-chest',
     name: "Everfilled Chest",
     type: 'treasure',
-    benefit: 'At the end of your turn, roll the haggle die and gain the result. (Ignore <bazaar-closed/>.',
+    benefit: 'At the end of your turn, roll the haggle die and gain the result. (Ignore <img src="icons/bazaar_closed.png" title="bazaar closed" alt="bazaar closed" />.)',
     advantage: '+1 Wild Advantage if you are on or adjacent to a Bazaar',
     expansion: 'covenant',
     system: {
       advantage: 'Wild',
-      end_of_turn: true,
+      endOfTurn: true,
     }
   },
   {
@@ -394,7 +394,7 @@ export const TREASURES = [
     id: 'necklace-of-haggling',
     name: 'Necklace of Haggling',
     type: 'treasure',
-    benefit: 'Ignore <bazaar-closed/> on the haggle die. Reinforce as normal.',
+    benefit: 'Ignore <img src="icons/bazaar_closed.png" title="bazaar closed" alt="bazaar closed" /> on the haggle die. Reinforce as normal.',
     advantage: '+1 STEALTH Advantage',
     expansion: 'base',
     system: {
@@ -435,7 +435,7 @@ export const TREASURES = [
     expansion: 'alliances',
     system: {
       advantage: 'Wild',
-      end_of_month: true
+      endOfMonth: true
     }
   },
   {
@@ -544,7 +544,7 @@ export const TREASURES = [
     system: {
       advantage: 'STEALTH',
       amount: 1,
-      end_of_turn: true,
+      endOfTurn: true,
     }
   },
   {
@@ -568,7 +568,7 @@ export const TREASURES = [
     expansion: 'alliances',
     system: {
       advantage: 'Wild',
-      end_of_month: true
+      endOfMonth: true
     }
   },
   {
@@ -653,7 +653,7 @@ export const TREASURES = [
       advantage: 'MAGIC',
       amount: 1,
       charge: 3,
-      end_of_month: true
+      endOfMonth: true
     }
   },
   {

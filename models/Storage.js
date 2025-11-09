@@ -4,6 +4,7 @@ export class Storage {
 
     // No data stored so use the default object values
     if (storedData == null) {
+      object.reset();
       Storage.write(object);
       storedData = JSON.stringify(object);
     }
