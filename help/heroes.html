@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="help.css" />
+  <title>Hero Summary | Return to Dark Tower...Remotely</title>
+</head>
+
+<body>
+  <h3>Hero Summary</h3>
+  <p>This gives a little bit of flavor for each hero for selection.</p>
+  <div>
+    <ul id="hero-list">
+    </ul>
+  </div>
+</body>
+
+<script type="module">
+  import { HEROES } from '../data/heroes.js';
+
+  function onLoad() {
+    const listElement = document.getElementById('hero-list');
+
+    HEROES.forEach(hero => {
+      const heroElement = document.createElement('li');
+
+      heroElement.textContent = `${hero.name} - ${hero.summary}`
+
+      listElement.appendChild(heroElement);
+    });
+  }
+
+  window.onload = onLoad();
+</script>
+
+</html>
