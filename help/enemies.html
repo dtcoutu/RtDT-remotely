@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="help.css" />
+  <title>Enemies Summary | Return to Dark Tower...Remotely</title>
+</head>
+
+<body>
+  <div>
+    <h3>Trait Summary</h3>
+    <p>The six traits that foes possess indicate what consequences heroes might experience battling them.</p>
+    <ul id="trait-list">
+    </ul>
+  </div>
+
+  <div>
+    <h3>Enemies Summary</h3>
+    <p>This provides some details on enemies to help with initial selection.</p>
+
+    <h4>Level 2</h4>
+    <ul id="enemy-list-level-2">
+    </ul>
+
+    <h4>Level 3</h4>
+    <ul id="enemy-list-level-3">
+    </ul>
+
+    <h4>Level 4</h4>
+    <ul id="enemy-list-level-4">
+    </ul>
+
+    <h4>Level 5 (Adversaries)</h4>
+    <ul id="enemy-list-level-5">
+    </ul>
+  </div>
+</body>
+
+<script type="module">
+  import { ENEMIES, TRAITS } from '../data/enemies.js';
+
+  function onLoad() {
+    populateTraits();
+    populateEnemies();
+  }
+
+  function populateTraits() {
+    const listElement = document.getElementById('trait-list');
+
+    Object.keys(TRAITS).forEach(type => {
+      const traitElement = document.createElement('li');
+
+      traitElement.textContent = `${type} ${TRAITS[type]}`;
+
+      listElement.appendChild(traitElement);
+    });
+  }
+
+  function populateEnemies() {
+    ENEMIES.forEach(enemy => {
+      const listElement = document.getElementById('enemy-list-level-' + enemy.level);
+      const enemyElement = document.createElement('li');
+
+      enemyElement.textContent = `${enemy.name} (${enemy.traits.join(', ')})`
+
+      const effectsElement = document.createElement('ul');
+
+      const effectsHTML = `
+      <li><strong>Event:</strong> ${enemy.strike_event}</li>
+      ${generateAdditionEffectsHTML(enemy.when_battling)}
+      `
+
+      effectsElement.innerHTML = effectsHTML.trim();
+
+      listElement.appendChild(enemyElement);
+      listElement.appendChild(effectsElement);
+    });
+  }
+
+  function generateAdditionEffectsHTML(effects) {
+    if (!effects) { return ''; }
+
+    const additionalEffectsHTML = effects.map(effect =>
+      `
+      <li>${effect}</li>
+      `
+    ).join('');
+
+    return `
+    <li>
+      <strong>Additional effects:</strong>
+      <ul>
+        ${additionalEffectsHTML}
+      </ul>
+    </li>
+    `
+  }
+
+  window.onload = onLoad();
+</script>
+
+</html>

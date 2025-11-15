@@ -150,7 +150,7 @@ export const ENEMIES = [
       'BEAST',
     ],
     when_battling: [
-      'Ashstrider adds skulls to buildlings',
+      'Ashstrider adds skulls to buildings',
       'Ashstrider hurts heroes in its current kingdom based on skulls in the kingdom'
     ],
     strike_event: 'Ashstrider adds skulls to buildings.'
