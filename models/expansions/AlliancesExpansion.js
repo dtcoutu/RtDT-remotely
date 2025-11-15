@@ -48,6 +48,8 @@ export class AlliancesExpansion {
   }
 
   reset() {
+    this._guilds = null;
+
     document.getElementById('alliances-heroic-action').classList.add('hidden');
     document.getElementById('alliances-reinforcement-action').classList.add('hidden');
   }

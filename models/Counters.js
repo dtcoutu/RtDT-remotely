@@ -57,6 +57,12 @@ export class Counters extends Storable {
   }
 
   reset() {
+    // Clean up old properties that are no longer used.
+    // Only needed for those that played the game before this point.
+    delete this._warrior;
+    delete this._spirit;
+    delete this._blessing;
+
     this.warrior = 7;
     this.spirit = 1;
     this.blessing = 0;

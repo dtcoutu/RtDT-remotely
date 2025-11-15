@@ -45,6 +45,8 @@ export class CovenantExpansion {
   }
 
   reset() {
+    this._monuments = [];
+
     document.getElementById('covenant-heroic-action').classList.add('hidden');
   }
 

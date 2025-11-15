@@ -24,6 +24,8 @@ let expansionSetup;
 let enemySetup;
 
 function resetGame() {
+  localStorage.clear();
+
   metadataModel.reset();
   gameStateModel.reset();
   countersModel.reset();
