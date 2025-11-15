@@ -2,6 +2,12 @@
   --border: 1px solid black;
 }
 
+#help-list {
+  display: block;
+  padding-left: 40px;
+  list-style-type: disc;
+}
+
 .action {
   border-bottom: var(--border);
 }
