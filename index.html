@@ -341,59 +341,67 @@
           <button data-action="update-counter" data-amount="1">+1</button>
           <div>Spend during a Heroic action for +1 Wild. Lose at the end of your turn.</div>
         </div>
+        <div id="availableAdvantages" class="counter" data-counter="availableAdvantages">
+          <strong title="Help keep track of advantages available for current battle/quest/etc.">Avail.
+            Advantages:</strong> <span id="availableAdvantages-counter" class="counter"></span>
+          <button data-action="update-counter" data-amount="-1">-1</button>
+          <button data-action="update-counter" data-amount="1">+1</button>
+        </div>
       </section>
 
       <section id="advantages" class="hidden">
         <h3>Advantages</h3>
         <div id="advantages-wrapper">
           <div>
-            <img src="icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
-              data-action="highlight" data-type="BEAST" />
+            <img src="icons/advantage.png" title="Click to highlight things related to this advanage" alt="advantage"
+              width="20" height="20" data-action="highlight" data-type="BEAST" />
             <span class="advantage">BEAST: </span>
             <span id="beast-counter" class="counter"></span>
           </div>
           <div>
-            <img src="icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
-              data-action="highlight" data-type="HUMANOID" />
+            <img src="icons/advantage.png" title="Click to highlight things related to this advanage" alt="advantage"
+              width="20" height="20" data-action="highlight" data-type="HUMANOID" />
             <span class="advantage">HUMANOID: </span>
             <span id="humanoid-counter" class="counter"></span>
           </div>
           <div>
-            <img src="icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
-              data-action="highlight" data-type="MAGIC" />
+            <img src="icons/advantage.png" title="Click to highlight things related to this advanage" alt="advantage"
+              width="20" height="20" data-action="highlight" data-type="MAGIC" />
             <span class="advantage">MAGIC: </span>
             <span id="magic-counter" class="counter"></span>
           </div>
           <div>
-            <img src="icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
-              data-action="highlight" data-type="MELEE" />
+            <img src="icons/advantage.png" title="Click to highlight things related to this advanage" alt="advantage"
+              width="20" height="20" data-action="highlight" data-type="MELEE" />
             <span class="advantage">MELEE: </span>
             <span id="melee-counter" class="counter"></span>
           </div>
           <div>
-            <img src="icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
-              data-action="highlight" data-type="STEALTH" />
+            <img src="icons/advantage.png" title="Click to highlight things related to this advanage" alt="advantage"
+              width="20" height="20" data-action="highlight" data-type="STEALTH" />
             <span class="advantage">STEALTH: </span>
             <span id="stealth-counter" class="counter"></span>
           </div>
           <div>
-            <img src="icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
-              data-action="highlight" data-type="UNDEAD" />
+            <img src="icons/advantage.png" title="Click to highlight things related to this advanage" alt="advantage"
+              width="20" height="20" data-action="highlight" data-type="UNDEAD" />
             <span class="advantage">UNDEAD: </span>
             <span id="undead-counter" class="counter"></span>
           </div>
           <div>
-            <img src="icons/advantage.png" title="advantage" alt="advantage" width="20" height="20"
-              data-action="highlight" data-type="Wild" />
+            <img src="icons/advantage.png" title="Click to highlight things related to this advanage" alt="advantage"
+              width="20" height="20" data-action="highlight" data-type="Wild" />
             <span class="advantage">Wild: </span>
             <span id="wild-counter" class="counter"></span>
           </div>
         </div>
         <div>
-          <span data-action="highlight" data-type="endOfTurn">End of Turn Reminders</span>
+          <span data-action="highlight" data-type="endOfTurn" title="Click to highlight end/beginning of turn things">
+            End of Turn Reminders</span>
         </div>
         <div>
-          <span data-action="highlight" data-type="endOfMonth">End of Month Reminders</span>
+          <span data-action="highlight" data-type="endOfMonth" title="Click to highlight end/beginning of month things">
+            End of Month Reminders</span>
         </div>
       </section>
 

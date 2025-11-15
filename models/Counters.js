@@ -4,6 +4,7 @@ export class Counters extends Storable {
   warrior;
   spirit;
   blessing;
+  availableAdvantages;
 
   constructor() {
     super();
@@ -66,6 +67,7 @@ export class Counters extends Storable {
     this.warrior = 7;
     this.spirit = 1;
     this.blessing = 0;
+    this.availableAdvantages = 0;
 
     this.updateStorage();
 
