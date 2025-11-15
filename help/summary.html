@@ -1,77 +1,80 @@
 <!doctype html>
 <html>
-  <head>
-    <link rel="stylesheet" href="help.css" />
-    <title>Card Summary | Return to Dark Tower...Remotely</title>
-  </head>
-  <body>
-    <div>
-      <ul>
-        <li><a href="summary.html?type=gear">Gear</a></li>
-        <li><a href="summary.html?type=spells">Spells</a></li>
-      </ul>
-    </div>
 
-    <section id="summary">
-      <h1><span id="card-type"></span> Cards</h1>
-      <section id="cards">
-        <dl id="card-list"></dl>
-      </section>
+<head>
+  <link rel="stylesheet" href="help.css" />
+  <title>Card Summary | Return to Dark Tower...Remotely</title>
+</head>
+
+<body>
+  <div>
+    <ul>
+      <li><a href="summary.html?type=gear">Gear</a></li>
+      <li><a href="summary.html?type=spells">Spells</a></li>
+    </ul>
+  </div>
+
+  <section id="summary">
+    <h1><span id="card-type"></span> Cards</h1>
+    <section id="cards">
+      <dl id="card-list"></dl>
     </section>
-  </body>
-  <script type="module">
-    import { GEAR } from '../gear.js';
-    import { SPELLS } from '../spells.js';
+  </section>
+</body>
+<script type="module">
+  import { GEAR } from '../data/gear.js';
+  import { SPELLS } from '../data/spells.js';
 
-    function onLoad() {
-      const params = new URLSearchParams(window.location.search);
-      let type = params.get('type');
+  function onLoad() {
+    const params = new URLSearchParams(window.location.search);
+    let type = params.get('type');
 
-      if (type === 'gear') {
-        showCards(GEAR);
-      } else if (type === 'spells') {
-        showCards(SPELLS);
-      } else {
-        type = null;
-        console.log('Need to handle null case');
-      }
-
-      const summarySection = document.getElementById('summary');
-      if (type) {
-        summarySection.classList.remove('hidden');
-        const cardTypeElement = document.getElementById('card-type');
-        cardTypeElement.innerHTML = capitalizeFirstLetter(type);
-      } else {
-        summarySection.classList.add('hidden');
-      }
+    if (type === 'gear') {
+      showCards(GEAR);
+    } else if (type === 'spells') {
+      showCards(SPELLS);
+    } else {
+      type = null;
+      console.log('Need to handle null case');
     }
 
-    window.onload = onLoad();
-
-
-    function showCards(cards) {
-      const cardList = document.getElementById('card-list');
-
-      cardList.innerHTML = "";
-
-      cards.forEach(card => {
-        const cardHeader = document.createElement("dt");
-
-        const cardName = document.createElement("span");
-        cardName.innerHTML = card.name;
-        cardHeader.appendChild(cardName);
-
-        cardList.appendChild(cardHeader);
-
-        const cardBody = document.createElement("dd");
-        cardBody.innerHTML = card.description;
-
-        cardList.appendChild(cardBody);
-      });
+    const summarySection = document.getElementById('summary');
+    if (type) {
+      summarySection.classList.remove('hidden');
+      const cardTypeElement = document.getElementById('card-type');
+      cardTypeElement.innerHTML = capitalizeFirstLetter(type);
+    } else {
+      summarySection.classList.add('hidden');
     }
+  }
 
-    function capitalizeFirstLetter(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-  </script>
+  window.onload = onLoad();
+
+
+  function showCards(cards) {
+    const cardList = document.getElementById('card-list');
+
+    cardList.innerHTML = "";
+
+    cards.forEach(card => {
+      const cardHeader = document.createElement("dt");
+
+      const cardName = document.createElement("span");
+      cardName.innerHTML = card.name;
+      cardHeader.appendChild(cardName);
+
+      cardList.appendChild(cardHeader);
+
+      const cardBody = document.createElement("dd");
+      cardBody.innerHTML = card.description;
+
+      cardList.appendChild(cardBody);
+    });
+  }
+
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+</script>
+
 </html>
