@@ -113,6 +113,14 @@ export class Hero extends Storable {
   reset() {
     super.reset();
 
+    // Clean up old properties that are no longer used.
+    // Only needed for those that played the game before this point.
+    ['_id', '_name', '_expansion', '_banner', '_move', '_virtues', '_kingdom'].forEach(property =>
+      delete this[property]
+    );
+
+    this.updateStorage();
+
     Hero.MANAGED_ELEMENT_IDS.forEach(elementId =>
       document.getElementById(elementId).classList.add('hidden')
     );
