@@ -8,7 +8,7 @@ export class SpellCards extends CardArray {
   }
 
   get cards() {
-    const allowedSpells = new Metadata().allowed_spells;
+    const allowedSpells = new Metadata().allowedSpells;
 
     return SPELLS.filter(spell => allowedSpells.includes(spell.type));
   }
