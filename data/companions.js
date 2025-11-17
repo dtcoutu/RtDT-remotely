@@ -237,7 +237,7 @@ export const ALLIANCE_COMPANIONS = [
         type: 'companion',
         guild: "arcane_scouts",
         benefit: {
-            text: 'If you Influence outside your home kingdom, gain an additional 3 |influence|.',
+            text: 'If you Influence outside your home kingdom, gain an additional 3 <img src="icons/influence-action.png" title="Influence" alt="Influence" width="50%" />.',
         },
         advantage: [
             {
@@ -256,7 +256,7 @@ export const ALLIANCE_COMPANIONS = [
         type: 'companion',
         guild: "druids_circle",
         benefit: {
-            text: 'When you spend (not lose) a potion, gain 1 |influence|',
+            text: 'When you spend (not lose) a potion, gain 1 <img src="icons/influence-action.png" title="Influence" alt="Influence" width="50%" />',
         },
         advantage: [
             {
@@ -314,7 +314,7 @@ export const ALLIANCE_COMPANIONS = [
         type: 'companion',
         guild: "paladins_order",
         benefit: {
-            text: 'At the end of the month, gain 4 |influence|.',
+            text: 'At the end of the month, gain 4 <img src="icons/influence-action.png" title="Influence" alt="Influence" width="50%" />.',
         },
         advantage: [
             {
@@ -393,7 +393,7 @@ export const ALLIANCE_COMPANIONS = [
         type: 'companion',
         guild: "thieves_guild",
         benefit: {
-            text: 'You can carry up to 4 extra treasures. When you gain a treasure, also gain 2 |influence|.',
+            text: 'You can carry up to 4 extra treasures. When you gain a treasure, also gain 2 <img src="icons/influence-action.png" title="Influence" alt="Influence" width="50%" />.',
         },
         advantage: [
             {
