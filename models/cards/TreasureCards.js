@@ -27,7 +27,7 @@ export class TreasureCards extends CardArray {
 
     const chargesHTML = card.currentCharges ? `<div>
       <span class="charges">${card.currentCharges}</span>
-      <img src="icons/charge.png" height="15" width="15" style="padding-left: 4px; padding-right: 4px;" />
+      <img src="/icons/charge.png" height="15" width="15" style="padding-left: 4px; padding-right: 4px;" />
       <button data-action="use-charge">-1</button>
       <button data-action="recover-charge">+1</button>
     </div>` : '';

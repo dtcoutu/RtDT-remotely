@@ -62,7 +62,7 @@ export class CovenantExpansion {
         </div>
         <div id="${monument.region}-monument-offering" class="monument-offering">${monument.offering}</div>
         <div id="${monument.region}-monument-reinforcement" class="monument-reinforcement ${monument.built ? '' : 'inactive'}">
-          <div><img src="icons/reinforce.png" title="reinforce" alt="reinforce" width="20px" />Reinforce</div>
+          <div><img src="/icons/reinforce.png" title="reinforce" alt="reinforce" width="20px" />Reinforce</div>
           <dl class="action">
             <dt><strong>Free:</strong></dt>
             <dd>${monument.reinforce.free}</dd>

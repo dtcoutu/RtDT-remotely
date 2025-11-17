@@ -64,7 +64,7 @@ const brutal_warlord = {
   color: 'crimson',
   summary: 'Recruits warriors and is good at Battles.',
   expansion: 'base',
-  banner: 'Gain 5 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />',
+  banner: 'Gain 5 <img src="/icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />',
   move: 3,
   virtues: [
     {
@@ -92,7 +92,7 @@ const brutal_warlord = {
       id: "additional-virtue-1",
       name: "inspiring",
       type: 'virtue',
-      description: 'After you Reinforce, also gain 6 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />.',
+      description: 'After you Reinforce, also gain 6 <img src="/icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />.',
       active: false,
       system: {
       }
@@ -101,7 +101,7 @@ const brutal_warlord = {
       id: "additional-virtue-2",
       name: "callous",
       type: 'virtue',
-      description: 'After you Battle, if you lost at least 10 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />, gain a treasure from the market.',
+      description: 'After you Battle, if you lost at least 10 <img src="/icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />, gain a treasure from the market.',
       active: false,
       system: {
       }
@@ -150,7 +150,7 @@ const devious_swindler = {
       id: "additional-virtue-1",
       name: "calculating",
       type: 'virtue',
-      description: 'You may ignore <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /> and <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> losses on <b>critical hit</b> battle cards.',
+      description: 'You may ignore <img src="/icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /> and <img src="/icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> losses on <b>critical hit</b> battle cards.',
       active: false,
       system: {
       }
@@ -209,7 +209,7 @@ const haunted_recluse = {
       id: "additional-virtue-1",
       name: "sinbearer",
       type: 'virtue',
-      description: 'At the end of the month, you can spend 12 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /> to remove all skulls from your current kingdom.',
+      description: 'At the end of the month, you can spend 12 <img src="/icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /> to remove all skulls from your current kingdom.',
       active: false,
       system: {
         endOfMonth: true
@@ -229,7 +229,7 @@ const haunted_recluse = {
       id: "additional-virtue-3",
       name: "soulreaper",
       type: 'virtue',
-      description: 'Prevent up to 2 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /> losses per battle card for each skull on or adjacent to your space.',
+      description: 'Prevent up to 2 <img src="/icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /> losses per battle card for each skull on or adjacent to your space.',
       active: false,
       system: {
       }
@@ -243,7 +243,7 @@ const orphaned_scion = {
   color: 'darkgreen',
   summary: 'Good at removing skulls from buildings.',
   expansion: 'base',
-  banner: 'Gain 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />',
+  banner: 'Gain 1 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />',
   move: 3,
   virtues: [
     {
@@ -280,7 +280,7 @@ const orphaned_scion = {
       id: "additional-virtue-2",
       name: "blessed",
       type: 'virtue',
-      description: 'Spend 1 spirit to prevent up to 6 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /> losses from a battle card or dungeon room.',
+      description: 'Spend 1 spirit to prevent up to 6 <img src="/icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /> losses from a battle card or dungeon room.',
       active: false,
       system: {
       }
@@ -321,7 +321,7 @@ const relentless_warden = {
       id: "base-virtue-2",
       name: "guarded",
       type: 'virtue',
-      description: 'Prevent up to 3 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /> losses per battle card when you Battle your quarry.',
+      description: 'Prevent up to 3 <img src="/icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" /> losses per battle card when you Battle your quarry.',
       permanent: true,
       system: {
       }
@@ -441,7 +441,7 @@ const relic_hunter = {
       id: "base-virtue-2",
       name: "prepared",
       type: 'virtue',
-      description: 'When you reinforce at a bazaar, spend 1 less <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to gain a treasure.',
+      description: 'When you reinforce at a bazaar, spend 1 less <img src="/icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> to gain a treasure.',
       permanent: true,
       system: {
       }
@@ -518,7 +518,7 @@ const spymaster = {
       id: "additional-virtue-2",
       name: "resourceful",
       type: 'virtue',
-      description: 'At the end of each month, gain 15 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />.',
+      description: 'At the end of each month, gain 15 <img src="/icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />.',
       active: false,
       system: {
         endOfMonth: true
@@ -528,7 +528,7 @@ const spymaster = {
       id: "additional-virtue-3",
       name: "unseen",
       type: 'virtue',
-      description: 'When you complete a monthly quest, you may remove a foe instead of gaining <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.',
+      description: 'When you complete a monthly quest, you may remove a foe instead of gaining <img src="/icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.',
       active: false,
       system: {
       }
@@ -542,14 +542,14 @@ const undaunted_ageis = {
   color: 'saddlebrown',
   summary: 'Can have three (instead of two) corruptions and gains benefits based on how many they have.',
   expansion: 'covenant',
-  banner: 'For each corruption you have, gain 3 <img src="icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />. You may spend 10 Warrior to remove one of your corruptions.',
+  banner: 'For each corruption you have, gain 3 <img src="/icons/warrior.png" title="warrior" alt="warrior" width="22" height="22" />. You may spend 10 Warrior to remove one of your corruptions.',
   move: 3,
   virtues: [
     {
       id: "base-virtue-1",
       name: "ascetic",
       type: 'virtue',
-      description: 'Gain 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> for each battle card you spend no Advantages on.',
+      description: 'Gain 1 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> for each battle card you spend no Advantages on.',
       permanent: true,
       system: {
       }
@@ -577,7 +577,7 @@ const undaunted_ageis = {
       id: "additional-virtue-2",
       name: "resolute",
       type: 'virtue',
-      description: 'When you Reinforce, spend 1 less <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> for each corruption you have.',
+      description: 'When you Reinforce, spend 1 less <img src="/icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" /> for each corruption you have.',
       active: false,
       system: {
       }
@@ -586,7 +586,7 @@ const undaunted_ageis = {
       id: "additional-virtue-3",
       name: "steeled",
       type: 'virtue',
-      description: 'Once per turn, if another hero would gain a corruption, you may gain it instead and gain 2 <img src="icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.',
+      description: 'Once per turn, if another hero would gain a corruption, you may gain it instead and gain 2 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="20" height="22" />.',
       active: false,
       system: {
       }

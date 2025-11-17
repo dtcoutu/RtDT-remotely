@@ -3,7 +3,7 @@ export const POTIONS = [
         id: 'dragons-teeth',
         name: 'Potion of Dragon\'s Teeth',
         type: 'potion',
-        description: 'Spend to gain 6 <img src="icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" />.'
+        description: 'Spend to gain 6 <img src="/icons/warrior.png" title="warrior" alt="warrior" width="18" height="18" />.'
     },
     {
         id: 'fortunes-favor',
@@ -18,7 +18,7 @@ export const POTIONS = [
         id: 'golden-sun',
         name: 'Potion of the Golden Sun',
         type: 'potion',
-        description: 'Spend to gain 1 <img src="icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />.'
+        description: 'Spend to gain 1 <img src="/icons/spirit.png" title="spirit" alt="spirit" width="18" height="18" />.'
     },
     {
         id: 'one-thousand-strides',
