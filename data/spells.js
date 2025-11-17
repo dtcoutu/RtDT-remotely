@@ -39,7 +39,7 @@ export const SPELLS = [
     id: 'abate-the-darkness',
     name: 'Abate the Darkness',
     type: 'invocation',
-    description: 'Remove a seal from teh Tower. Return any skulls that emerge to the supply. Replace the seal.'
+    description: 'Remove a seal from the Tower. Return any skulls that emerge to the supply. Replace the seal.'
   },
   {
     id: 'celestial-jaunt',
