@@ -575,3 +575,7 @@ summary {
   text-decoration: underline;
   font-size: medium;
 }
+
+a:hover {
+  cursor: pointer;
+}
