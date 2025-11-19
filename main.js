@@ -8,6 +8,7 @@ import { Counters } from "./models/Counters.js";
 import { ExpansionSetup } from "./components/ExpansionSetup.js";
 import { Expansion } from "./models/Expansion.js";
 import { Cards } from "./models/Cards.js";
+import { HelperDialogs } from "./components/HelperDialogs.js";
 
 // Model variables
 let metadataModel;
@@ -22,6 +23,7 @@ let cardsModel;
 let heroSetup;
 let expansionSetup;
 let enemySetup;
+let helperDialogs;
 
 function resetGame() {
   localStorage.clear();
@@ -75,6 +77,7 @@ function initializeComponents() {
   heroSetup = new HeroSetup(heroModel);
   expansionSetup = new ExpansionSetup(expansionModel);
   enemySetup = new EnemySetup(enemiesModel);
+  helperDialogs = new HelperDialogs();
 }
 
 export function setup() {

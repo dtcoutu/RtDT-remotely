@@ -12,7 +12,6 @@
       <summary>Help</summary>
       <ul class="help-list">
         <li><a href="help/usage.html" target="_blank">How to use this app?</a></li>
-        <li><a href="help/summary.html" target="_blank">Card summaries</a></li>
         <li><a href="https://boardgamegeek.com/boardgame/256680/return-to-dark-tower" target="_blank">Board Game Geek
             entry</a></li>
       </ul>
@@ -25,7 +24,8 @@
         <section id="base-setup">
           <section id="character-setup">
             <label>
-              Choose a <a href="help/heroes.html" target="_blank">hero</a>:
+              Choose a
+              <a class="helper" data-action="open-dialog" data-id="helper-dialog" data-type="hero">hero</a>:
               <select name="hero" id="hero-selector" data-action="select">
                 <option value="">---</option>
               </select>
@@ -55,7 +55,7 @@
         </section>
 
         <section id="enemy-selectors">
-          <a href="help/enemies.html" target="_blank">Enemies</a>:
+          <a class="helper" data-action="open-dialog" data-id="helper-dialog" data-type="enemy">Enemies</a>:
           <div>
             <label>
               Adversary:
@@ -154,25 +154,25 @@
             <ul>
               <li class="action">
                 <div>
-                  <img src="/icons/cleanse.png" title="Cleanse" alt="Cleanse" width="50%" />
-                  Cleanse
+                  <img src="/icons/cleanse.png" title="Cleanse" alt="Cleanse" width="40" />
+                  <div>Cleanse</div>
                 </div>
                 <span>Remove all skulls from your space</span>
               </li>
               <li class="action">
-                <div><img src="/icons/battle.png" title="Battle" alt="Battle" width="50%" />
+                <div><img src="/icons/battle.png" title="Battle" alt="Battle" width="40" />
                   <div>Battle</div>
                 </div>
                 <div><span>Battle a foe on your space</span></div>
               </li>
               <li class="action">
-                <div><img src="/icons/quest.png" title="Quest" alt="Quest" width="50%" />
+                <div><img src="/icons/quest.png" title="Quest" alt="Quest" width="40" />
                   <div>Quest</div>
                 </div>
                 <div><span>Complete a quest or explore a dungeon</span></div>
               </li>
               <li id="alliances-heroic-action" class="action hidden">
-                <div><img src="/icons/influence-action.png" title="Influence" alt="Influence" width="50%" />
+                <div><img src="/icons/influence-action.png" title="Influence" alt="Influence" width="40" />
                   <div>Influence</div>
                 </div>
                 <div><span>When at a Guild Hall gain 2 <img src="/icons/influence.png" title="influence" alt="influence"
@@ -441,7 +441,10 @@
     </details>
 
     <details id="cards-spells" class="hidden" open>
-      <summary>Spells</summary>
+      <summary>
+        Spells
+        <a class="helper" data-action="open-dialog" data-id="helper-dialog" data-type="spell">(see details)</a>
+      </summary>
       <section id="spell-cards" data-type="spell">
         <button id="spell-select" data-action="select">Select Spell</button>
         <select id="spell-selector" class="hidden"></select>
@@ -464,7 +467,10 @@
         </ul>
       </section>
       <section id="gear-cards" data-type="gear">
-        <h2>Gear</h2>
+        <h2>
+          Gear
+          <a class="helper" data-action="open-dialog" data-id="helper-dialog" data-type="gear">(see details)</a>
+        </h2>
         <button id="gear-select" data-action="select">Select Gear</button>
         <select id="gear-selector" class="hidden"></select>
         <button id="gear-add" class="hidden" data-action="add">Add</button>
@@ -480,7 +486,10 @@
         </ul>
       </section>
       <section id="potion-cards" data-type="potion">
-        <h2>Potions</h2>
+        <h2>
+          Potions
+          <a class="helper" data-action="open-dialog" data-id="helper-dialog" data-type="potion">(see details)</a>
+        </h2>
         <button id="potion-select" data-action="select">Select Potion</button>
         <select id="potion-selector" class="hidden"></select>
         <button id="potion-add" class="hidden" data-action="add">Add</button>
@@ -502,6 +511,13 @@
 
     <button id="alliance-companion-modal-close" data-action="close">Close</button>
   </aside>
+
+  <div id="helper-dialogs">
+    <dialog id="helper-dialog">
+      <button data-action="close-dialog">Close</button>
+      <div></div>
+    </dialog>
+  </div>
 
   <script type="module">
     import { setup, pageUpdate } from "./main.js";

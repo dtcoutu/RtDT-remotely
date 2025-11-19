@@ -8,6 +8,10 @@
   list-style-type: disc;
 }
 
+img {
+  vertical-align: bottom;
+}
+
 .action {
   border-bottom: var(--border);
 }
@@ -565,4 +569,9 @@ summary {
 
 .strong {
   font-weight: bold;
+}
+
+.helper {
+  text-decoration: underline;
+  font-size: medium;
 }
