@@ -27,7 +27,7 @@ export class CompanionCards extends CardArray {
 
   cardHeader(card) {
     return `
-    <span class="companion-title">${card.title}</span>
+    <span class="card-title">${card.title}</span>
     `;
   }
 
@@ -36,7 +36,7 @@ export class CompanionCards extends CardArray {
     const benefitHTML = card.benefit ? `
       <div>
         <span>${card.benefit.text}</span>
-        ${card.benefit.usage ? `<span class="companion-usage">${card.benefit.usage}</span>` : ''}
+        ${card.benefit.usage ? `<span class="card-usage">${card.benefit.usage}</span>` : ''}
       </div>
     ` : '';
 
@@ -44,7 +44,7 @@ export class CompanionCards extends CardArray {
     const advantagesHTML = card.advantage.map(adv => `
       <div>
         ${adv.text}
-        ${adv.usage ? `<span class="companion-usage">${adv.usage}</span>` : ''}
+        ${adv.usage ? `<span class="card-usage">${adv.usage}</span>` : ''}
       </div>
       `).join('');
 

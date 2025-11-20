@@ -1,6 +1,8 @@
 import { CompanionCards } from "./cards/CompanionCards.js";
+import { CorruptionCards } from "./cards/CorruptionCards.js";
 import { GearCards } from "./cards/GearCards.js";
 import { PotionCards } from "./cards/PotionCards.js";
+import { QuestItemCards } from "./cards/QuestItemCards.js";
 import { SpellCards } from "./cards/SpellCards.js";
 import { TreasureCards } from "./cards/TreasureCards.js";
 import { Metadata } from "./Metadata.js";
@@ -8,8 +10,10 @@ import { Storable } from "./Storable.js";
 
 export class Cards extends Storable {
   companion;
+  corruption;
   gear;
   potion;
+  quest_item;
   treasure;
   spell;
 
@@ -19,8 +23,10 @@ export class Cards extends Storable {
     const data = this.loadStorage();
 
     this.companion = data.companion ? CompanionCards.from(data.companion) : new CompanionCards();
+    this.corruption = data.corruption ? CorruptionCards.from(data.corruption) : new CorruptionCards();
     this.gear = data.gear ? GearCards.from(data.gear) : new GearCards();
     this.potion = data.potion ? PotionCards.from(data.potion) : new PotionCards();
+    this.quest_item = data.quest_item ? QuestItemCards.from(data.quest_item) : new QuestItemCards();
     this.treasure = data.treasure ? TreasureCards.from(data.treasure) : new TreasureCards();
     if (new Metadata().allowedSpells) {
       this.spell = data.spell ? SpellCards.from(data.spell) : new SpellCards();
@@ -99,8 +105,10 @@ export class Cards extends Storable {
 
   reset() {
     this.companion = new CompanionCards();
+    this.corruption = new CorruptionCards();
     this.gear = new GearCards();
     this.potion = new PotionCards();
+    this.quest_item = new QuestItemCards();
     this.treasure = new TreasureCards();
     this.spell = new Metadata().allowedSpells ? new SpellCards() : null;
 

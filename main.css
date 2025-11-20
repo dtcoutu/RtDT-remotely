@@ -473,13 +473,13 @@ button {
   min-height: 150px;
 }
 
-.companion-title {
+.card-title {
   font-style: italic;
   font-weight: normal;
   padding-left: 2px;
 }
 
-.companion-usage {
+.card-usage {
   font-style: italic;
   font-size: smaller;
   padding-left: 2px;
@@ -488,6 +488,16 @@ button {
 #potion-cards {
   flex: 2;
   min-width: 380px;
+}
+
+#quest_item-cards {
+  flex: 2;
+  min-width: 380px;
+}
+
+#corruption-cards {
+  flex: 2;
+  min-width: 325px;
 }
 
 .count {
